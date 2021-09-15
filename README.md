@@ -31,15 +31,15 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">SIM PreAlpha 2.0.21.08.30</h3>
+  <h3 align="center">Sistem Perpustakaan PreAlpha 1.0.21.09.15</h3>
 
   <p align="center">
-   Sistem Informasi Manajemen Sekolah
+   Sistem Perpustakaan Sekolah
     <br />
-    <a href="https://github.com/godgodwinter/sim-v2"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/godgodwinter/laravel-perpus21"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://sim.baemon.web.id/">View Demo</a>
+    <a href="https://baemon.web.id/">View Demo</a>
     ·
     <a href="https://twitter.com/kakadlz">Report Bug</a>
     ·
@@ -74,9 +74,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot-dashboardlm2]](https://github.com/godgodwinter/sim-v2)
-[![Product Name Screen Shot][product-screenshot-dashboardlm3]](https://github.com/godgodwinter/sim-v2)
-<!-- [![Product Name Screen Shot][product-classdiagram1]](https://github.com/godgodwinter/sim-v2) -->
+[![Product Name Screen Shot][product-screenshot-dashboardlm2]](https://github.com/godgodwinter/laravel-perpus21)
+[![Product Name Screen Shot][product-screenshot-dashboardlm3]](https://github.com/godgodwinter/laravel-perpus21)
+<!-- [![Product Name Screen Shot][product-classdiagram1]](https://github.com/godgodwinter/laravel-perpus21) -->
 
 Sistem administrasi keuangan sekolah
 
@@ -96,7 +96,7 @@ Library/Plugin
 * [Auth:Fortify](#)
 * [Auth:Jetstream](#)
 * [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
-* [Stisla](https://github.com/stisla/stisla)
+* [AdminLTE3](https://adminlte.io/themes/v3/)
 
 
 
@@ -118,7 +118,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- 1. Get a free API Key at [https://example.com](https://example.com) -->
 1. Clone the repo
    ```sh
-   git clone https://github.com/godgodwinter/sim-v2.git
+   git clone https://github.com/godgodwinter/laravel-perpus21.git
    ```
 2. Install menggunakan composer
    ```sh
@@ -148,7 +148,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 6. Jika ingin menggunakan data palsu untuk testing lanjutkan langkah 6 ini
    ```sh
-   php artisan db:seed --class=oneseeder  //untuk meload data user admin@gmail.com pass 12345678
+   php artisan db:seed   //untuk meload data user admin@gmail.com pass 12345678
    ```
    
 
@@ -174,7 +174,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Kukuh Setya Nugraha - [@kakadlz](https://twitter.com/kakadlz) 
 Kukuh Setya Nugraha - [@kukuh.sn](https://www.instagram.com/kukuh.sn/) 
 
-Project Link: [https://github.com/godgodwinter/sim-v2](https://github.com/godgodwinter/sim-v2)
+Project Link: [https://github.com/godgodwinter/laravel-perpus21](https://github.com/godgodwinter/laravel-perpus21)
 
 
 
@@ -183,16 +183,16 @@ Project Link: [https://github.com/godgodwinter/sim-v2](https://github.com/godgod
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/godgodwinter/sim-v2.svg?style=for-the-badge
-[contributors-url]: https://github.com/godgodwinter/sim-v2/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/godgodwinter/sim-v2.svg?style=for-the-badge
-[forks-url]: https://github.com/godgodwinter/sim-v2/network/members
-[stars-shield]: https://img.shields.io/github/stars/godgodwinter/sim-v2.svg?style=for-the-badge
-[stars-url]: https://github.com/godgodwinter/sim-v2/stargazers
-[issues-shield]: https://img.shields.io/github/issues/godgodwinter/sim-v2.svg?style=for-the-badge
-[issues-url]: https://github.com/godgodwinter/sim-v2/issues
-[license-shield]: https://img.shields.io/github/license/godgodwinter/sim-v2.svg?style=for-the-badge
-[license-url]: https://github.com/godgodwinter/sim-v2/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/godgodwinter/laravel-perpus21.svg?style=for-the-badge
+[contributors-url]: https://github.com/godgodwinter/laravel-perpus21/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/godgodwinter/laravel-perpus21.svg?style=for-the-badge
+[forks-url]: https://github.com/godgodwinter/laravel-perpus21/network/members
+[stars-shield]: https://img.shields.io/github/stars/godgodwinter/laravel-perpus21.svg?style=for-the-badge
+[stars-url]: https://github.com/godgodwinter/laravel-perpus21/stargazers
+[issues-shield]: https://img.shields.io/github/issues/godgodwinter/laravel-perpus21.svg?style=for-the-badge
+[issues-url]: https://github.com/godgodwinter/laravel-perpus21/issues
+[license-shield]: https://img.shields.io/github/license/godgodwinter/laravel-perpus21.svg?style=for-the-badge
+[license-url]: https://github.com/godgodwinter/laravel-perpus21/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.instagram.com/kukuh.sn/
 [product-screenshot-dashboardlm2]: images/dashboardlm2.png
