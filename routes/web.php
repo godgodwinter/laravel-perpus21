@@ -28,9 +28,13 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
 //DASHBOARD-MENU
-Route::get('/dashboard', 'App\Http\Controllers\adminberandaController@index');
+Route::get('/dashboard', 'App\Http\Controllers\adminberandaController@index')->name('dashboard');
 // Route::get('/qrtests', function()
 
+//BUKURAK-MENU
+Route::get('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@index')->name('admin.bukurak');
+Route::post('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@store')->name('admin.bukurak.store');
+Route::delete('/admin/bukurakmultidel', 'App\Http\Controllers\adminbukurakcontroller@multidel')->name('admin.bukurak.multidel');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 

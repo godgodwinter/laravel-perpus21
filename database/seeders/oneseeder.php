@@ -17,7 +17,7 @@ class oneseeder extends Seeder
      */
     public function run()
     {
-        
+
         //ADMIN SEEDER
         DB::table('users')->insert([
             'name' => 'Admin',
@@ -87,7 +87,7 @@ class oneseeder extends Seeder
               'updated_at' => Carbon::now()
            ]);
 
-           
+
           DB::table('kategori')->insert([
             'nama' => 'Siswa',
             'prefix' => 'tipeanggota',
@@ -102,7 +102,7 @@ class oneseeder extends Seeder
            'updated_at' => Carbon::now()
         ]);
 
-        
+
         DB::table('kategori')->insert([
             'nama' => 'Bagus',
             'prefix' => 'tipeperalatan',
@@ -116,7 +116,7 @@ class oneseeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);
-         
+
         DB::table('kategori')->insert([
             'nama' => 'Tidak Layak',
             'prefix' => 'tipeperalatan',
@@ -158,7 +158,7 @@ class oneseeder extends Seeder
             'sekolahnama' => 'SMP ABCD 01 Malang',
             'sekolahalamat' => 'Jl. Abcd Desa Qwerty Kecamatan Zxcvb',
             'sekolahtelp' => '0341-123456',
-            'aplikasijudul' => 'SISTEM PERPUSTAKAAN',
+            'aplikasijudul' => 'PERPUSTAKAAN',
             'aplikasijudulsingkat' => 'SP',
             'defaultdenda' => '7000',
             'defaultminbayar' => '100',
