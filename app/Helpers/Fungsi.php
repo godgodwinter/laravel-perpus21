@@ -45,88 +45,6 @@ class Fungsi {
     return (isset($hasil) ? $hasil : '');
 }
 
-    public static function periksajurusan($datas) {
-            $strex=explode(" ",$datas);
-            // dd($strex);
-        if(isset($strex[1])){
-            if($strex[1]=='OTO'){
-                $hasil='Teknik Otomotif';
-            }elseif($strex[1]=='TKJ'){
-                $hasil='Teknik Komputer dan Jaringan';
-            }else{
-                $hasil='Umum';
-            }
-        }
-        
-        return (isset($hasil) ? $hasil : '');
-    }
-
-    public static function periksajurusankompetensi($datas) {
-        $strex=explode(" ",$datas);
-        // dd($strex);
-    if(isset($strex[1])){
-        if($strex[1]=='OTO'){
-            $hasil='Teknik dan Bisnis Sepeda Motor';
-        }elseif($strex[1]=='TKJ'){
-            $hasil='Teknik Komputer dan Jaringan';
-        }else{
-            $hasil='Umum';
-        }
-    }
-    
-    return (isset($hasil) ? $hasil : '');
-}
-    public static function periksajurusankode($datas) {
-        $strex=explode(" ",$datas);
-        // dd($strex);
-        $hasil='null';
-        if(isset($strex[1])){
-        if($strex[1]=='OTO'){
-            $hasil=$strex[1];
-        }elseif($strex[1]=='TKJ'){
-            $hasil=$strex[1];
-        }else{
-            $hasil='Umum';
-        }
-    }
-    
-    return (isset($hasil) ? $hasil : '');
-    }
-
-    public static function periksajurusantingkat($datas) {
-        $strex=explode(" ",$datas);
-        // dd($strex);
-        $hasil='null';
-        if(isset($strex[0])){
-            $hasil=$strex[0];
-    }
-    
-    
-    return (isset($hasil) ? $hasil : '');
-    }
-    
-    public static function tahunaktif($datas) {
-        $strex=explode("/",$datas);
-        // dd($strex);
-        $hasil='null';
-        if(isset($strex[0])){
-            $hasil=$strex[0];
-    }
-    
-    
-    return (isset($hasil) ? $hasil : '');
-    }
-
-
-    public static function checkauth($menu){
-	
-        if(Auth::user()->tipeuser===$menu){
-            return 'success';
-        }else{    
-            return '404';
-        }
-     
-    }
     public static function rupiah($angka){
 	
         $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
@@ -174,13 +92,6 @@ class Fungsi {
      
     }
 
-    public static function tapelaktif(){
-	
-        $settings = DB::table('settings')->first();
-        $data=$settings->tapelaktif;
-        return $data;
-     
-    }
 
     public static function aplikasijudulsingkat(){
 	
@@ -197,17 +108,10 @@ class Fungsi {
      
     }
 
-    public static function passdefaultsiswa(){
+    public static function passdefaultadmin(){
 	
         $settings = DB::table('settings')->first();
-        $data=$settings->passdefaultsiswa;
-        return $data;
-     
-    }
-    public static function passdefaultortu(){
-	
-        $settings = DB::table('settings')->first();
-        $data=$settings->passdefaultortu;
+        $data=$settings->passdefaultadmin;
         return $data;
      
     }
@@ -240,49 +144,34 @@ class Fungsi {
         return $data;
      
     }
-    public static function minimalpembayaranujian(){
+    public static function defaultdenda(){
 	
         $settings = DB::table('settings')->first();
-        $data=$settings->minimalpembayaranujian;
+        $data=$settings->defaultdenda;
+        return $data;
+     
+    }
+    public static function defaultminbayar(){
+	
+        $settings = DB::table('settings')->first();
+        $data=$settings->defaultminbayar;
+        return $data;
+     
+    }
+    public static function defaultmaxbukupinjam(){
+	
+        $settings = DB::table('settings')->first();
+        $data=$settings->defaultmaxbukupinjam;
         return $data;
      
     }
 
-    //untuk kenaikan kelas
-    public static  function naik_k($str)
-        {
-                //  $stre=str_replace('X','Xzz',$str);
-                //  $str=substr($stre,1);
-                
-            $strex=explode(" ",$str);
-            if($strex[0]==="X"){
-                $strex[0]="XI";
-            }else if($strex[0]==="XI"){
-                $strex[0]="XII";
-            }else if($strex[0]==="XII"){
-                $strex[0]="Alumni";
-            }
-
-
-            $str=implode(" ",$strex);
-            
-            return $str;
-        }
-
-    //untuk kenaikan kelas
-    public static function naik_k_tanpa_alumni($str)
-    {
-        $strex=explode(" ",$str);
-        if($strex[0]==="X"){
-            $strex[0]="XI";
-        }else if($strex[0]==="XI"){
-            $strex[0]="XII";
-        }
-
-
-        $str=implode(" ",$strex);
-        
-        return $str;
+    public static function defaultmaxharipinjam(){
+	
+        $settings = DB::table('settings')->first();
+        $data=$settings->defaultmaxharipinjam;
+        return $data;
+     
     }
     //naik tapel
     public static function naik_t($str)

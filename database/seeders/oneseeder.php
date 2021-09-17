@@ -166,7 +166,6 @@ class oneseeder extends Seeder
             'defaultmaxharipinjam' => '7',
             'passdefaultpegawai' => 'perpus123',
             'passdefaultadmin' => 'perpus123',
-            'passdefaultpegawai' => '12345678',
             'sekolahlogo' => '',
             'sekolahttd' => 'Nama Kepala Sekolah M.Pd',
             'sekolahttd2' => 'Nama Kepala Sekolah M.Pd', //masih konsep
