@@ -19,28 +19,47 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../assets/index2.html" class="h1"><b>Admin</b>LTE</a>
+      <a href="../assets/index2.html" class="h1"><b>Perpustakaan</b></a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      {{-- <p class="login-box-msg">Sign in to start your session</p> --}}
 
-      <form action="../assets/index3.html" method="post">
+      <form action="{{ route('login') }}" method="POST">
+        @csrf
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input id="identity" type="text" class="form-control" name="identity" tabindex="1" required autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
+            @error('identity')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>    
+        @enderror
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
-            </div>
+            </div>  
+            @error('password')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>    
+        @enderror
           </div>
         </div>
+        
+  @if($errors->any())
+  @foreach ($errors->all() as $error)
+    <div class="text-danger">
+    {{ $error }}
+    </div>    
+  @endforeach
+@endif
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -52,34 +71,14 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-      <div class="social-auth-links text-center mt-2 mb-3">
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div>
       <!-- /.social-auth-links -->
 
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a><?php
-        // prints e.g. 'Current PHP version: 4.1.1'
-        echo 'Current PHP version: ' . phpversion();
-        
-        // prints e.g. '2.0' or nothing if the extension isn't enabled
-        echo phpversion('tidy');
-        ?>
-      </p>
     </div>
     <!-- /.card-body -->
   </div>

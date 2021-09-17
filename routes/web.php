@@ -28,7 +28,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
 //DASHBOARD-MENU
-Route::get('/home', 'App\Http\Controllers\adminberandaController@index');
+Route::get('/dashboard', 'App\Http\Controllers\adminberandaController@index');
 // Route::get('/qrtests', function()
 
 
