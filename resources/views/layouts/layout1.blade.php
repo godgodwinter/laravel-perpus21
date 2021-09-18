@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/fontawesome-free/css/all.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/toastr/toastr.min.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset("assets/") }}/dist/css/adminlte.min.css">
   
@@ -152,7 +156,7 @@ crossorigin="anonymous"></script>
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{ route('admin.buku') }}" class="nav-link">
             <i class="fas fa-book"></i>
             <p>Buku</p>
           </a>
@@ -214,6 +218,7 @@ crossorigin="anonymous"></script>
   </div>
 
       @yield('container-modals')
+      @yield('notif')
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
@@ -234,6 +239,10 @@ crossorigin="anonymous"></script>
 @yield('jshere')
 <!-- jQuery -->
 <script src="{{ asset("assets/") }}/plugins/jquery/jquery.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="{{ asset("assets/") }}/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="{{ asset("assets/") }}/plugins/toastr/toastr.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset("assets/") }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->

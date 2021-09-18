@@ -136,7 +136,7 @@ class adminbukurakcontroller extends Controller
     public function destroy($id)
     {
         bukurak::destroy($id);
-        return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
+        return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
     
     }
 

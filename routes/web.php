@@ -41,6 +41,16 @@ Route::delete('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontrolle
 Route::delete('/admin/databukurak/multidel', 'App\Http\Controllers\adminbukurakcontroller@multidel')->name('admin.bukurak.multidel');
 
 
+//buku-MENU
+Route::get('/admin/buku', 'App\Http\Controllers\adminbukucontroller@index')->name('admin.buku');
+Route::get('/admin/buku/cari', 'App\Http\Controllers\adminbukucontroller@cari')->name('admin.buku.cari');
+Route::post('/admin/buku', 'App\Http\Controllers\adminbukucontroller@store')->name('admin.buku.store');
+Route::get('/admin/buku/{id}', 'App\Http\Controllers\adminbukucontroller@show')->name('admin.buku.show');
+Route::put('/admin/buku/{id}', 'App\Http\Controllers\adminbukucontroller@update')->name('admin.buku.update');
+Route::delete('/admin/buku/{id}', 'App\Http\Controllers\adminbukucontroller@destroy')->name('admin.buku.destroy');
+Route::delete('/admin/databuku/multidel', 'App\Http\Controllers\adminbukucontroller@multidel')->name('admin.buku.multidel');
+
+
 //SETTINGS-MENU
 Route::get('/admin/settings', 'App\Http\Controllers\settingsController@index')->name('admin.settings');
 Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@update')->name('admin.settings.update');
@@ -48,6 +58,8 @@ Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@upda
 // ExportdanImport
 Route::get('admin/databukurak/export', 'App\Http\Controllers\prosesController@exportbukurak')->name('bukurak.export');
 Route::post('admin/databukurak/import', 'App\Http\Controllers\prosesController@importbukurak')->name('bukurak.import');
+Route::get('admin/databuku/export', 'App\Http\Controllers\prosesController@exportbuku')->name('buku.export');
+Route::post('admin/databuku/import', 'App\Http\Controllers\prosesController@importbuku')->name('buku.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 

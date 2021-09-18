@@ -15,6 +15,7 @@ class buku extends Model
         'nama',
         'kode',
         'bukurak_nama',
+        'bukurak_kode',
         'bukukategori_nama',
         'bukukategori_ddc',
     ];

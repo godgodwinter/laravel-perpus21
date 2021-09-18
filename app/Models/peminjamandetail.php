@@ -17,6 +17,7 @@ class peminjamandetail extends Model
         'isbn',
         'buku_nama',
         'bukurak_nama',
+        'bukurak_kode',
         'bukukategori_nama',
         'bukukategori_ddc',
         'jaminan_nama',

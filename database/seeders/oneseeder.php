@@ -66,7 +66,7 @@ class oneseeder extends Seeder
         DB::table('kategori')->insert([
             'nama' => 'Agama',
             'prefix' => 'ddc',
-            'kode' => '0-200',
+            'kode' => '1-200',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);

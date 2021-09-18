@@ -16,6 +16,7 @@ class pengembaliandetail extends Model
         'nomeridentitas',
         'isbn',
         'buku_nama',
+        'bukurak_kode',
         'bukurak_nama',
         'bukukategori_nama',
         'bukukategori_ddc',

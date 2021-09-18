@@ -2,7 +2,7 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Rak Buku')
+@section('title','Buku')
 @section('linkpages')
 data{{ $pages }}
 @endsection
@@ -12,6 +12,7 @@ data{{ $pages }}
 @endsection
 
 @section('jshere')
+
 @endsection
 
 
@@ -47,8 +48,9 @@ $message=session('status');
 <tr>
     <th width="10%" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
-    <th> Nama Rak </th>
-    <th> Kode Rak</th>
+    <th> KD Buku - Judul Buku </th>
+    <th> Kategori </th>
+    <th> Jumlah </th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
 @endsection
@@ -71,7 +73,7 @@ $message=session('status');
             });
 
             $.ajax({
-                url: "{{ route('admin.bukurak.multidel') }}",
+                url: "{{ route('admin.buku.multidel') }}",
                 type: "DELETE",
                 data: {
                     _token: $("input[name=_token]").val(),
@@ -93,8 +95,9 @@ $message=session('status');
 <tr id="sid{{ $data->id }}">
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
-    <td>{{ $data->nama }}</td>
-    <td>{{ $data->kode }}</td>
+    <td> {{ $data->kode }} - {{ $data->nama }}</td>
+    <td>{{ $data->bukukategori_nama }}</td>
+    <td>0</td>
 
     <td class="text-center">
         {{-- <a class="btn btn-icon btn-secondary btn-sm " href="{{ url('/admin/inputnilai/kelas') }}/{{ $data->id }}"
@@ -107,7 +110,7 @@ $message=session('status');
 @endforeach
 
 <tr>
-    <td class="text-left" colspan="4">
+    <td class="text-left" colspan="5">
         <a href="#" class="btn btn-sm  btn-danger" id="deleteAllSelectedRecord"
             onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"><i class="fas fa-trash"></i> Hapus
             Terpilih</a></td>
@@ -255,40 +258,65 @@ $message=session('status');
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="form-group col-md-12 col-12">
-                                            <label for="nama">Nama @yield('title')</label>
+                                            <label for="nama">Judul Buku @yield('title')</label>
                                             <input type="text" name="nama" id="nama"
                                                 class="form-control @error('nama') is-invalid @enderror" placeholder=""
                                                 value="{{old('nama')}}" required>
                                             @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                                             @enderror
                                         </div>
+                                          </div>
+                                       
                                         <div class="form-group col-md-12 col-12">
-                                            <label for="kode">Kode</label>
-                                            <input type="text" name="kode" id="kode"
-                                                class="form-control @error('kode') is-invalid @enderror" placeholder=""
-                                                value="{{old('kode')}}" required>
-                                            @error('kode')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
+                                            <label>Tempat Rak Buku <code>*)</code></label>
+                                            <select class="form-control form-control-lg" required name="bukurak_nama">  
+                                                @if (old('bukurak_nama'))
+                                                <option>{{old('bukurak_nama')}}</option>                        
+                                                @endif
+                                            @foreach ($bukurak as $t)
+                                                <option>{{ $t->nama }}</option>
+                                            @endforeach
+                                            </select>
+                                        </div> 
+
+                                        
+                                        <div class="form-group col-md-12 col-12">
+                                            <label>DDC / Kategori Buku <code>*)</code></label>
+                                            <select class="form-control form-control-lg" required name="bukukategori_nama">  
+                                                @if (old('bukukategori_nama'))
+                                                <option>{{old('bukukategori_nama')}}</option>                        
+                                                @endif
+                                            @foreach ($bukukategori as $t)
+                                                <option value="{{ $t->nama }}">{{ $t->kode }} / {{ $t->nama }}</option>
+                                            @endforeach
+                                            </select>
+                                        </div> 
+                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text">123</span>
+                                            </div>
+                                            <input type="number" name="kode" id="kode"
+                                            class="form-control @error('kode') is-invalid @enderror" placeholder="Kode Buku (Otomatis diawali ddc)"
+                                            value="{{old('kode')}}" required min="1" readonly>
+                                        @error('kode')<div class="invalid-feedback"> {{$message}}</div>
+                                        @enderror
+
 
                                     </div>
 
 
                                     <div class="row">
                                         <div class="form-group mb-0 col-12">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" name="remember" class="custom-control-input"
-                                                    id="newsletter">
-
-
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer text-right">
                                     <button class="btn btn-primary">Simpan</button>
+                                    
                                 </div>
                             </form>
+                            
                         </div>
 
                     </div>
@@ -300,7 +328,7 @@ $message=session('status');
 
         </div>
 
-</section>
+       
 <!-- /.content -->
 @endsection
 
