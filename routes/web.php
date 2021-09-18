@@ -71,6 +71,18 @@ Route::delete('/admin/anggota/{id}', 'App\Http\Controllers\adminanggotacontrolle
 Route::delete('/admin/dataanggota/multidel', 'App\Http\Controllers\adminanggotacontroller@multidel')->name('admin.anggota.multidel');
 
 
+
+
+//peralatan-MENU
+Route::get('/admin/peralatan', 'App\Http\Controllers\adminperalatancontroller@index')->name('admin.peralatan');
+Route::get('/admin/peralatan/cari', 'App\Http\Controllers\adminperalatancontroller@cari')->name('admin.peralatan.cari');
+Route::post('/admin/peralatan', 'App\Http\Controllers\adminperalatancontroller@store')->name('admin.peralatan.store');
+Route::get('/admin/peralatan/{id}', 'App\Http\Controllers\adminperalatancontroller@show')->name('admin.peralatan.show');
+Route::put('/admin/peralatan/{id}', 'App\Http\Controllers\adminperalatancontroller@update')->name('admin.peralatan.update');
+Route::delete('/admin/peralatan/{id}', 'App\Http\Controllers\adminperalatancontroller@destroy')->name('admin.peralatan.destroy');
+Route::delete('/admin/dataperalatan/multidel', 'App\Http\Controllers\adminperalatancontroller@multidel')->name('admin.peralatan.multidel');
+
+
 //SETTINGS-MENU
 Route::get('/admin/settings', 'App\Http\Controllers\settingsController@index')->name('admin.settings');
 Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@update')->name('admin.settings.update');
@@ -84,6 +96,8 @@ Route::get('admin/databukudetail/export', 'App\Http\Controllers\prosesController
 Route::post('admin/databukudetail/import', 'App\Http\Controllers\prosesController@importbukudetail')->name('bukudetail.import');
 Route::get('admin/dataanggota/export', 'App\Http\Controllers\prosesController@exportanggota')->name('anggota.export');
 Route::post('admin/dataanggota/import', 'App\Http\Controllers\prosesController@importanggota')->name('anggota.import');
+Route::get('admin/dataperalatan/export', 'App\Http\Controllers\prosesController@exportperalatan')->name('peralatan.export');
+Route::post('admin/dataperalatan/import', 'App\Http\Controllers\prosesController@importperalatan')->name('peralatan.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 

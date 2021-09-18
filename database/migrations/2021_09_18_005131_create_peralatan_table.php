@@ -18,6 +18,7 @@ class CreatePeralatanTable extends Migration
             $table->string('nama')->nullable();
             $table->string('kategori_nama')->nullable();
             $table->string('tgl_masuk')->nullable();
+            $table->string('kondisi')->nullable();
             $table->timestamps();
         });
     }

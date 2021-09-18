@@ -15,5 +15,6 @@ class peralatan extends Model
         'nama',
         'kategori_nama',
         'tgl_masuk',
+        'kondisi',
     ];
 }

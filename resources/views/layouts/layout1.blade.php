@@ -174,7 +174,7 @@ crossorigin="anonymous"></script>
           </a>
         </li>
         <li class="nav-item">
-        <a href="#" class="nav-link">
+        <a href="{{route('admin.peralatan')}}" class="nav-link">
           <i class="fas fa-screwdriver"></i>
           <p>Peralatan</p>
         </a>
