@@ -224,7 +224,6 @@ $cari=$request->cari;
                                 {{-- </form> --}}
                                 <script>
                                     $(function () {
-
                                         let daftarbuku;
                                         if (localStorage.getItem('daftarbuku') === null) {
                                             daftarbuku = [];
@@ -249,6 +248,9 @@ $cari=$request->cari;
                                             daftarbuku + '" />');
 
                                         var inputdaftarbuku = document.getElementById('inputdaftarbuku');
+                                        
+                                        var jmlbuku=daftarbuku.length;
+                                        // alert(jmlbuku);
                                     });
 
                                     $(document).ready(function () {
@@ -302,6 +304,34 @@ $cari=$request->cari;
                                                             }
 
                                                             if (bukubaru.value != '') {
+                                                                //periksa jika data sudah ada
+                                                                $hasilperiksa=0;
+                                                                for (let i = 0; i < daftarbuku2.length; i++) {
+                                                                          if(daftarbuku2[i]==bukubaru.value){
+                                                                              $hasilperiksa++;
+                                                                          }else{
+                                                                              
+                                                                            // alert('belum ada');
+                                                                          }  
+                                                                    }
+
+                                                                    if($hasilperiksa>0){
+                                                                var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 3000
+                                                                });
+
+                                                                Toast.fire({
+                                                                    icon: 'error',
+                                                                    title: 
+                                                                        'Data sudah ditambahkan! '
+                                                                });
+
+                                                                    }else{
+                                                                            // alert('belum ada');
+                                                                            
                                                                 daftarbuku2.push(bukubaru
                                                                     .value);
                                                                 localStorage.setItem(
@@ -328,6 +358,8 @@ $cari=$request->cari;
 
                                                                 inputdaftarbuku.value =
                                                                     daftarbuku2;
+
+                                                                    }
                                                                 // console.log(daftarbuku2);
                                                                 // $("#forminputan").append('<input name="new_gallery" value="'+ daftarbuku +'" />');
                                                                 // $(this).remove();
