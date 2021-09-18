@@ -33,6 +33,31 @@ class adminbukucontroller extends Controller
         // return view('admin.beranda');
     }
     
+    
+    public function cari(Request $request)
+    {
+        // dd($request);
+        $cari=$request->cari;
+
+        #WAJIB
+        $pages='buku';
+        $jmldata='0';
+        $datas='0';
+
+
+    $datas=DB::table('buku')
+    // ->where('nis','like',"%".$cari."%")
+    ->where('nama','like',"%".$cari."%")
+    ->orWhere('kode','like',"%".$cari."%")
+    ->paginate(Fungsi::paginationjml());
+
+
+
+    $bukurak = DB::table('bukurak')->get();
+    $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+    return view('admin.buku.index',compact('pages','bukurak','bukukategori','datas','request'));
+    }
     public function store(Request $request)
     {
         // dd($request);
@@ -66,6 +91,9 @@ class adminbukucontroller extends Controller
                'bukurak_kode'     =>   $ambilbukurak_kode->kode,
                'bukukategori_nama'     =>   $request->bukukategori_nama,
                'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
+               'penerbit'     =>   $request->penerbit,
+               'tahunterbit'     =>   $request->tahunterbit,
+               'bahasa'     =>   $request->bahasa,
                'created_at'=>date("Y-m-d H:i:s"),
                'updated_at'=>date("Y-m-d H:i:s")
         ));
@@ -138,6 +166,9 @@ class adminbukucontroller extends Controller
             'bukukategori_nama'     =>   $request->bukukategori_nama,
             'bukurak_kode'     =>   $ambilbukurak_kode->kode,
             'bukurak_nama'     =>   $request->bukurak_nama,
+            'penerbit'     =>   $request->penerbit,
+            'tahunterbit'     =>   $request->tahunterbit,
+            'bahasa'     =>   $request->bahasa,
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 

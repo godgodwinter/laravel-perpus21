@@ -18,6 +18,9 @@ class CreatePeminjamandetailTable extends Migration
             $table->string('isbn')->nullable(); //dari table kategori
             $table->string('nomeridentitas')->nullable();
             $table->string('buku_nama')->nullable();
+            $table->string('buku_penerbit')->nullable();
+            $table->string('buku_tahunterbit')->nullable();
+            $table->string('buku_bahasa')->nullable();
             $table->string('bukurak_nama')->nullable();
             $table->string('bukukategori_nama')->nullable();  //ktp / kartu pelajar
             $table->string('bukukategori_ddc')->nullable(); //dari table kategori

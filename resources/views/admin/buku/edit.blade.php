@@ -94,14 +94,39 @@ $message=session('status');
             <div class="card-body">
                 <div class="row">
                   <div class="form-group col-md-12 col-12">
-                      <label for="nama">Judul Buku @yield('title')</label>
+                      <label for="nama">Judul Buku</label>
                       <input type="text" name="nama" id="nama"
                           class="form-control @error('nama') is-invalid @enderror" placeholder=""
                           value="{{$datas->nama}}" required>
                       @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                       @enderror
                   </div>
-                    </div>
+                  
+                  <div class="form-group col-md-12 col-12">
+                    <label for="penerbit">Penerbit</label>
+                    <input type="text" name="penerbit" id="penerbit"
+                        class="form-control @error('penerbit') is-invalid @enderror" placeholder=""
+                        value="{{$datas->penerbit}}" required>
+                    @error('penerbit')<div class="invalid-feedback"> {{$message}}</div>
+                    @enderror
+                </div>
+                <div class="form-group col-md-12 col-12">
+                    <label for="tahunterbit">Tanggal Terbit</label>
+                    <input type="text" name="tahunterbit" id="tahunterbit"
+                        class="form-control @error('tahunterbit') is-invalid @enderror" placeholder=""
+                        value="{{$datas->tahunterbit}}" required>
+                    @error('tahunterbit')<div class="invalid-feedback"> {{$message}}</div>
+                    @enderror
+                </div>
+                
+                <div class="form-group col-md-12 col-12">
+                    <label for="bahasa">Bahasa</label>
+                    <input type="text" name="bahasa" id="bahasa"
+                        class="form-control @error('bahasa') is-invalid @enderror" placeholder=""
+                        value="{{$datas->bahasa}}" required>
+                    @error('bahasa')<div class="invalid-feedback"> {{$message}}</div>
+                    @enderror
+                </div>
                  
                   <div class="form-group col-md-12 col-12">
                       <label>Tempat Rak Buku <code>*)</code></label>

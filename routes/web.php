@@ -51,6 +51,16 @@ Route::delete('/admin/buku/{id}', 'App\Http\Controllers\adminbukucontroller@dest
 Route::delete('/admin/databuku/multidel', 'App\Http\Controllers\adminbukucontroller@multidel')->name('admin.buku.multidel');
 
 
+//buku-MENU
+Route::get('/admin/buku/{id}/bukudetail', 'App\Http\Controllers\adminbukudetailcontroller@index')->name('admin.buku.bukudetail');
+Route::post('/admin/buku/{id}/bukudetail/cari', 'App\Http\Controllers\adminbukudetailcontroller@cari')->name('admin.bukudetail.cari');
+Route::post('/admin/buku/{id}/bukudetail', 'App\Http\Controllers\adminbukudetailcontroller@store')->name('admin.bukudetail.store');
+Route::get('/admin/buku/{buku}/bukudetail/{id}', 'App\Http\Controllers\adminbukudetailcontroller@show')->name('admin.bukudetail.show');
+Route::put('/admin/buku/{buku}/bukudetail/{id}', 'App\Http\Controllers\adminbukudetailcontroller@update')->name('admin.bukudetail.update');
+Route::delete('/admin/buku/{buku}/bukudetail/{id}', 'App\Http\Controllers\adminbukudetailcontroller@destroy')->name('admin.bukudetail.destroy');
+Route::delete('/admin/bukudetail/multidel', 'App\Http\Controllers\adminbukudetailcontroller@multidel')->name('admin.bukudetail.multidel');
+
+
 //SETTINGS-MENU
 Route::get('/admin/settings', 'App\Http\Controllers\settingsController@index')->name('admin.settings');
 Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@update')->name('admin.settings.update');
@@ -60,6 +70,8 @@ Route::get('admin/databukurak/export', 'App\Http\Controllers\prosesController@ex
 Route::post('admin/databukurak/import', 'App\Http\Controllers\prosesController@importbukurak')->name('bukurak.import');
 Route::get('admin/databuku/export', 'App\Http\Controllers\prosesController@exportbuku')->name('buku.export');
 Route::post('admin/databuku/import', 'App\Http\Controllers\prosesController@importbuku')->name('buku.import');
+Route::get('admin/databukudetail/export', 'App\Http\Controllers\prosesController@exportbukudetail')->name('bukudetail.export');
+Route::post('admin/databukudetail/import', 'App\Http\Controllers\prosesController@importbukudetail')->name('bukudetail.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 
