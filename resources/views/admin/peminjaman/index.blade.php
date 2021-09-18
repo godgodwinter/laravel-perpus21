@@ -43,96 +43,6 @@ $message=session('status');
 @endsection
 
 
-{{-- DATATABLE --}}
-@section('headtable')
-<tr>
-    <th width="10%" class="text-center">
-        <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
-    <th> Nama Rak </th>
-    <th> Kode Rak</th>
-    <th width="200px" class="text-center">Aksi</th>
-</tr>
-@endsection
-
-@section('bodytable')
-<script>
-    // console.log('asdad');
-    $().jquery;
-    $.fn.jquery;
-    $(function (e) {
-        $("#chkCheckAll").click(function () {
-            $(".checkBoxClass").prop('checked', $(this).prop('checked'));
-        })
-
-        $("#deleteAllSelectedRecord").click(function (e) {
-            e.preventDefault();
-            var allids = [];
-            $("input:checkbox[name=ids]:checked").each(function () {
-                allids.push($(this).val());
-            });
-
-            $.ajax({
-                url: "{{ route('admin.bukurak.multidel') }}",
-                type: "DELETE",
-                data: {
-                    _token: $("input[name=_token]").val(),
-                    ids: allids
-                },
-                success: function (response) {
-                    $.each(allids, function ($key, val) {
-                        $("#sid" + val).remove();
-                    })
-                }
-            });
-
-        })
-
-    });
-
-</script>
-@foreach ($datas as $data)
-<tr id="sid{{ $data->id }}">
-    <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
-        {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
-    <td>{{ $data->nama }}</td>
-    <td>{{ $data->kode }}</td>
-
-    <td class="text-center">
-        {{-- <a class="btn btn-icon btn-secondary btn-sm " href="{{ url('/admin/inputnilai/kelas') }}/{{ $data->id }}"
-        data-toggle="tooltip" data-placement="top" title="Lihat selengkapnya!"> <i
-            class="fas fa-angle-double-right"></i> </a> --}}
-        <x-button-edit link="/admin/{{ $pages }}/{{$data->id}}" />
-        <x-button-delete link="/admin/{{ $pages }}/{{$data->id}}" />
-    </td>
-</tr>
-@endforeach
-
-<tr>
-    <td class="text-left" colspan="4">
-        <a href="#" class="btn btn-sm  btn-danger" id="deleteAllSelectedRecord"
-            onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"><i class="fas fa-trash"></i> Hapus
-            Terpilih</a></td>
-</tr>
-
-@endsection
-
-@section('foottable')
-
-@php
-$cari=$request->cari;
-@endphp
-{{ $datas->onEachSide(1)
-    ->appends(['cari'=>$cari])
-    ->links() }}
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><i class="far fa-file"></i> Halaman ke-{{ $datas->currentPage() }}</li>
-        <li class="breadcrumb-item"><i class="fas fa-paste"></i> {{ $datas->total() }} Total Data</li>
-        <li class="breadcrumb-item active" aria-current="page"><i class="far fa-copy"></i> {{ $datas->perPage() }} Data
-            Perhalaman</li>
-    </ol>
-</nav>
-@endsection
 
 @section('container')
 
@@ -250,7 +160,27 @@ $cari=$request->cari;
                                         var inputdaftarbuku = document.getElementById('inputdaftarbuku');
                                         
                                         var jmlbuku=daftarbuku.length;
+                                        
+                                        // $hasilperiksa=0;
+                                        //                         for (let i = 0; i < daftarbuku2.length; i++) {
+                                        //                                   if(daftarbuku2[i]==bukubaru.value){
+                                        //                                       $hasilperiksa++;
+                                        //                                   }else{
+                                                                              
+                                        //                                     // alert('belum ada');
+                                        //                                   }  
+                                        //                             }
                                         // alert(jmlbuku);
+
+                                                                for (let i = 0; i < daftarbuku.length; i++) {
+                                                                    
+                                            data_i = JSON.parse(localStorage.getItem(daftarbuku[i]));
+                                            // data.i = JSON.parse(localStorage.getItem('data-'+1234));
+                                                                    
+                                        $("#tbody").append(
+                                            '<tr id="'+daftarbuku[i]+'"><td class="text-center">'+(i+1)+'</td><td>'+daftarbuku[i]+'</td><td>'+data_i.buku_nama+'</td><td>'+data_i.bukukategori_nama+'</td><td></td> </tr>');
+
+                                                                    }
                                     });
 
                                     $(document).ready(function () {
@@ -265,6 +195,30 @@ $cari=$request->cari;
 
                                         document.querySelector('#isikan').addEventListener('click', function (
                                         e) {
+                                            
+                                    // if (localStorage)  
+                                    // {  
+                                    //     var buku_ = {};  
+                                    //     buku_.Name = '123';  
+                                    //     buku_.Age = 123;  
+                                    //     buku_.Salary ='asd';  
+                                    //     buku_.City = 'zxc';  
+                                    //     var ItemId = "data-" + buku_.Name;  
+                                    //     localStorage.setItem(ItemId, JSON.stringify(buku_));  
+
+                                        
+                                    //     var buku_ = {};  
+                                    //     buku_.Name = '1234';  
+                                    //     buku_.Age = 123;  
+                                    //     buku_.Salary ='asd';  
+                                    //     buku_.City = 'zxc';  
+                                    //     var ItemId = "data-" + buku_.Name;  
+                                    //     localStorage.setItem(ItemId, JSON.stringify(buku_));  
+                                    // }  
+                                    // else  
+                                    // {  
+                                    //     alert("OOPS! Your Browser Not Supporting LocalStorage Please Update It!")  
+                                    // }  
 
                                             e.preventDefault();
 
@@ -331,7 +285,17 @@ $cari=$request->cari;
 
                                                                     }else{
                                                                             // alert('belum ada');
+                                                                            //buatobjek untuk doom
+                                                                            var buku_ = {};  
+                                                                            buku_.id = response.data;  
+                                                                            buku_.buku_nama = response.buku_nama;   
+                                                                            buku_.bukukategori_nama = response.bukukategori_nama;   
+                                                                            // var ItemId = "data-" + buku_.id;  
+                                                                            var ItemId = buku_.id;  
+                                                                            localStorage.setItem(ItemId, JSON.stringify(buku_));  
                                                                             
+                                            // data_i = JSON.parse(localStorage.getItem('data-'+123));
+
                                                                 daftarbuku2.push(bukubaru
                                                                     .value);
                                                                 localStorage.setItem(
@@ -358,6 +322,11 @@ $cari=$request->cari;
 
                                                                 inputdaftarbuku.value =
                                                                     daftarbuku2;
+
+                                            // data.i = JSON.parse(localStorage.getItem('data-'+1234));
+                                                                    
+                                        $("#tbody").append(
+                                            '<tr id="'+bukubaru.value+'"><td class="text-center">-</td><td>'+bukubaru.value+'</td><td>'+response.buku_nama+'</td><td>'+response.bukukategori_nama+'</td><td></td> </tr>');
 
                                                                     }
                                                                 // console.log(daftarbuku2);
@@ -444,6 +413,7 @@ $cari=$request->cari;
                                     document.querySelector('#clear').addEventListener('click', function (e) {
                                         localStorage.removeItem("daftarbuku");
                                         inputdaftarbuku.value = '';
+                                        $("#tbody").empty();
                                     });
 
                                 </script>
@@ -570,7 +540,27 @@ $cari=$request->cari;
                         </div>
 
                     </form>
-                    <x-layout-table2 pages="{{ $pages }}" pagination="{{ $datas->perPage() }}" />
+                    <div class="card-body -mt-5">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-md">
+                                <thead>
+                                        <tr>
+                                            <th width="10%" class="text-center">
+                                                <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
+                                            <th> Kode Panggil </th>
+                                            <th> Judul Buku</th>
+                                            <th> Kategori Buku</th>
+                                            <th width="200px" class="text-center">Aksi</th>
+                                        </tr>
+                                </thead>
+                                <tbody id="tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer text-right">
+                                @yield('foottable')
+                        </div>
                 </div>
                 <!-- /.card-body -->
 

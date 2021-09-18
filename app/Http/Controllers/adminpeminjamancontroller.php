@@ -55,12 +55,25 @@ class adminpeminjamancontroller extends Controller
     {
         
         $datas=DB::table('bukudetail')->where('kodepanggil',$id)->count();
+        $data=DB::table('bukudetail')->where('kodepanggil',$id)->first();
         // //make response JSON
-        return response()->json([
-            'success' => true,
-            'message' => $datas,
-            'data'    => $id  
-        ], 200);
+        if($datas>0){
+            return response()->json([
+                'success' => true,
+                'message' => $datas,
+                'buku_nama' => $data->buku_nama,
+                'bukukategori_nama' => $data->bukukategori_nama,
+                'data'    => $id  
+            ], 200);
+
+        }else{
+            return response()->json([
+                'success' => true,
+                'message' => $datas,
+                'data'    => $id  
+            ], 200);
+
+        }
     }
 
 }
