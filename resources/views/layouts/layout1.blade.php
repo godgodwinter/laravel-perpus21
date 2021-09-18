@@ -8,9 +8,14 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ asset("assets/") }}/dist/css/adminlte.min.css">
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
+integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
+crossorigin="anonymous"></script>
+  @yield('csshere')
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -23,7 +28,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../assets/index3.html" class="nav-link">Pinjam</a>
+        <a href="{{ asset("assets/") }}/index3.html" class="nav-link">Pinjam</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Kembalikan</a>
@@ -71,8 +76,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../assets/index3.html" class="brand-link">
-      <img src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="{{ asset("assets/") }}/index3.html" class="brand-link">
+      <img src="{{ asset("assets/") }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">{{Fungsi::aplikasijudul()}}</span>
     </a>
 
@@ -105,19 +110,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../assets/index.html" class="nav-link">
+                <a href="{{ asset("assets/") }}/index.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard v1</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../assets/index2.html" class="nav-link">
+                <a href="{{ asset("assets/") }}/index2.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard v2</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../assets/index3.html" class="nav-link">
+                <a href="{{ asset("assets/") }}/index3.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard v3</p>
                 </a>
@@ -224,13 +229,14 @@
 </div>
 <!-- ./wrapper -->
 
+@yield('jshere')
 <!-- jQuery -->
-<script src="../assets/plugins/jquery/jquery.min.js"></script>
+<script src="{{ asset("assets/") }}/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset("assets/") }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../assets/dist/js/adminlte.min.js"></script>
+<script src="{{ asset("assets/") }}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../assets/dist/js/demo.js"></script>
+<script src="{{ asset("assets/") }}/dist/js/demo.js"></script>
 </body>
 </html>

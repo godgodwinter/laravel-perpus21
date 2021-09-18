@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Fungsi;
+use App\Models\bukurak;
+use Illuminate\Support\Facades\URL;
 
 class adminbukurakcontroller extends Controller
 {
@@ -54,14 +56,96 @@ class adminbukurakcontroller extends Controller
     }
     public function show(Request $request,bukurak $id)
     {
+        // dd($id);
         #WAJIB
-        $pages='siswa';
+        $pages='bukurak';
+        $datas=$id;
+
+        return view('admin.bukurak.edit',compact('pages','datas','request'));
+    }
+    
+    public function proses_update($request,$datas)
+    {
+        if($request->nama!==$datas->nama){
+            $request->validate([
+                'nama'=>'unique:bukurak,nama'
+            ],
+            [
+                // 'nama.unique'=>'Nama harus diisi'
+
+
+            ]);
+        }
+        
+        if($request->kode!==$datas->kode){
+            $request->validate([
+                'kode'=>'unique:bukurak,kode'
+            ],
+            [
+                // 'nama.unique'=>'Nama harus diisi'
+
+
+            ]);
+        }
+
+       
+       
+        
+
+        bukurak::where('id',$datas->id)
+        ->update([
+            'nama'     =>   $request->nama,
+            'kode'     =>   $request->kode,
+           'updated_at'=>date("Y-m-d H:i:s")
+        ]);
+
+        
+    }
+
+    public function update(Request $request, bukurak $id)
+    {
+        $this->proses_update($request,$id);
+
+            return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
+    }
+    
+    public function destroy($id)
+    {
+        bukurak::destroy($id);
+        return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
+    
+    }
+
+    public function multidel(Request $request)
+    {
+        
+        $ids=$request->ids;
+
+        // $datasiswa = DB::table('siswa')->where('id',$ids)->get();
+        // foreach($datasiswa as $ds){
+        //     $nis=$ds->nis;
+        // }
+
+        // dd($request);
+
+        // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
+        bukurak::whereIn('id',$ids)->delete();
+
+        
+        // load ulang
+     
+        #WAJIB
+        $pages='bukurak';
+        $jmldata='0';
         $datas='0';
 
 
-        $datas=siswa::all();
-        $datausers = DB::table('users')->where('nomerinduk',$siswa->nis)->get();
+        $datas=DB::table('bukurak')
+        ->paginate(Fungsi::paginationjml());
 
-        return view('admin.siswa.edit',compact('pages','datas','tapel','kelas','siswa','datausers','request'));
+        $jmldata = DB::table('bukurak')->count();
+
+        return view('admin.bukurak.index',compact('pages','jmldata','datas','request'));
+
     }
 }
