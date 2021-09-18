@@ -21,5 +21,6 @@ class anggota extends Model
         'jk',
         'tipe',
         'sekolahasal',
+        'telp',
     ];
 }

@@ -168,7 +168,7 @@ crossorigin="anonymous"></script>
             </a>
           </li>
           <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{route('admin.anggota')}}" class="nav-link">
             <i class="fas fa-user-tie"></i>
             <p>Anggota</p>
           </a>

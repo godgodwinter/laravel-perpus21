@@ -24,6 +24,7 @@ class CreateAnggotaTable extends Migration
             $table->string('jk')->nullable();
             $table->string('tipe')->nullable(); // siswa / umum  //jika siswa sekolah lainya
             $table->string('sekolahasal')->nullable(); // siswa / umum //jika siswa sekolah lainya
+            $table->string('telp')->nullable();
             $table->timestamps();
         });
     }

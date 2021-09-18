@@ -98,10 +98,6 @@ class adminbukucontroller extends Controller
                'updated_at'=>date("Y-m-d H:i:s")
         ));
 
-        $notification = array(
-            'message' => 'Post created successfully!',
-            'alert-type' => 'success'
-        );
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
     
     }

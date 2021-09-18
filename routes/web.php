@@ -51,7 +51,7 @@ Route::delete('/admin/buku/{id}', 'App\Http\Controllers\adminbukucontroller@dest
 Route::delete('/admin/databuku/multidel', 'App\Http\Controllers\adminbukucontroller@multidel')->name('admin.buku.multidel');
 
 
-//buku-MENU
+//bukudetail-MENU
 Route::get('/admin/buku/{id}/bukudetail', 'App\Http\Controllers\adminbukudetailcontroller@index')->name('admin.buku.bukudetail');
 Route::post('/admin/buku/{id}/bukudetail/cari', 'App\Http\Controllers\adminbukudetailcontroller@cari')->name('admin.bukudetail.cari');
 Route::post('/admin/buku/{id}/bukudetail', 'App\Http\Controllers\adminbukudetailcontroller@store')->name('admin.bukudetail.store');
@@ -59,6 +59,16 @@ Route::get('/admin/buku/{buku}/bukudetail/{id}', 'App\Http\Controllers\adminbuku
 Route::put('/admin/buku/{buku}/bukudetail/{id}', 'App\Http\Controllers\adminbukudetailcontroller@update')->name('admin.bukudetail.update');
 Route::delete('/admin/buku/{buku}/bukudetail/{id}', 'App\Http\Controllers\adminbukudetailcontroller@destroy')->name('admin.bukudetail.destroy');
 Route::delete('/admin/bukudetail/multidel', 'App\Http\Controllers\adminbukudetailcontroller@multidel')->name('admin.bukudetail.multidel');
+
+
+//anggota-MENU
+Route::get('/admin/anggota', 'App\Http\Controllers\adminanggotacontroller@index')->name('admin.anggota');
+Route::get('/admin/anggota/cari', 'App\Http\Controllers\adminanggotacontroller@cari')->name('admin.anggota.cari');
+Route::post('/admin/anggota', 'App\Http\Controllers\adminanggotacontroller@store')->name('admin.anggota.store');
+Route::get('/admin/anggota/{id}', 'App\Http\Controllers\adminanggotacontroller@show')->name('admin.anggota.show');
+Route::put('/admin/anggota/{id}', 'App\Http\Controllers\adminanggotacontroller@update')->name('admin.anggota.update');
+Route::delete('/admin/anggota/{id}', 'App\Http\Controllers\adminanggotacontroller@destroy')->name('admin.anggota.destroy');
+Route::delete('/admin/dataanggota/multidel', 'App\Http\Controllers\adminanggotacontroller@multidel')->name('admin.anggota.multidel');
 
 
 //SETTINGS-MENU
@@ -72,6 +82,8 @@ Route::get('admin/databuku/export', 'App\Http\Controllers\prosesController@expor
 Route::post('admin/databuku/import', 'App\Http\Controllers\prosesController@importbuku')->name('buku.import');
 Route::get('admin/databukudetail/export', 'App\Http\Controllers\prosesController@exportbukudetail')->name('bukudetail.export');
 Route::post('admin/databukudetail/import', 'App\Http\Controllers\prosesController@importbukudetail')->name('bukudetail.import');
+Route::get('admin/dataanggota/export', 'App\Http\Controllers\prosesController@exportanggota')->name('anggota.export');
+Route::post('admin/dataanggota/import', 'App\Http\Controllers\prosesController@importanggota')->name('anggota.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 
