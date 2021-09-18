@@ -31,6 +31,7 @@ class adminpeminjamancontroller extends Controller
         return view('admin.peminjaman.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
+
     public function store(Request $request)
     {
         if($request->daftarbuku==null){
@@ -48,6 +49,18 @@ class adminpeminjamancontroller extends Controller
         $datas=DB::table('bukudetail')->where('kodepanggil',$str[0])->first();
         dd(($str[0]),$datas);
 
+    }
+    
+    public function periksa($id)
+    {
+        
+        $datas=DB::table('bukudetail')->where('kodepanggil',$id)->count();
+        // //make response JSON
+        return response()->json([
+            'success' => true,
+            'message' => $datas,
+            'data'    => $id  
+        ], 200);
     }
 
 }

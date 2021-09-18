@@ -241,7 +241,7 @@ $cari=$request->cari;
 
                                         Toast.fire({
                                             icon: 'success',
-                                            title: 'Data berhasil ditambahkan!'
+                                            title: 'Data berhasil dimuat!'
                                         });
 
                                         $("#forminputan").append(
@@ -251,59 +251,162 @@ $cari=$request->cari;
                                         var inputdaftarbuku = document.getElementById('inputdaftarbuku');
                                     });
 
+                                    $(document).ready(function () {
 
-                                    document.querySelector('#isikan').addEventListener('click', function (e) {
-                                        let bukubaru = document.querySelector('#nama');
-
-                                        let daftarbuku2;
-                                        if (localStorage.getItem('daftarbuku') === null) {
-                                            daftarbuku2 = [];
-                                        } else {
-                                            daftarbuku2 = JSON.parse(localStorage.getItem('daftarbuku'));
-                                        }
-
-                                        if (bukubaru.value != '') {
-                                            daftarbuku2.push(bukubaru.value);
-                                            localStorage.setItem('daftarbuku', JSON.stringify(daftarbuku2));
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                                    'content')
+                                            }
+                                        });
 
 
+                                        document.querySelector('#isikan').addEventListener('click', function (
+                                        e) {
+
+                                            e.preventDefault();
+
+                                            var nama = $("input[name=nama]").val();
+
+                                            var link = "/admin/peminjaman/periksa/" + nama;
+
+                                            $.ajax({
+                                                url: link,
+                                                method: 'GET',
+                                                data: {
+                                                    "_token": "{{ csrf_token() }}",
+                                                    nama: nama,
+                                                },
+                                                success: function (response) {
+                                                    if (response.success) {
+
+                                                        // alert(response
+                                                        //         .message
+                                                        //         ) //Message come from controller
+                                                        if (response
+                                                            .message != 0) {
+
+                                                            let bukubaru = document
+                                                                .querySelector('#nama');
+
+                                                            let daftarbuku2;
+                                                            if (localStorage.getItem(
+                                                                    'daftarbuku') ===
+                                                                null) {
+                                                                daftarbuku2 = [];
+                                                            } else {
+                                                                daftarbuku2 = JSON.parse(
+                                                                    localStorage
+                                                                    .getItem(
+                                                                        'daftarbuku'));
+                                                            }
+
+                                                            if (bukubaru.value != '') {
+                                                                daftarbuku2.push(bukubaru
+                                                                    .value);
+                                                                localStorage.setItem(
+                                                                    'daftarbuku', JSON
+                                                                    .stringify(
+                                                                        daftarbuku2));
 
 
-                                            var Toast = Swal.mixin({
-                                                toast: true,
-                                                position: 'top-end',
-                                                showConfirmButton: false,
-                                                timer: 3000
+
+
+                                                                var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 3000
+                                                                });
+
+                                                                Toast.fire({
+                                                                    icon: 'success',
+                                                                    title: bukubaru
+                                                                        .value +
+                                                                        'Data berhasil ditambahkan!'
+                                                                });
+
+                                                                inputdaftarbuku.value =
+                                                                    daftarbuku2;
+                                                                // console.log(daftarbuku2);
+                                                                // $("#forminputan").append('<input name="new_gallery" value="'+ daftarbuku +'" />');
+                                                                // $(this).remove();
+
+                                                            } else {
+                                                                var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 3000
+                                                                });
+
+                                                                Toast.fire({
+                                                                    icon: 'error',
+                                                                    title: 
+                                                                        'Data gagal ditambahkan! atau Buku tidak ditemukan'
+                                                                });
+
+                                                            }
+                                                        }else{
+                                                            var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 3000
+                                                                });
+
+                                                                Toast.fire({
+                                                                    icon: 'error',
+                                                                    title: 
+                                                                        'Data gagal ditambahkan! atau Buku tidak ditemukan'
+                                                                });
+                                                        }
+
+                                                    } else {
+                                                        alert("Error")
+                                                        // alert(response.message) //Message come from controller
+                                                        
+                                                        var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 3000
+                                                                });
+
+                                                                Toast.fire({
+                                                                    icon: 'error',
+                                                                    title: 
+                                                                        'Data gagal ditambahkan! atau Buku tidak ditemukan'
+                                                                });
+                                                    }
+                                                },
+                                                error: function (error) {
+
+                                                    // alert(
+                                                    //         'Gagal! Isi data terlebih dahulu!'
+                                                    //         ) //Message come from controller
+                                                    console.log(error)
+                                                    
+                                                    var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 3000
+                                                                });
+
+                                                                Toast.fire({
+                                                                    icon: 'error',
+                                                                    title: 
+                                                                        'Data gagal ditambahkan! atau Buku tidak ditemukan'
+                                                                });
+                                                }
                                             });
 
-                                            Toast.fire({
-                                                icon: 'success',
-                                                title: bukubaru.value + 'Data berhasil ditambahkan!'
-                                            });
 
-                                            inputdaftarbuku.value = daftarbuku2;
-                                            // console.log(daftarbuku2);
-                                            // $("#forminputan").append('<input name="new_gallery" value="'+ daftarbuku +'" />');
-                                            // $(this).remove();
+                                            // let pesan = document.querySelector('#pesan');		
+                                            //     pesan.innerHTML = bukubaru.value + " berhasil disimpan";
+                                        });
 
-                                        } else {
-                                            var Toast = Swal.mixin({
-                                                toast: true,
-                                                position: 'top-end',
-                                                showConfirmButton: false,
-                                                timer: 3000
-                                            });
-
-                                            Toast.fire({
-                                                icon: 'error',
-                                                title: bukubaru.value + 'Data gagal ditambahkan!'
-                                            });
-
-                                        }
-
-
-                                        // let pesan = document.querySelector('#pesan');		
-                                        //     pesan.innerHTML = bukubaru.value + " berhasil disimpan";
                                     });
 
                                     document.querySelector('#clear').addEventListener('click', function (e) {
@@ -312,6 +415,58 @@ $cari=$request->cari;
                                     });
 
                                 </script>
+
+
+                                {{-- <script type="text/javascript">
+                                    $(document).ready(function () {
+
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                                    'content')
+                                            }
+                                        });
+
+
+
+                                        $("#isikan").click(function (e) {
+                                            e.preventDefault();
+
+                                            var nama = $("input[name=nama]").val();
+
+                                            var link = "/admin/peminjaman/periksa/" + nama;
+
+                                            $.ajax({
+                                                url: link,
+                                                method: 'GET',
+                                                data: {
+                                                    "_token": "{{ csrf_token() }}",
+                                nama: nama,
+                                },
+                                success: function (response) {
+                                if (response.success) {
+
+                                alert(response
+                                .message) //Message come from controller
+                                } else {
+                                alert("Error")
+                                // alert(response.message) //Message come from controller
+                                }
+                                },
+                                error: function (error) {
+
+                                alert(
+                                'Gagal! Angka harus 1-100!') //Message come from controller
+                                console.log(error)
+                                }
+                                });
+
+
+                                });
+
+                                });
+
+                                </script> --}}
                             </div>
 
                         </div>
