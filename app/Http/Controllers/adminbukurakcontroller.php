@@ -30,6 +30,30 @@ class adminbukurakcontroller extends Controller
         return view('admin.bukurak.index',compact('pages','jmldata','datas','request'));
         // return view('admin.beranda');
     }
+
+    
+    public function cari(Request $request)
+    {
+        // dd($request);
+        $cari=$request->cari;
+        $kategori_nama=$request->kategori_nama;
+
+        #WAJIB
+        $pages='bukurak';
+        $jmldata='0';
+        $datas='0';
+
+
+    $datas=DB::table('bukurak')
+    // ->where('nis','like',"%".$cari."%")
+    ->where('nama','like',"%".$cari."%")
+    ->orWhere('kode','like',"%".$cari."%")
+    ->paginate(Fungsi::paginationjml());
+
+
+
+        return view('admin.bukurak.index',compact('pages','jmldata','datas','request'));
+    }
     public function store(Request $request)
     {
         // dd($request);

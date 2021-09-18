@@ -211,6 +211,7 @@ crossorigin="anonymous"></script>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
       @yield('container')
+      @yield('container-modals')
   </div>
   <!-- /.content-wrapper -->
 

@@ -33,11 +33,17 @@ Route::get('/dashboard', 'App\Http\Controllers\adminberandaController@index')->n
 
 //BUKURAK-MENU
 Route::get('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@index')->name('admin.bukurak');
+Route::get('/admin/bukurak/cari', 'App\Http\Controllers\adminbukurakcontroller@cari')->name('admin.bukurak.cari');
 Route::post('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@store')->name('admin.bukurak.store');
 Route::get('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@show')->name('admin.bukurak.show');
 Route::put('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@update')->name('admin.bukurak.update');
 Route::delete('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@destroy')->name('admin.bukurak.destroy');
 Route::delete('/admin/databukurak/multidel', 'App\Http\Controllers\adminbukurakcontroller@multidel')->name('admin.bukurak.multidel');
+
+
+// ExportdanImport
+Route::get('admin/databukurak/export', 'App\Http\Controllers\prosesController@exportbukurak')->name('bukurak.export');
+Route::post('admin/databukurak/import', 'App\Http\Controllers\prosesController@importbukurak')->name('bukurak.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 

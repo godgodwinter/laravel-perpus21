@@ -2,8 +2,10 @@
 
 namespace App\Exports;
 
+use App\Http\Resources\bukurakresource;
+use App\Http\Resources\kelasresource;
 use App\Http\Resources\siswaresource;
-use App\Http\Resources\tagihanaturresource;
+use App\Http\Resources\tapelresource;
 use App\Models\siswa;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -11,7 +13,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 
-class Exporttagihanatur implements FromCollection, WithHeadings, ShouldAutoSize
+class Exportbukurak implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -31,9 +33,8 @@ class Exporttagihanatur implements FromCollection, WithHeadings, ShouldAutoSize
     {
         return [
             'id',
-            'kelas_nama',
-            'tapel_nama',
-            'nominaltagihan',
+            'nama',
+            'kode',
             'created_at',
             'updated_at',
         ];
@@ -47,11 +48,11 @@ class Exporttagihanatur implements FromCollection, WithHeadings, ShouldAutoSize
 
         // $datas=siswa::latest()->get();
 
-    $datas = DB::table('tagihanatur')
+    $datas = DB::table('bukurak')
     // ->join('users','users.nomerinduk','=','siswa.nis')
     // ->whereraw('tagihan.paket_harga > tagihan.total_bayar')
     ->get();
     // dd($datas);
-        return tagihanaturresource::collection($datas);
+        return bukurakresource::collection($datas);
     }
 }
