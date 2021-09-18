@@ -41,6 +41,10 @@ Route::delete('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontrolle
 Route::delete('/admin/databukurak/multidel', 'App\Http\Controllers\adminbukurakcontroller@multidel')->name('admin.bukurak.multidel');
 
 
+//SETTINGS-MENU
+Route::get('/admin/settings', 'App\Http\Controllers\settingsController@index')->name('admin.settings');
+Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@update')->name('admin.settings.update');
+
 // ExportdanImport
 Route::get('admin/databukurak/export', 'App\Http\Controllers\prosesController@exportbukurak')->name('bukurak.export');
 Route::post('admin/databukurak/import', 'App\Http\Controllers\prosesController@importbukurak')->name('bukurak.import');

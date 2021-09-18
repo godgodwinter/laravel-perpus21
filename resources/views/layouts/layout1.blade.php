@@ -58,7 +58,7 @@ crossorigin="anonymous"></script>
             <i class="fas fa-user-cog"></i> Profil
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="{{route('admin.settings')}}" class="dropdown-item">
             <i class="fas fa-cogs"></i> Pengaturan
           </a>
           <div class="dropdown-divider"></div>
@@ -130,7 +130,7 @@ crossorigin="anonymous"></script>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
+            <a href="{{route('admin.settings')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Pengaturan
@@ -211,8 +211,9 @@ crossorigin="anonymous"></script>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
       @yield('container')
-      @yield('container-modals')
   </div>
+
+      @yield('container-modals')
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">

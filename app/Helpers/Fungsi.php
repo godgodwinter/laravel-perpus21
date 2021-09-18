@@ -100,13 +100,6 @@ class Fungsi {
         return $data;
      
     }
-    public static function nominaltagihandefault(){
-	
-        $settings = DB::table('settings')->first();
-        $data=$settings->nominaltagihandefault;
-        return $data;
-     
-    }
 
     public static function passdefaultadmin(){
 	
