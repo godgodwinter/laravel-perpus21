@@ -10,6 +10,13 @@ class Fungsi {
     //     return (isset($user->username) ? $user->username : '');
     // }
 
+    public static function periksaarray($inputan){
+        // $data=$inputan;
+        $str=explode(",",$inputan);
+        $jmlstr=count($str);
+       
+        return $jmlstr;
+    }
     public static function autokodebuku($inputan){
         // $data=$inputan;
         $str=explode("-",$inputan);

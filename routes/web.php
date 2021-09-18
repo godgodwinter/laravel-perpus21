@@ -83,6 +83,13 @@ Route::delete('/admin/peralatan/{id}', 'App\Http\Controllers\adminperalatancontr
 Route::delete('/admin/dataperalatan/multidel', 'App\Http\Controllers\adminperalatancontroller@multidel')->name('admin.peralatan.multidel');
 
 
+//peminjaman-MENU
+Route::get('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@index')->name('admin.peminjaman');
+Route::get('/admin/peminjaman/cari', 'App\Http\Controllers\adminpeminjamancontroller@cari')->name('admin.peminjaman.cari');
+Route::post('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@store')->name('admin.peminjaman.store');
+
+
+
 //SETTINGS-MENU
 Route::get('/admin/settings', 'App\Http\Controllers\settingsController@index')->name('admin.settings');
 Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@update')->name('admin.settings.update');
@@ -98,6 +105,8 @@ Route::get('admin/dataanggota/export', 'App\Http\Controllers\prosesController@ex
 Route::post('admin/dataanggota/import', 'App\Http\Controllers\prosesController@importanggota')->name('anggota.import');
 Route::get('admin/dataperalatan/export', 'App\Http\Controllers\prosesController@exportperalatan')->name('peralatan.export');
 Route::post('admin/dataperalatan/import', 'App\Http\Controllers\prosesController@importperalatan')->name('peralatan.import');
+Route::get('admin/datapeminjaman/export', 'App\Http\Controllers\prosesController@exportpeminjaman')->name('peminjaman.export');
+Route::post('admin/datapeminjaman/import', 'App\Http\Controllers\prosesController@importpeminjaman')->name('peminjaman.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 

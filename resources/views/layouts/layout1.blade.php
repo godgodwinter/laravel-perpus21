@@ -181,7 +181,7 @@ crossorigin="anonymous"></script>
       </li>
           <li class="nav-header">PROSES</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('admin.peminjaman')}}" class="nav-link">
               <i class="fas fa-calendar-plus"></i>
               <p>Peminjaman</p>
             </a>
