@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
+use App\Models\buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -75,5 +76,121 @@ class adminbukucontroller extends Controller
         );
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
     
+    }
+    public function show(Request $request,buku $id)
+    {
+        // dd($id);
+        #WAJIB
+        $pages='buku';
+        $datas=$id;
+        
+        $bukurak = DB::table('bukurak')->get();
+        $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+        return view('admin.buku.edit',compact('pages','datas','bukurak','bukukategori','request'));
+    }
+    public function proses_update($request,$datas)
+    {
+        if($request->nama!==$datas->nama){
+            $request->validate([
+                'nama'=>'unique:bukurak,nama'
+            ],
+            [
+                // 'nama.unique'=>'Nama harus diisi'
+
+
+            ]);
+        }
+        
+        if($request->kode!==$datas->kode){
+            $request->validate([
+                'kode'=>'unique:bukurak,kode'
+            ],
+            [
+                // 'nama.unique'=>'Nama harus diisi'
+
+
+            ]);
+        }
+
+       
+       
+        $ambilbukurak_kode = DB::table('bukurak')->where('nama',$request->bukurak_nama)->first();
+        $ambilbukukategori_ddc = DB::table('kategori')->where('nama',$request->bukukategori_nama)->first();
+
+     
+        if($request->bukukategori_nama==$datas->bukukategori_nama){
+            $kodebuku=$datas->kode;
+        }else{
+            $kodebuku=Fungsi::autokodebuku($ambilbukukategori_ddc->kode);
+                    if($kodebuku==='penuh'){
+                        return redirect()->back()->with('status','Data Gagal di tambahkan karena kode buku penuh!')->with('tipe','error')->with('icon','fas fa-feather');
+
+                    }
+        }
+        // dd($request->bukukategori_nama,$datas->bukukategori_nama,$kodebuku);
+
+        buku::where('id',$datas->id)
+        ->update([
+            'nama'     =>   $request->nama,
+            'kode'     =>   $kodebuku,
+            'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
+            'bukukategori_nama'     =>   $request->bukukategori_nama,
+            'bukurak_kode'     =>   $ambilbukurak_kode->kode,
+            'bukurak_nama'     =>   $request->bukurak_nama,
+           'updated_at'=>date("Y-m-d H:i:s")
+        ]);
+
+        
+    }
+
+    public function update(Request $request, buku $id)
+    {
+        $this->proses_update($request,$id);
+
+            return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
+    }
+    
+    public function destroy($id)
+    {
+        buku::destroy($id);
+        return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
+    
+    }
+
+    public function multidel(Request $request)
+    {
+        
+        $ids=$request->ids;
+
+        // $datasiswa = DB::table('siswa')->where('id',$ids)->get();
+        // foreach($datasiswa as $ds){
+        //     $nis=$ds->nis;
+        // }
+
+        // dd($request);
+
+        // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
+        buku::whereIn('id',$ids)->delete();
+
+        
+        // load ulang
+     
+       
+        #WAJIB
+        $pages='buku';
+        $jmldata='0';
+        $datas='0';
+
+
+        $datas=DB::table('buku')
+        ->orderBy('nama','asc')
+        ->paginate(Fungsi::paginationjml());
+
+        $bukurak = DB::table('bukurak')->get();
+        $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+        return view('admin.buku.index',compact('pages','bukurak','bukukategori','datas','request'));
+
     }
 }

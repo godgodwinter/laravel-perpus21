@@ -294,10 +294,10 @@ $message=session('status');
                                         
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                              <span class="input-group-text">123</span>
+                                              <span class="input-group-text">Kode Buku</span>
                                             </div>
                                             <input type="number" name="kode" id="kode"
-                                            class="form-control @error('kode') is-invalid @enderror" placeholder="Kode Buku (Otomatis diawali ddc)"
+                                            class="form-control @error('kode') is-invalid @enderror" placeholder="Otomatis di antara DDC"
                                             value="{{old('kode')}}" required min="1" readonly>
                                         @error('kode')<div class="invalid-feedback"> {{$message}}</div>
                                         @enderror

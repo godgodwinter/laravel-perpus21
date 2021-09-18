@@ -113,16 +113,6 @@ $message=session('status');
 
                 </div>
              
-           
-                <div class="row">
-                  <div class="form-group mb-0 col-12">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" id="newsletter">
-                  
-                      
-                    </div>
-                  </div>
-                </div>
             </div>
             <div class=" text-right">
                 
