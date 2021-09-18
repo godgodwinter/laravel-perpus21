@@ -178,7 +178,21 @@ $message=session('status');
                                             // data.i = JSON.parse(localStorage.getItem('data-'+1234));
                                                                     
                                         $("#tbody").append(
-                                            '<tr id="'+daftarbuku[i]+'"><td class="text-center">'+(i+1)+'</td><td>'+daftarbuku[i]+'</td><td>'+data_i.buku_nama+'</td><td>'+data_i.bukukategori_nama+'</td><td></td> </tr>');
+                                            '<tr id="'+daftarbuku[i]+'"><td class="text-center">'+(i+1)+'</td><td>'+daftarbuku[i]+'</td><td>'+data_i.buku_nama+'</td><td>'+data_i.bukukategori_nama+'</td><td><button class="btn btn-primary btn-sm" id="hapusbuku'+daftarbuku[i]+'">Hapus Data</button></td> </tr>');
+
+
+                                            document.querySelector('#hapusbuku'+daftarbuku[i]).addEventListener('click', function (e) {
+                                        // localStorage.removeItem("daftarbuku");
+                                        localStorage.removeItem(daftarbuku[i]);
+                                        $("#"+daftarbuku[i]).empty();
+                                        daftarbuku.splice(i);
+                                        localStorage.setItem('daftarbuku',JSON.stringify(daftarbuku));
+
+                                        // localStorage.removeItem(daftarbuku[i]);
+                                        // inputdaftarbuku.value = '';
+                                        // alert(daftarbuku[i]);
+                                        // $("#tbody").empty();
+                                    });
 
                                                                     }
                                     });
@@ -322,11 +336,28 @@ $message=session('status');
 
                                                                 inputdaftarbuku.value =
                                                                     daftarbuku2;
+                                                                    
+                                             location.reload();
 
                                             // data.i = JSON.parse(localStorage.getItem('data-'+1234));
                                                                     
                                         $("#tbody").append(
-                                            '<tr id="'+bukubaru.value+'"><td class="text-center">-</td><td>'+bukubaru.value+'</td><td>'+response.buku_nama+'</td><td>'+response.bukukategori_nama+'</td><td></td> </tr>');
+                                            '<tr id="'+bukubaru.value+'"><td class="text-center">'+(daftarbuku2.length)+'</td><td>'+bukubaru.value+'</td><td>'+response.buku_nama+'</td><td>'+response.bukukategori_nama+'</td><td><button class="btn btn-primary btn-sm" id="hapusbuku'+bukubaru.value+'">Hapus Data</button></td> </tr>');
+                                             i=(daftarbuku2.length-1);
+                                            //  alert(bukubaru.value);
+                                            // document.querySelector('#hapusbuku'+bukubaru.value).addEventListener('click', function (e) {
+                                            //     // localStorage.removeItem("daftarbuku");
+                                            //     localStorage.removeItem(bukubaru.value);
+                                            //     $("#"+bukubaru.value).empty();
+                                            //     daftarbuku2.splice(i);
+                                            //     localStorage.setItem('daftarbuku',JSON.stringify(daftarbuku2));
+        
+                                            //     // localStorage.removeItem(daftarbuku[i]);
+                                            //     // inputdaftarbuku.value = '';
+                                            //     // alert(daftarbuku[i]);
+                                            //     // $("#tbody").empty();
+                                            // });
+                                           
 
                                                                     }
                                                                 // console.log(daftarbuku2);
@@ -416,6 +447,8 @@ $message=session('status');
                                         $("#tbody").empty();
                                     });
 
+                                
+
                                 </script>
 
 
@@ -503,24 +536,8 @@ $message=session('status');
 
                         <div class="row">
 
-                            <div class="form-group col-md-4 col-4 mt-1 text-right">
-                                <input type="text" name="cari" id="cari"
-                                    class="form-control form-control-sm @error('cari') is-invalid @enderror"
-                                    value="{{$request->cari}}" placeholder="Cari...">
-                                @error('cari')<div class="invalid-feedback"> {{$message}}</div>
-                                @enderror
-                            </div>
 
-
-
-                            <div class="form-group col-md-4 col-4 mt-1 text-left">
-
-
-                                <button type="submit" value="CARI" class="btn btn-icon btn-info btn-sm mt-0"><span
-                                        class="pcoded-micon"> <i class="fas fa-search"></i> Pecarian</span></button>
-
-                            </div>
-                            <div class="form-group col-md-4 col-4 mt-1 text-right">
+                            <div class="form-group col-md-12 col-12 mt-1 text-right">
 
                                 <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                                     data-target="#importExcel"><i class="fas fa-upload"></i>
