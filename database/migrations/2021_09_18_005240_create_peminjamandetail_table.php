@@ -16,10 +16,12 @@ class CreatePeminjamandetailTable extends Migration
         Schema::create('peminjamandetail', function (Blueprint $table) {
             $table->id();
             $table->string('isbn')->nullable(); //dari table kategori
+            $table->string('nomeridentitas')->nullable();
             $table->string('buku_nama')->nullable();
-            $table->string('buku_rak')->nullable();
-            $table->string('buku_kategori')->nullable();  //ktp / kartu pelajar
-            $table->string('buku_ddc')->nullable(); //dari table kategori
+            $table->string('bukurak_nama')->nullable();
+            $table->string('bukukategori_nama')->nullable();  //ktp / kartu pelajar
+            $table->string('bukukategori_ddc')->nullable(); //dari table kategori
+            $table->string('jaminan_nama')->nullable();  //ktp / kartu pelajar
             $table->string('jaminan_tipe')->nullable(); //dari table kategori
             $table->string('tgl_pinjam')->nullable(); //timestamp
             $table->string('tgl_harus_kembali')->nullable(); //diambil dari settings maxharipinjam

@@ -102,9 +102,9 @@ $message=session('status');
     <td>{{ $data->kode }}</td>
 
     <td class="text-center">
-        <a class="btn btn-icon btn-secondary btn-sm " href="{{ url('/admin/inputnilai/kelas') }}/{{ $data->id }}"
+        {{-- <a class="btn btn-icon btn-secondary btn-sm " href="{{ url('/admin/inputnilai/kelas') }}/{{ $data->id }}"
             data-toggle="tooltip" data-placement="top" title="Lihat selengkapnya!"> <i
-                class="fas fa-angle-double-right"></i> </a>
+                class="fas fa-angle-double-right"></i> </a> --}}
         <x-button-edit link="/admin/{{ $pages }}/{{$data->id}}" />
         <x-button-delete link="/admin/{{ $pages }}/{{$data->id}}" />
     </td>

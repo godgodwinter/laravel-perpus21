@@ -17,7 +17,7 @@ class CreatePengembalianTable extends Migration
             $table->id();
             $table->string('nama')->nullable();
             $table->string('nomeridentitas')->nullable();
-            $table->string('jaminan')->nullable();  //ktp / kartu pelajar
+            $table->string('jaminan_nama')->nullable();  //ktp / kartu pelajar
             $table->string('jaminan_tipe')->nullable(); //dari table kategori
             $table->string('tgl_pinjam')->nullable(); //timestamp
             $table->string('tgl_harus_kembali')->nullable(); //diambil dari settings maxharipinjam

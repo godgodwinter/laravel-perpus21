@@ -34,6 +34,9 @@ Route::get('/dashboard', 'App\Http\Controllers\adminberandaController@index')->n
 //BUKURAK-MENU
 Route::get('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@index')->name('admin.bukurak');
 Route::post('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@store')->name('admin.bukurak.store');
+Route::get('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@show')->name('admin.bukurak.show');
+Route::put('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@update')->name('admin.bukurak.update');
+Route::delete('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@destrou')->name('admin.bukurak.destroy');
 Route::delete('/admin/bukurakmultidel', 'App\Http\Controllers\adminbukurakcontroller@multidel')->name('admin.bukurak.multidel');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');

@@ -52,4 +52,16 @@ class adminbukurakcontroller extends Controller
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success')->with('icon','fas fa-feather');
     
     }
+    public function show(Request $request,bukurak $id)
+    {
+        #WAJIB
+        $pages='siswa';
+        $datas='0';
+
+
+        $datas=siswa::all();
+        $datausers = DB::table('users')->where('nomerinduk',$siswa->nis)->get();
+
+        return view('admin.siswa.edit',compact('pages','datas','tapel','kelas','siswa','datausers','request'));
+    }
 }
