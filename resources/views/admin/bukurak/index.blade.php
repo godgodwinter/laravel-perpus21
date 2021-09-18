@@ -120,8 +120,14 @@ $message=session('status');
 
 @endsection
 
-@section('foottable')
-{{ $datas->links() }}
+@section('foottable')  
+
+@php
+  $cari=$request->cari;
+@endphp
+{{ $datas->onEachSide(1)
+    ->appends(['cari'=>$cari])
+    ->links() }}
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><i class="far fa-file"></i> Halaman ke-{{ $datas->currentPage() }}</li>
