@@ -172,18 +172,18 @@ crossorigin="anonymous"></script>
             </a>
           </li>
           <li class="nav-header">MASTER</li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
           <a href="{{ route('admin.bukurak') }}" class="nav-link">
             <i class="fas fa-box-open"></i>
             <p>Rak Buku</p>
-          </a>
+          </a> --}}
         </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fas fa-archive"></i>
             <p>Kategori</p>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a href="{{ route('admin.buku') }}" class="nav-link">
             <i class="fas fa-book"></i>
@@ -219,6 +219,18 @@ crossorigin="anonymous"></script>
             <a href="#" class="nav-link">
               <i class="far fa-calendar-check"></i>
               <p>Pengembalian</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-hand-holding-usd"></i>
+              <p>Pemasukan</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="far fa-money-bill-alt"></i>
+              <p>Pengeluaran</p>
             </a>
           </li>
           <li class="nav-header">REPORT</li>
