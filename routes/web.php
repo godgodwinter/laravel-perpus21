@@ -86,9 +86,18 @@ Route::delete('/admin/dataperalatan/multidel', 'App\Http\Controllers\adminperala
 
 //peminjaman-MENU
 Route::get('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@index')->name('admin.peminjaman');
+Route::get('/admin/pinjambuku', 'App\Http\Controllers\adminpeminjamancontroller@buku')->name('admin.peminjaman.buku');
 Route::get('/admin/peminjaman/cari', 'App\Http\Controllers\adminpeminjamancontroller@cari')->name('admin.peminjaman.cari');
 Route::post('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@store')->name('admin.peminjaman.store');
 Route::get('/admin/peminjaman/periksa/{id}', 'App\Http\Controllers\adminpeminjamancontroller@periksa')->name('admin.peminjaman.periksa');
+
+
+//peminjaman-MENU
+Route::get('/admin/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@index')->name('admin.pengembalian');
+Route::get('/admin/kembalikanbuku', 'App\Http\Controllers\adminpeminjamancontroller@buku')->name('admin.kembalikan.buku');
+Route::get('/admin/pengembalian/cari', 'App\Http\Controllers\adminpengembaliancontroller@cari')->name('admin.pengembalian.cari');
+Route::post('/admin/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@store')->name('admin.pengembalian.store');
+Route::get('/admin/pengembalian/periksa/{id}', 'App\Http\Controllers\adminpengembaliancontroller@periksa')->name('admin.pengembalian.periksa');
 
 
 
@@ -115,6 +124,8 @@ Route::get('admin/dataperalatan/export', 'App\Http\Controllers\prosesController@
 Route::post('admin/dataperalatan/import', 'App\Http\Controllers\prosesController@importperalatan')->name('peralatan.import');
 Route::get('admin/datapeminjaman/export', 'App\Http\Controllers\prosesController@exportpeminjaman')->name('peminjaman.export');
 Route::post('admin/datapeminjaman/import', 'App\Http\Controllers\prosesController@importpeminjaman')->name('peminjaman.import');
+Route::get('admin/datapengembalian/export', 'App\Http\Controllers\prosesController@exportpengembalian')->name('pengembalian.export');
+Route::post('admin/datapengembalian/import', 'App\Http\Controllers\prosesController@importpengembalian')->name('pengembalian.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 

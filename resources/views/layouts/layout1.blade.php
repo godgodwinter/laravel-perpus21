@@ -35,10 +35,10 @@ crossorigin="anonymous"></script>
         <a href="{{ route("admin.buku") }}" class="nav-link">Pilih Buku</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route("admin.peminjaman") }}" class="nav-link" id="jmldatabuku2">Pinjam</a>
+        <a href="{{ route("admin.peminjaman") }}" class="nav-link" id="jmldatabuku">Pinjam</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link"  id="jmlakandikembalikan">Kembalikan</a>
+        <a href="{{ route("admin.pengembalian") }}" class="nav-link"  id="jmldatabukukembali">Kembalikan</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Anggota</a>
@@ -64,13 +64,24 @@ crossorigin="anonymous"></script>
             }
         // alert(daftarbuku.length);
         
-        $("#jmldatabuku").append('<span class="badge badge-warning navbar-badge">'+daftarbuku.length+'</span>');
-        $("#jmldatabuku2").append('<span class="badge badge-warning navbar-badge">'+daftarbuku.length+'</span>');
+        $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
+
+        
+        let daftarkembali=0;
+            if (localStorage.getItem('daftarkembali') === null) {
+                daftarkembali = [];
+            } else {
+                daftarkembali = JSON.parse(localStorage.getItem('daftarkembali'));
+            }
+        // alert(daftarbuku.length);
+        
+        $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
+        $("#jmldatabukukembali").append('<span class="badge badge-success navbar-badge">'+daftarkembali.length+'</span>');
         });
       </script>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" id="jmldatabuku">
+        <a class="nav-link" data-toggle="dropdown" href="#" >
           <i class="fas fa-cog"></i>
           
         </a>
@@ -216,7 +227,7 @@ crossorigin="anonymous"></script>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('admin.pengembalian')}}" class="nav-link">
               <i class="far fa-calendar-check"></i>
               <p>Pengembalian</p>
             </a>

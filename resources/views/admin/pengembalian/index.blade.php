@@ -2,7 +2,7 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Peminjaman')
+@section('title','Pengembalian')
 @section('linkpages')
 data{{ $pages }}
 @endsection
@@ -42,8 +42,8 @@ $message=session('status');
          
     @if((session('clearlocal')=='yes'))
    
-   localStorage.removeItem("daftarbuku");
-                                       inputdaftarbuku.value = '';
+   localStorage.removeItem("daftarkembali");
+                                       inputdaftarkembali.value = '';
                                        $("#tbody").empty();
    @endif
    
@@ -191,11 +191,11 @@ $message=session('status');
                                 {{-- </form> --}}
                                 <script>
                                     $(function () {
-                                        let daftarbuku;
-                                        if (localStorage.getItem('daftarbuku') === null) {
-                                            daftarbuku = [];
+                                        let daftarkembali;
+                                        if (localStorage.getItem('daftarkembali') === null) {
+                                            daftarkembali = [];
                                         } else {
-                                            daftarbuku = JSON.parse(localStorage.getItem('daftarbuku'));
+                                            daftarkembali = JSON.parse(localStorage.getItem('daftarkembali'));
                                         }
 
                                         var Toast = Swal.mixin({
@@ -211,16 +211,16 @@ $message=session('status');
                                         });
 
                                         $("#forminputan").append(
-                                            '<input name="daftarbuku" type="hidden" id="inputdaftarbuku" value="' +
-                                            daftarbuku + '" />');
+                                            '<input name="daftarkembali" type="hidden" id="inputdaftarkembali" value="' +
+                                            daftarkembali + '" />');
 
-                                        var inputdaftarbuku = document.getElementById('inputdaftarbuku');
+                                        var inputdaftarkembali = document.getElementById('inputdaftarkembali');
                                         
-                                        var jmlbuku=daftarbuku.length;
+                                        var jmlbuku=daftarkembali.length;
                                         
                                         // $hasilperiksa=0;
-                                        //                         for (let i = 0; i < daftarbuku2.length; i++) {
-                                        //                                   if(daftarbuku2[i]==bukubaru.value){
+                                        //                         for (let i = 0; i < daftarkembali2.length; i++) {
+                                        //                                   if(daftarkembali2[i]==bukubaru.value){
                                         //                                       $hasilperiksa++;
                                         //                                   }else{
                                                                               
@@ -229,35 +229,35 @@ $message=session('status');
                                         //                             }
                                         // alert(jmlbuku);
 
-                                                                for (let i = 0; i < daftarbuku.length; i++) {
+                                                                for (let i = 0; i < daftarkembali.length; i++) {
                                                                     
-                                            data_i = JSON.parse(localStorage.getItem(daftarbuku[i]));
+                                            data_i = JSON.parse(localStorage.getItem(daftarkembali[i]));
                                             // data.i = JSON.parse(localStorage.getItem('data-'+1234));
                                                                     
                                         $("#tbody").append(
-                                            '<tr id="'+daftarbuku[i]+'"><td class="text-center">'+(i+1)+'</td><td>'+daftarbuku[i]+'</td><td>'+data_i.buku_nama+'</td><td>'+data_i.bukukategori_nama+'</td><td><button class="btn btn-icon btn-danger btn-sm" id="hapusbuku'+daftarbuku[i]+'"><span class="pcoded-micon"> <i class="fas fa-trash"></i></span></button></td> </tr>');
+                                            '<tr id="'+daftarkembali[i]+'"><td class="text-center">'+(i+1)+'</td><td>'+daftarkembali[i]+'</td><td>'+data_i.buku_nama+'</td><td>'+data_i.bukukategori_nama+'</td><td><button class="btn btn-icon btn-danger btn-sm" id="hapusbuku'+daftarkembali[i]+'"><span class="pcoded-micon"> <i class="fas fa-trash"></i></span></button></td> </tr>');
 
 
-                                            document.querySelector('#hapusbuku'+daftarbuku[i]).addEventListener('click', function (e) {
-                                                // alert(daftarbuku[i]);
-                                        // localStorage.removeItem("daftarbuku");
-                                        localStorage.removeItem(daftarbuku[i]);
+                                            document.querySelector('#hapusbuku'+daftarkembali[i]).addEventListener('click', function (e) {
+                                                // alert(daftarkembali[i]);
+                                        // localStorage.removeItem("daftarkembali");
+                                        localStorage.removeItem(daftarkembali[i]);
                                         
-                                        const index = daftarbuku.indexOf(daftarbuku[i]);
+                                        const index = daftarkembali.indexOf(daftarkembali[i]);
                                         // alert(index);
 
                                         if (index > -1) {
-                                            daftarbuku.splice(index, 1);
+                                            daftarkembali.splice(index, 1);
                                         }
-                                        // daftarbuku.splice(i);
+                                        // daftarkembali.splice(i);
 
-                                        // $("#"+daftarbuku[i]).empty();
-                                        localStorage.setItem('daftarbuku',JSON.stringify(daftarbuku));
+                                        // $("#"+daftarkembali[i]).empty();
+                                        localStorage.setItem('daftarkembali',JSON.stringify(daftarkembali));
 
                                         location.reload();
-                                        // localStorage.removeItem(daftarbuku[i]);
-                                        // inputdaftarbuku.value = '';
-                                        // alert(daftarbuku[i]);
+                                        // localStorage.removeItem(daftarkembali[i]);
+                                        // inputdaftarkembali.value = '';
+                                        // alert(daftarkembali[i]);
                                         // $("#tbody").empty();
                                     });
 
@@ -318,31 +318,31 @@ $message=session('status');
                                                     if (response.success) {
 
                                                         // alert(response
-                                                        //         .message
+                                                        //         .status
                                                         //         ) //Message come from controller
                                                         if (response
-                                                            .message != 0) {
+                                                            .status == 'dipinjam') {
 
                                                             let bukubaru = document
                                                                 .querySelector('#nama');
 
-                                                            let daftarbuku2;
+                                                            let daftarkembali2;
                                                             if (localStorage.getItem(
-                                                                    'daftarbuku') ===
+                                                                    'daftarkembali') ===
                                                                 null) {
-                                                                daftarbuku2 = [];
+                                                                daftarkembali2 = [];
                                                             } else {
-                                                                daftarbuku2 = JSON.parse(
+                                                                daftarkembali2 = JSON.parse(
                                                                     localStorage
                                                                     .getItem(
-                                                                        'daftarbuku'));
+                                                                        'daftarkembali'));
                                                             }
 
                                                             if (bukubaru.value != '') {
                                                                 //periksa jika data sudah ada
                                                                 $hasilperiksa=0;
-                                                                for (let i = 0; i < daftarbuku2.length; i++) {
-                                                                          if(daftarbuku2[i]==bukubaru.value){
+                                                                for (let i = 0; i < daftarkembali2.length; i++) {
+                                                                          if(daftarkembali2[i]==bukubaru.value){
                                                                               $hasilperiksa++;
                                                                           }else{
                                                                               
@@ -377,12 +377,12 @@ $message=session('status');
                                                                             
                                             // data_i = JSON.parse(localStorage.getItem('data-'+123));
 
-                                                                daftarbuku2.push(bukubaru
+                                                                daftarkembali2.push(bukubaru
                                                                     .value);
                                                                 localStorage.setItem(
-                                                                    'daftarbuku', JSON
+                                                                    'daftarkembali', JSON
                                                                     .stringify(
-                                                                        daftarbuku2));
+                                                                        daftarkembali2));
 
 
 
@@ -401,34 +401,34 @@ $message=session('status');
                                                                         'Data berhasil ditambahkan!'
                                                                 });
 
-                                                                inputdaftarbuku.value =
-                                                                    daftarbuku2;
+                                                                inputdaftarkembali.value =
+                                                                    daftarkembali2;
                                                                     
                                              location.reload();
 
                                             // data.i = JSON.parse(localStorage.getItem('data-'+1234));
                                                                     
                                         $("#tbody").append(
-                                            '<tr id="'+bukubaru.value+'"><td class="text-center">'+(daftarbuku2.length)+'</td><td>'+bukubaru.value+'</td><td>'+response.buku_nama+'</td><td>'+response.bukukategori_nama+'</td><td><button class="btn btn-icon btn-danger btn-sm" id="hapusbuku'+bukubaru.value+'"><span class="pcoded-micon"> <i class="fas fa-trash"></i></span></button></td> </tr>');
-                                             i=(daftarbuku2.length-1);
+                                            '<tr id="'+bukubaru.value+'"><td class="text-center">'+(daftarkembali2.length)+'</td><td>'+bukubaru.value+'</td><td>'+response.buku_nama+'</td><td>'+response.bukukategori_nama+'</td><td><button class="btn btn-icon btn-danger btn-sm" id="hapusbuku'+bukubaru.value+'"><span class="pcoded-micon"> <i class="fas fa-trash"></i></span></button></td> </tr>');
+                                             i=(daftarkembali2.length-1);
                                             //  alert(bukubaru.value);
                                             // document.querySelector('#hapusbuku'+bukubaru.value).addEventListener('click', function (e) {
-                                            //     // localStorage.removeItem("daftarbuku");
+                                            //     // localStorage.removeItem("daftarkembali");
                                             //     localStorage.removeItem(bukubaru.value);
                                             //     $("#"+bukubaru.value).empty();
-                                            //     daftarbuku2.splice(i);
-                                            //     localStorage.setItem('daftarbuku',JSON.stringify(daftarbuku2));
+                                            //     daftarkembali2.splice(i);
+                                            //     localStorage.setItem('daftarkembali',JSON.stringify(daftarkembali2));
         
-                                            //     // localStorage.removeItem(daftarbuku[i]);
-                                            //     // inputdaftarbuku.value = '';
-                                            //     // alert(daftarbuku[i]);
+                                            //     // localStorage.removeItem(daftarkembali[i]);
+                                            //     // inputdaftarkembali.value = '';
+                                            //     // alert(daftarkembali[i]);
                                             //     // $("#tbody").empty();
                                             // });
                                            
 
                                                                     }
-                                                                // console.log(daftarbuku2);
-                                                                // $("#forminputan").append('<input name="new_gallery" value="'+ daftarbuku +'" />');
+                                                                // console.log(daftarkembali2);
+                                                                // $("#forminputan").append('<input name="new_gallery" value="'+ daftarkembali +'" />');
                                                                 // $(this).remove();
 
                                                             } else {
@@ -442,7 +442,7 @@ $message=session('status');
                                                                 Toast.fire({
                                                                     icon: 'error',
                                                                     title: 
-                                                                        'Data gagal ditambahkan! atau Buku tidak ditemukan atau sedang dipinjam'
+                                                                        'Data gagal ditambahkan! atau Buku tidak sedang dipinjam atau sudah dikembalikan'
                                                                 });
 
                                                             }
@@ -457,7 +457,7 @@ $message=session('status');
                                                                 Toast.fire({
                                                                     icon: 'error',
                                                                     title: 
-                                                                        'Data gagal ditambahkan! atau Buku tidak ditemukan atau sedang dipinjam'
+                                                                        'Data gagal ditambahkan! atau Buku tidak sedang dipinjam atau sudah dikembalikan'
                                                                 });
                                                         }
 
@@ -509,8 +509,8 @@ $message=session('status');
                                     });
 
                                     document.querySelector('#clear').addEventListener('click', function (e) {
-                                        localStorage.removeItem("daftarbuku");
-                                        inputdaftarbuku.value = '';
+                                        localStorage.removeItem("daftarkembali");
+                                        inputdaftarkembali.value = '';
                                         $("#tbody").empty();
                                     });
 

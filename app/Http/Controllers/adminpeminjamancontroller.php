@@ -146,9 +146,16 @@ class adminpeminjamancontroller extends Controller
             ], 200);
 
         }else{
+            $ada=1;
+            if($data->status!='ada'){
+                $ada=0;
+            }
             return response()->json([
                 'success' => true,
-                'message' => $datas,
+                'message' => $ada,
+                'status' => $data->status,
+                'buku_nama' => $data->buku_nama,
+                'bukukategori_nama' => $data->bukukategori_nama,
                 'data'    => $id  
             ], 200);
 
