@@ -9,6 +9,9 @@ data{{ $pages }}
 @section('halaman','kelas')
 
 @section('csshere')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
 
 @section('jshere')
@@ -98,6 +101,8 @@ $message=session('status');
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
+                                        
+
                                         <div class="form-group col-md-12 col-12">
                                             <label for="nama">Kode Panggil</label>
                                             <input type="text" name="nama" id="nama" class="form-control" placeholder=""
@@ -115,6 +120,22 @@ $message=session('status');
                                 <form action="/admin/{{ $pages }}" method="post">
                                     @csrf
                                     <div class="card-body">
+                                        
+                                        <div class="form-group">
+                                            <label>Pilih Anggota :</label>
+                                            <select class="form-control form-control-lg" id="tags" select2 select2-hidden-accessible  name="nomeridentitas" required>
+                                            @php
+                                            // $cekdataselect = DB::table('anggota')
+                                            //     ->count();
+                                            $dataselect=DB::table('anggota')
+                                                ->get();
+                                                @endphp 
+                                               
+                                            @foreach ($dataselect as $t)
+                                                <option value="{{ $t->nomeridentitas }}" >{{ $t->nomeridentitas }} - {{ $t->nama }}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
                                         <div class="row" id="forminputan">
                                             {{-- <div class="form-group col-md-12 col-12">
                                             <label for="nama">Kode Panggil</label>
@@ -130,6 +151,15 @@ $message=session('status');
                                         <button class="btn btn-primary" id="kirimdata">Selesai</button>
                                     </div>
                                 </form>
+                                
+                            <script type="text/javascript">
+                                var values = $('#tags option[selected="true"]').map(function() { return $(this).val(); }).get();
+    
+                                  // you have no need of .trigger("change") if you dont want to trigger an event
+                                  $('#tags').select2({ 
+                                placeholder: "Pilih Anggota"
+                               });
+                              </script>
 
                                 {{-- </form> --}}
                                 <script>
@@ -154,7 +184,7 @@ $message=session('status');
                                         });
 
                                         $("#forminputan").append(
-                                            '<input name="daftarbuku" id="inputdaftarbuku" value="' +
+                                            '<input name="daftarbuku" type="hidden" id="inputdaftarbuku" value="' +
                                             daftarbuku + '" />');
 
                                         var inputdaftarbuku = document.getElementById('inputdaftarbuku');

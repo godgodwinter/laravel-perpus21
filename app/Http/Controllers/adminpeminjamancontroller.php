@@ -47,7 +47,17 @@ class adminpeminjamancontroller extends Controller
         }
         
         $datas=DB::table('bukudetail')->where('kodepanggil',$str[0])->first();
-        dd(($str[0]),$datas);
+        $dataanggota=DB::table('anggota')->where('nomeridentitas',$request->nomeridentitas)->first();
+
+        dd(($str[0]),$datas,$request->nomeridentitas,$dataanggota->nama);
+
+        //buat kodetransaksi dari date masukkan ke peminjaman dan peminjamandetail
+
+        //insert anggota ke peminjaman
+        
+        //insert buku ke peminjaman detail where kodetransaksi
+
+        //ubah status buku per exemplar bahwa dipinjam
 
     }
     
