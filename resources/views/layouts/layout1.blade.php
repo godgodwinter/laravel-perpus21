@@ -67,10 +67,21 @@ crossorigin="anonymous"></script>
           </a>
           <div class="dropdown-divider"></div>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+        
+                <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger"
+                onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                    <i class="fas fa-sign-out-alt">    
+                    </i> Logout
+                  </a>
+        </form>
+          {{-- <a href="#" class="dropdown-item">
             <i class="fas fa-sign-out-alt"></i> <span class=" text-muted text-sm">Logout</span>
 
-          </a>
+          </a> --}}
         </div>
       </li>
     </ul>
