@@ -39,7 +39,7 @@
     <a href="https://github.com/godgodwinter/laravel-perpus21"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://baemon.web.id/">View Demo</a>
+    <a href="https://perpus.baemon.web.id/">View Demo</a>
     ·
     <a href="https://twitter.com/kakadlz">Report Bug</a>
     ·
