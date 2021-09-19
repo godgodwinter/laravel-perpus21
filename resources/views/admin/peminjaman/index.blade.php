@@ -96,7 +96,7 @@ $message=session('status');
                                 {{-- <form action="#" method="post">
                                 @csrf --}}
                                 <div class="card-header">
-                                    <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Tambah
+                                    <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Pilih
                                         Buku</span>
                                 </div>
                                 <div class="card-body">
@@ -104,7 +104,7 @@ $message=session('status');
                                         
 
                                         <div class="form-group col-md-12 col-12">
-                                            <label for="nama">Kode Panggil</label>
+                                            <label for="nama">Kode Panggil <code>*) Gunakan Barcode Scanner </code></label>
                                             <input type="text" name="nama" id="nama" class="form-control" placeholder=""
                                                 required>
                                         </div>
@@ -113,7 +113,7 @@ $message=session('status');
 
                                 </div>
                                 <div class="card-footer text-right">
-                                    <button class="btn btn-primary" id="clear">Reset Data</button>
+                                    <button class="btn btn-danger" id="clear">Reset Data</button>
                                     <button class="btn btn-primary" id="isikan">Simpan</button>
                                 </div>
 
@@ -148,7 +148,7 @@ $message=session('status');
                                     </div>
 
                                     <div class="card-footer text-right">
-                                        <button class="btn btn-primary" id="kirimdata">Selesai</button>
+                                        <button class="btn btn-success" id="kirimdata">Selesai</button>
                                     </div>
                                 </form>
                                 
@@ -208,16 +208,26 @@ $message=session('status');
                                             // data.i = JSON.parse(localStorage.getItem('data-'+1234));
                                                                     
                                         $("#tbody").append(
-                                            '<tr id="'+daftarbuku[i]+'"><td class="text-center">'+(i+1)+'</td><td>'+daftarbuku[i]+'</td><td>'+data_i.buku_nama+'</td><td>'+data_i.bukukategori_nama+'</td><td><button class="btn btn-primary btn-sm" id="hapusbuku'+daftarbuku[i]+'">Hapus Data</button></td> </tr>');
+                                            '<tr id="'+daftarbuku[i]+'"><td class="text-center">'+(i+1)+'</td><td>'+daftarbuku[i]+'</td><td>'+data_i.buku_nama+'</td><td>'+data_i.bukukategori_nama+'</td><td><button class="btn btn-icon btn-danger btn-sm" id="hapusbuku'+daftarbuku[i]+'"><span class="pcoded-micon"> <i class="fas fa-trash"></i></span></button></td> </tr>');
 
 
                                             document.querySelector('#hapusbuku'+daftarbuku[i]).addEventListener('click', function (e) {
+                                                // alert(daftarbuku[i]);
                                         // localStorage.removeItem("daftarbuku");
-                                        localStorage.removeItem(daftarbuku[i]);
-                                        $("#"+daftarbuku[i]).empty();
-                                        daftarbuku.splice(i);
+                                        // localStorage.removeItem(daftarbuku[i]);
+                                        
+                                        const index = daftarbuku.indexOf(daftarbuku[i]);
+                                        // alert(index);
+
+                                        if (index > -1) {
+                                            daftarbuku.splice(index, 1);
+                                        }
+                                        // daftarbuku.splice(i);
+
+                                        // $("#"+daftarbuku[i]).empty();
                                         localStorage.setItem('daftarbuku',JSON.stringify(daftarbuku));
 
+                                        location.reload();
                                         // localStorage.removeItem(daftarbuku[i]);
                                         // inputdaftarbuku.value = '';
                                         // alert(daftarbuku[i]);
@@ -372,7 +382,7 @@ $message=session('status');
                                             // data.i = JSON.parse(localStorage.getItem('data-'+1234));
                                                                     
                                         $("#tbody").append(
-                                            '<tr id="'+bukubaru.value+'"><td class="text-center">'+(daftarbuku2.length)+'</td><td>'+bukubaru.value+'</td><td>'+response.buku_nama+'</td><td>'+response.bukukategori_nama+'</td><td><button class="btn btn-primary btn-sm" id="hapusbuku'+bukubaru.value+'">Hapus Data</button></td> </tr>');
+                                            '<tr id="'+bukubaru.value+'"><td class="text-center">'+(daftarbuku2.length)+'</td><td>'+bukubaru.value+'</td><td>'+response.buku_nama+'</td><td>'+response.bukukategori_nama+'</td><td><button class="btn btn-icon btn-danger btn-sm" id="hapusbuku'+bukubaru.value+'"><span class="pcoded-micon"> <i class="fas fa-trash"></i></span></button></td> </tr>');
                                              i=(daftarbuku2.length-1);
                                             //  alert(bukubaru.value);
                                             // document.querySelector('#hapusbuku'+bukubaru.value).addEventListener('click', function (e) {
@@ -592,12 +602,11 @@ $message=session('status');
                             <table class="table table-bordered table-md">
                                 <thead>
                                         <tr>
-                                            <th width="10%" class="text-center">
-                                                <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
+                                            <th width="10%" class="text-center"> No</th>
                                             <th> Kode Panggil </th>
                                             <th> Judul Buku</th>
                                             <th> Kategori Buku</th>
-                                            <th width="200px" class="text-center">Aksi</th>
+                                            <th width="5%" class="text-center">Aksi</th>
                                         </tr>
                                 </thead>
                                 <tbody id="tbody">

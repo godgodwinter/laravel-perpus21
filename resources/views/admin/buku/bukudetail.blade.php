@@ -98,7 +98,9 @@ $message=session('status');
 <tr id="sid{{ $data->id }}">
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
-    <td> {{ $data->kodepanggil }}</td>
+    <td> {{ $data->kodepanggil }} 
+    <input type="hidden" value="{{ $data->kodepanggil }}" name="{{ $data->kodepanggil }}">
+    </td>
     @php
        $isbn='-'; 
     @endphp
@@ -112,10 +114,134 @@ $message=session('status');
     <td>{{ ucfirst($data->status) }}</td>
 
     <td class="text-center">
-        <a class="btn btn-icon btn-secondary btn-sm " href="{{ url('/admin/buku/') }}/{{ $data->id }}/bukudetail"  data-toggle="tooltip" data-placement="top" title="Lihat selengkapnya!"> <i class="fas fa-angle-double-right"></i> </a>
+        <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Masukkan keranjang!" id="isikan{{ $data->kodepanggil }}"><i class="fas fa-shopping-cart"></i> </button>
         <x-button-edit link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
         <x-button-delete link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
     </td>
+    <script>
+        
+
+        $(document).ready(function () {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                            'content')
+                    }
+                });
+
+
+                document.querySelector('#isikan{{ $data->kodepanggil }}').addEventListener('click', function (
+                e) {
+                    e.preventDefault();
+
+var nama = $("input[name={{ $data->kodepanggil }}]").val();
+
+var link = "/admin/peminjaman/periksa/" + nama;
+// alert(link);
+
+$.ajax({
+    url: link,
+    method: 'GET',
+    data: {
+        "_token": "{{ csrf_token() }}",
+        nama: nama,
+    },
+                            success:function(response){
+                            if(response.success){
+                                                        if (response
+                                                            .message != 0) {
+                                                                // alert(response.message);
+                                                                
+                                                            let daftarbuku2;
+                                                            if (localStorage.getItem(
+                                                                    'daftarbuku') ===
+                                                                null) {
+                                                                daftarbuku2 = [];
+                                                            } else {
+                                                                daftarbuku2 = JSON.parse(
+                                                                    localStorage
+                                                                    .getItem(
+                                                                        'daftarbuku'));
+                                                            }
+
+                                                            
+                                                            var hasilperiksa=0;
+                                                            for (let i = 0; i < daftarbuku2.length; i++) {
+                                                                          if(daftarbuku2[i]==nama){
+                                                                              hasilperiksa++;
+                                                                          }else{
+                                                                              
+                                                                            // alert('belum ada');
+                                                                          }  
+                                                                    }
+                                                                // alert(hasilperiksa);
+                                                                if(hasilperiksa>0){
+                                                                            var Toast = Swal.mixin({
+                                                                                toast: true,
+                                                                                position: 'top-end',
+                                                                                showConfirmButton: false,
+                                                                                timer: 3000
+                                                                            });
+
+                                                                            Toast.fire({
+                                                                                icon: 'error',
+                                                                                title: 
+                                                                                    'Data sudah ditambahkan! '
+                                                                            });
+
+
+                                                                }else{
+                                                                    
+
+                                                                    var buku_ = {};  
+                                                                            buku_.id = response.data;  
+                                                                            buku_.buku_nama = response.buku_nama;   
+                                                                            buku_.bukukategori_nama = response.bukukategori_nama;   
+                                                                            // var ItemId = "data-" + buku_.id;  
+                                                                            var ItemId = buku_.id;  
+                                                                            localStorage.setItem(ItemId, JSON.stringify(buku_));  
+                                                                            
+
+                                                                daftarbuku2.push(nama);
+                                                                localStorage.setItem(
+                                                                    'daftarbuku', JSON
+                                                                    .stringify(
+                                                                        daftarbuku2));
+
+                                                                        var Toast = Swal.mixin({
+                                                                            toast: true,
+                                                                            position: 'top-end',
+                                                                            showConfirmButton: false,
+                                                                            timer: 3000
+                                                                        });
+
+                                                                        Toast.fire({
+                                                                            icon: 'success',
+                                                                            title: nama +
+                                                                                'Data berhasil ditambahkan!'
+                                                                        });
+ 
+                                                                        location.reload();
+                                                                }
+                                                                    }
+                                                                    
+                                                             
+                                                           
+                            }else{
+                            alert("Error")
+                            // alert(response.message) //Message come from controller
+                            }
+                            },
+                            error:function(error){
+
+                            alert('Gagal! Angka harus 1-100!') //Message come from controller
+                            console.log(error)
+                            }
+                            });
+                            });
+                            });
+    </script>
 </tr>
 @endforeach
 

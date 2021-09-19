@@ -32,13 +32,16 @@ crossorigin="anonymous"></script>
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ asset("assets/") }}/index3.html" class="nav-link">Pinjam</a>
+        <a href="{{ route("admin.buku") }}" class="nav-link">Pilih Buku</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Kembalikan</a>
+        <a href="{{ route("admin.peminjaman") }}" class="nav-link" id="jmldatabuku2">Pinjam</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Periksa Buku</a>
+        <a href="#" class="nav-link"  id="jmlakandikembalikan">Kembalikan</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Anggota</a>
       </li>
     </ul>
 
@@ -50,11 +53,26 @@ crossorigin="anonymous"></script>
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+      
+      <script>
+        $(function () {
+            let daftarbuku=0;
+            if (localStorage.getItem('daftarbuku') === null) {
+                daftarbuku = [];
+            } else {
+                daftarbuku = JSON.parse(localStorage.getItem('daftarbuku'));
+            }
+        // alert(daftarbuku.length);
+        
+        $("#jmldatabuku").append('<span class="badge badge-warning navbar-badge">'+daftarbuku.length+'</span>');
+        $("#jmldatabuku2").append('<span class="badge badge-warning navbar-badge">'+daftarbuku.length+'</span>');
+        });
+      </script>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#" id="jmldatabuku">
           <i class="fas fa-cog"></i>
-          <span class="badge badge-warning navbar-badge">3</span>
+          
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
