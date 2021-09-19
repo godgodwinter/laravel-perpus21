@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth:web', 'verified']], function() {
 
 //DASHBOARD-MENU
 Route::get('/dashboard', 'App\Http\Controllers\adminberandaController@index')->name('dashboard');
+// Route::get('/dashboard', 'App\Http\Controllers\adminberandaController@index')->name('dashboard');
 // Route::get('/qrtests', function()
 
 //BUKURAK-MENU
@@ -132,9 +133,15 @@ Route::get('/404', 'App\Http\Controllers\adminberandaController@notfound');
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');
-Route::get('/', function()
-{
-	return QrCode::size(250)
-	->backgroundColor(255, 255, 204)
-	->generate(url('/qrtests'));
+
+Route::get('/', function () {
+    return view('auth.login');
 });
+
+// Route::get('/', 'App\Http\Controllers\adminberandaController@notfound')->name('luar');
+// Route::get('/', function()
+// {
+// 	return QrCode::size(250)
+// 	->backgroundColor(255, 255, 204)
+// 	->generate(url('/qrtests'));
+// });
