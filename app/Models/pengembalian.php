@@ -12,6 +12,7 @@ class pengembalian extends Model
     use HasFactory;
 
     protected $fillable = [
+        'kodetrans',
         'nama',
         'nomeridentitas',
         'jaminan_nama',

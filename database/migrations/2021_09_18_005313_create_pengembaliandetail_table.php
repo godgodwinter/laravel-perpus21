@@ -15,6 +15,7 @@ class CreatePengembaliandetailTable extends Migration
     {
         Schema::create('pengembaliandetail', function (Blueprint $table) {
             $table->id();
+            $table->string('kodetrans')->nullable();
             $table->string('isbn')->nullable(); //dari table kategori
             $table->string('nomeridentitas')->nullable();
             $table->string('buku_nama')->nullable();

@@ -12,6 +12,7 @@ class peminjamandetail extends Model
     use HasFactory;
 
     protected $fillable = [
+        'kodetrans',
         'nama',
         'nomeridentitas',
         'isbn',

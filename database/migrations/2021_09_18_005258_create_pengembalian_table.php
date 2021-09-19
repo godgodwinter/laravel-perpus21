@@ -15,6 +15,7 @@ class CreatePengembalianTable extends Migration
     {
         Schema::create('pengembalian', function (Blueprint $table) {
             $table->id();
+            $table->string('kodetrans')->nullable();
             $table->string('nama')->nullable();
             $table->string('nomeridentitas')->nullable();
             $table->string('jaminan_nama')->nullable();  //ktp / kartu pelajar
