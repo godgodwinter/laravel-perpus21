@@ -92,6 +92,7 @@ class adminpeminjamancontroller extends Controller
                 'isbn' => $datas->isbn,
                 'nomeridentitas' =>$request->nomeridentitas,
                 'buku_nama' => $datas->buku_nama,
+                'buku_kodepanggil' => $datas->kodepanggil,
                 'buku_penerbit' => $datas->buku_penerbit,
                 'buku_tahunterbit' => $datas->buku_tahunterbit,
                 'buku_pengarang' => $datas->buku_pengarang,

@@ -17,6 +17,7 @@ class peminjamandetail extends Model
         'nomeridentitas',
         'isbn',
         'buku_nama',
+        'buku_kodepanggil',
         'buku_penerbit',
         'buku_tahunterbit',
         'buku_pengarang',
@@ -31,5 +32,6 @@ class peminjamandetail extends Model
         'tgl_pinjam',
         'tgl_harus_kembali',
         'denda',
+        'statuspengembalian',
     ];
 }
