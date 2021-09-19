@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
+use App\Models\bukudetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -53,13 +55,72 @@ class adminpeminjamancontroller extends Controller
         //buat kodetransaksi dari date masukkan ke peminjaman dan peminjamandetail
         $kodetrans=base64_encode(date('YmdHis'));
         $decodekodetrans=base64_decode($kodetrans);
-        dd(($str[0]),$datas,$request->nomeridentitas,$dataanggota->nama,$kodetrans,$decodekodetrans);
 
-        //insert anggota ke peminjaman
+        // validator (lakukan di front end, jika tidak sesuai tidak dapat masuk kesini)
+        // a.periksa jumlah tanggungan buku belum dikembalikan
+        // b. buku masih dipinjam / rusak
+
+        //1.insert anggota ke peminjaman
+        $jaminan_nama=$request->nomeridentitas;
+        if($request->jaminan_nama!=null){
+            $jaminan_nama=$request->jaminan_nama;
+        }
+        $tgl_pinjam=date('Y-m-d');
+        $tgl_harus_kembali=Fungsi::manipulasiTanggal($tgl_pinjam,Fungsi::defaultmaxharipinjam(),'days');
+        // dd($jml,count($str),($str[0]),$datas,$request->nomeridentitas,$dataanggota->nama,$kodetrans,$decodekodetrans,$tgl_pinjam,$tgl_harus_kembali);
+
+        DB::table('peminjaman')->insert([
+            'kodetrans' => $kodetrans,
+            'nama' => $dataanggota->nama,
+            'nomeridentitas' =>$request->nomeridentitas,
+            'jaminan_tipe' => $request->jaminan_tipe,
+            'jaminan_nama' => $jaminan_nama,
+            'tgl_pinjam' => $tgl_pinjam,
+            'tgl_harus_kembali' =>$tgl_harus_kembali,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
         
-        //insert buku ke peminjaman detail where kodetransaksi
+        //2/insert buku ke peminjaman detail where kodetransaksi
+        
+        for($i=0;$i<$jml;$i++){
 
-        //ubah status buku per exemplar bahwa dipinjam
+            $datas=DB::table('bukudetail')->where('kodepanggil',$str[$i])->first();
+            // dd($datas);
+            DB::table('peminjamandetail')->insert([
+                'kodetrans' => $kodetrans,
+                'isbn' => $datas->isbn,
+                'nomeridentitas' =>$request->nomeridentitas,
+                'buku_nama' => $datas->buku_nama,
+                'buku_penerbit' => $datas->buku_penerbit,
+                'buku_tahunterbit' => $datas->buku_tahunterbit,
+                'buku_pengarang' => $datas->buku_pengarang,
+                'buku_tempatterbit' => $datas->buku_tempatterbit,
+                'buku_bahasa' => $datas->buku_bahasa,
+                'bukurak_nama' => $datas->bukurak_nama,
+                'bukukategori_nama' => $datas->bukukategori_nama,
+                'bukukategori_ddc' => $datas->bukukategori_ddc,
+                'jaminan_tipe' => $request->jaminan_tipe,
+                'jaminan_nama' => $jaminan_nama,
+                'tgl_pinjam' => $tgl_pinjam,
+                'tgl_harus_kembali' =>$tgl_harus_kembali,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+            
+        //3.ubah status buku per exemplar bahwa dipinjam
+        
+        bukudetail::where('kodepanggil',$str[$i])
+        ->update([
+            'status'     =>  'dipinjam',
+           'updated_at'=>date("Y-m-d H:i:s")
+        ]);
+
+            
+        }
+        
+        return redirect()->back()->with('status','Proses Peminjaman Berhasil!')->with('tipe','success')->with('clearlocal','yes');
+
 
     }
     
@@ -70,9 +131,15 @@ class adminpeminjamancontroller extends Controller
         $data=DB::table('bukudetail')->where('kodepanggil',$id)->first();
         // //make response JSON
         if($datas>0){
+            $ada=1;
+            if($data->status!='ada'){
+                $ada=0;
+            }
+
             return response()->json([
                 'success' => true,
-                'message' => $datas,
+                'message' => $ada,
+                'status' => $data->status,
                 'buku_nama' => $data->buku_nama,
                 'bukukategori_nama' => $data->bukukategori_nama,
                 'data'    => $id  

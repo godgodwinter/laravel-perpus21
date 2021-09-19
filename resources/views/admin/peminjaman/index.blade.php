@@ -39,7 +39,16 @@ $message=session('status');
             icon: '{{$tipe}}',
             title: '{{$message}}'
         });
+         
+    @if((session('clearlocal')=='yes'))
+   
+   localStorage.removeItem("daftarbuku");
+                                       inputdaftarbuku.value = '';
+                                       $("#tbody").empty();
+   @endif
+   
     });
+   
 
 </script>
 @endif
@@ -123,7 +132,7 @@ $message=session('status');
                                         
                                         <div class="form-group">
                                             <label>Pilih Anggota :</label>
-                                            <select class="form-control form-control-lg" id="tags" select2 select2-hidden-accessible  name="nomeridentitas" required>
+                                            <select class="form-control form-control-md" id="tags" select2 select2-hidden-accessible  name="nomeridentitas" required>
                                             @php
                                             // $cekdataselect = DB::table('anggota')
                                             //     ->count();
@@ -135,6 +144,24 @@ $message=session('status');
                                                 <option value="{{ $t->nomeridentitas }}" >{{ $t->nomeridentitas }} - {{ $t->nama }}</option>
                                             @endforeach
                                             </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>Pilih Jaminan :</label>
+                                            <select class="form-control form-control-md" id="tags" select2 select2-hidden-accessible  name="jaminan_tipe" required>
+                                          
+                                                <option >Kartu Pelajar</option>
+                                                <option >KTP</option>
+                                                <option >SIM</option>
+                                                <option >Lainya</option>
+                                           
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-12 col-12">
+                                            <label for="jaminan_nama">Identitas <code>*) Jika kosong maka akan menggunakan Nomer Identitas dari Anggota </code></label>
+                                            <input type="text" name="jaminan_nama" id="jaminan_nama" class="form-control" placeholder=""
+                                                >
                                         </div>
                                         <div class="row" id="forminputan">
                                             {{-- <div class="form-group col-md-12 col-12">

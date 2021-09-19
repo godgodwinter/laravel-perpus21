@@ -114,7 +114,13 @@ $message=session('status');
     <td>{{ ucfirst($data->status) }}</td>
 
     <td class="text-center">
+        @if ($data->status=='ada')
         <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Masukkan keranjang!" id="isikan{{ $data->kodepanggil }}"><i class="fas fa-shopping-cart"></i> </button>
+        @else
+        <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Telah dipinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button>
+            
+        @endif
+
         <x-button-edit link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
         <x-button-delete link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
     </td>

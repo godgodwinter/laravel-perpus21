@@ -9,6 +9,10 @@ class Fungsi {
     //     $user = DB::table('users')->where('userid', $user_id)->first();
     //     return (isset($user->username) ? $user->username : '');
     // }
+    public static function manipulasiTanggal($tgl,$jumlah=1,$format='days'){
+        $currentDate = $tgl;
+        return date('Y-m-d', strtotime($jumlah.' '.$format, strtotime($currentDate)));
+    }
 
     public static function periksaarray($inputan){
         // $data=$inputan;
