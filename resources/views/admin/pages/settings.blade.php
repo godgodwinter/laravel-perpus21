@@ -17,32 +17,27 @@ data{{ $pages }}
 
 @section('notif')
 
-@if (session('tipe'))
+
 @php
 $tipe=session('tipe');
-@endphp
-@else
-@php
-$tipe='light';
-@endphp
-@endif
-
-@if (session('icon'))
-@php
-$icon=session('icon');
-@endphp
-@else
-@php
-$icon='far fa-lightbulb';
-@endphp
-@endif
-
-@php
 $message=session('status');
 @endphp
-@if (session('status'))
-<x-alert tipe="{{ $tipe }}" message="{{ $message }}" icon="{{ $icon }}" />
-
+        @if (session('status'))
+        <script>
+            $(function() {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            
+            Toast.fire({
+                icon: '{{$tipe}}',
+                title: '{{$message}}'
+                });
+            });
+        </script>
 @endif
 @endsection
 
@@ -257,36 +252,67 @@ $message=session('status');
             <div class="card-body">
                       <div class="card-body">
 
-
-                          <form action="/admin/{{ $pages }}/1}" method="post">
-                              @method('put')
-                              @csrf
                               <div class="card-header">
                                   <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Data Seeder
                                       dan Reset</span>
                               </div>
-                              <div class="card-body">
-                                  <div class="row">
-                                      <div class="form-group col-md-6 col-6">
-                                       
-                                      </div>
-                                     
+          
+                              <div class="card-body ml-3">
+                             
+                                <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                    
+                                  <form action="{{ route('reset.hard') }}" method="post" class="d-inline">
+                                    @csrf
+                                    <button class="btn btn-danger btn-lg"
+                                        onclick="return  confirm('Anda yakin melakukan Hard Reset aplikasi? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
+                                            class="pcoded-micon"> <i class="fas fa-power-off"></i> Hard reset aplikasi!</span></button>
+                                  </form>
+                                  
+                                  <form action="{{ route('reset.default') }}" method="post" class="d-inline ml-1">
+                                    @csrf
+                                    <button class="btn btn-danger btn-lg"
+                                        onclick="return  confirm('Anda yakin melakukan Hard Reset aplikasi? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
+                                            class="pcoded-micon"> <i class="fas fa-power-off"></i> Reset Settings!</span></button>
+                                  </form>
+                                  
+                                </div>
+                            </div>
 
-                                  </div>
+                            
+                            <div class="card-body ml-3">
+                             
+                                <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                    
+                                  <form action="{{ route('seeder.anggota') }}" method="post" class="d-inline">
+                                    @csrf
+                                    <button class="btn btn-info btn-lg"
+                                        onclick="return  confirm('Anda yakin memasukan data palsu ? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
+                                            class="pcoded-micon"> <i class="fas fa-power-off"></i>Seeder Anggota!</span></button>
+                                  </form>
 
-
-                                  <div class="row">
-                                      <div class="form-group mb-0 col-12">
-                                          <div class="custom-control custom-checkbox">
-                                              <input type="checkbox" name="remember" class="custom-control-input"
-                                                  id="newsletter">
-
-
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-
+                                  <form action="{{ route('seeder.bukurak') }}" method="post" class="d-inline ml-1">
+                                    @csrf
+                                    <button class="btn btn-info btn-lg"
+                                        onclick="return  confirm('Anda yakin memasukan data palsu ? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
+                                            class="pcoded-micon"> <i class="fas fa-power-off"></i> Seeder bukurak!</span></button>
+                                  </form>
+                                  
+                                  <form action="{{ route('seeder.buku') }}" method="post" class="d-inline ml-1">
+                                    @csrf
+                                    <button class="btn btn-info btn-lg"
+                                        onclick="return  confirm('Anda yakin memasukan data palsu ? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
+                                            class="pcoded-micon"> <i class="fas fa-power-off"></i> Seeder Buku!</span></button>
+                                  </form>
+                                  
+                                  <form action="{{ route('seeder.bukudetail') }}" method="post" class="d-inline ml-1">
+                                    @csrf
+                                    <button class="btn btn-info btn-lg"
+                                        onclick="return  confirm('Anda yakin memasukan data palsu ? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
+                                            class="pcoded-micon"> <i class="fas fa-power-off"></i> Seeder BukuDetail!</span></button>
+                                  </form>
+                                  
+                                </div>
+                            </div>
                       </div>
               </div>
           </div>

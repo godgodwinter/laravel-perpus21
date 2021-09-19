@@ -157,16 +157,17 @@ This is an example of how to list things you need to use the software and how to
    
 
 Buka browser dan tulis alamat berikut
-   
+
    ```sh
    http://127.0.0.1:8000/
    ```
 
    jika tidak ada error (tidak ada css / javascripnya ,biasanya pada windows 10 lawas) gunakan skrip berikut :
    
-      ```sh
-   php -S localhost:8000 -t public
+   ```sh
+    php -S localhost:8000 -t public
    ```
+   
 
 
 <!-- LICENSE -->

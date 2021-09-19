@@ -95,6 +95,12 @@ Route::get('/admin/peminjaman/periksa/{id}', 'App\Http\Controllers\adminpeminjam
 //SETTINGS-MENU
 Route::get('/admin/settings', 'App\Http\Controllers\settingsController@index')->name('admin.settings');
 Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@update')->name('admin.settings.update');
+Route::post('admin/reset/hard', 'App\Http\Controllers\settingsController@resethard')->name('reset.hard');
+Route::post('admin/reset/default', 'App\Http\Controllers\settingsController@default')->name('reset.default');
+Route::post('admin/seeder/anggota', 'App\Http\Controllers\settingsController@anggota')->name('seeder.anggota');
+Route::post('admin/seeder/bukurak', 'App\Http\Controllers\settingsController@bukurak')->name('seeder.bukurak');
+Route::post('admin/seeder/buku', 'App\Http\Controllers\settingsController@buku')->name('seeder.buku');
+Route::post('admin/seeder/bukudetail', 'App\Http\Controllers\settingsController@bukudetail')->name('seeder.bukudetail');
 
 // ExportdanImport
 Route::get('admin/databukurak/export', 'App\Http\Controllers\prosesController@exportbukurak')->name('bukurak.export');
