@@ -95,7 +95,7 @@ Route::get('/admin/peminjaman/periksa/{id}', 'App\Http\Controllers\adminpeminjam
 //SETTINGS-MENU
 Route::get('/admin/settings', 'App\Http\Controllers\settingsController@index')->name('admin.settings');
 Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@update')->name('admin.settings.update');
-Route::post('admin/reset/hard', 'App\Http\Controllers\settingsController@resethard')->name('reset.hard');
+Route::post('admin/reset/hard', 'App\Http\Controllers\settingsController@hard')->name('reset.hard');
 Route::post('admin/reset/default', 'App\Http\Controllers\settingsController@default')->name('reset.default');
 Route::post('admin/seeder/anggota', 'App\Http\Controllers\settingsController@anggota')->name('seeder.anggota');
 Route::post('admin/seeder/bukurak', 'App\Http\Controllers\settingsController@bukurak')->name('seeder.bukurak');
