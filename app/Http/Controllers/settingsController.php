@@ -119,36 +119,140 @@ class settingsController extends Controller
         }
         
         $faker = Faker::create('id_ID');
-        for($i=0;$i<$jmldata;$i++){
-            $nama=$faker->sentence($nbWords = 6, $variableNbWords = true);
-            $pengarang=$faker->name;
-            $penerbit=$faker->company;
-            $nomerrak=$faker->numberBetween(1,10);
-            $nomeridentitas=date('YmdHis').$i;
-            // 3. insert data siswa
-                $kode='R '.($i+1);
-                DB::table('buku')->insert([
-                    'nama' => $nama,
-                    'kode' => $nomeridentitas,
-                    'pengarang' => $pengarang,
-                    'penerbit' => $penerbit,
-                    'bahasa' => $faker->randomElement(['Indonesia', 'English']),
-                    'tempatterbit' => $faker->country,
-                    'tahunterbit' => $faker->numberBetween(1990,2021),
-                    'bukurak_nama' => 'Rak '.$nomerrak,
-                    'bukurak_kode' => 'R'.$nomerrak,
-                    'bukukategori_nama' => 'Campur',
-                    'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
-     }
+    //     for($i=0;$i<$jmldata;$i++){
+    //         $nama=$faker->sentence($nbWords = 6, $variableNbWords = true);
+    //         $pengarang=$faker->name;
+    //         $penerbit=$faker->company;
+    //         $nomerrak=$faker->numberBetween(1,10);
+    //         $nomeridentitas=date('YmdHis').$i;
+    //         // 3. insert data siswa
+    //             $kode='R '.($i+1);
+    //             DB::table('buku')->insert([
+    //                 'nama' => $nama,
+    //                 'kode' => $nomeridentitas,
+    //                 'pengarang' => $pengarang,
+    //                 'penerbit' => $penerbit,
+    //                 'bahasa' => $faker->randomElement(['Indonesia', 'English']),
+    //                 'tempatterbit' => $faker->country,
+    //                 'tahunterbit' => $faker->numberBetween(1990,2021),
+    //                 'bukurak_nama' => 'Rak '.$nomerrak,
+    //                 'bukurak_kode' => 'R'.$nomerrak,
+    //                 'bukukategori_nama' => 'Campur',
+    //                 'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
+    //                 'created_at' => Carbon::now(),
+    //                 'updated_at' => Carbon::now()
+    //             ]);
+    //  }
+
+    buku::truncate();
+
+                    DB::table('buku')->insert([
+                        'nama' => 'Sejarah Wali Songo [sumber elektronis]',
+                        'kode' => date('YmdHis').'1',
+                        'pengarang' => 'Zulham Farobi',
+                        'penerbit' =>'Anak Hebat Indonesia',
+                        'bahasa' => $faker->randomElement(['Indonesia', 'English']),
+                        'tempatterbit' => $faker->country,
+                        'tahunterbit' => $faker->numberBetween(1990,2021),
+                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        'bukukategori_nama' => 'Sejarah',
+                        'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+
+                    
+                    DB::table('buku')->insert([
+                        'nama' => 'Sejarah pemikiran ekonomi Islam',
+                        'kode' => date('YmdHis').'2',
+                        'pengarang' => 'Jajang W Mahri',
+                        'penerbit' =>'Penerbit Universitas Terbuka',
+                        'bahasa' => $faker->randomElement(['Indonesia', 'English']),
+                        'tempatterbit' => $faker->country,
+                        'tahunterbit' => $faker->numberBetween(1990,2021),
+                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        'bukukategori_nama' => 'Sejarah',
+                        'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+    
+                    
+                    
+                    DB::table('buku')->insert([
+                        'nama' => 'Tegar dalam doa',
+                        'kode' => date('YmdHis').'2',
+                        'pengarang' => 'Fauzah ',
+                        'penerbit' => 'CV Pustaka Mediaguru',
+                        'bahasa' => $faker->randomElement(['Indonesia', 'English']),
+                        'tempatterbit' => $faker->country,
+                        'tahunterbit' => $faker->numberBetween(1990,2021),
+                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        'bukukategori_nama' => 'Agama',
+                        'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                    
+                    DB::table('buku')->insert([
+                        'nama' => 'Hikmah melangitkan doa',
+                        'kode' => date('YmdHis').'2',
+                        'pengarang' => 'Neny Andriani ; editor, Diyah KN',
+                        'penerbit' => 'CV. Bumi Pena',
+                        'bahasa' => $faker->randomElement(['Indonesia', 'English']),
+                        'tempatterbit' => $faker->country,
+                        'tahunterbit' => $faker->numberBetween(1990,2021),
+                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        'bukukategori_nama' => 'Agama',
+                        'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+
+                        
+                    DB::table('buku')->insert([
+                        'nama' => 'Pengantar jaringan komputer',
+                        'kode' => date('YmdHis').'2',
+                        'pengarang' => 'Adi Wibowo',
+                        'penerbit' => 'UMKO Publishing',
+                        'bahasa' => $faker->randomElement(['Indonesia', 'English']),
+                        'tempatterbit' => $faker->country,
+                        'tahunterbit' => $faker->numberBetween(1990,2021),
+                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        'bukukategori_nama' => 'Teknologi',
+                        'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                    
+
+                    DB::table('buku')->insert([
+                        'nama' => 'Metode penelitian pendidikan ilmu komputer',
+                        'kode' => date('YmdHis').'2',
+                        'pengarang' => 'Wahyudin',
+                        'penerbit' => 'Perkumpulan Rumah Cemerlang Indonesia',
+                        'bahasa' => $faker->randomElement(['Indonesia', 'English']),
+                        'tempatterbit' => $faker->country,
+                        'tahunterbit' => $faker->numberBetween(1990,2021),
+                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        'bukukategori_nama' => 'Teknologi',
+                        'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+
      return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
     
 
     public function bukudetail(){
-        $jmldata=20;
+        $jmldata=5;
         $limitdata=200;
         
         $faker = Faker::create('id_ID');

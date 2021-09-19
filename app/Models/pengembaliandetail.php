@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class pengembaliandetail extends Model
 {
-    public $table = "pengembalian";
+    public $table = "pengembaliandetail";
 
     use HasFactory;
 

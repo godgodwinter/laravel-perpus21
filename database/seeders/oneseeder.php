@@ -87,6 +87,15 @@ class oneseeder extends Seeder
               'updated_at' => Carbon::now()
            ]);
 
+           
+          DB::table('kategori')->insert([
+            'nama' => 'Teknologi',
+            'prefix' => 'ddc',
+            'kode' => '601-800',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+         ]);
+
 
           DB::table('kategori')->insert([
             'nama' => 'Siswa',

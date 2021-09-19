@@ -77,6 +77,7 @@ class adminpeminjamancontroller extends Controller
             'jaminan_nama' => $jaminan_nama,
             'tgl_pinjam' => $tgl_pinjam,
             'tgl_harus_kembali' =>$tgl_harus_kembali,
+            'denda' =>Fungsi::defaultdenda(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
