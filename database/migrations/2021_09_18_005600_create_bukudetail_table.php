@@ -20,6 +20,8 @@ class CreateBukudetailTable extends Migration
             $table->string('buku_nama')->nullable();
             $table->string('buku_penerbit')->nullable();
             $table->string('buku_tahunterbit')->nullable();
+            $table->string('buku_pengarang')->nullable();
+            $table->string('buku_tempatterbit')->nullable();
             $table->string('buku_bahasa')->nullable();
             $table->string('bukurak_nama')->nullable();
             $table->string('bukurak_kode')->nullable();

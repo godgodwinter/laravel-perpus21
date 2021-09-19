@@ -19,6 +19,8 @@ class peminjamandetail extends Model
         'buku_nama',
         'buku_penerbit',
         'buku_tahunterbit',
+        'buku_pengarang',
+        'buku_tempatterbit',
         'buku_bahasa',
         'bukurak_nama',
         'bukurak_kode',

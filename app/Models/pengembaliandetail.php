@@ -19,6 +19,8 @@ class pengembaliandetail extends Model
         'buku_nama',
         'buku_penerbit',
         'buku_tahunterbit',
+        'buku_pengarang',
+        'buku_tempatterbit',
         'buku_bahasa',
         'bukurak_kode',
         'bukurak_nama',

@@ -84,12 +84,17 @@ class settingsController extends Controller
     public function bukurak(){
         $jmldata=10;
         $limitdata=200;
+        $cekdata=DB::table('bukurak')
+        ->count();
+        if($cekdata>$limitdata){
+            return redirect()->back()->with('status','Gagal! Data siswa lebih dari '.$limitdata)->with('tipe','error')->with('icon','fas fa-trash');
+        }
         
         bukurak::truncate();
         
+        $faker = Faker::create('id_ID');
         for($i=0;$i<$jmldata;$i++){
             // 3. insert data siswa
-                $faker = Faker::create('id_ID');
                 $nama='RAK '.($i+1);
                 $kode='R '.($i+1);
                 DB::table('bukurak')->insert([
@@ -104,7 +109,37 @@ class settingsController extends Controller
     public function buku(){
         $jmldata=20;
         $limitdata=200;
+        
+        $cekdata=DB::table('anggota')
+        ->count();
+        if($cekdata>$limitdata){
+            return redirect()->back()->with('status','Gagal! Data siswa lebih dari '.$limitdata)->with('tipe','error')->with('icon','fas fa-trash');
+        }
+        
+        $faker = Faker::create('id_ID');
+        for($i=0;$i<$jmldata;$i++){
+            $nama=$faker->name;
+            $nomeridentitas=date('YmdHis').$i;
+            // 3. insert data siswa
+                $kode='R '.($i+1);
+                DB::table('anggota')->insert([
+                    'nama' => $nama,
+                    'tipe' => $faker->randomElement(['Siswa', 'Umum']),
+                    'tempatlahir' => $faker->randomElement(['Sumbersari', 'Jakarta','Surabaya','Blitar']),
+                    'tgllahir' => $faker->numberBetween(1990,2020).'-0'.$faker->numberBetween(1,9).'-'.$faker->numberBetween(10,29),
+                    'alamat' => 'Desa '.$faker->randomElement(['Sumbersari', 'Sumbermakmur','Mulyorejo','Morodadi']).' Kecamatan Losari Kabupaten Malang',
+                    'nomeridentitas' => $nomeridentitas,
+                    'sekolahasal' => $faker->randomElement(['Sumbersari', 'Jakarta','Surabaya','Blitar']),
+                    'jk' => $faker->randomElement(['Laki-laki', 'Perempuan']),
+                    'telp' => $nomeridentitas,
+                    'agama' => $faker->randomElement(['Islam', 'Kristen','Hindu','Budha']),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+     }
+     return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
+    
     public function bukudetail(){
         $jmldata=20;
         $limitdata=200;
@@ -112,5 +147,34 @@ class settingsController extends Controller
     public function anggota(){
         $jmldata=20;
         $limitdata=200;
+
+        $cekdata=DB::table('anggota')
+        ->count();
+        if($cekdata>$limitdata){
+            return redirect()->back()->with('status','Gagal! Data siswa lebih dari '.$limitdata)->with('tipe','error')->with('icon','fas fa-trash');
+        }
+        
+        $faker = Faker::create('id_ID');
+        for($i=0;$i<$jmldata;$i++){
+            $nama=$faker->name;
+            $nomeridentitas=date('YmdHis').$i;
+            // 3. insert data siswa
+                $kode='R '.($i+1);
+                DB::table('anggota')->insert([
+                    'nama' => $nama,
+                    'tipe' => $faker->randomElement(['Siswa', 'Umum']),
+                    'tempatlahir' => $faker->randomElement(['Sumbersari', 'Jakarta','Surabaya','Blitar']),
+                    'tgllahir' => $faker->numberBetween(1990,2020).'-0'.$faker->numberBetween(1,9).'-'.$faker->numberBetween(10,29),
+                    'alamat' => 'Desa '.$faker->randomElement(['Sumbersari', 'Sumbermakmur','Mulyorejo','Morodadi']).' Kecamatan Losari Kabupaten Malang',
+                    'nomeridentitas' => $nomeridentitas,
+                    'sekolahasal' => $faker->randomElement(['Sumbersari', 'Jakarta','Surabaya','Blitar']),
+                    'jk' => $faker->randomElement(['Laki-laki', 'Perempuan']),
+                    'telp' => $nomeridentitas,
+                    'agama' => $faker->randomElement(['Islam', 'Kristen','Hindu','Budha']),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+     }
+     return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
 }

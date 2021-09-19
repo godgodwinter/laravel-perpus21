@@ -17,6 +17,8 @@ class CreateBukuTable extends Migration
             $table->id();
             $table->string('kode')->nullable();
             $table->string('nama')->nullable();
+            $table->string('pengarang')->nullable();
+            $table->string('tempatterbit')->nullable();
             $table->string('penerbit')->nullable();
             $table->string('tahunterbit')->nullable();
             $table->string('bahasa')->nullable();
