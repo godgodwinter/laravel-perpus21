@@ -133,7 +133,7 @@ crossorigin="anonymous"></script>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -160,7 +160,7 @@ crossorigin="anonymous"></script>
                   <p>Dashboard v3</p>
                 </a>
               </li>
-            </ul>
+            </ul> --}}
           </li>
           <li class="nav-item">
             <a href="{{route('admin.settings')}}" class="nav-link">
@@ -221,6 +221,8 @@ crossorigin="anonymous"></script>
               <p>Pengembalian</p>
             </a>
           </li>
+          
+          <li class="nav-header">KEUANGAN</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-hand-holding-usd"></i>
@@ -244,6 +246,12 @@ crossorigin="anonymous"></script>
             <a href="#" class="nav-link">
               <i class="fas fa-user-clock"></i>
               <p>Laporan Peminjaman</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>Laporan Keuangan</p>
             </a>
           </li>
         </ul>
