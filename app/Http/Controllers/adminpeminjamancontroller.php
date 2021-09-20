@@ -58,7 +58,6 @@ class adminpeminjamancontroller extends Controller
         foreach($request->daftarbuku as $db){
             $kode=$db['kode'];
             $jml=$db['jml'];
-        }
         
             // 1.ambil data buku
                 $databuku=DB::table('buku')->where('kode',$kode)->first();
@@ -111,7 +110,8 @@ class adminpeminjamancontroller extends Controller
                         'status'     =>  'dipinjam',
                        'updated_at'=>date("Y-m-d H:i:s")
                     ]);
-                }
+        }
+    }
                 // dd($kodetrans,$databukudetail,$request->daftarbuku,$db,$db['kode'],$kode,$jml,$databuku);
             // }
 
