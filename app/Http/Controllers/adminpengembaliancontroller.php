@@ -34,7 +34,15 @@ class adminpengembaliancontroller extends Controller
         return view('admin.pengembalian.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
+    
     public function store(Request $request)
+    {
+        if($request->daftarbuku==null){
+        return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');
+        }
+    }
+
+    public function storelawas(Request $request)
     {
         if($request->daftarkembali==null){
         return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');

@@ -152,7 +152,7 @@ $message=session('status');
                                         
                                         <div class="form-group">
                                             <label>Pilih Anggota :</label>
-                                            <select class="form-control form-control-md" id="tags" select2 select2-hidden-accessible  name="nomeridentitas" required>
+                                            <select class="form-control form-control-md tagsbuku" id="tags" select2 select2-hidden-accessible  name="nomeridentitas" required>
                                             @php
                                             // $cekdataselect = DB::table('anggota')
                                             //     ->count();
@@ -168,7 +168,7 @@ $message=session('status');
                                         
                                         <div class="form-group">
                                             <label>Pilih Jaminan :</label>
-                                            <select class="form-control form-control-md" id="tags" select2 select2-hidden-accessible  name="jaminan_tipe" required>
+                                            <select class="form-control form-control-md"  select2 select2-hidden-accessible  name="jaminan_tipe" required>
                                           
                                                 <option >Kartu Pelajar</option>
                                                 <option >KTP</option>
@@ -207,10 +207,18 @@ $message=session('status');
                                 placeholder: "Pilih Anggota"
                                });
                                
+                               $("#tags").select2({
+                                    theme: "classic"
+                                    });
+                                    
+                                   $("#tagsbuku").select2({
+                                    theme: "classic"
+                                    });
+                               
                                var values = $('#tagsbuku option[selected="true"]').map(function() { return $(this).val(); }).get();
                                     
                                     // you have no need of .trigger("change") if you dont want to trigger an event
-                                    $('#tagsbuku').select2({ 
+                                    $('tagsbuku').select2({ 
                                 placeholder: "Pilih Buku"
                                 });
 
