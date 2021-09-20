@@ -97,15 +97,15 @@ $message=session('status');
 <tr id="sid{{ $data->id }}">
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
-    {{-- <td> {{ $data->buku_kode}}  --}}
-    <input type="hidden" value="{{ $data->buku_kode}}" name="{{ $data->buku_kode}}">
+    {{-- <td> {{ $data->kodepanggil }}  --}}
+    <input type="hidden" value="{{ $data->kodepanggil }}" name="{{ $data->kodepanggil }}">
     </td>
     <td>{{ $data->kondisi }}</td>
     <td>{{ ucfirst($data->status) }}</td>
 
     <td class="text-center">
         {{-- @if ($data->status=='ada')
-        <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Masukkan keranjang!" id="isikan{{ $data->buku_kode}}"><i class="fas fa-shopping-cart"></i> </button>
+        <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Masukkan keranjang!" id="isikan{{ $data->kodepanggil }}"><i class="fas fa-shopping-cart"></i> </button>
         @else
         <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Telah dipinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button>
             
@@ -127,11 +127,11 @@ $message=session('status');
                 });
 
 
-                document.querySelector('#isikan{{ $data->buku_kode}}').addEventListener('click', function (
+                document.querySelector('#isikan{{ $data->kodepanggil }}').addEventListener('click', function (
                 e) {
                     e.preventDefault();
 
-var nama = $("input[name={{ $data->buku_kode}}]").val();
+var nama = $("input[name={{ $data->kodepanggil }}]").val();
 
 var link = "/admin/peminjaman/periksa/" + nama;
 // alert(link);

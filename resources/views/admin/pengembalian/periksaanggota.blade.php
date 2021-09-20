@@ -2,7 +2,7 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Pengembalian')
+@section('title','Data Anggota')
 @section('linkpages')
 data{{ $pages }}
 @endsection
@@ -99,7 +99,7 @@ $message=session('status');
                     <div class="row">
 
 
-                        <div class="col-12 col-md-12 col-lg-12">
+                        <div class="col-12 col-md-12 col-lg-4">
                             <div class="card">
                                 {{-- <form action="#" method="post">
                                 @csrf --}}
@@ -171,6 +171,103 @@ $message=session('status');
 
                         </div>
                         <!-- /.card-body -->
+
+                        <div class="col-12 col-md-12 col-lg-8">
+
+                            <div class="card">
+                                <div class="card-header">
+                
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                
+                
+                
+                                    <form action="{{ route('admin.'.$pages.'.cari') }}" method="GET">
+                
+                                        <div class="row">
+                
+                
+                                            <div class="form-group col-md-12 col-12 mt-1 text-right">
+                
+                                                <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
+                                                    data-target="#importExcel"><i class="fas fa-upload"></i>
+                                                    Import
+                                                </button>
+                
+                                                <a href="/admin/@yield('linkpages')/export" type="submit" value="Import"
+                                                    class="btn btn-icon btn-primary btn-sm"><span class="pcoded-micon"> <i
+                                                            class="fas fa-download"></i> Export </span></a>
+                                            </div>
+                
+                
+                
+                
+                
+                
+                                        </div>
+                
+                                    </form>
+                                    <div class="card-body -mt-5">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-md">
+                                                <thead>
+                                                        <tr>
+                                                            <th width="10%" class="text-center"> No</th>
+                                                            <th> Kode Buku </th>
+                                                            <th> Judul</th>
+                                                            <th> Jumlah</th>
+                                                            <th> Kategori</th>
+                                                            {{-- <th width="5%" class="text-center">Aksi</th> --}}
+                                                        </tr>
+                                                </thead>
+                                                <form action="/admin/pemgembalian/kembelikan" method="post">
+                                                <tbody id="tbody">
+                                                    {{-- {{dd($datas)}} --}}
+                                                    @foreach ($datas as $data)
+                                                        <tr>
+                                                            <td class="text-center">{{(($loop->index)+1)}}</td>
+                                                            <td>{{$data->buku_kode}}</td>
+                                                            <td>{{$data->buku_nama}}</td>
+                                                            @php
+                                                            $jmldatapinjam=DB::table('peminjamandetail')->where('nomeridentitas',$data->nomeridentitas)->where('buku_kode',$data->buku_kode)->where('statuspengembalian',null)->orderBy('created_at', 'desc')->count();
+       
+                                                            @endphp
+                                                            <td class="text-center">
+                                                                {{-- {{$jmldatapinjam}} --}}
+                                                                <input type="number" class="form-control-plaintext form-control2 no-border text-center btn btn-light" id="tdnilaisiswa" min=0 max="{{$jmldatapinjam}}" value="{{ $jmldatapinjam }}">
+                                                            </td>
+                                                            <td>{{$data->bukukategori_nama}}</td>
+                                                            {{-- <td>{{$data->bukukategori_nama}}</td> --}}
+                                                        </tr>
+                                                    @endforeach
+                
+                                                </tbody>
+                                            </table>
+                                            
+                                    <div class="card-footer text-right">
+                                        <button class="btn btn-success" id="kirimdata">Kembalikan</button>
+                                    </div>
+                                </form>
+                                        </div>
+                                        <div class="card-footer text-right">
+                                                @yield('foottable')
+                                        </div>
+                                </div>
+                                <!-- /.card-body -->
+                
+                            </div>
+                        </div>
+                        </div>
+                        
+                        {{-- asd --}}
 
                     </div>
                 </div>

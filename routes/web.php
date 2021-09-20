@@ -100,7 +100,7 @@ Route::post('/admin/bukupinjam/{id}/bukudetail/cari', 'App\Http\Controllers\admi
 //peminjaman-MENU
 Route::get('/admin/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@index')->name('admin.pengembalian');
 Route::get('/admin/pengembalian/periksa/{id}', 'App\Http\Controllers\adminpengembaliancontroller@periksa')->name('admin.pengembalian.periksa');
-Route::get('/admin/pengembalian/periksaanggota/{id}', 'App\Http\Controllers\adminpengembaliancontroller@periksaanggota')->name('admin.pengembalian.periksaanggota');
+Route::post('/admin/pengembalian/periksaanggota/', 'App\Http\Controllers\adminpengembaliancontroller@periksaanggota')->name('admin.pengembalian.periksaanggota');
 Route::get('/admin/kembalikanbuku', 'App\Http\Controllers\adminpeminjamancontroller@buku')->name('admin.kembalikan.buku');
 Route::get('/admin/pengembalian/cari', 'App\Http\Controllers\adminpengembaliancontroller@cari')->name('admin.pengembalian.cari');
 Route::post('/admin/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@store')->name('admin.pengembalian.store');

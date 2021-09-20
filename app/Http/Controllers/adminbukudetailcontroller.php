@@ -87,10 +87,12 @@ class adminbukudetailcontroller extends Controller
         $buku=$buku;
         $datas=$id;
         
-        $bukurak = DB::table('bukurak')->get();
+        // $bukurak = DB::table('bukurak')->get();
         $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-        return view('admin.buku.bukudetail_edit',compact('pages','datas','bukurak','buku','bukukategori','request'));
+        return view('admin.buku.bukudetail_edit',compact('pages','datas'
+        // ,'bukurak'
+        ,'buku','bukukategori','request'));
     }
     public function proses_update($request,$buku,$datas)
     {
