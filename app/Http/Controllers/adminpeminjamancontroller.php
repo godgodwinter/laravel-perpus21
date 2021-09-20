@@ -36,6 +36,7 @@ class adminpeminjamancontroller extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $kodetrans=base64_encode(date('YmdHis'));
         $decodekodetrans=base64_decode($kodetrans);
         
@@ -46,7 +47,7 @@ class adminpeminjamancontroller extends Controller
         if($request->jaminan_nama!=null){
             $jaminan_nama=$request->jaminan_nama;
         }
-        $tgl_pinjam=date('Y-m-d');
+        $tgl_pinjam=$request->tgl_pinjam;
         $tgl_harus_kembali=Fungsi::manipulasiTanggal($tgl_pinjam,Fungsi::defaultmaxharipinjam(),'days');
 
         // dd($request->daftarbuku);

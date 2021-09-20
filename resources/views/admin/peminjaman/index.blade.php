@@ -185,6 +185,13 @@ $message=session('status');
                                             <input type="text" name="jaminan_nama" id="jaminan_nama" class="form-control" placeholder=""
                                                 >
                                         </div>
+                                        
+                                        <div class="form-group col-md-12 col-12">
+                                            <label>Tanggal Pinjam</label>
+                                            <input type="date" class="form-control" name="tgl_pinjam" @error('tgl_pinjam') is-invalid @enderror"  required value="{{ date('Y-m-d') }}">
+                                            @error('tgl_pinjam')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
                                         <div class="row" id="forminputan">
                                             {{-- <div class="form-group col-md-12 col-12">
                                             <label for="nama">Kode Panggil</label>
@@ -539,32 +546,6 @@ $message=session('status');
                 <div class="card-body">
 
 
-
-                    <form action="{{ route('admin.'.$pages.'.cari') }}" method="GET">
-
-                        <div class="row">
-
-
-                            <div class="form-group col-md-12 col-12 mt-1 text-right">
-
-                                <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#importExcel"><i class="fas fa-upload"></i>
-                                    Import
-                                </button>
-
-                                <a href="/admin/@yield('linkpages')/export" type="submit" value="Import"
-                                    class="btn btn-icon btn-primary btn-sm"><span class="pcoded-micon"> <i
-                                            class="fas fa-download"></i> Export </span></a>
-                            </div>
-
-
-
-
-
-
-                        </div>
-
-                    </form>
                     <div class="card-body -mt-5">
                         <div class="table-responsive">
                             <table class="table table-bordered table-md">

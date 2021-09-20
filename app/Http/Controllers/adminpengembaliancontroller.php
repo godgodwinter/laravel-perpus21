@@ -35,18 +35,12 @@ class adminpengembaliancontroller extends Controller
         // return view('admin.beranda');
     }
     
-    // public function periksa($id)
-    // {
-    //     $jmlpinjam=DB::table('peminjaman')->where('nomeridentitas',$id)->orderBy('created_at', 'desc')->count();
-    //     if($jmlpinjam>0){
-    //         // return redirect(URL::to('/').'/admin/pengembalian/periksa/'.$id)->with('status','Data Ditemukan!')->with('tipe','success');
-    //     dd($id);
+    public function kembalikan(Request $request)
+    {
+        dd($request);
+        // 1. ambil
 
-    //     }else{
-    //         return redirect()->back()->with('status','Belum pernah pinjam!')->with('tipe','error');
-    //     }
-    //     // dd($id);
-    // }
+    }
     public function periksaanggota(Request $request)
     {
         if($this->checkauth('admin')==='404'){

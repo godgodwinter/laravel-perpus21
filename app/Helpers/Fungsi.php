@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
  
@@ -9,6 +10,52 @@ class Fungsi {
     //     $user = DB::table('users')->where('userid', $user_id)->first();
     //     return (isset($user->username) ? $user->username : '');
     // }
+    
+    public static function periksadenda($inputan){
+        
+        $hitungketerlambatan = strtotime($inputan)-strtotime(Carbon::now());
+        $selisih = $hitungketerlambatan / 86400;
+        // jika selisih negatif maka terlambat
+        if($selisih<0){
+        $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($inputan);
+        $denda=$DeferenceInDays*Fungsi::defaultdenda();
+        }else{
+            $denda=0;
+        }
+
+        return $denda;
+    }
+    public static function tanggalindo($inputan){
+        $bulanindo='Januari';
+        $str=explode("-",$inputan);
+                if($str[1]=='01'){
+                    $bulanindo='Januari';
+                }elseif($str[1]=='02'){
+                    $bulanindo='Februari';
+                }elseif($str[1]=='03'){
+                    $bulanindo='Maret';
+                }elseif($str[1]=='04'){
+                    $bulanindo='April';
+                }elseif($str[1]=='05'){
+                    $bulanindo='Mei';
+                }elseif($str[1]=='06'){
+                    $bulanindo='Juni';
+                }elseif($str[1]=='07'){
+                    $bulanindo='Juli';
+                }elseif($str[1]=='08'){
+                    $bulanindo='Agustus';
+                }elseif($str[1]=='09'){
+                    $bulanindo='September';
+                }elseif($str[1]=='10'){
+                    $bulanindo='Oktober';
+                }elseif($str[1]=='11'){
+                    $bulanindo='November';
+                }else{
+                    $bulanindo='Desember';
+                }
+
+        return $str[2]." ".$bulanindo." " .$str[0]; 
+    }
     public static function manipulasiTanggal($tgl,$jumlah=1,$format='days'){
         $currentDate = $tgl;
         return date('Y-m-d', strtotime($jumlah.' '.$format, strtotime($currentDate)));
