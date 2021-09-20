@@ -95,14 +95,6 @@ $message=session('status');
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="form-group col-md-12 col-12">
-                        <label for="isbn">ISBN </label>
-                        <input type="text" name="isbn" id="isbn"
-                            class="form-control @error('isbn') is-invalid @enderror" placeholder=""
-                            value="{{$datas->isbn}}" >
-                        @error('isbn')<div class="invalid-feedback"> {{$message}}</div>
-                        @enderror
-                    </div>
                       </div>
                    
                     <div class="form-group col-md-12 col-12">

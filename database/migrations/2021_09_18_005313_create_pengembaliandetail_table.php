@@ -16,7 +16,7 @@ class CreatePengembaliandetailTable extends Migration
         Schema::create('pengembaliandetail', function (Blueprint $table) {
             $table->id();
             $table->string('kodetrans')->nullable();
-            $table->string('isbn')->nullable(); //dari table kategori
+            $table->string('buku_isbn')->nullable(); //dari table kategori
             $table->string('nomeridentitas')->nullable();
             $table->string('buku_nama')->nullable();
             $table->string('buku_kodepanggil')->nullable();
@@ -25,7 +25,7 @@ class CreatePengembaliandetailTable extends Migration
             $table->string('buku_pengarang')->nullable();
             $table->string('buku_tempatterbit')->nullable();
             $table->string('buku_bahasa')->nullable();
-            $table->string('bukurak_nama')->nullable();
+            // $table->string('bukurak_nama')->nullable();
             $table->string('bukukategori_nama')->nullable();  //ktp / kartu pelajar
             $table->string('bukukategori_ddc')->nullable(); //dari table kategori
             $table->string('jaminan_nama')->nullable(); //dari table kategori

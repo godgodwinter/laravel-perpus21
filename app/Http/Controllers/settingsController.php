@@ -70,7 +70,7 @@ class settingsController extends Controller
         
         buku::truncate();
         bukudetail::truncate();
-        bukurak::truncate();
+        // bukurak::truncate();
         anggota::truncate();
         peralatan::truncate();
         peminjaman::truncate();
@@ -149,13 +149,14 @@ class settingsController extends Controller
                     DB::table('buku')->insert([
                         'nama' => 'Sejarah Wali Songo [sumber elektronis]',
                         'kode' => date('YmdHis').'1',
+                        'isbn' => '978-623-244-922-0',
                         'pengarang' => 'Zulham Farobi',
                         'penerbit' =>'Anak Hebat Indonesia',
                         'bahasa' => $faker->randomElement(['Indonesia', 'English']),
                         'tempatterbit' => $faker->country,
                         'tahunterbit' => $faker->numberBetween(1990,2021),
-                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
-                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        // 'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        // 'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
                         'bukukategori_nama' => 'Sejarah',
                         'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
                         'created_at' => Carbon::now(),
@@ -166,13 +167,14 @@ class settingsController extends Controller
                     DB::table('buku')->insert([
                         'nama' => 'Sejarah pemikiran ekonomi Islam',
                         'kode' => date('YmdHis').'2',
+                        'isbn' => '978-623-312-462-1',
                         'pengarang' => 'Jajang W Mahri',
                         'penerbit' =>'Penerbit Universitas Terbuka',
                         'bahasa' => $faker->randomElement(['Indonesia', 'English']),
                         'tempatterbit' => $faker->country,
                         'tahunterbit' => $faker->numberBetween(1990,2021),
-                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
-                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        // 'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        // 'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
                         'bukukategori_nama' => 'Sejarah',
                         'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
                         'created_at' => Carbon::now(),
@@ -183,14 +185,15 @@ class settingsController extends Controller
                     
                     DB::table('buku')->insert([
                         'nama' => 'Tegar dalam doa',
-                        'kode' => date('YmdHis').'2',
+                        'kode' => date('YmdHis').'3',
+                        'isbn' => '978-623-383-034-8',
                         'pengarang' => 'Fauzah ',
                         'penerbit' => 'CV Pustaka Mediaguru',
                         'bahasa' => $faker->randomElement(['Indonesia', 'English']),
                         'tempatterbit' => $faker->country,
                         'tahunterbit' => $faker->numberBetween(1990,2021),
-                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
-                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        // 'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        // 'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
                         'bukukategori_nama' => 'Agama',
                         'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
                         'created_at' => Carbon::now(),
@@ -199,14 +202,15 @@ class settingsController extends Controller
                     
                     DB::table('buku')->insert([
                         'nama' => 'Hikmah melangitkan doa',
-                        'kode' => date('YmdHis').'2',
+                        'kode' => date('YmdHis').'4',
+                        'isbn' => '978-623-6860-68-7',
                         'pengarang' => 'Neny Andriani ; editor, Diyah KN',
                         'penerbit' => 'CV. Bumi Pena',
                         'bahasa' => $faker->randomElement(['Indonesia', 'English']),
                         'tempatterbit' => $faker->country,
                         'tahunterbit' => $faker->numberBetween(1990,2021),
-                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
-                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        // 'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        // 'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
                         'bukukategori_nama' => 'Agama',
                         'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
                         'created_at' => Carbon::now(),
@@ -216,14 +220,15 @@ class settingsController extends Controller
                         
                     DB::table('buku')->insert([
                         'nama' => 'Pengantar jaringan komputer',
-                        'kode' => date('YmdHis').'2',
+                        'kode' => date('YmdHis').'5',
+                        'isbn' => '978-623-95937-6-6',
                         'pengarang' => 'Adi Wibowo',
                         'penerbit' => 'UMKO Publishing',
                         'bahasa' => $faker->randomElement(['Indonesia', 'English']),
                         'tempatterbit' => $faker->country,
                         'tahunterbit' => $faker->numberBetween(1990,2021),
-                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
-                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        // 'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        // 'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
                         'bukukategori_nama' => 'Teknologi',
                         'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
                         'created_at' => Carbon::now(),
@@ -233,14 +238,15 @@ class settingsController extends Controller
 
                     DB::table('buku')->insert([
                         'nama' => 'Metode penelitian pendidikan ilmu komputer',
-                        'kode' => date('YmdHis').'2',
+                        'kode' => date('YmdHis').'6',
+                        'isbn' => '978-623-6478-35-6',
                         'pengarang' => 'Wahyudin',
                         'penerbit' => 'Perkumpulan Rumah Cemerlang Indonesia',
                         'bahasa' => $faker->randomElement(['Indonesia', 'English']),
                         'tempatterbit' => $faker->country,
                         'tahunterbit' => $faker->numberBetween(1990,2021),
-                        'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
-                        'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
+                        // 'bukurak_nama' => 'Rak '.$faker->numberBetween(1,10),
+                        // 'bukurak_kode' => 'R'.$faker->numberBetween(1,10),
                         'bukukategori_nama' => 'Teknologi',
                         'bukukategori_ddc' => $faker->unique()->numberBetween(1000,2000),
                         'created_at' => Carbon::now(),
@@ -270,14 +276,14 @@ class settingsController extends Controller
                 'buku_bahasa' => $db->bahasa,
                 'buku_tempatterbit' =>$db->tempatterbit,
                 'buku_tahunterbit' =>$db->tahunterbit,
-                'bukurak_nama' =>$db->bukurak_nama,
-                'bukurak_kode' => $db->bukurak_kode,
+                // 'bukurak_nama' =>$db->bukurak_nama,
+                // 'bukurak_kode' => $db->bukurak_kode,
                 'bukukategori_nama' => $db->bukukategori_nama,
                 'bukukategori_ddc' => $db->bukukategori_ddc,
                 'kondisi' => $faker->randomElement(['Bagus', 'Layak','Tidak Layak']),
                 'status' => 'ada',
                 'kodepanggil' => $db->kode.'-'.$nomeridentitas,
-                'isbn' =>$db->kode.'-'.$nomeridentitas,
+                'buku_isbn' =>$db->isbn,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);

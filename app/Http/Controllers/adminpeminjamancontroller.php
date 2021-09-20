@@ -90,7 +90,7 @@ class adminpeminjamancontroller extends Controller
             // dd($datas);
             DB::table('peminjamandetail')->insert([
                 'kodetrans' => $kodetrans,
-                'isbn' => $datas->isbn,
+                'buku_isbn' => $datas->buku_isbn,
                 'nomeridentitas' =>$request->nomeridentitas,
                 'buku_nama' => $datas->buku_nama,
                 'buku_kodepanggil' => $datas->kodepanggil,
@@ -99,7 +99,7 @@ class adminpeminjamancontroller extends Controller
                 'buku_pengarang' => $datas->buku_pengarang,
                 'buku_tempatterbit' => $datas->buku_tempatterbit,
                 'buku_bahasa' => $datas->buku_bahasa,
-                'bukurak_nama' => $datas->bukurak_nama,
+                // 'bukurak_nama' => $datas->bukurak_nama,
                 'bukukategori_nama' => $datas->bukukategori_nama,
                 'bukukategori_ddc' => $datas->bukukategori_ddc,
                 'jaminan_tipe' => $request->jaminan_tipe,

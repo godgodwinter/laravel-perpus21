@@ -90,7 +90,7 @@ class adminpengembaliancontroller extends Controller
             // dd(Carbon::now(),$tgl_harus_kembali,$DeferenceInDays,$selisih,$denda);
             DB::table('pengembaliandetail')->insert([
                 'kodetrans' => $kodetrans,
-                'isbn' => $datas->isbn,
+                'buku_isbn' => $datas->buku_isbn,
                 'nomeridentitas' =>$request->nomeridentitas,
                 'buku_nama' => $datas->buku_nama,
                 'buku_kodepanggil' => $datas->buku_kodepanggil,
@@ -99,7 +99,7 @@ class adminpengembaliancontroller extends Controller
                 'buku_pengarang' => $datas->buku_pengarang,
                 'buku_tempatterbit' => $datas->buku_tempatterbit,
                 'buku_bahasa' => $datas->buku_bahasa,
-                'bukurak_nama' => $datas->bukurak_nama,
+                // 'bukurak_nama' => $datas->bukurak_nama,
                 'bukukategori_nama' => $datas->bukukategori_nama,
                 'bukukategori_ddc' => $datas->bukukategori_ddc,
                 'jaminan_tipe' => $datas->jaminan_tipe,

@@ -15,16 +15,16 @@ class CreateBukudetailTable extends Migration
     {
         Schema::create('bukudetail', function (Blueprint $table) {
             $table->id();
-            $table->string('isbn')->nullable();
             $table->string('buku_kode')->nullable();
             $table->string('buku_nama')->nullable();
+            $table->string('buku_isbn')->nullable();
             $table->string('buku_penerbit')->nullable();
             $table->string('buku_tahunterbit')->nullable();
             $table->string('buku_pengarang')->nullable();
             $table->string('buku_tempatterbit')->nullable();
             $table->string('buku_bahasa')->nullable();
-            $table->string('bukurak_nama')->nullable();
-            $table->string('bukurak_kode')->nullable();
+            // $table->string('bukurak_nama')->nullable();
+            // $table->string('bukurak_kode')->nullable();
             $table->string('bukukategori_nama')->nullable();  //ktp / kartu pelajar
             $table->string('bukukategori_ddc')->nullable(); //dari table kategori.kode
             $table->string('kondisi')->nullable();

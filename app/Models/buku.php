@@ -13,14 +13,15 @@ class buku extends Model
 
     protected $fillable = [
         'nama',
+        'isbn',
         'penerbit',
         'tahunterbit',
         'pengarang',
         'tempatterbit',
         'bahasa',
         'kode',
-        'bukurak_nama',
-        'bukurak_kode',
+        // 'bukurak_nama',
+        // 'bukurak_kode',
         'bukukategori_nama',
         'bukukategori_ddc',
     ];

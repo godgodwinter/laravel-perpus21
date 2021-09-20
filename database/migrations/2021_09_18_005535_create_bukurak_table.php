@@ -13,12 +13,12 @@ class CreateBukurakTable extends Migration
      */
     public function up()
     {
-        Schema::create('bukurak', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama')->nullable();
-            $table->string('kode')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('bukurak', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('nama')->nullable();
+        //     $table->string('kode')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**

@@ -12,16 +12,16 @@ class bukudetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'isbn',
         'buku_nama',
+        'buku_isbn',
         'buku_penerbit',
         'buku_tahunterbit',
         'buku_bahasa',
         'buku_kode',
         'buku_pengarang',
         'buku_tempatterbit',
-        'bukurak_nama',
-        'bukurak_kode',
+        // 'bukurak_nama',
+        // 'bukurak_kode',
         'bukukategori_nama',
         'bukukategori_ddc',
         'status',

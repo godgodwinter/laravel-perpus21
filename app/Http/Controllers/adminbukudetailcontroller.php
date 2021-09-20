@@ -26,13 +26,15 @@ class adminbukudetailcontroller extends Controller
 
 
         $datas=DB::table('bukudetail')->where('buku_kode',$id->kode)
-        ->orderBy('isbn','asc')
+        // ->orderBy('isbn','asc')
         ->paginate(Fungsi::paginationjml());
 
-        $bukurak = DB::table('bukurak')->get();
+        // $bukurak = DB::table('bukurak')->get();
         $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-        return view('admin.buku.bukudetail',compact('pages','bukurak','bukukategori','datas','buku','request'));
+        return view('admin.buku.bukudetail',compact('pages'
+        // ,'bukurak'
+        ,'bukukategori','datas','buku','request'));
         // return view('admin.beranda');
     }
 
@@ -56,14 +58,13 @@ class adminbukudetailcontroller extends Controller
         // dd($kodebuku);
         DB::table('bukudetail')->insert(
             array(
-                   'isbn'     =>   $request->isbn,
                    'kondisi'     =>   $request->kondisi,
                    'status'     =>   'ada', //ada ,  dipinjam , hilang
                    'kodepanggil'     =>   $id->kode.'-'.date('YmdHis'),
                    'buku_nama'     =>   $id->nama,
                    'buku_kode'     =>   $id->kode,
-                   'bukurak_nama'     =>   $id->bukurak_nama,
-                   'bukurak_kode'     =>   $id->bukurak_kode,
+                //    'bukurak_nama'     =>   $id->bukurak_nama,
+                //    'bukurak_kode'     =>   $id->bukurak_kode,
                    'bukukategori_nama'     =>   $id->bukukategori_nama,
                    'bukukategori_ddc'     =>   $id->bukukategori_ddc,
                    'created_at'=>date("Y-m-d H:i:s"),
@@ -100,7 +101,6 @@ class adminbukudetailcontroller extends Controller
 
         bukudetail::where('id',$datas->id)
         ->update([
-            'isbn'     =>   $request->isbn,
             'kondisi'     =>   $request->kondisi,
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
@@ -148,13 +148,15 @@ class adminbukudetailcontroller extends Controller
 
 
         $datas=DB::table('bukudetail')->where('buku_kode',$id->kode)
-        ->orderBy('isbn','asc')
+        // ->orderBy('isbn','asc')
         ->paginate(Fungsi::paginationjml());
 
-        $bukurak = DB::table('bukurak')->get();
+        // $bukurak = DB::table('bukurak')->get();
         $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-        return view('admin.buku.bukudetail',compact('pages','bukurak','bukukategori','datas','buku','request'));
+        return view('admin.buku.bukudetail',compact('pages'
+        // ,'bukurak'
+        ,'bukukategori','datas','buku','request'));
 
     }
 }

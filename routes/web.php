@@ -33,13 +33,13 @@ Route::get('/dashboard', 'App\Http\Controllers\adminberandaController@index')->n
 // Route::get('/qrtests', function()
 
 //BUKURAK-MENU
-Route::get('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@index')->name('admin.bukurak');
-Route::get('/admin/bukurak/cari', 'App\Http\Controllers\adminbukurakcontroller@cari')->name('admin.bukurak.cari');
-Route::post('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@store')->name('admin.bukurak.store');
-Route::get('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@show')->name('admin.bukurak.show');
-Route::put('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@update')->name('admin.bukurak.update');
-Route::delete('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@destroy')->name('admin.bukurak.destroy');
-Route::delete('/admin/databukurak/multidel', 'App\Http\Controllers\adminbukurakcontroller@multidel')->name('admin.bukurak.multidel');
+// Route::get('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@index')->name('admin.bukurak');
+// Route::get('/admin/bukurak/cari', 'App\Http\Controllers\adminbukurakcontroller@cari')->name('admin.bukurak.cari');
+// Route::post('/admin/bukurak', 'App\Http\Controllers\adminbukurakcontroller@store')->name('admin.bukurak.store');
+// Route::get('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@show')->name('admin.bukurak.show');
+// Route::put('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@update')->name('admin.bukurak.update');
+// Route::delete('/admin/bukurak/{id}', 'App\Http\Controllers\adminbukurakcontroller@destroy')->name('admin.bukurak.destroy');
+// Route::delete('/admin/databukurak/multidel', 'App\Http\Controllers\adminbukurakcontroller@multidel')->name('admin.bukurak.multidel');
 
 
 //buku-MENU
@@ -115,7 +115,7 @@ Route::put('/admin/settings/{id}', 'App\Http\Controllers\settingsController@upda
 Route::post('admin/reset/hard', 'App\Http\Controllers\settingsController@hard')->name('reset.hard');
 Route::post('admin/reset/default', 'App\Http\Controllers\settingsController@default')->name('reset.default');
 Route::post('admin/seeder/anggota', 'App\Http\Controllers\settingsController@anggota')->name('seeder.anggota');
-Route::post('admin/seeder/bukurak', 'App\Http\Controllers\settingsController@bukurak')->name('seeder.bukurak');
+// Route::post('admin/seeder/bukurak', 'App\Http\Controllers\settingsController@bukurak')->name('seeder.bukurak');
 Route::post('admin/seeder/buku', 'App\Http\Controllers\settingsController@buku')->name('seeder.buku');
 Route::post('admin/seeder/bukudetail', 'App\Http\Controllers\settingsController@bukudetail')->name('seeder.bukudetail');
 

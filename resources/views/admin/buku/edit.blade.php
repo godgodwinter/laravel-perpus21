@@ -79,6 +79,8 @@ $message=session('status');
 
     <!-- Default box -->
 
+    <div class="card-body">
+        <div class="row">
     <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
            
@@ -120,6 +122,15 @@ $message=session('status');
                 </div>
                 
                 <div class="form-group col-md-12 col-12">
+                    <label for="isbn">ISBN </label>
+                    <input type="text" name="isbn" id="isbn"
+                        class="form-control @error('isbn') is-invalid @enderror" placeholder=""
+                        value="{{$datas->isbn}}" >
+                    @error('isbn')<div class="invalid-feedback"> {{$message}}</div>
+                    @enderror
+                </div>
+                
+                <div class="form-group col-md-12 col-12">
                     <label for="bahasa">Bahasa</label>
                     <input type="text" name="bahasa" id="bahasa"
                         class="form-control @error('bahasa') is-invalid @enderror" placeholder=""
@@ -128,7 +139,7 @@ $message=session('status');
                     @enderror
                 </div>
                  
-                  <div class="form-group col-md-12 col-12">
+                  {{-- <div class="form-group col-md-12 col-12">
                       <label>Tempat Rak Buku <code>*)</code></label>
                       <select class="form-control form-control-lg" required name="bukurak_nama">  
                           @if ($datas->bukurak_nama)
@@ -138,7 +149,7 @@ $message=session('status');
                           <option>{{ $t->nama }}</option>
                       @endforeach
                       </select>
-                  </div> 
+                  </div>  --}}
 
                   
                   <div class="form-group col-md-12 col-12">
@@ -177,15 +188,10 @@ $message=session('status');
             </div>
           </form>
         </div>
-                
-            </div>
-            <!-- /.card-body -->
+                <!-- /.card-body -->
 
-        </div>
-    </div>
     <!-- /.card -->
 
-    </div>
 
 </section>
 <!-- /.content -->

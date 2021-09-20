@@ -49,6 +49,7 @@ $message=session('status');
     <th width="10%" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
     <th> KD Buku - Judul Buku </th>
+    <th> ISBN </th>
     <th> Kategori </th>
     <th> Jumlah </th>
     <th width="200px" class="text-center">Aksi</th>
@@ -96,6 +97,15 @@ $message=session('status');
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
     <td> {{ $data->kode }} - {{ $data->nama }}</td>
+    @php
+       $isbn='-'; 
+    @endphp
+    @if ($data->isbn)
+       @php
+       $isbn=$data->isbn;
+       @endphp
+    @endif
+    <td>{{ $isbn }}</td>
     <td>{{ $data->bukukategori_nama }}</td>
     @php
         $jml=0;
@@ -284,6 +294,14 @@ $message=session('status');
                                             @error('tahunterbit')<div class="invalid-feedback"> {{$message}}</div>
                                             @enderror
                                         </div>
+                                        <div class="form-group col-md-12 col-12">
+                                            <label for="isbn">ISBN </label>
+                                            <input type="text" name="isbn" id="isbn"
+                                                class="form-control @error('isbn') is-invalid @enderror" placeholder=""
+                                                value="{{old('isbn')}}" >
+                                            @error('isbn')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
                                         
                                         <div class="form-group col-md-12 col-12">
                                             <label for="bahasa">Bahasa</label>
@@ -294,7 +312,7 @@ $message=session('status');
                                             @enderror
                                         </div>
                                        
-                                        <div class="form-group col-md-12 col-12">
+                                        {{-- <div class="form-group col-md-12 col-12">
                                             <label>Tempat Rak Buku <code>*)</code></label>
                                             <select class="form-control form-control-lg" required name="bukurak_nama">  
                                                 @if (old('bukurak_nama'))
@@ -304,7 +322,7 @@ $message=session('status');
                                                 <option>{{ $t->nama }}</option>
                                             @endforeach
                                             </select>
-                                        </div> 
+                                        </div>  --}}
 
                                         
                                         <div class="form-group col-md-12 col-12">

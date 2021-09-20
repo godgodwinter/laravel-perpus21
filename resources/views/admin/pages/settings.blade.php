@@ -290,12 +290,12 @@ $message=session('status');
                                             class="pcoded-micon"> <i class="fas fa-power-off"></i>Seeder Anggota!</span></button>
                                   </form>
 
-                                  <form action="{{ route('seeder.bukurak') }}" method="post" class="d-inline ml-1">
+                                  {{-- <form action="{{ route('seeder.bukurak') }}" method="post" class="d-inline ml-1">
                                     @csrf
                                     <button class="btn btn-info btn-lg"
                                         onclick="return  confirm('Anda yakin memasukan data palsu ? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
                                             class="pcoded-micon"> <i class="fas fa-power-off"></i> Seeder bukurak!</span></button>
-                                  </form>
+                                  </form> --}}
                                   
                                   <form action="{{ route('seeder.buku') }}" method="post" class="d-inline ml-1">
                                     @csrf

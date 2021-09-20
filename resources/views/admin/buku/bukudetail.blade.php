@@ -51,7 +51,6 @@ $message=session('status');
     <th width="10%" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
         <th> Kode Panggil </th>
-    <th> ISBN </th>
     <th> Kondisi </th>
     <th> Status </th>
     <th width="200px" class="text-center">Aksi</th>
@@ -101,15 +100,6 @@ $message=session('status');
     <td> {{ $data->kodepanggil }} 
     <input type="hidden" value="{{ $data->kodepanggil }}" name="{{ $data->kodepanggil }}">
     </td>
-    @php
-       $isbn='-'; 
-    @endphp
-    @if ($data->isbn)
-       @php
-       $isbn=$data->isbn;
-       @endphp
-    @endif
-    <td>{{ $isbn }}</td>
     <td>{{ $data->kondisi }}</td>
     <td>{{ ucfirst($data->status) }}</td>
 
@@ -399,14 +389,6 @@ $.ajax({
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="isbn">ISBN </label>
-                                            <input type="text" name="isbn" id="isbn"
-                                                class="form-control @error('isbn') is-invalid @enderror" placeholder=""
-                                                value="{{old('isbn')}}" >
-                                            @error('isbn')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
                                           </div>
                                        
                                         <div class="form-group col-md-12 col-12">
