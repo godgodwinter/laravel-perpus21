@@ -2,11 +2,13 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Buku')
+@section('title')
+Buku <b>{{$buku->nama}}</b>
+@endsection
 @section('linkpages')
 data{{ $pages }}
 @endsection
-@section('halaman','kelas')
+@section('halaman','bukudetail')
 
 @section('csshere')
 @endsection
@@ -48,12 +50,9 @@ $message=session('status');
 <tr>
     <th width="10%" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
-    <th> KD Buku - Judul Buku </th>
-    <th> ISBN </th>
-    <th> Kategori </th>
-    <th> Jumlah </th>
-    <th> Tersedia </th>
-    <th> Dipinjam </th>
+        <th> Kode Panggil </th>
+    <th> Kondisi </th>
+    <th> Status </th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
 @endsection
@@ -76,7 +75,7 @@ $message=session('status');
             });
 
             $.ajax({
-                url: "{{ route('admin.buku.multidel') }}",
+                url: "{{ route('admin.bukudetail.multidel') }}",
                 type: "DELETE",
                 data: {
                     _token: $("input[name=_token]").val(),
@@ -98,53 +97,152 @@ $message=session('status');
 <tr id="sid{{ $data->id }}">
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
-    <td> {{ $data->kode }} - {{ $data->nama }}</td>
-    @php
-       $isbn='-'; 
-    @endphp
-    @if ($data->isbn)
-       @php
-       $isbn=$data->isbn;
-       @endphp
-    @endif
-    <td>{{ $isbn }}</td>
-    <td class="text-center">{{ $data->bukukategori_nama }}</td>
-    @php
-        $jml=0;
-
-        $cekjml = DB::table('bukudetail')->where('buku_kode',$data->kode)->count();
-        $cekjmlada = DB::table('bukudetail')->where('buku_kode',$data->kode)->where('status','ada')->count();
-        $cekjmldipinjam = DB::table('bukudetail')->where('buku_kode',$data->kode)->where('status','dipinjam')->count();
-    @endphp
-    <td class="text-center">{{$cekjml}}</td>
-    <td class="text-center">{{$cekjmlada}}  
-        @if ($cekjmlada>0)
-        <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" id="isikan{{ $data->kode }}"><i class="fas fa-shopping-cart"></i>
-        </button>
-        @else
-        <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button>
-        @endif
+    <td> {{ $data->kodepanggil }} 
+    <input type="hidden" value="{{ $data->kodepanggil }}" name="{{ $data->kodepanggil }}">
     </td>
-    <td class="text-center">{{$cekjmldipinjam}}    
-        @if ($cekjmldipinjam>0)
-        <button class="btn btn-icon btn-success btn-sm "  data-toggle="tooltip" data-placement="top" title="Kembalikan!" id="isikan{{ $data->kode }}">
-            <i class="fas fa-hands"></i>
-         </button>
-        @else
-        <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Kembalikan!" ><i class="fas fa-hands"></i> </button>
-        @endif 
-    </td>
+    <td>{{ $data->kondisi }}</td>
+    <td>{{ ucfirst($data->status) }}</td>
 
     <td class="text-center">
-        <a class="btn btn-icon btn-secondary btn-sm " href="{{ url('/admin/buku/') }}/{{ $data->id }}/bukudetail"  data-toggle="tooltip" data-placement="top" title="Lihat selengkapnya!"> <i class="fas fa-angle-double-right"></i> </a>
-        <x-button-edit link="/admin/{{ $pages }}/{{$data->id}}" />
-        <x-button-delete link="/admin/{{ $pages }}/{{$data->id}}" />
+        @if ($data->status=='ada')
+        <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Masukkan keranjang!" id="isikan{{ $data->kodepanggil }}"><i class="fas fa-shopping-cart"></i> </button>
+        @else
+        <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Telah dipinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button>
+            
+        @endif
+
+        <x-button-edit link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
+        <x-button-delete link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
     </td>
+    <script>
+        
+
+        $(document).ready(function () {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                            'content')
+                    }
+                });
+
+
+                document.querySelector('#isikan{{ $data->kodepanggil }}').addEventListener('click', function (
+                e) {
+                    e.preventDefault();
+
+var nama = $("input[name={{ $data->kodepanggil }}]").val();
+
+var link = "/admin/peminjaman/periksa/" + nama;
+// alert(link);
+
+$.ajax({
+    url: link,
+    method: 'GET',
+    data: {
+        "_token": "{{ csrf_token() }}",
+        nama: nama,
+    },
+                            success:function(response){
+                            if(response.success){
+                                                        if (response
+                                                            .message != 0) {
+                                                                // alert(response.message);
+                                                                
+                                                            let daftarbuku2;
+                                                            if (localStorage.getItem(
+                                                                    'daftarbuku') ===
+                                                                null) {
+                                                                daftarbuku2 = [];
+                                                            } else {
+                                                                daftarbuku2 = JSON.parse(
+                                                                    localStorage
+                                                                    .getItem(
+                                                                        'daftarbuku'));
+                                                            }
+
+                                                            
+                                                            var hasilperiksa=0;
+                                                            for (let i = 0; i < daftarbuku2.length; i++) {
+                                                                          if(daftarbuku2[i]==nama){
+                                                                              hasilperiksa++;
+                                                                          }else{
+                                                                              
+                                                                            // alert('belum ada');
+                                                                          }  
+                                                                    }
+                                                                // alert(hasilperiksa);
+                                                                if(hasilperiksa>0){
+                                                                            var Toast = Swal.mixin({
+                                                                                toast: true,
+                                                                                position: 'top-end',
+                                                                                showConfirmButton: false,
+                                                                                timer: 3000
+                                                                            });
+
+                                                                            Toast.fire({
+                                                                                icon: 'error',
+                                                                                title: 
+                                                                                    'Data sudah ditambahkan! '
+                                                                            });
+
+
+                                                                }else{
+                                                                    
+
+                                                                    var buku_ = {};  
+                                                                            buku_.id = response.data;  
+                                                                            buku_.buku_nama = response.buku_nama;   
+                                                                            buku_.bukukategori_nama = response.bukukategori_nama;   
+                                                                            // var ItemId = "data-" + buku_.id;  
+                                                                            var ItemId = buku_.id;  
+                                                                            localStorage.setItem(ItemId, JSON.stringify(buku_));  
+                                                                            
+
+                                                                daftarbuku2.push(nama);
+                                                                localStorage.setItem(
+                                                                    'daftarbuku', JSON
+                                                                    .stringify(
+                                                                        daftarbuku2));
+
+                                                                        var Toast = Swal.mixin({
+                                                                            toast: true,
+                                                                            position: 'top-end',
+                                                                            showConfirmButton: false,
+                                                                            timer: 3000
+                                                                        });
+
+                                                                        Toast.fire({
+                                                                            icon: 'success',
+                                                                            title: nama +
+                                                                                'Data berhasil ditambahkan!'
+                                                                        });
+ 
+                                                                        location.reload();
+                                                                }
+                                                                    }
+                                                                    
+                                                             
+                                                           
+                            }else{
+                            alert("Error")
+                            // alert(response.message) //Message come from controller
+                            }
+                            },
+                            error:function(error){
+
+                            alert('Gagal! Angka harus 1-100!') //Message come from controller
+                            console.log(error)
+                            }
+                            });
+                            });
+                            });
+    </script>
 </tr>
 @endforeach
 
 <tr>
-    <td class="text-left" colspan="5">
+    <td class="text-left" colspan="6">
         <a href="#" class="btn btn-sm  btn-danger" id="deleteAllSelectedRecord"
             onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"><i class="fas fa-trash"></i> Hapus
             Terpilih</a></td>
@@ -195,7 +293,7 @@ $message=session('status');
     <!-- Default box -->
     <div class="row">
 
-        <div class="col-12 col-md-12 col-lg-12">
+        <div class="col-12 col-md-12 col-lg-8">
 
             <div class="card">
                 <div class="card-header">
@@ -213,7 +311,7 @@ $message=session('status');
 
 
                         
-                        <form action="{{ route('admin.'.$pages.'.cari') }}" method="GET">
+                        <form action="" method="GET">
                            
                     <div class="row">
                                
@@ -262,7 +360,7 @@ $message=session('status');
         </div>
     </div>
 
-    <div class="col-12 col-md-12 col-lg-12">
+    <div class="col-12 col-md-12 col-lg-4">
 
         <div class="card">
             <div class="card-header">
@@ -283,7 +381,7 @@ $message=session('status');
 
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
-                            <form action="/admin/{{ $pages }}" method="post">
+                            <form action="/admin/buku/{{$buku->id}}/{{ $pages }}" method="post">
                                 @csrf
                                 <div class="card-header">
                                     <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Tambah
@@ -291,79 +389,28 @@ $message=session('status');
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="nama">Judul Buku</label>
-                                            <input type="text" name="nama" id="nama"
-                                                class="form-control @error('nama') is-invalid @enderror" placeholder=""
-                                                value="{{old('nama')}}" required>
-                                            @error('nama')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="penerbit">Penerbit</label>
-                                            <input type="text" name="penerbit" id="penerbit"
-                                                class="form-control @error('penerbit') is-invalid @enderror" placeholder=""
-                                                value="{{old('penerbit')}}" required>
-                                            @error('penerbit')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="tahunterbit">Tanggal Terbit</label>
-                                            <input type="text" name="tahunterbit" id="tahunterbit"
-                                                class="form-control @error('tahunterbit') is-invalid @enderror" placeholder=""
-                                                value="{{old('tahunterbit')}}" required>
-                                            @error('tahunterbit')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="isbn">ISBN </label>
-                                            <input type="text" name="isbn" id="isbn"
-                                                class="form-control @error('isbn') is-invalid @enderror" placeholder=""
-                                                value="{{old('isbn')}}" >
-                                            @error('isbn')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="bahasa">Bahasa</label>
-                                            <input type="text" name="bahasa" id="bahasa"
-                                                class="form-control @error('bahasa') is-invalid @enderror" placeholder=""
-                                                value="{{old('bahasa')}}" required>
-                                            @error('bahasa')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
+                                          </div>
                                        
-                                        {{-- <div class="form-group col-md-12 col-12">
-                                            <label>Tempat Rak Buku <code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="bukurak_nama">  
-                                                @if (old('bukurak_nama'))
-                                                <option>{{old('bukurak_nama')}}</option>                        
-                                                @endif
-                                            @foreach ($bukurak as $t)
-                                                <option>{{ $t->nama }}</option>
-                                            @endforeach
-                                            </select>
-                                        </div>  --}}
-
-                                        
                                         <div class="form-group col-md-12 col-12">
-                                            <label>DDC / Kategori Buku <code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="bukukategori_nama">  
-                                                @if (old('bukukategori_nama'))
-                                                <option>{{old('bukukategori_nama')}}</option>                        
+                                            <label>Kondisi<code>*)</code></label>
+                                            <select class="form-control form-control-lg" required name="kondisi">  
+                                                @if (old('kondisi'))
+                                                <option>{{old('kondisi')}}</option>                        
                                                 @endif
-                                            @foreach ($bukukategori as $t)
-                                                <option value="{{ $t->nama }}">{{ $t->kode }} / {{ $t->nama }}</option>
-                                            @endforeach
+                                                <option>Bagus</option>
+                                                <option>Layak</option>
+                                                <option>Tidak Layak</option>
                                             </select>
                                         </div> 
+
+                                        
                                         
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                              <span class="input-group-text">Kode Buku</span>
+                                              <span class="input-group-text">Kode Panggil</span>
                                             </div>
                                             <input type="number" name="kode" id="kode"
-                                            class="form-control @error('kode') is-invalid @enderror" placeholder="Otomatis di antara DDC"
+                                            class="form-control @error('kode') is-invalid @enderror" placeholder="Otomatis dari Kode buku dan Iterasi detail buku"
                                             value="{{old('kode')}}" required min="1" readonly>
                                         @error('kode')<div class="invalid-feedback"> {{$message}}</div>
                                         @enderror
@@ -394,6 +441,7 @@ $message=session('status');
 
         </div>
     </div>
+</div>
 </div>
 
        
