@@ -271,6 +271,7 @@ class settingsController extends Controller
             DB::table('bukudetail')->insert([
                 'buku_nama' => $db->nama,
                 'buku_kode' => $db->kode,
+                'buku_kode' => $db->kode,
                 'buku_pengarang' =>$db->pengarang,
                 'buku_penerbit' => $db->penerbit,
                 'buku_bahasa' => $db->bahasa,
@@ -282,7 +283,7 @@ class settingsController extends Controller
                 'bukukategori_ddc' => $db->bukukategori_ddc,
                 'kondisi' => $faker->randomElement(['Bagus', 'Layak','Tidak Layak']),
                 'status' => 'ada',
-                'kodepanggil' => $db->kode.'-'.$nomeridentitas,
+                // 'kodepanggil' => $db->kode.'-'.$nomeridentitas,
                 'buku_isbn' =>$db->isbn,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

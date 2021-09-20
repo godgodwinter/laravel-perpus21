@@ -105,13 +105,14 @@ $message=session('status');
                                 @csrf --}}
                               
 
-                                <form action="/admin/{{ $pages }}" method="post">
-                                    @csrf
+                                <form action="/admin/pengembalian/periksaanggota" method="get" id="formanggota">
+                                    {{-- @csrf --}}
                                     <div class="card-body">
                                         
                                         <div class="form-group">
                                             <label>Pilih Anggota :</label>
                                             <select class="form-control form-control-md" id="tags" select2 select2-hidden-accessible  name="nomeridentitas" required>
+                                                <option value="" disabled selected>Pilih Anggota</option>
                                             @php
                                             // $cekdataselect = DB::table('anggota')
                                             //     ->count();
@@ -155,6 +156,14 @@ $message=session('status');
                                    $("#tags").select2({
                                     theme: "classic"
                                     });
+
+                                    
+                                $("select#tags").change(function(e){
+                                    var selectedText = $(this).find("option:selected").val();
+                                     kode = $(this).find("option:selected").val();
+                                    //  alert(kode);
+                                    $("form#formanggota").prop('action', '/admin/pengembalian/periksaanggota/'+kode);
+                                });
                                    </script>
 
 

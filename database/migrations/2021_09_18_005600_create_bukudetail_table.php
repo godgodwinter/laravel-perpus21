@@ -29,7 +29,7 @@ class CreateBukudetailTable extends Migration
             $table->string('bukukategori_ddc')->nullable(); //dari table kategori.kode
             $table->string('kondisi')->nullable();
             $table->string('status')->nullable();
-            $table->string('kodepanggil')->nullable(); //relasi dengan ddc buku
+            // $table->string('kodepanggil')->nullable(); //relasi dengan ddc buku
             $table->timestamps();
         });
     }

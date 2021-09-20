@@ -35,11 +35,62 @@ class adminpengembaliancontroller extends Controller
         // return view('admin.beranda');
     }
     
+    // public function periksa($id)
+    // {
+    //     $jmlpinjam=DB::table('peminjaman')->where('nomeridentitas',$id)->orderBy('created_at', 'desc')->count();
+    //     if($jmlpinjam>0){
+    //         // return redirect(URL::to('/').'/admin/pengembalian/periksa/'.$id)->with('status','Data Ditemukan!')->with('tipe','success');
+    //     dd($id);
+
+    //     }else{
+    //         return redirect()->back()->with('status','Belum pernah pinjam!')->with('tipe','error');
+    //     }
+    //     // dd($id);
+    // }
+    public function periksaanggota($id)
+    {
+        if($this->checkauth('admin')==='404'){
+            return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
+        }
+        
+        $jmlpinjam=DB::table('peminjaman')->where('nomeridentitas',$id)->orderBy('created_at', 'desc')->count();
+        if($jmlpinjam<1){
+            return redirect()->back()->with('status','Belum pernah pinjam!')->with('tipe','error');
+        }else{
+
+        $jmlbelumkembali=0;
+            //ambil data
+        $datapinjam=DB::table('peminjamandetail')->where('nomeridentitas',$id)->where('statuspengembalian',null)->orderBy('created_at', 'desc')->get();
+       
+        $unique = $datapinjam->unique('brand');
+            dd($unique);
+            #WAJIB
+            $pages='pengembalian';
+            $jmldata='0';
+            $datas='0';
+    
+    
+            $datas=DB::table('pengembalian')
+            ->orderBy('nama','asc')
+            ->paginate(Fungsi::paginationjml());
+    
+            // $pengembaliankategori = DB::table('kategori')->where('prefix','tipepengembalian')->get();
+            // $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+    
+            return view('admin.pengembalian.index',compact('pages','datas','request'));
+            // return redirect(URL::to('/').'/admin/pengembalian/periksa/'.$id)->with('status','Data Ditemukan!')->with('tipe','success');
+        }
+        // dd($id);
+        // if($request->daftarbuku==null){
+        // return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');
+        // }
+    }
     public function store(Request $request)
     {
-        if($request->daftarbuku==null){
-        return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');
-        }
+        dd($request);
+        // if($request->daftarbuku==null){
+        // return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');
+        // }
     }
 
     public function storelawas(Request $request)

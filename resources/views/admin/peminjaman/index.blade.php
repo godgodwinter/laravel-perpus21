@@ -113,6 +113,7 @@ $message=session('status');
                                         <div class="form-group">
                                            <label>Pilih Buku :</label>
                                             <select class="form-control form-control-md" id="tagsbuku" select2 select2-hidden-accessible  name="nomeridentitas" required>
+                                                <option value="" disabled selected>Pilih Buku</option>
                                             @php
                                             // $cekdataselect = DB::table('anggota')
                                             //     ->count();
@@ -153,6 +154,7 @@ $message=session('status');
                                         <div class="form-group">
                                             <label>Pilih Anggota :</label>
                                             <select class="form-control form-control-md tagsbuku" id="tags" select2 select2-hidden-accessible  name="nomeridentitas" required>
+                                                <option value="" disabled selected>Pilih Anggota</option>
                                             @php
                                             // $cekdataselect = DB::table('anggota')
                                             //     ->count();

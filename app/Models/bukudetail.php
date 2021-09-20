@@ -13,6 +13,7 @@ class bukudetail extends Model
 
     protected $fillable = [
         'buku_nama',
+        'buku_kode',
         'buku_isbn',
         'buku_penerbit',
         'buku_tahunterbit',
@@ -25,6 +26,5 @@ class bukudetail extends Model
         'bukukategori_nama',
         'bukukategori_ddc',
         'status',
-        'kodepanggil',
     ];
 }

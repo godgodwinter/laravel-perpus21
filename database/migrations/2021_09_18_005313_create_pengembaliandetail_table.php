@@ -19,7 +19,8 @@ class CreatePengembaliandetailTable extends Migration
             $table->string('buku_isbn')->nullable(); //dari table kategori
             $table->string('nomeridentitas')->nullable();
             $table->string('buku_nama')->nullable();
-            $table->string('buku_kodepanggil')->nullable();
+            $table->string('buku_kode')->nullable();
+            // $table->string('buku_kodepanggil')->nullable();
             $table->string('buku_penerbit')->nullable();
             $table->string('buku_tahunterbit')->nullable();
             $table->string('buku_pengarang')->nullable();
