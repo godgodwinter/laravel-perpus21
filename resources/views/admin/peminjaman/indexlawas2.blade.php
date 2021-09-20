@@ -42,8 +42,9 @@ $message=session('status');
          
     @if((session('clearlocal')=='yes'))
    
-        localStorage.clear(); 
-        $("#tbody").empty();
+   localStorage.removeItem("daftarbuku");
+                                       inputdaftarbuku.value = '';
+                                       $("#tbody").empty();
    @endif
    
     });
@@ -443,7 +444,8 @@ $message=session('status');
                                     //                 data_i = JSON.parse(localStorage.getItem(daftarbuku[i]));
                                     //         // data.i = JSON.parse(localStorage.getItem('data-'+1234));
                                             $("#forminputan").append(
-                                            '<input name="daftarbuku['+i+'][kode]" type="hidden" id="inputdaftarbuku" value="'+buku.kode+'" /><input name="daftarbuku['+i+'][jml]" type="hidden" id="inputdaftarbuku" value="'+buku.jml+'" />');
+                                            '<input name="daftarbuku" type="text" id="inputdaftarbuku" value="' +
+                                            buku.kode + '" />');
 
                                                                     
                                         $("#tbody").append(

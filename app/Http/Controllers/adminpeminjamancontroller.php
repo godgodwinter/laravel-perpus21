@@ -36,9 +36,89 @@ class adminpeminjamancontroller extends Controller
 
     public function store(Request $request)
     {
+        $kodetrans=base64_encode(date('YmdHis'));
+        $decodekodetrans=base64_decode($kodetrans);
+        
+        $dataanggota=DB::table('anggota')->where('nomeridentitas',$request->nomeridentitas)->first();
+
+        
+        $jaminan_nama=$request->nomeridentitas;
+        if($request->jaminan_nama!=null){
+            $jaminan_nama=$request->jaminan_nama;
+        }
+        $tgl_pinjam=date('Y-m-d');
+        $tgl_harus_kembali=Fungsi::manipulasiTanggal($tgl_pinjam,Fungsi::defaultmaxharipinjam(),'days');
+
+        // dd($request->daftarbuku);
         if($request->daftarbuku==null){
         return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');
         }
+
+        // dd($request->daftarbuku);
+        foreach($request->daftarbuku as $db){
+            $kode=$db['kode'];
+            $jml=$db['jml'];
+        }
+        
+            // 1.ambil data buku
+                $databuku=DB::table('buku')->where('kode',$kode)->first();
+                
+            // 2. insert peminjaman berdasarkan dataanggota
+                DB::table('peminjaman')->insert([
+                    'kodetrans' => $kodetrans,
+                    'nama' => $dataanggota->nama,
+                    'nomeridentitas' =>$request->nomeridentitas,
+                    'jaminan_tipe' => $request->jaminan_tipe,
+                    'jaminan_nama' => $jaminan_nama,
+                    'tgl_pinjam' => $tgl_pinjam,
+                    'tgl_harus_kembali' =>$tgl_harus_kembali,
+                    'denda' =>Fungsi::defaultdenda(),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+            // 3. ulangi sesuai jml buku
+            // 4. insert peminjamandetail
+            for($i=0;$i<$jml;$i++){
+                $cek=DB::table('bukudetail')->where('status','ada')->where('buku_kode',$databuku->kode)->skip(0)->take(1)->count();
+                // dd($cek,($jml-$i));
+                $datas=DB::table('bukudetail')->where('status','ada')->where('buku_kode',$databuku->kode)->skip(0)->take(1)->first();
+                // dd($kodetrans,$databukudetail,$request->daftarbuku,$db,$db['kode'],$kode,$jml,$databuku);
+                // foreach($databukudetail as $datas){
+             if($cek>0){       
+            DB::table('peminjamandetail')->insert([
+                'kodetrans' => $kodetrans,
+                'buku_isbn' => $datas->buku_isbn,
+                'nomeridentitas' =>$request->nomeridentitas,
+                'buku_nama' => $datas->buku_nama,
+                'buku_penerbit' => $datas->buku_penerbit,
+                'buku_tahunterbit' => $datas->buku_tahunterbit,
+                'buku_pengarang' => $datas->buku_pengarang,
+                'buku_tempatterbit' => $datas->buku_tempatterbit,
+                'buku_bahasa' => $datas->buku_bahasa,
+                // 'bukurak_nama' => $datas->bukurak_nama,
+                'bukukategori_nama' => $datas->bukukategori_nama,
+                'bukukategori_ddc' => $datas->bukukategori_ddc,
+                'jaminan_tipe' => $request->jaminan_tipe,
+                'jaminan_nama' => $jaminan_nama,
+                'tgl_pinjam' => $tgl_pinjam,
+                'tgl_harus_kembali' =>$tgl_harus_kembali,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+
+                    bukudetail::where('id',$datas->id)
+                    ->update([
+                        'status'     =>  'dipinjam',
+                       'updated_at'=>date("Y-m-d H:i:s")
+                    ]);
+                }
+                // dd($kodetrans,$databukudetail,$request->daftarbuku,$db,$db['kode'],$kode,$jml,$databuku);
+            // }
+
+        }
+        
+        // dd($request->daftarbuku,$db);
+        return redirect()->back()->with('status','Proses Peminjaman Berhasil!')->with('tipe','success')->with('clearlocal','yes');
 
     }
     public function storelawas(Request $request)
@@ -137,7 +217,8 @@ class adminpeminjamancontroller extends Controller
     {
         $jmltersedia=DB::table('bukudetail')->where('buku_kode',$id)->where('status','ada')->count();
         $data=DB::table('buku')->where('kode',$id)->first();
-
+        // $datsa=DB::table('buku')->get();
+        // return $datsa;
         return response()->json([
             'success' => true,
             'message' => $jmltersedia,
