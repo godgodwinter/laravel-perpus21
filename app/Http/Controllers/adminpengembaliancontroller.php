@@ -37,8 +37,121 @@ class adminpengembaliancontroller extends Controller
     
     public function kembalikan(Request $request)
     {
-        dd($request);
-        // 1. ambil
+        
+        $kodetrans=base64_encode(date('YmdHis'));
+        $decodekodetrans=base64_decode($kodetrans);
+
+        $datapinjam=DB::table('peminjamandetail')->where('nomeridentitas',$request->nomeridentitas)->where('statuspengembalian',null)->orderBy('created_at', 'desc')->get();
+       
+        $datas = $datapinjam->unique('buku_kode');
+        $dataanggota=DB::table('anggota')->where('nomeridentitas',$request->nomeridentitas)->first();
+        // $loop=1;
+        $dendakeseluruhan=0;
+        foreach($datas as $data){
+            $nomeridentitas=$data->nomeridentitas;
+            $buku_kode=$data->buku_kode;
+            $jml=$request->datas[$data->buku_kode][$dataanggota->nomeridentitas];
+            $denda=Fungsi::periksadenda($data->tgl_harus_kembali);
+            $dendatotalperbuku=$denda*$jml;
+
+            
+            $databuku=DB::table('buku')->where('kode',$buku_kode)->first();
+            // dd($dendatotalperbuku);
+                for($i=0;$i<$jml;$i++){
+                    // $cek=DB::table('peminjamandetail')->where('status','dipinjam')->where('buku_kode',$databuku->kode)->where('nomeridentitas',$nomeridentitas)->skip(0)->take(1)->count();
+                    
+                        
+            // 3.update data bukudetail ,,status
+                    $cek=DB::table('bukudetail')->where('status','dipinjam')->where('buku_kode',$databuku->kode)->skip(0)->take(1)->count();
+                    $ambil=DB::table('bukudetail')->where('status','dipinjam')->where('buku_kode',$databuku->kode)->skip(0)->take(1)->first();
+                    // dd($cek,$ambil);
+                    if($cek>0){    
+                            bukudetail::where('id',$ambil->id)
+                            ->update([
+                                'status'     =>  'ada',
+                            'updated_at'=>date("Y-m-d H:i:s")
+                            ]);
+                        }
+                        
+            // 4.insert data pengembaliandetail 
+                    $cek=DB::table('peminjamandetail')->where('statuspengembalian',null)->where('buku_kode',$databuku->kode)->where('nomeridentitas',$nomeridentitas)->skip(0)->take(1)->count();
+                    $ambil=DB::table('peminjamandetail')->where('statuspengembalian',null)->where('buku_kode',$databuku->kode)->where('nomeridentitas',$nomeridentitas)->skip(0)->take(1)->first();
+                    // dd($cek,$ambil);
+                    if($cek>0){    
+                        DB::table('pengembaliandetail')->insert([
+                            'kodetrans' => $kodetrans,
+                            'buku_isbn' => $ambil->buku_isbn,
+                            'nomeridentitas' =>$nomeridentitas,
+                            'buku_nama' => $ambil->buku_nama,
+                            'buku_kode' => $ambil->buku_kode,
+                            'buku_penerbit' => $ambil->buku_penerbit,
+                            'buku_tahunterbit' => $ambil->buku_tahunterbit,
+                            'buku_pengarang' => $ambil->buku_pengarang,
+                            'buku_tempatterbit' => $ambil->buku_tempatterbit,
+                            'buku_bahasa' => $ambil->buku_bahasa,
+                            // 'bukurak_nama' => $ambil->bukurak_nama,
+                            'bukukategori_nama' => $ambil->bukukategori_nama,
+                            'bukukategori_ddc' => $ambil->bukukategori_ddc,
+                            'jaminan_tipe' => $ambil->jaminan_tipe,
+                            'jaminan_nama' => $ambil->jaminan_nama,
+                            'tgl_pinjam' => $ambil->tgl_pinjam,
+                            'tgl_harus_kembali' =>$ambil->tgl_harus_kembali,
+                            'tgl_dikembalikan' =>date('Y-m-d'),
+                            'totaldenda' =>$denda,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                        }
+                        
+            // 2.update data peminjamandetail ,,status
+                    $cek=DB::table('peminjamandetail')->where('statuspengembalian',null)->where('buku_kode',$databuku->kode)->where('nomeridentitas',$nomeridentitas)->skip(0)->take(1)->count();
+                    $ambil=DB::table('peminjamandetail')->where('statuspengembalian',null)->where('buku_kode',$databuku->kode)->where('nomeridentitas',$nomeridentitas)->skip(0)->take(1)->first();
+                    // dd($cek,$ambil);
+                    if($cek>0){    
+                            peminjamandetail::where('id',$ambil->id)
+                            ->update([
+                                // 'denda'     =>  Fungsi::defaultdenda(),
+                                'statuspengembalian'     =>  'ada',
+                            'updated_at'=>date("Y-m-d H:i:s")
+                            ]);
+                        }
+                        
+
+                        $dendakeseluruhan+=$denda;
+                        // $loop++;
+                  }
+                  
+                   
+
+
+        }
+        
+            // 5.inset data pengembalian
+            DB::table('pengembalian')->insert([
+                'kodetrans' => $kodetrans,
+                'nama' => $dataanggota->nama,
+                'nomeridentitas' =>$request->nomeridentitas,
+                'jaminan_tipe' => $ambil->jaminan_tipe,
+                'jaminan_nama' => $ambil->jaminan_nama,
+                'tgl_pinjam' => $ambil->tgl_pinjam,
+                'tgl_harus_kembali' =>$ambil->tgl_harus_kembali,
+                'denda' =>Fungsi::defaultdenda(),
+                'totaldendaakhir' =>$dendakeseluruhan,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        // dd($dataanggota,$datas,$request->datas,$dendakeseluruhan);
+        
+        return redirect(URL::to('/').'/admin/pengembalian')->with('status','Proses pengembalian berhasil dilakukan!')->with('tipe','success')->with('icon','fas fa-trash');
+        // 1. ambil data request
+            // ulangi perbuku
+            //ambil jmlah yang dikembalikan
+            // 2.update data peminjamandetail ,,status
+            // 3.update data bukudetail ,,status
+            // 4.insert data pengembaliandetail 
+                    // a. ambil data peminjaman tgl_harus_kembali
+                    // b. hitung denda dan denta total 
+            // 5.inset data pengembalian
 
     }
     public function periksaanggota(Request $request)

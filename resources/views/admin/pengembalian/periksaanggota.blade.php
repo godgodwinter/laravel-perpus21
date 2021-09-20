@@ -122,8 +122,9 @@ $message=session('status');
                                 <form action="/admin/pengembalian/kembelikan" method="post">
                                 <tbody id="tbody">
                                     {{-- {{dd($datas)}} --}}
-                                    @foreach ($datas as $data)
                                     @csrf
+                                    <input type="hidden" value="{{$dataanggota->nomeridentitas}}" name="nomeridentitas" >
+                                    @foreach ($datas as $data)
                                         <tr>
                                             <td class="text-center">{{(($loop->index)+1)}}</td>
                                             <td>{{$data->buku_kode}}</td>
@@ -134,7 +135,7 @@ $message=session('status');
                                             @endphp
                                             <td class="text-center">
                                                 {{-- {{$jmldatapinjam}} --}}
-                                                <input type="number" name="datas[{{($loop->index)+1}}][{{$data->buku_kode}}][{{$data->nomeridentitas}}]" class="form-control-plaintext form-control2 no-border text-center btn btn-light" id="datas{{$data->buku_kode}}" min=0 max="{{$jmldatapinjam}}" value="{{ $jmldatapinjam }}">
+                                                <input type="number" name="datas[{{$data->buku_kode}}][{{$data->nomeridentitas}}]" class="form-control-plaintext form-control2 no-border text-center btn btn-light" id="datas{{$data->buku_kode}}" min=0 max="{{$jmldatapinjam}}" value="{{ $jmldatapinjam }}">
                                             </td>
                                             <td>{{$data->bukukategori_nama}}</td>
                                             <td>{{Fungsi::tanggalindo($data->tgl_pinjam)}}</td>
