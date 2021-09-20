@@ -50,7 +50,7 @@ $message=session('status');
 <tr>
     <th width="10%" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
-        <th> Kode Panggil </th>
+        {{-- <th> Kode Panggil </th> --}}
     <th> Kondisi </th>
     <th> Status </th>
     <th width="200px" class="text-center">Aksi</th>
@@ -97,19 +97,19 @@ $message=session('status');
 <tr id="sid{{ $data->id }}">
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
-    <td> {{ $data->kodepanggil }} 
+    {{-- <td> {{ $data->kodepanggil }}  --}}
     <input type="hidden" value="{{ $data->kodepanggil }}" name="{{ $data->kodepanggil }}">
     </td>
     <td>{{ $data->kondisi }}</td>
     <td>{{ ucfirst($data->status) }}</td>
 
     <td class="text-center">
-        @if ($data->status=='ada')
+        {{-- @if ($data->status=='ada')
         <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Masukkan keranjang!" id="isikan{{ $data->kodepanggil }}"><i class="fas fa-shopping-cart"></i> </button>
         @else
         <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Telah dipinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button>
             
-        @endif
+        @endif --}}
 
         <x-button-edit link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
         <x-button-delete link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />

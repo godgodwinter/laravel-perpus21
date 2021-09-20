@@ -90,6 +90,7 @@ Route::get('/admin/pinjambuku', 'App\Http\Controllers\adminpeminjamancontroller@
 Route::get('/admin/peminjaman/cari', 'App\Http\Controllers\adminpeminjamancontroller@cari')->name('admin.peminjaman.cari');
 Route::post('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@store')->name('admin.peminjaman.store');
 Route::get('/admin/peminjaman/periksa/{id}', 'App\Http\Controllers\adminpeminjamancontroller@periksa')->name('admin.peminjaman.periksa');
+Route::get('/admin/peminjaman/periksabuku/{id}', 'App\Http\Controllers\adminpeminjamancontroller@periksabuku')->name('admin.peminjaman.periksabuku');
 Route::get('/admin/bukupinjam', 'App\Http\Controllers\adminpeminjamancontroller@indexbukupinjam')->name('admin.bukupinjam');
 Route::get('/admin/bukupinjam/cari', 'App\Http\Controllers\adminpeminjamancontroller@caribukupinjam')->name('admin.bukupinjam.cari');
 Route::get('/admin/bukupinjam/{id}/bukudetail', 'App\Http\Controllers\adminpeminjamancontroller@indexbukupinjamdetail')->name('admin.bukupinjam.bukudetail');

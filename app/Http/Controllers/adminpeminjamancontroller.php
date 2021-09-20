@@ -39,6 +39,13 @@ class adminpeminjamancontroller extends Controller
         if($request->daftarbuku==null){
         return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');
         }
+
+    }
+    public function storelawas(Request $request)
+    {
+        if($request->daftarbuku==null){
+        return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');
+        }
         $bukubuku=$request->daftarbuku;
         $jml=Fungsi::periksaarray($bukubuku);
         // if()
@@ -126,6 +133,24 @@ class adminpeminjamancontroller extends Controller
 
     }
     
+    public function periksabuku($id)
+    {
+        $jmltersedia=DB::table('bukudetail')->where('buku_kode',$id)->where('status','ada')->count();
+        $data=DB::table('buku')->where('kode',$id)->first();
+
+        return response()->json([
+            'success' => true,
+            'message' => $jmltersedia,
+            // 'status' => $data->status,
+            'nama' => $data->nama,
+            'pengarang' => $data->pengarang,
+            'penerbit' => $data->penerbit,
+            'isbn' => $data->isbn,
+            'bukukategori_nama' => $data->bukukategori_nama,
+            'data'    => $id  
+        ], 200);
+
+    }
     public function periksa($id)
     {
         
