@@ -151,6 +151,8 @@ Route::post('/admin/settings/cleartemp', 'App\Http\Controllers\prosesController@
 //upload
 Route::post('admin/databuku/upload/{buku}', 'App\Http\Controllers\prosesController@uploadbuku')->name('admin.buku.upload');
 Route::delete('admin/databuku/upload/{buku}', 'App\Http\Controllers\prosesController@uploadbukudelete')->name('admin.buku.upload.delete');
+Route::post('admin/dataanggota/upload/{anggota}', 'App\Http\Controllers\prosesController@uploadanggota')->name('admin.anggota.upload');
+Route::delete('admin/dataanggota/upload/{anggota}', 'App\Http\Controllers\prosesController@uploadanggotadelete')->name('admin.anggota.upload.delete');
 
 // Route::post('/checkemail',['uses'=>'PagesController@checkEmail']);
 // Route::post('/checkemail', 'App\Http\Controllers\PagesController@checkEmail')->name('checkEmail');

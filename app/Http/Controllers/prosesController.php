@@ -6,6 +6,7 @@ use App\Exports\Exportbuku;
 use App\Exports\Exportbukurak;
 use App\Imports\Importbukurak;
 use App\Imports\Importbuku;
+use App\Models\anggota;
 use App\Models\buku;
 use App\Models\settings;
 use App\Models\siswa;
@@ -157,6 +158,66 @@ class prosesController extends Controller
         return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
 	}
 
+	
+	public function uploadanggota(Request $request,anggota $anggota){
+        // dd($request);
+		$this->validate($request, [
+			'file' => 'required',
+		]);
+		$namafilebaru=$anggota->nomeridentitas;
+ 
+		// menyimpan data file yang diupload ke variabel $file
+		$file = $request->file('file');
+ 
+      	        // nama file
+		echo 'File Name: '.$file->getClientOriginalName();
+		echo '<br>';
+ 
+      	        // ekstensi file
+		echo 'File Extension: '.$file->getClientOriginalExtension();
+		// dd()
+		echo '<br>';
+ 
+      	        // real path
+		echo 'File Real Path: '.$file->getRealPath();
+		echo '<br>';
+ 
+      	        // ukuran file
+		echo 'File Size: '.$file->getSize();
+		echo '<br>';
+ 
+      	        // tipe mime
+		echo 'File Mime Type: '.$file->getMimeType();
+ 
+      	        // isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'storage/gambar';
+ 
+                // upload file
+		$file->move($tujuan_upload,"gambar/".$namafilebaru.".jpg");
+
+
+		anggota::where('nomeridentitas',$anggota->nomeridentitas)
+		->update([
+			'gambar' => "gambar/".$namafilebaru.".jpg",
+		'updated_at'=>date("Y-m-d H:i:s")
+		]);
+
+        return redirect()->back()->with('status','Photo berhasil Diupload!')->with('tipe','success')->with('icon','fas fa-edit');
+
+	}
+	
+	public function uploadanggotadelete(Request $request,anggota $anggota){
+		
+        // dd($request);
+        Storage::disk('public')->delete($request->namaphoto);
+		anggota::where('id',$anggota->id)
+		->update([
+			'gambar' => "",
+			'updated_at'=>date("Y-m-d H:i:s")
+		]);
+        return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
+	}
+
 	public function uploadlogo(Request $request,settings $settings){
         // dd($request);
 		$this->validate($request, [
@@ -204,17 +265,6 @@ class prosesController extends Controller
 
 	}
 
-	public function uploadsiswadelete(Request $request,siswa $siswa){
-		
-        // dd($request);
-        Storage::disk('public')->delete($request->namaphoto);
-		User::where('nomerinduk',$siswa->nis)
-		->update([
-			'profile_photo_path' => "",
-		'updated_at'=>date("Y-m-d H:i:s")
-		]);
-        return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
-	}
 
 	public function uploadlogodelete(Request $request,settings $settings){
 		
@@ -224,65 +274,6 @@ class prosesController extends Controller
 		->update([
 			'sekolahlogo' => "",
 		'updated_at'=>date("Y-m-d H:i:s")
-		]);
-        return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
-	}
-
-
-	public function uploadtagihanatur(Request $request,tagihanatur $tagihanatur){
-        // dd($request);
-		$this->validate($request, [
-			'file' => 'required',
-		]);
-		$namafilebaru=$tagihanatur->id;
- 
-		// menyimpan data file yang diupload ke variabel $file
-		$file = $request->file('file');
- 
-      	        // nama file
-		echo 'File Name: '.$file->getClientOriginalName();
-		echo '<br>';
- 
-      	        // ekstensi file
-		echo 'File Extension: '.$file->getClientOriginalExtension();
-		// dd()
-		echo '<br>';
- 
-      	        // real path
-		echo 'File Real Path: '.$file->getRealPath();
-		echo '<br>';
- 
-      	        // ukuran file
-		echo 'File Size: '.$file->getSize();
-		echo '<br>';
- 
-      	        // tipe mime
-		echo 'File Mime Type: '.$file->getMimeType();
- 
-      	        // isi dengan nama folder tempat kemana file diupload
-		$tujuan_upload = 'storage/gambar/scan';
- 
-                // upload file
-		$file->move($tujuan_upload,$namafilebaru.".jpg");
-
-
-		tagihanatur::where('id',$tagihanatur->id)
-		->update([
-			'gambar' => $namafilebaru.".jpg",
-		'updated_at'=>date("Y-m-d H:i:s")
-		]);
-
-        return redirect()->back()->with('status','Photo berhasil Diupload!')->with('tipe','success')->with('icon','fas fa-edit');
-
-	}
-	public function uploadtagihanaturdelete(Request $request,tagihanatur $tagihanatur){
-		
-        // dd($request);
-        Storage::disk('public')->delete($request->namaphoto);
-		tagihanatur::where('id',$tagihanatur->id)
-		->update([
-			'gambar' => "",
-			'updated_at'=>date("Y-m-d H:i:s")
 		]);
         return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
 	}
