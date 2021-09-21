@@ -41,6 +41,13 @@ class pagesController extends Controller
         return view('admin.testing.barcode',compact('pages'
     ));
     }
+    
+    public function tail()
+    {
+        $pages='beranda';
+        return view('testing.tail',compact('pages'
+    ));
+    }
 
 
 

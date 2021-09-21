@@ -197,6 +197,7 @@ Route::get('raport/{nis}', 'App\Http\Controllers\raportcontroller@show')->name('
 Route::get('raport/{nis}/cetak', 'App\Http\Controllers\raportcontroller@cetak')->name('raport.cetak');
 
 Route::get('/404', 'App\Http\Controllers\adminberandaController@notfound');
+Route::get('/tail', 'App\Http\Controllers\pagesController@tail');
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');
