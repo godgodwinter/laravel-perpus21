@@ -197,7 +197,7 @@ class adminpengembaliancontroller extends Controller
         if($jmlpinjam<1){
             return redirect(URL::to('/').'/admin/pengembalian')->with('status','Belum pernah pinjam!')->with('tipe','error');
         }else{
-            return redirect(URL::to('/').'/admin/pengembalian/periksaanggota/'.$request->nomeridentitas)->with('status','Belum pernah pinjam!')->with('tipe','error');
+            return redirect(URL::to('/').'/admin/pengembalian/periksaanggota/'.$request->nomeridentitas)->with('status','Data ditemukan!')->with('tipe','success');
 
         $jmlbelumkembali=0;
             //ambil data
