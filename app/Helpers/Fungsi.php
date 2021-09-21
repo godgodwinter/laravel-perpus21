@@ -11,6 +11,20 @@ class Fungsi {
     //     return (isset($user->username) ? $user->username : '');
     // }
     
+    public static function periksaterlambat($inputan){
+        
+        $hitungketerlambatan = strtotime($inputan)-strtotime(Carbon::now());
+        $selisih = $hitungketerlambatan / 86400;
+        // jika selisih negatif maka terlambat
+        if($selisih<0){
+        $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($inputan);
+        $telat=$DeferenceInDays;
+        }else{
+            $telat=0;
+        }
+
+        return $telat;
+    }
     public static function periksadenda($inputan){
         
         $hitungketerlambatan = strtotime($inputan)-strtotime(Carbon::now());
@@ -24,6 +38,12 @@ class Fungsi {
         }
 
         return $denda;
+    }
+    
+    public static function tanggalgaring($inputan){
+        $bulanindo='Januari';
+        $str=explode("-",$inputan);
+        return $str[2]."/".$str[1]."/".$str[0];
     }
     public static function tanggalindo($inputan){
         $bulanindo='Januari';
