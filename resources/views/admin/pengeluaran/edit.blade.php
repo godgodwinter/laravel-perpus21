@@ -2,11 +2,11 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Pemasukan')
+@section('title','pengeluaran')
 @section('linkpages')
 data{{ $pages }}
 @endsection
-@section('halaman','pemasukan')
+@section('halaman','pengeluaran')
 
 @section('csshere')
 @endsection
@@ -114,7 +114,8 @@ $message=session('status');
                             <option>{{$datas->kategori_nama}}</option>                        
                             @endif
                             <option>Umum</option>
-                            <option>Dana Hibah</option>
+                            <option>Perbaikan</option>
+                            <option>Kegiatan Sekolah</option>
                         </select>
                     </div> 
 

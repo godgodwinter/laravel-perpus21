@@ -32,6 +32,31 @@ class adminperalatancontroller extends Controller
         return view('admin.peralatan.index',compact('pages','datas','peralatankategori','kondisi','request'));
         // return view('admin.beranda');
     }
+    public function cari(Request $request)
+    {
+        // dd($request);
+        $cari=$request->cari;
+
+        #WAJIB
+        $pages='peralatan';
+        $jmldata='0';
+        $datas='0';
+
+
+    $datas=DB::table('peralatan')
+    // ->where('nis','like',"%".$cari."%")
+    ->where('nama','like',"%".$cari."%")
+    ->orWhere('kondisi','like',"%".$cari."%")
+    ->orWhere('kategori_nama','like',"%".$cari."%")
+    ->paginate(Fungsi::paginationjml());
+
+
+
+    $peralatankategori = DB::table('kategori')->where('prefix','tipeperalatan')->get();
+    $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+
+    return view('admin.peralatan.index',compact('pages','datas','peralatankategori','kondisi','request'));
+    }
     public function store(Request $request)
     {
         // dd($request);

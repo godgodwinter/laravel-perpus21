@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class pemasukanresource extends JsonResource
+class peralatanresource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,8 @@ class pemasukanresource extends JsonResource
             'id'=>$this->id,
             'nama'=>$this->nama,
             'kategori_nama'=>$this->kategori_nama,
-            'nominal'=>$this->nominal,
-            'tglbayar'=>$this->tglbayar,
-            'catatan'=>$this->catatan,
+            'tgl_masuk'=>$this->tgl_masuk,
+            'kondisi'=>$this->kondisi,
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,
         ];

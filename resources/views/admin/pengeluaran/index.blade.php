@@ -2,7 +2,7 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Pemasukan')
+@section('title','pengeluaran')
 @section('linkpages')
 data{{ $pages }}
 @endsection
@@ -73,7 +73,7 @@ $message=session('status');
             });
 
             $.ajax({
-                url: "{{ route('admin.pemasukan.multidel') }}",
+                url: "{{ route('admin.pengeluaran.multidel') }}",
                 type: "DELETE",
                 data: {
                     _token: $("input[name=_token]").val(),
@@ -274,7 +274,8 @@ $message=session('status');
                                                 <option>{{old('kategori_nama')}}</option>                        
                                                 @endif
                                                 <option>Umum</option>
-                                                <option>Dana Hibah</option>
+                                                <option>Perbaikan</option>
+                                                <option>Kegiatan Sekolah</option>
                                             </select>
                                         </div> 
 

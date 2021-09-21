@@ -17,10 +17,10 @@ class pengeluaranresource extends JsonResource
         return[
             'id'=>$this->id,
             'nama'=>$this->nama,
-            'nominal'=>$this->nominal,
             'kategori_nama'=>$this->kategori_nama,
-            'catatan'=>$this->catatan,
+            'nominal'=>$this->nominal,
             'tglbayar'=>$this->tglbayar,
+            'catatan'=>$this->catatan,
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,
         ];
