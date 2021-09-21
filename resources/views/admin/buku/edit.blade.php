@@ -91,7 +91,9 @@ $message=session('status');
     <div class="card-body">
         <div class="row">
             
-      <div class="col-12 col-md-12 col-lg-12">
+
+            
+      <div class="col-8 col-md-8 col-lg-8">
         <div class="card"> 
           
               <div class="row">
@@ -99,12 +101,12 @@ $message=session('status');
               
                 {{-- <span class="btn btn-icon btn-light ml-4"><i class="fas fa-feather"></i> EDIT {{ Str::upper($pages) }}</span> --}}
 
-            
+                <div class="form-group col-md-6 col-6 ml-6">  
                 <form method="post" action="/admin/databuku/upload/{{ $datas->id }}" enctype="multipart/form-data">
                   {{ csrf_field() }}
                   
-
-                  <div class="form-group col-md-6 col-6 ml-6">      
+                
+ 
                     <div class="col-lg-8 d-flex align-items-stretch mb-4">
 
                 @if($datas->gambar!='')
@@ -118,7 +120,11 @@ $message=session('status');
 
                 @endif
 
+               
                  </div>
+                 
+
+                 
                 {{-- <img alt="image" src="{{ asset("assets/") }}/img/products/product-3-50.png" class="rounded-circle profile-widget-picture"> --}}
                     <label for="file">Pilih Photo <code>*)</code></label>
                     <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" required>
@@ -140,12 +146,28 @@ $message=session('status');
                   </form>
                   <a href="{{ route('admin.'.$pages) }}" class="btn btn-icon btn-dark ml-3"> <i class="fas fa-backward"></i> Batal</a>
                   </div>
-                  </div>
 
+                  
+                  <br>
+                  <br>
+                  <br>
+                  {!! DNS1D::getBarcodeHTML($datas->kode, 'C39') !!}</br>
+             {{-- {!! DNS1D::getBarcodeHTML($datas->kode, 'PHARMA') !!}</br> --}}
 
+                </div>
                 </div>
                 
             </div>
+            </div>
+            </div>
+            <div class="col-4 col-md-4 col-lg-4">
+                <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/admin/peminjaman/pengembalian/'.$datas->kode), 'QRCODE')}}" alt="barcode" width="50%"/>
+               
+       
+        
+              </div>
+
+
 
     <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
