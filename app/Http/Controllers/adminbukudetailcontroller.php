@@ -38,6 +38,36 @@ class adminbukudetailcontroller extends Controller
         // return view('admin.beranda');
     }
 
+    public function cari(Request $request,buku $id)
+    {
+        
+        $buku=$id;
+        // dd($request);
+        $cari=$request->cari;
+
+        #WAJIB
+        $pages='bukudetail';
+        $jmldata='0';
+        $datas='0';
+
+
+    $datas=DB::table('bukudetail')
+    // ->where('nis','like',"%".$cari."%")
+    ->where('kondisi','like',"%".$cari."%")
+    ->where('buku_kode',$id->kode)
+    ->orWhere('status','like',"%".$cari."%")
+    ->where('buku_kode',$id->kode)
+    ->paginate(Fungsi::paginationjml());
+
+
+
+    // $bukurak = DB::table('bukurak')->get();= DB::table('bukurak')->get();
+        $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+        return view('admin.buku.bukudetail',compact('pages'
+        // ,'bukurak'
+        ,'bukukategori','datas','buku','request'));
+    }
     public function store(Request $request,buku $id)
     {
         // dd($request);

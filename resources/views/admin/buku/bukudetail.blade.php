@@ -311,7 +311,7 @@ $.ajax({
 
 
                         
-                        <form action="" method="GET">
+                        <form action="{{url("/admin/buku/".$buku->id."/databukudetail/cari")}}" method="GET">
                            
                     <div class="row">
                                
