@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="{{ asset("assets/") }}/dist/css/adminlte.min.css">
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
-integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
+integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xgit Zd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
 crossorigin="anonymous"></script>
   @yield('csshere')
 </head>
@@ -286,19 +286,19 @@ crossorigin="anonymous"></script>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ asset("assets/") }}/index.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-users"></i>
                   <p>Laporan Pengunjung</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ asset("assets/") }}/index2.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-user-clock"></i>
                   <p>Laporan Peminjaman</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ asset("assets/") }}/index2.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-money-check-alt"></i>
                   <p>Laporan Keuangan</p>
                 </a>
