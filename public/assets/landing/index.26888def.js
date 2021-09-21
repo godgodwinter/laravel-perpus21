@@ -59,17 +59,11 @@ i.data("mainState", (() => ({
         label: "ADMIN",
         link: "/dashboard"
     }, {
-        label: "GURU",
-        link: "/dashboard"
+        label: "KATALOG",
+        link: "/katalog"
     }, {
-        label: "KEPSEK",
-        link: "/dashboard"
-    }, {
-        label: "SISWA",
-        link: "/siswa/tagihansiswa"
-    }, {
-        label: "WALI MURID",
-        link: "/dashboard"
+        label: "ANGGOTA",
+        link: "/anggota"
     }],
     handelMouseEnter: e => {
         n.to(e.querySelector(".underline-link"), {

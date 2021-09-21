@@ -48,6 +48,12 @@ class pagesController extends Controller
         return view('testing.tail',compact('pages'
     ));
     }
+    public function landing()
+    {
+        $pages='beranda';
+        return view('testing.landing',compact('pages'
+    ));
+    }
 
 
 
