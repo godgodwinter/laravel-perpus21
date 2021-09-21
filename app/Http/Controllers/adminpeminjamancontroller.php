@@ -35,6 +35,35 @@ class adminpeminjamancontroller extends Controller
         // return view('admin.beranda');
     }
 
+    public function invoicepeminjamanperiksa(Request $request)
+    {
+        // dd($request);
+        return redirect(URL::to('/').'/admin/peminjaman/'.$request->kodetrans)->with('status','Data ditemukan!')->with('tipe','success')->with('icon','fas fa-trash');
+
+    }
+    public function invoicepeminjaman(Request $request)
+    {
+        if($this->checkauth('admin')==='404'){
+            return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
+        }
+
+        #WAJIB
+        $pages='peminjaman';
+        $jmldata='0';
+        $datas='0';
+
+
+        $datas=DB::table('peminjaman')
+        ->orderBy('created_at','desc')
+        ->paginate(Fungsi::paginationjml());
+
+        // $peminjamankategori = DB::table('kategori')->where('prefix','tipepeminjaman')->get();
+        // $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+
+        return view('admin.peminjaman.invoicepeminjaman',compact('pages','datas','request'));
+        // return view('admin.beranda');
+    }
+
     public function invoice(Request $request,$id)
     {
         $datapinjam=DB::table('peminjaman')

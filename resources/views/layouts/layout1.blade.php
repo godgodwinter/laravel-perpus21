@@ -262,13 +262,13 @@ crossorigin="anonymous"></script>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ asset("assets/") }}/index.html" class="nav-link">
+                <a href="{{route('admin.peminjaman.invoicepeminjaman')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Peminjaman</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ asset("assets/") }}/index2.html" class="nav-link">
+                <a href="{{route('admin.pengembalian.invoicepengembalian')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pengembalian</p>
                 </a>

@@ -17,15 +17,15 @@ class importbukudetail implements ToModel, WithHeadingRow
 
     public function model(array $data)
     {
-        $datas=DB::table('bukudetail')
-        ->where('created_at',$data['created_at'])
-        ->where('status',$data['status'])
-        ->where('kondisi',$data['kondisi'])
-        ->where('buku_kode',$data['buku_kode'])
-        ->where('buku_nama',$data['buku_nama'])
-        ->count();
+    //     $datas=DB::table('bukudetail')
+    //     ->where('created_at',$data['created_at'])
+    //     ->where('status',$data['status'])
+    //     ->where('kondisi',$data['kondisi'])
+    //     ->where('buku_kode',$data['buku_kode'])
+    //     ->where('buku_nama',$data['buku_nama'])
+    //     ->count();
     
-    if ($datas<1) {
+    // if ($datas<1) {
 
        DB::table('bukudetail')->insert(
         array(
@@ -44,17 +44,17 @@ class importbukudetail implements ToModel, WithHeadingRow
                 'created_at' => $data['created_at'], 
                 'updated_at' => $data['updated_at'], 
         ));
-        }else{
+        // }else{
 
-        // kelas::where('nama',$data['nama'])
-        // ->where('kelas_nama',$data['kelas_nama'])
-        // ->update([
-        //     'nominaltagihan' => $nominal, 
-        //     'created_at' => $data['created_at'], 
-        //     'updated_at' => $data['updated_at'], 
-        // ]);
+        // // kelas::where('nama',$data['nama'])
+        // // ->where('kelas_nama',$data['kelas_nama'])
+        // // ->update([
+        // //     'nominaltagihan' => $nominal, 
+        // //     'created_at' => $data['created_at'], 
+        // //     'updated_at' => $data['updated_at'], 
+        // // ]);
 
-        }
+        // }
 
 
 

@@ -87,7 +87,7 @@ Route::delete('/admin/dataperalatan/multidel', 'App\Http\Controllers\adminperala
 //peminjaman-MENU
 Route::get('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@index')->name('admin.peminjaman');
 Route::get('/admin/pinjambuku', 'App\Http\Controllers\adminpeminjamancontroller@buku')->name('admin.peminjaman.buku');
-Route::get('/admin/peminjaman/{id}', 'App\Http\Controllers\adminpeminjamancontroller@invoice')->name('admin.peminjaman.invoice');
+// Route::get('/admin/peminjaman/{id}', 'App\Http\Controllers\adminpeminjamancontroller@invoice')->name('admin.peminjaman.invoice');
 Route::get('/admin/peminjaman/cari', 'App\Http\Controllers\adminpeminjamancontroller@cari')->name('admin.peminjaman.cari');
 Route::post('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@store')->name('admin.peminjaman.store');
 Route::get('/admin/peminjaman/periksa/{id}', 'App\Http\Controllers\adminpeminjamancontroller@periksa')->name('admin.peminjaman.periksa');
@@ -113,6 +113,10 @@ Route::get('/admin/bukukembali/{id}/bukudetail', 'App\Http\Controllers\adminpemi
 Route::post('/admin/bukukembali/{id}/bukudetail/cari', 'App\Http\Controllers\adminpeminjamancontroller@caribukukembalidetail')->name('admin.bukukembali.bukudetail.cari');
 
 //invoice
+Route::get('/admin/invoice/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@invoicepeminjaman')->name('admin.peminjaman.invoicepeminjaman');
+Route::post('/admin/invoice/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@invoicepeminjamanperiksa')->name('admin.peminjaman.invoicepeminjamanperiksa');
+Route::get('/admin/invoice/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@invoicepengembalian')->name('admin.pengembalian.invoicepengembalian');
+Route::post('/admin/invoice/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@invoicepengembalianperiksa')->name('admin.pengembalian.invoicepengembalianperiksa');
 Route::get('/admin/peminjaman/{id}', 'App\Http\Controllers\adminpeminjamancontroller@invoice')->name('admin.peminjaman.invoice');
 Route::get('/admin/pengembalian/{id}', 'App\Http\Controllers\adminpengembaliancontroller@invoice')->name('admin.pengembalian.invoice');
 

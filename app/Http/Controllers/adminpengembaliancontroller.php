@@ -34,6 +34,35 @@ class adminpengembaliancontroller extends Controller
         return view('admin.pengembalian.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
+    
+    public function invoicepengembalianperiksa(Request $request)
+    {
+        // dd($request);
+        return redirect(URL::to('/').'/admin/pengembalian/'.$request->kodetrans)->with('status','Data ditemukan!')->with('tipe','success')->with('icon','fas fa-trash');
+
+    }
+    public function invoicepengembalian(Request $request)
+    {
+        if($this->checkauth('admin')==='404'){
+            return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
+        }
+
+        #WAJIB
+        $pages='pengembalian';
+        $jmldata='0';
+        $datas='0';
+
+
+        $datas=DB::table('pengembalian')
+        ->orderBy('created_at','desc')
+        ->paginate(Fungsi::paginationjml());
+
+        // $pengembaliankategori = DB::table('kategori')->where('prefix','tipepengembalian')->get();
+        // $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+
+        return view('admin.pengembalian.invoicepengembalian',compact('pages','datas','request'));
+        // return view('admin.beranda');
+    }
     public function invoice(Request $request,$id)
     {
         $datapinjam=DB::table('pengembalian')
@@ -142,7 +171,8 @@ class adminpengembaliancontroller extends Controller
                             peminjamandetail::where('id',$ambil->id)
                             ->update([
                                 // 'denda'     =>  Fungsi::defaultdenda(),
-                                'statuspengembalian'     =>  'ada',
+                                'statuspengembalian'     =>  'sudah',
+                                'denda'     =>  $denda,
                             'updated_at'=>date("Y-m-d H:i:s")
                             ]);
                         }
