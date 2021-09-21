@@ -34,13 +34,36 @@ class adminpengembaliancontroller extends Controller
         return view('admin.pengembalian.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
-    public function invoice($id)
+    public function invoice(Request $request,$id)
     {
-        $datas=DB::table('pengembalian')
+        $datapinjam=DB::table('pengembalian')
         ->where('kodetrans',$id)
         ->orderBy('created_at','desc')
         ->first();
-        dd($datas);
+        
+        $jmlbelumkembali=0;
+            //ambil data
+        $datapinjamdetail=DB::table('pengembaliandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
+       
+        $datas = $datapinjamdetail->unique('buku_kode');
+        $dataanggota=DB::table('anggota')->where('nomeridentitas',$datapinjam->nomeridentitas)->first();
+       
+            // dd($datas);
+            #WAJIB
+            $pages='pengembalian';
+            // $jmldata='0';
+            // $datas='0';
+    
+    
+            // $datas=DB::table('pengembalian')
+            // ->orderBy('nama','asc')
+            // ->paginate(Fungsi::paginationjml());
+    
+            // $pengembaliankategori = DB::table('kategori')->where('prefix','tipepengembalian')->get();
+            // $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+    
+        // dd($dataanggota);
+        return view('admin.pengembalian.invoiceshow',compact('pages','datas','datapinjam','request','dataanggota'));
     }
     
     public function kembalikan(Request $request)
