@@ -156,6 +156,7 @@ $message=session('status');
     </td>
 </tr>
 <script>
+    // alert(jmlpinjamlocal);
     // va
      if($("input#tersedia{{$data->kode}}").val()>0){
         $("#isikan{{$data->kode}}").prop('disabled', false);
@@ -207,6 +208,7 @@ $message=session('status');
                                                                     'Buku berhasil ditambahkan, Periksa menu peminjaman! '
                                                             });
                                                             $("#isikan{{$data->kode}}").prop('disabled', false);
+                                                    location.reload();
 
                                             }else{    
                                             var Toast = Swal.mixin({
