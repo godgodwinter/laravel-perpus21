@@ -87,6 +87,7 @@ Route::delete('/admin/dataperalatan/multidel', 'App\Http\Controllers\adminperala
 //peminjaman-MENU
 Route::get('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@index')->name('admin.peminjaman');
 Route::get('/admin/pinjambuku', 'App\Http\Controllers\adminpeminjamancontroller@buku')->name('admin.peminjaman.buku');
+Route::get('/admin/peminjaman/{id}', 'App\Http\Controllers\adminpeminjamancontroller@invoice')->name('admin.peminjaman.invoice');
 Route::get('/admin/peminjaman/cari', 'App\Http\Controllers\adminpeminjamancontroller@cari')->name('admin.peminjaman.cari');
 Route::post('/admin/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@store')->name('admin.peminjaman.store');
 Route::get('/admin/peminjaman/periksa/{id}', 'App\Http\Controllers\adminpeminjamancontroller@periksa')->name('admin.peminjaman.periksa');
@@ -101,6 +102,7 @@ Route::post('/admin/bukupinjam/{id}/bukudetail/cari', 'App\Http\Controllers\admi
 Route::get('/admin/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@index')->name('admin.pengembalian');
 Route::post('/admin/pengembalian/kembelikan', 'App\Http\Controllers\adminpengembaliancontroller@kembalikan')->name('admin.pengembalian.kembalikan');
 Route::post('/admin/pengembalian/periksaanggota/', 'App\Http\Controllers\adminpengembaliancontroller@periksaanggota')->name('admin.pengembalian.periksaanggota');
+Route::get('/admin/pengembalian/periksaanggota/{id}', 'App\Http\Controllers\adminpengembaliancontroller@periksaanggotashow')->name('admin.pengembalian.periksaanggota.show');
 Route::get('/admin/kembalikanbuku', 'App\Http\Controllers\adminpeminjamancontroller@buku')->name('admin.kembalikan.buku');
 Route::get('/admin/pengembalian/cari', 'App\Http\Controllers\adminpengembaliancontroller@cari')->name('admin.pengembalian.cari');
 Route::post('/admin/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@store')->name('admin.pengembalian.store');
@@ -110,6 +112,9 @@ Route::get('/admin/bukukembali/cari', 'App\Http\Controllers\adminpeminjamancontr
 Route::get('/admin/bukukembali/{id}/bukudetail', 'App\Http\Controllers\adminpeminjamancontroller@indexbukukembalidetail')->name('admin.bukukembali.bukudetail');
 Route::post('/admin/bukukembali/{id}/bukudetail/cari', 'App\Http\Controllers\adminpeminjamancontroller@caribukukembalidetail')->name('admin.bukukembali.bukudetail.cari');
 
+//invoice
+Route::get('/admin/peminjaman/{id}', 'App\Http\Controllers\adminpeminjamancontroller@invoice')->name('admin.peminjaman.invoice');
+Route::get('/admin/pengembalian/{id}', 'App\Http\Controllers\adminpengembaliancontroller@invoice')->name('admin.pengembalian.invoice');
 
 
 //SETTINGS-MENU

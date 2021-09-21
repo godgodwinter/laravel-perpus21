@@ -34,6 +34,14 @@ class adminpengembaliancontroller extends Controller
         return view('admin.pengembalian.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
+    public function invoice($id)
+    {
+        $datas=DB::table('pengembalian')
+        ->where('kodetrans',$id)
+        ->orderBy('created_at','desc')
+        ->first();
+        dd($datas);
+    }
     
     public function kembalikan(Request $request)
     {
@@ -142,7 +150,7 @@ class adminpengembaliancontroller extends Controller
             ]);
         // dd($dataanggota,$datas,$request->datas,$dendakeseluruhan);
         
-        return redirect(URL::to('/').'/admin/pengembalian')->with('status','Proses pengembalian berhasil dilakukan!')->with('tipe','success')->with('icon','fas fa-trash');
+        return  redirect(URL::to('/').'/admin/pengembalian/'.$kodetrans)->with('status','Proses pengembalian berhasil dilakukan!')->with('tipe','success')->with('icon','fas fa-trash');
         // 1. ambil data request
             // ulangi perbuku
             //ambil jmlah yang dikembalikan
@@ -152,6 +160,31 @@ class adminpengembaliancontroller extends Controller
                     // a. ambil data peminjaman tgl_harus_kembali
                     // b. hitung denda dan denta total 
             // 5.inset data pengembalian
+
+    }
+    public function periksaanggotashow(Request $request,$id){
+        $jmlbelumkembali=0;
+            //ambil data
+        $datapinjam=DB::table('peminjamandetail')->where('nomeridentitas',$id)->where('statuspengembalian',null)->orderBy('created_at', 'desc')->get();
+       
+        $datas = $datapinjam->unique('buku_kode');
+        $dataanggota=DB::table('anggota')->where('nomeridentitas',$id)->first();
+       
+            // dd($datas);
+            #WAJIB
+            $pages='pengembalian';
+            // $jmldata='0';
+            // $datas='0';
+    
+    
+            // $datas=DB::table('pengembalian')
+            // ->orderBy('nama','asc')
+            // ->paginate(Fungsi::paginationjml());
+    
+            // $pengembaliankategori = DB::table('kategori')->where('prefix','tipepengembalian')->get();
+            // $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+    
+            return view('admin.pengembalian.periksaanggota',compact('pages','datas','request','dataanggota'));
 
     }
     public function periksaanggota(Request $request)
@@ -164,6 +197,7 @@ class adminpengembaliancontroller extends Controller
         if($jmlpinjam<1){
             return redirect(URL::to('/').'/admin/pengembalian')->with('status','Belum pernah pinjam!')->with('tipe','error');
         }else{
+            return redirect(URL::to('/').'/admin/pengembalian/periksaanggota/'.$request->nomeridentitas)->with('status','Belum pernah pinjam!')->with('tipe','error');
 
         $jmlbelumkembali=0;
             //ambil data

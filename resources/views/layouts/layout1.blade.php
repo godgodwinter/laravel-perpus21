@@ -120,7 +120,7 @@ crossorigin="anonymous"></script>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ asset("assets/") }}/index3.html" class="brand-link">
+    <a href="{{ url("/dashboard") }}" class="brand-link">
       <img src="{{ asset("assets/") }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">{{Fungsi::aplikasijudul()}}</span>
     </a>
@@ -223,13 +223,13 @@ crossorigin="anonymous"></script>
           <li class="nav-item">
             <a href="{{route('admin.peminjaman')}}" class="nav-link">
               <i class="fas fa-calendar-plus"></i>
-              <p>Peminjaman</p>
+              <p>Pinjam</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('admin.pengembalian')}}" class="nav-link">
               <i class="far fa-calendar-check"></i>
-              <p>Pengembalian</p>
+              <p>Kembalikan</p>
             </a>
           </li>
           
@@ -249,6 +249,60 @@ crossorigin="anonymous"></script>
           <li class="nav-header">REPORT</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Invoice
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ asset("assets/") }}/index.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Peminjaman</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ asset("assets/") }}/index2.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengembalian</p>
+                </a>
+              </li>
+            
+            </ul>
+            
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Laporan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ asset("assets/") }}/index.html" class="nav-link">
+                  <i class="fas fa-users"></i>
+                  <p>Laporan Pengunjung</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ asset("assets/") }}/index2.html" class="nav-link">
+                  <i class="fas fa-user-clock"></i>
+                  <p>Laporan Peminjaman</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ asset("assets/") }}/index2.html" class="nav-link">
+                  <i class="fas fa-money-check-alt"></i>
+                  <p>Laporan Keuangan</p>
+                </a>
+              </li>
+            
+            </ul>
+{{--             
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="fas fa-users"></i>
               <p>Laporan Pengunjung</p>
             </a>
@@ -264,7 +318,7 @@ crossorigin="anonymous"></script>
               <i class="fas fa-money-check-alt"></i>
               <p>Laporan Keuangan</p>
             </a>
-          </li>
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

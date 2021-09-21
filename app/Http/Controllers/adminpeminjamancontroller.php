@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
 use App\Models\bukudetail;
+use App\Models\peminjaman;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,14 @@ class adminpeminjamancontroller extends Controller
         // return view('admin.beranda');
     }
 
+    public function invoice($id)
+    {
+        $datas=DB::table('peminjaman')
+        ->where('kodetrans',$id)
+        ->orderBy('created_at','desc')
+        ->first();
+        dd($datas);
+    }
     public function store(Request $request)
     {
         // dd($request);
@@ -120,7 +129,7 @@ class adminpeminjamancontroller extends Controller
         }
         
         // dd($request->daftarbuku,$db);
-        return redirect()->back()->with('status','Proses Peminjaman Berhasil!')->with('tipe','success')->with('clearlocal','yes');
+        return  redirect(URL::to('/').'/admin/peminjaman/'.$kodetrans)->with('status','Proses Peminjaman Berhasil!')->with('tipe','success')->with('clearlocal','yes');
 
     }
     public function storelawas(Request $request)
