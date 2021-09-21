@@ -27,6 +27,7 @@ class CreateBukuTable extends Migration
             // $table->string('bukurak_kode')->nullable();
             $table->string('bukukategori_nama')->nullable();  //ktp / kartu pelajar
             $table->string('bukukategori_ddc')->nullable(); //dari table kategori
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

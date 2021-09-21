@@ -6,6 +6,7 @@ use App\Exports\Exportbuku;
 use App\Exports\Exportbukurak;
 use App\Imports\Importbukurak;
 use App\Imports\Importbuku;
+use App\Models\buku;
 use App\Models\settings;
 use App\Models\siswa;
 use App\Models\tagihanatur;
@@ -97,12 +98,12 @@ class prosesController extends Controller
          
     }
 
-	public function uploadsiswa(Request $request,siswa $siswa){
+	public function uploadbuku(Request $request,buku $buku){
         // dd($request);
 		$this->validate($request, [
 			'file' => 'required',
 		]);
-		$namafilebaru=$siswa->nis;
+		$namafilebaru=$buku->kode;
  
 		// menyimpan data file yang diupload ke variabel $file
 		$file = $request->file('file');
@@ -128,20 +129,32 @@ class prosesController extends Controller
 		echo 'File Mime Type: '.$file->getMimeType();
  
       	        // isi dengan nama folder tempat kemana file diupload
-		$tujuan_upload = 'storage/profile-photos';
+		$tujuan_upload = 'storage/gambar';
  
                 // upload file
-		$file->move($tujuan_upload,"profile-photos/".$namafilebaru.".jpg");
+		$file->move($tujuan_upload,"gambar/".$namafilebaru.".jpg");
 
 
-		User::where('nomerinduk',$siswa->nis)
+		buku::where('kode',$buku->kode)
 		->update([
-			'profile_photo_path' => "profile-photos/".$namafilebaru.".jpg",
+			'gambar' => "gambar/".$namafilebaru.".jpg",
 		'updated_at'=>date("Y-m-d H:i:s")
 		]);
 
         return redirect()->back()->with('status','Photo berhasil Diupload!')->with('tipe','success')->with('icon','fas fa-edit');
 
+	}
+	
+	public function uploadbukudelete(Request $request,buku $buku){
+		
+        // dd($request);
+        Storage::disk('public')->delete($request->namaphoto);
+		buku::where('id',$buku->id)
+		->update([
+			'gambar' => "",
+			'updated_at'=>date("Y-m-d H:i:s")
+		]);
+        return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
 	}
 
 	public function uploadlogo(Request $request,settings $settings){

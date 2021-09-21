@@ -148,6 +148,9 @@ Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->nam
 Route::get('/barcode', [pagesController::class, 'barcode'])->name('barcode.index');
 
 Route::post('/admin/settings/cleartemp', 'App\Http\Controllers\prosesController@cleartemp')->name('cleartemp');
+//upload
+Route::post('admin/databuku/upload/{buku}', 'App\Http\Controllers\prosesController@uploadbuku')->name('admin.buku.upload');
+Route::delete('admin/databuku/upload/{buku}', 'App\Http\Controllers\prosesController@uploadbukudelete')->name('admin.buku.upload.delete');
 
 // Route::post('/checkemail',['uses'=>'PagesController@checkEmail']);
 // Route::post('/checkemail', 'App\Http\Controllers\PagesController@checkEmail')->name('checkEmail');
