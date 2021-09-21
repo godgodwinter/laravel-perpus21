@@ -274,6 +274,10 @@ $message=session('status');
                                         onclick="return  confirm('Anda yakin melakukan Hard Reset aplikasi? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
                                             class="pcoded-micon"> <i class="fas fa-power-off"></i> Reset Settings!</span></button>
                                   </form>
+
+                                  <button type="button" class="btn btn-icon btn-warning btn-md ml-1" data-toggle="modal"  data-placement="top" title="File sampah sisa export dan import! Agar tidak membebani server."  data-target="#cleartemp"><i class="fas fa-trash"></i>
+                                    Hapus File Sampah
+                                  </button>
                                   
                                 </div>
                             </div>
@@ -319,4 +323,32 @@ $message=session('status');
       </div>
     </section>
 
+@endsection
+
+
+@section('container-modals')
+
+              <!-- Import Excel -->
+              <div class="modal fade" id="cleartemp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <form method="post" action="{{ route('cleartemp') }}" enctype="multipart/form-data">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Temporari</h5>
+                      </div>
+                      <div class="modal-body">
+           
+                        {{ csrf_field() }}
+           
+                        <label></label>
+           
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Hapus!</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
 @endsection

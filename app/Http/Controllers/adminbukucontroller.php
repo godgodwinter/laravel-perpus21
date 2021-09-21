@@ -56,17 +56,19 @@ class adminbukucontroller extends Controller
 
 
 
-    $bukurak = DB::table('bukurak')->get();
+    // $bukurak = DB::table('bukurak')->get();
     $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-    return view('admin.buku.index',compact('pages','bukurak','bukukategori','datas','request'));
+    return view('admin.buku.index',compact('pages'
+    // ,'bukurak'
+    ,'bukukategori','datas','request'));
     }
     public function store(Request $request)
     {
         // dd($request);
         // dd($request);
         $request->validate([
-            'nama'=>'required|unique:bukurak,nama',
+            'nama'=>'required|unique:buku,nama',
             // 'bukurak_nama'=>'required',
             'bukukategori_nama'=>'required',
 

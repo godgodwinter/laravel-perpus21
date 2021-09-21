@@ -125,11 +125,18 @@ $message=session('status');
         @else
         {{-- <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button> --}}
         @endif
-        
-        <input type="hidden" name="{{$data->kode}}" id="{{$data->kode}}" value="{{$data->kode}}">
-        <input type="number" class="form-control-plaintext form-control2 no-border text-center btn btn-light" name="tersedia{{$data->kode}}" id="tersedia{{$data->kode}}" value="{{$cekjmlada}}" min="0" max="{{$cekjmlada}}"> 
-        <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" id="isikan{{ $data->kode }}"><i class="fas fa-shopping-cart"></i>
-        </button>
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="hidden" name="{{$data->kode}}" id="{{$data->kode}}" value="{{$data->kode}}">
+                <input type="number" class="form-control-plaintext form-control2 no-border text-center btn btn-light" name="tersedia{{$data->kode}}" id="tersedia{{$data->kode}}" value="{{$cekjmlada}}" min="0" max="{{$cekjmlada}}"> 
+
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" id="isikan{{ $data->kode }}"><i class="fas fa-shopping-cart"></i>
+                </button>
+            </div>
+        </div>
+       
     </td>
     <td class="text-center">{{$cekjmldipinjam}}    
         @if ($cekjmldipinjam>0)
@@ -223,7 +230,7 @@ $message=session('status');
 @endforeach
 
 <tr>
-    <td class="text-left" colspan="5">
+    <td class="text-left" colspan="8">
         <a href="#" class="btn btn-sm  btn-danger" id="deleteAllSelectedRecord"
             onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"><i class="fas fa-trash"></i> Hapus
             Terpilih</a></td>

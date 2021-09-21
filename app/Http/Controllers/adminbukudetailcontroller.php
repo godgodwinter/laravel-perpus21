@@ -60,7 +60,7 @@ class adminbukudetailcontroller extends Controller
             array(
                    'kondisi'     =>   $request->kondisi,
                    'status'     =>   'ada', //ada ,  dipinjam , hilang
-                   'kodepanggil'     =>   $id->kode.'-'.date('YmdHis'),
+                //    'kodepanggil'     =>   $id->kode.'-'.date('YmdHis'),
                    'buku_nama'     =>   $id->nama,
                    'buku_kode'     =>   $id->kode,
                 //    'bukurak_nama'     =>   $id->bukurak_nama,

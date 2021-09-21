@@ -50,7 +50,8 @@ $message=session('status');
 @endsection
 
 @section('foottable')
-</section>
+
+@endsection
 
 @section('container')
 <!-- Main content -->
@@ -75,7 +76,6 @@ $message=session('status');
 </section>
 
 <!-- Main content -->
-<section class="content">
 
     <!-- Default box -->
 

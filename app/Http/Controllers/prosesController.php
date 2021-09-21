@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\Exportbuku;
 use App\Exports\Exportbukurak;
 use App\Imports\Importbukurak;
+use App\Imports\Importbuku;
 use App\Models\settings;
 use App\Models\siswa;
 use App\Models\tagihanatur;
@@ -22,6 +24,12 @@ class prosesController extends Controller
 	{
         $tgl=date("YmdHis");
 		return Excel::download(new Exportbukurak, 'perpus-bukurak-'.$tgl.'.xlsx');
+	}
+	
+	public function exportbuku()
+	{
+        $tgl=date("YmdHis");
+		return Excel::download(new Exportbuku, 'perpus-buku-'.$tgl.'.xlsx');
 	}
 
 	public function importbukurak(Request $request) 
@@ -50,6 +58,44 @@ class prosesController extends Controller
 		// return redirect('/siswa');
         return redirect()->back()->with('status','Data berhasil Diimport!')->with('tipe','success')->with('icon','fas fa-edit');
 	}
+	
+	public function importbuku(Request $request) 
+	{
+		// validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+		$file = $request->file('file');
+ 
+		// membuat nama file unik
+		$nama_file = rand().$file->getClientOriginalName();
+ 
+		// upload ke folder file_siswa di dalam folder public
+		$file->move('file_temp',$nama_file);
+ 
+		// import data
+		Excel::import(new Importbuku, public_path('/file_temp/'.$nama_file));
+ 
+		// notifikasi dengan session
+		// Session::flash('sukses','Data Siswa Berhasil Diimport!');
+ 
+		// alihkan halaman kembali
+		// return redirect('/siswa');
+        return redirect()->back()->with('status','Data berhasil Diimport!')->with('tipe','success')->with('icon','fas fa-edit');
+	}
+
+	
+    public function cleartemp() 
+	{ 
+            $file = new Filesystem;
+            $file->cleanDirectory(public_path('file_temp'));
+
+        // unlink(public_path('file_temp'));
+        return redirect()->back()->with('status','Data berhasil di Hapus!')->with('tipe','success')->with('icon','fas fa-trash');
+         
+    }
 
 	public function uploadsiswa(Request $request,siswa $siswa){
         // dd($request);
@@ -227,16 +273,6 @@ class prosesController extends Controller
 		]);
         return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
 	}
-
-    public function cleartemp() 
-	{ 
-            $file = new Filesystem;
-            $file->cleanDirectory(public_path('file_temp'));
-
-        // unlink(public_path('file_temp'));
-        return redirect()->back()->with('status','Data berhasil di Hapus!')->with('tipe','success')->with('icon','fas fa-trash');
-         
-    }
 
 
 }

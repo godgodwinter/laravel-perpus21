@@ -147,7 +147,7 @@ Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->nam
 
 Route::get('/barcode', [pagesController::class, 'barcode'])->name('barcode.index');
 
-Route::get('/register', 'App\Http\Controllers\adminberandaController@notfound')->name('cleartemp');
+Route::post('/admin/settings/cleartemp', 'App\Http\Controllers\prosesController@cleartemp')->name('cleartemp');
 
 // Route::post('/checkemail',['uses'=>'PagesController@checkEmail']);
 // Route::post('/checkemail', 'App\Http\Controllers\PagesController@checkEmail')->name('checkEmail');
