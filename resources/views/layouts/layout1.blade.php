@@ -56,27 +56,32 @@ crossorigin="anonymous"></script>
       
       <script>
         $(function () {
-            let daftarbuku=0;
-            if (localStorage.getItem('daftarbuku') === null) {
-                daftarbuku = [];
-            } else {
-                daftarbuku = JSON.parse(localStorage.getItem('daftarbuku'));
-            }
+          var jmlpinjamlocal=localStorage.length;
+          // alert(jmlpinjamlocal);
+            // let daftarbuku=0;
+            // if (localStorage.getItem('daftarbuku') === null) {
+            //     daftarbuku = [];
+            // } else {
+            //     daftarbuku = JSON.parse(localStorage.getItem('daftarbuku'));
+            // }
         // alert(daftarbuku.length);
         
-        $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
+        // $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
+        $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+jmlpinjamlocal+'</span>');
 
         
-        let daftarkembali=0;
-            if (localStorage.getItem('daftarkembali') === null) {
-                daftarkembali = [];
-            } else {
-                daftarkembali = JSON.parse(localStorage.getItem('daftarkembali'));
-            }
+        // let daftarkembali=0;
+        //     if (localStorage.getItem('daftarkembali') === null) {
+        //         daftarkembali = [];
+        //     } else {
+        //         daftarkembali = JSON.parse(localStorage.getItem('daftarkembali'));
+        //     }
         // alert(daftarbuku.length);
         
-        $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
-        $("#jmldatabukukembali").append('<span class="badge badge-success navbar-badge">'+daftarkembali.length+'</span>');
+        // $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
+        // $("#jmldatabukukembali").append('<span class="badge badge-success navbar-badge">'+daftarkembali.length+'</span>');
+        // $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
+        $("#jmldatabukukembali").append('<span class="badge badge-success navbar-badge">0</span>');
         });
       </script>
       <!-- Notifications Dropdown Menu -->

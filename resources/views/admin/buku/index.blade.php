@@ -52,8 +52,8 @@ $message=session('status');
     <th> ISBN </th>
     <th> Kategori </th>
     <th> Jumlah </th>
-    <th> Tersedia </th>
-    <th> Dipinjam </th>
+    <th class="text-center"> Tersedia </th>
+    <th class="text-center"> Dipinjam </th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
 @endsection
@@ -117,19 +117,26 @@ $message=session('status');
         $cekjmldipinjam = DB::table('bukudetail')->where('buku_kode',$data->kode)->where('status','dipinjam')->count();
     @endphp
     <td class="text-center">{{$cekjml}}</td>
-    <td class="text-center">{{$cekjmlada}}  
+    <td class="text-center">
+        {{-- {{$cekjmlada}}   --}}
         @if ($cekjmlada>0)
+        {{-- <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" id="isikan{{ $data->kode }}"><i class="fas fa-shopping-cart"></i>
+        </button> --}}
+        @else
+        {{-- <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button> --}}
+        @endif
+        
+        <input type="hidden" name="{{$data->kode}}" id="{{$data->kode}}" value="{{$data->kode}}">
+        <input type="number" class="form-control-plaintext form-control2 no-border text-center btn btn-light" name="tersedia{{$data->kode}}" id="tersedia{{$data->kode}}" value="{{$cekjmlada}}" min="0" max="{{$cekjmlada}}"> 
         <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" id="isikan{{ $data->kode }}"><i class="fas fa-shopping-cart"></i>
         </button>
-        @else
-        <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Pinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button>
-        @endif
     </td>
     <td class="text-center">{{$cekjmldipinjam}}    
         @if ($cekjmldipinjam>0)
-        <button class="btn btn-icon btn-success btn-sm "  data-toggle="tooltip" data-placement="top" title="Kembalikan!" id="isikan{{ $data->kode }}">
+        
+        <a href="{{ route("admin.pengembalian")}}" class="btn btn-icon btn-success btn-sm "  data-toggle="tooltip" data-placement="top" title="Kembalikan!" >
             <i class="fas fa-hands"></i>
-         </button>
+         </a>
         @else
         <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Kembalikan!" ><i class="fas fa-hands"></i> </button>
         @endif 
@@ -141,6 +148,78 @@ $message=session('status');
         <x-button-delete link="/admin/{{ $pages }}/{{$data->id}}" />
     </td>
 </tr>
+<script>
+    // va
+     if($("input#tersedia{{$data->kode}}").val()>0){
+        $("#isikan{{$data->kode}}").prop('disabled', false);
+        $("#isikan{{$data->kode}}").prop('class', 'btn btn-icon btn-info btn-sm');
+        $("#isikan{{$data->kode}}").prop('title', 'Pinjam!');
+
+        $("input#tersedia{{$data->kode}}").prop('min','1');
+        $("input#tersedia{{$data->kode}}").prop('max','{{$cekjmldipinjam}}');
+     }else{
+         $("input#tersedia{{$data->kode}}").prop('readonly',true);
+        $("#isikan{{$data->kode}}").prop('disabled', false);
+        $("#isikan{{$data->kode}}").prop('class', 'btn btn-icon btn-secondary btn-sm');
+        $("#isikan{{$data->kode}}").prop('title', 'Buku tidak tersedia!');
+        // alert('buku tidak tersedia');
+        }
+        
+     
+    // $("input#tersedia{{$data->kode}}").prop('disabled'.true);
+
+    document.querySelector('#isikan{{ $data->kode }}').addEventListener('click', function (
+                                        e) {
+                                                // alert($("input#tersedia{{$data->kode}}").val());
+                                            if($("input#tersedia{{$data->kode}}").val()>0){
+
+
+                                                // masukkan data ke dalam local storage
+                                                        
+                                                                        var buku_ = {};  
+                                                                                buku_.kode = '{{$data->kode}}';  
+                                                                                buku_.nama = '{{$data->nama}}';
+                                                                                buku_.pengarang ='{{$data->pengarang}}';   
+                                                                                buku_.penerbit = '{{$data->penerbit}}';  
+                                                                                buku_.bukukategori_nama = '{{$data->bukukategori_nama}}';   
+                                                                                buku_.jml = parseInt('{{$cekjmlada}}');   
+                                                                                // var ItemId = "data-" + buku_.id;  
+                                                                                var ItemId = buku_.kode;  
+                                                                                localStorage.setItem(ItemId, JSON.stringify(buku_)); 
+                                                                                 
+                                            var Toast = Swal.mixin({
+                                                                toast: true,
+                                                                position: 'top-end',
+                                                                showConfirmButton: false,
+                                                                timer: 3000
+                                                            });
+
+                                                            Toast.fire({
+                                                                icon: 'success',
+                                                                title: 
+                                                                    'Buku berhasil ditambahkan, Periksa menu peminjaman! '
+                                                            });
+                                                            $("#isikan{{$data->kode}}").prop('disabled', false);
+
+                                            }else{    
+                                            var Toast = Swal.mixin({
+                                                                toast: true,
+                                                                position: 'top-end',
+                                                                showConfirmButton: false,
+                                                                timer: 3000
+                                                            });
+
+                                                            Toast.fire({
+                                                                icon: 'error',
+                                                                title: 
+                                                                    'Gagal, Buku tidak tersedial! '
+                                                            });
+                                                            $("#isikan{{$data->kode}}").prop('disabled', false);
+                                                // alert('buku tidak tersedia');
+                                            }
+                                            // alert(isikan{{ $data->kode }});
+                                        });
+</script>
 @endforeach
 
 <tr>
