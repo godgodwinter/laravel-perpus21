@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class Importbuku implements ToModel, WithHeadingRow
+class importbukudetail implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -17,24 +17,30 @@ class Importbuku implements ToModel, WithHeadingRow
 
     public function model(array $data)
     {
-        $datas=DB::table('buku')
-        ->where('kode',$data['kode'])
+        $datas=DB::table('bukudetail')
+        ->where('created_at',$data['created_at'])
+        ->where('status',$data['status'])
+        ->where('kondisi',$data['kondisi'])
+        ->where('buku_kode',$data['buku_kode'])
+        ->where('buku_nama',$data['buku_nama'])
         ->count();
     
     if ($datas<1) {
 
-       DB::table('buku')->insert(
+       DB::table('bukudetail')->insert(
         array(
-                'kode' => $data['kode'],
-                'isbn' => $data['isbn'],
-                'nama' => $data['nama'],
-                'pengarang' => $data['pengarang'],
-                'tempatterbit' => $data['tempatterbit'],
-                'penerbit' => $data['penerbit'],
-                'tahunterbit' => $data['tahunterbit'],
-                'bahasa' => $data['bahasa'],
+                'buku_kode' => $data['buku_kode'],
+                'buku_isbn' => $data['buku_isbn'],
+                'buku_nama' => $data['buku_nama'],
+                'buku_pengarang' => $data['buku_pengarang'],
+                'buku_tempatterbit' => $data['buku_tempatterbit'],
+                'buku_penerbit' => $data['buku_penerbit'],
+                'buku_tahunterbit' => $data['buku_tahunterbit'],
+                'buku_bahasa' => $data['buku_bahasa'],
                 'bukukategori_nama' => $data['bukukategori_nama'],
                 'bukukategori_ddc' => $data['bukukategori_ddc'],
+                'kondisi' => $data['kondisi'], 
+                'status' => $data['status'], 
                 'created_at' => $data['created_at'], 
                 'updated_at' => $data['updated_at'], 
         ));

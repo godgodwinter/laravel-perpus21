@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class Importbuku implements ToModel, WithHeadingRow
+class importanggota implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -17,24 +17,24 @@ class Importbuku implements ToModel, WithHeadingRow
 
     public function model(array $data)
     {
-        $datas=DB::table('buku')
-        ->where('kode',$data['kode'])
+        $datas=DB::table('anggota')
+        ->where('nomeridentitas',$data['nomeridentitas'])
         ->count();
     
     if ($datas<1) {
 
-       DB::table('buku')->insert(
+       DB::table('anggota')->insert(
         array(
-                'kode' => $data['kode'],
-                'isbn' => $data['isbn'],
                 'nama' => $data['nama'],
-                'pengarang' => $data['pengarang'],
-                'tempatterbit' => $data['tempatterbit'],
-                'penerbit' => $data['penerbit'],
-                'tahunterbit' => $data['tahunterbit'],
-                'bahasa' => $data['bahasa'],
-                'bukukategori_nama' => $data['bukukategori_nama'],
-                'bukukategori_ddc' => $data['bukukategori_ddc'],
+                'nomeridentitas' => $data['nomeridentitas'],
+                'agama' => $data['agama'],
+                'tempatlahir' => $data['tempatlahir'],
+                'tgllahir' => $data['tgllahir'],
+                'alamat' => $data['alamat'],
+                'jk' => $data['jk'],
+                'tipe' => $data['tipe'],
+                'sekolahasal' => $data['sekolahasal'],
+                'telp' => $data['telp'],
                 'created_at' => $data['created_at'], 
                 'updated_at' => $data['updated_at'], 
         ));
