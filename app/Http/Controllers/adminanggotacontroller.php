@@ -31,6 +31,33 @@ class adminanggotacontroller extends Controller
         return view('admin.anggota.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
+    
+    public function cari(Request $request)
+    {
+        // dd($request);
+        $cari=$request->cari;
+
+        #WAJIB
+        $pages='anggota';
+        $jmldata='0';
+        $datas='0';
+
+
+    $datas=DB::table('anggota')
+    // ->where('nis','like',"%".$cari."%")
+    ->where('nama','like',"%".$cari."%")
+    ->orWhere('nomeridentitas','like',"%".$cari."%")
+    ->orWhere('agama','like',"%".$cari."%")
+    ->orWhere('tipe','like',"%".$cari."%")
+    ->paginate(Fungsi::paginationjml());
+
+
+
+    // $bukurak = DB::table('bukurak')->get();
+    // $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+    return view('admin.anggota.index',compact('pages','datas','request'));
+    }
     public function store(Request $request)
     {
         // dd($request);
