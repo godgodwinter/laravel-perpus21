@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
-use App\Models\peralatan;
+use App\Models\pengeluaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
-class adminperalatancontroller extends Controller
+class adminpengeluarancontroller extends Controller
 {
     public function index(Request $request)
     {
@@ -17,55 +17,56 @@ class adminperalatancontroller extends Controller
         }
 
         #WAJIB
-        $pages='peralatan';
+        $pages='pengeluaran';
         $jmldata='0';
         $datas='0';
 
 
-        $datas=DB::table('peralatan')
-        ->orderBy('nama','asc')
+        $datas=DB::table('pengeluaran')
+        ->orderBy('created_at','desc')
         ->paginate(Fungsi::paginationjml());
 
-        $peralatankategori = DB::table('kategori')->where('prefix','tipeperalatan')->get();
-        $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+        // $anggotakategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-        return view('admin.peralatan.index',compact('pages','datas','peralatankategori','kondisi','request'));
+        return view('admin.pengeluaran.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
+    
     public function cari(Request $request)
     {
         // dd($request);
         $cari=$request->cari;
 
         #WAJIB
-        $pages='peralatan';
+        $pages='pengeluaran';
         $jmldata='0';
         $datas='0';
 
 
-    $datas=DB::table('peralatan')
+    $datas=DB::table('pengeluaran')
     // ->where('nis','like',"%".$cari."%")
     ->where('nama','like',"%".$cari."%")
-    ->orWhere('kondisi','like',"%".$cari."%")
     ->orWhere('kategori_nama','like',"%".$cari."%")
+    // ->orWhere('tglbayar','like',"%".$cari."%")
+    // ->orWhere('tipe','like',"%".$cari."%")
     ->paginate(Fungsi::paginationjml());
 
 
 
-    $peralatankategori = DB::table('kategori')->where('prefix','tipeperalatan')->get();
-    $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+    // $bukurak = DB::table('bukurak')->get();
+    // $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-    return view('admin.peralatan.index',compact('pages','datas','peralatankategori','kondisi','request'));
+    return view('admin.pengeluaran.index',compact('pages','datas','request'));
     }
     public function store(Request $request)
     {
         // dd($request);
         // dd($request);
         $request->validate([
-            'nama'=>'required|unique:peralatan,nama',
+            'nama'=>'required|unique:pengeluaran,nama',
             'kategori_nama'=>'required',
-            'tgl_masuk'=>'required',
-            'kondisi'=>'required',
+            'tglbayar'=>'required',
+            'nominal'=>'required',
 
 
         ],
@@ -74,12 +75,13 @@ class adminperalatancontroller extends Controller
 
         ]);
         
-       DB::table('peralatan')->insert(
+       DB::table('pengeluaran')->insert(
         array(
                'nama'     =>   $request->nama,
                'kategori_nama'     =>   $request->kategori_nama,
-               'tgl_masuk'     =>   $request->tgl_masuk,
-               'kondisi'     =>   $request->kondisi,
+               'tglbayar'     =>   $request->tglbayar,
+               'catatan'     =>   $request->catatan,
+               'nominal'     =>   $request->nominal,
                'created_at'=>date("Y-m-d H:i:s"),
                'updated_at'=>date("Y-m-d H:i:s")
         ));
@@ -87,46 +89,47 @@ class adminperalatancontroller extends Controller
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
     
     }
-    public function show(Request $request,peralatan $id)
+    public function show(Request $request,pengeluaran $id)
     {
         // dd($id);
         #WAJIB
-        $pages='peralatan';
+        $pages='pengeluaran';
         $datas=$id;
         
 
-        $peralatankategori = DB::table('kategori')->where('prefix','tipeperalatan')->get();
-        $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
-        return view('admin.peralatan.edit',compact('pages','datas','peralatankategori','kondisi','request'));
+        return view('admin.pengeluaran.edit',compact('pages','datas','request'));
     }
     public function proses_update($request,$datas)
     {
-        if($request->nama!==$datas->nama){
-            $request->validate([
-                'nama'=>'unique:peralatan,nama'
-            ],
-            [
-                'nama.unique'=>'Nama sudah digunakan'
+        $request->validate([
+            'nama'=>'required',
+            'kategori_nama'=>'required',
+            'tglbayar'=>'required',
+            'nominal'=>'required',
 
 
-            ]);
-        }
+        ],
+        [
+            'nama.required'=>'Nama Harus diisi',
+
+        ]);
     
 
        
-        peralatan::where('id',$datas->id)
+        pengeluaran::where('id',$datas->id)
         ->update([
             'nama'     =>   $request->nama,
             'kategori_nama'     =>   $request->kategori_nama,
-            'tgl_masuk'     =>   $request->tgl_masuk,
-            'kondisi'     =>   $request->kondisi,
+            'tglbayar'     =>   $request->tglbayar,
+            'catatan'     =>   $request->catatan,
+            'nominal'     =>   $request->nominal,
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 
         
     }
 
-    public function update(Request $request, peralatan $id)
+    public function update(Request $request, pengeluaran $id)
     {
         $this->proses_update($request,$id);
 
@@ -135,7 +138,7 @@ class adminperalatancontroller extends Controller
     
     public function destroy($id)
     {
-        peralatan::destroy($id);
+        pengeluaran::destroy($id);
         return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
     
     }
@@ -153,25 +156,24 @@ class adminperalatancontroller extends Controller
         // dd($request);
 
         // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
-        peralatan::whereIn('id',$ids)->delete();
+        pengeluaran::whereIn('id',$ids)->delete();
 
         
         // load ulang
      
         #WAJIB
-        $pages='peralatan';
+        $pages='pengeluaran';
         $jmldata='0';
         $datas='0';
 
 
-        $datas=DB::table('peralatan')
-        ->orderBy('nama','asc')
+        $datas=DB::table('pengeluaran')
+        ->orderBy('created_at','desc')
         ->paginate(Fungsi::paginationjml());
 
-        $peralatankategori = DB::table('kategori')->where('prefix','tipeperalatan')->get();
-        $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
+        // $anggotakategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-        return view('admin.peralatan.index',compact('pages','datas','peralatankategori','kondisi','request'));
+        return view('admin.pengeluaran.index',compact('pages','datas','request'));
 
     }
 }

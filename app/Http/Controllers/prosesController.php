@@ -6,10 +6,16 @@ use App\Exports\exportanggota;
 use App\Exports\Exportbuku;
 use App\Exports\exportbukudetail;
 use App\Exports\Exportbukurak;
+use App\Exports\exportpemasukan;
+use App\Exports\exportpengeluaran;
+use App\Exports\exportperalatan;
 use App\Imports\importanggota;
 use App\Imports\Importbukurak;
 use App\Imports\Importbuku;
 use App\Imports\importbukudetail;
+use App\Imports\Importpemasukan;
+use App\Imports\Importpengeluaran;
+use App\Imports\Importperalatan;
 use App\Models\anggota;
 use App\Models\buku;
 use App\Models\settings;
@@ -43,10 +49,25 @@ class prosesController extends Controller
         $tgl=date("YmdHis");
 		return Excel::download(new exportanggota, 'perpus-anggota-'.$tgl.'.xlsx');
 	}
+	public function exportperalatan()
+	{
+        $tgl=date("YmdHis");
+		return Excel::download(new exportperalatan, 'perpus-peralatan-'.$tgl.'.xlsx');
+	}
 	public function exportbukudetail()
 	{
         $tgl=date("YmdHis");
 		return Excel::download(new exportbukudetail, 'perpus-bukudetail-'.$tgl.'.xlsx');
+	}
+	public function exportpemasukan()
+	{
+        $tgl=date("YmdHis");
+		return Excel::download(new exportpemasukan, 'perpus-pemasukan-'.$tgl.'.xlsx');
+	}
+	public function exportpengeluaran()
+	{
+        $tgl=date("YmdHis");
+		return Excel::download(new exportpengeluaran, 'perpus-pengeluaran-'.$tgl.'.xlsx');
 	}
 
 	public function importbukurak(Request $request) 
@@ -149,6 +170,89 @@ class prosesController extends Controller
  
 		// import data
 		Excel::import(new importbukudetail, public_path('/file_temp/'.$nama_file));
+ 
+		// notifikasi dengan session
+		// Session::flash('sukses','Data Siswa Berhasil Diimport!');
+ 
+		// alihkan halaman kembali
+		// return redirect('/siswa');
+        return redirect()->back()->with('status','Data berhasil Diimport!')->with('tipe','success')->with('icon','fas fa-edit');
+	}
+
+
+	public function importpemasukan(Request $request) 
+	{
+		// validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+		$file = $request->file('file');
+ 
+		// membuat nama file unik
+		$nama_file = rand().$file->getClientOriginalName();
+ 
+		// upload ke folder file_siswa di dalam folder public
+		$file->move('file_temp',$nama_file);
+ 
+		// import data
+		Excel::import(new Importpemasukan, public_path('/file_temp/'.$nama_file));
+ 
+		// notifikasi dengan session
+		// Session::flash('sukses','Data Siswa Berhasil Diimport!');
+ 
+		// alihkan halaman kembali
+		// return redirect('/siswa');
+        return redirect()->back()->with('status','Data berhasil Diimport!')->with('tipe','success')->with('icon','fas fa-edit');
+	}
+
+	public function importpengeluaran(Request $request) 
+	{
+		// validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+		$file = $request->file('file');
+ 
+		// membuat nama file unik
+		$nama_file = rand().$file->getClientOriginalName();
+ 
+		// upload ke folder file_siswa di dalam folder public
+		$file->move('file_temp',$nama_file);
+ 
+		// import data
+		Excel::import(new Importpengeluaran, public_path('/file_temp/'.$nama_file));
+ 
+		// notifikasi dengan session
+		// Session::flash('sukses','Data Siswa Berhasil Diimport!');
+ 
+		// alihkan halaman kembali
+		// return redirect('/siswa');
+        return redirect()->back()->with('status','Data berhasil Diimport!')->with('tipe','success')->with('icon','fas fa-edit');
+	}
+
+
+	public function importperalatan(Request $request) 
+	{
+		// validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+		$file = $request->file('file');
+ 
+		// membuat nama file unik
+		$nama_file = rand().$file->getClientOriginalName();
+ 
+		// upload ke folder file_siswa di dalam folder public
+		$file->move('file_temp',$nama_file);
+ 
+		// import data
+		Excel::import(new Importperalatan, public_path('/file_temp/'.$nama_file));
  
 		// notifikasi dengan session
 		// Session::flash('sukses','Data Siswa Berhasil Diimport!');

@@ -240,13 +240,13 @@ crossorigin="anonymous"></script>
           
           <li class="nav-header">KEUANGAN</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('admin.pemasukan')}}" class="nav-link">
               <i class="fas fa-hand-holding-usd"></i>
               <p>Pemasukan</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('admin.pengeluaran')}}" class="nav-link">
               <i class="far fa-money-bill-alt"></i>
               <p>Pengeluaran</p>
             </a>

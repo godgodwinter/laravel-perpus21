@@ -112,6 +112,27 @@ Route::get('/admin/bukukembali/cari', 'App\Http\Controllers\adminpeminjamancontr
 Route::get('/admin/bukukembali/{id}/bukudetail', 'App\Http\Controllers\adminpeminjamancontroller@indexbukukembalidetail')->name('admin.bukukembali.bukudetail');
 Route::post('/admin/bukukembali/{id}/bukudetail/cari', 'App\Http\Controllers\adminpeminjamancontroller@caribukukembalidetail')->name('admin.bukukembali.bukudetail.cari');
 
+
+
+//pemasukan-MENU
+Route::get('/admin/pemasukan', 'App\Http\Controllers\adminpemasukancontroller@index')->name('admin.pemasukan');
+Route::get('/admin/pemasukan/cari', 'App\Http\Controllers\adminpemasukancontroller@cari')->name('admin.pemasukan.cari');
+Route::post('/admin/pemasukan', 'App\Http\Controllers\adminpemasukancontroller@store')->name('admin.pemasukan.store');
+Route::get('/admin/pemasukan/{id}', 'App\Http\Controllers\adminpemasukancontroller@show')->name('admin.pemasukan.show');
+Route::put('/admin/pemasukan/{id}', 'App\Http\Controllers\adminpemasukancontroller@update')->name('admin.pemasukan.update');
+Route::delete('/admin/pemasukan/{id}', 'App\Http\Controllers\adminpemasukancontroller@destroy')->name('admin.pemasukan.destroy');
+Route::delete('/admin/datapemasukan/multidel', 'App\Http\Controllers\adminpemasukancontroller@multidel')->name('admin.pemasukan.multidel');
+
+
+//pengeluaran-MENU
+Route::get('/admin/pengeluaran', 'App\Http\Controllers\adminpengeluarancontroller@index')->name('admin.pengeluaran');
+Route::get('/admin/pengeluaran/cari', 'App\Http\Controllers\adminpengeluarancontroller@cari')->name('admin.pengeluaran.cari');
+Route::post('/admin/pengeluaran', 'App\Http\Controllers\adminpengeluarancontroller@store')->name('admin.pengeluaran.store');
+Route::get('/admin/pengeluaran/{id}', 'App\Http\Controllers\adminpengeluarancontroller@show')->name('admin.pengeluaran.show');
+Route::put('/admin/pengeluaran/{id}', 'App\Http\Controllers\adminpengeluarancontroller@update')->name('admin.pengeluaran.update');
+Route::delete('/admin/pengeluaran/{id}', 'App\Http\Controllers\adminpengeluarancontroller@destroy')->name('admin.pengeluaran.destroy');
+Route::delete('/admin/datapengeluaran/multidel', 'App\Http\Controllers\adminpengeluarancontroller@multidel')->name('admin.pengeluaran.multidel');
+
 //invoice
 Route::get('/admin/invoice/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@invoicepeminjaman')->name('admin.peminjaman.invoicepeminjaman');
 Route::post('/admin/invoice/peminjaman', 'App\Http\Controllers\adminpeminjamancontroller@invoicepeminjamanperiksa')->name('admin.peminjaman.invoicepeminjamanperiksa');
@@ -146,6 +167,10 @@ Route::get('admin/datapeminjaman/export', 'App\Http\Controllers\prosesController
 Route::post('admin/datapeminjaman/import', 'App\Http\Controllers\prosesController@importpeminjaman')->name('peminjaman.import');
 Route::get('admin/datapengembalian/export', 'App\Http\Controllers\prosesController@exportpengembalian')->name('pengembalian.export');
 Route::post('admin/datapengembalian/import', 'App\Http\Controllers\prosesController@importpengembalian')->name('pengembalian.import');
+Route::get('admin/datapemasukan/export', 'App\Http\Controllers\prosesController@exportpemasukan')->name('pemasukan.export');
+Route::post('admin/datapemasukan/import', 'App\Http\Controllers\prosesController@importpemasukan')->name('pemasukan.import');
+Route::get('admin/datapengeluaran/export', 'App\Http\Controllers\prosesController@exportpengeluaran')->name('pengeluaran.export');
+Route::post('admin/datapengeluaran/import', 'App\Http\Controllers\prosesController@importpengeluaran')->name('pengeluaran.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 
