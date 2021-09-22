@@ -8,7 +8,13 @@
         <div class="flex flex-col items-center justify-end pt-20 space-y-10 pb-18">
             <h2
                 class="text-4xl font-extrabold leading-snug text-center text-transparent tex md:text-6xl lg:text-4xl bg-gradient-to-tr from-pink-500 to-indigo-600 via-blue-600-300 bg-clip-text ">
-                SISTEM PERPUSTAKAAN
+               
+       
+ <div class="typing-container">
+    <span id="sentence" class="sentence">SISTEM </span>
+    <span id="feature-text"></span>
+    <span class="input-cursor"></span>
+  </div> 
 
             </h2>
 
