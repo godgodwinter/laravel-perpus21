@@ -17,14 +17,14 @@
   </div> --}}
 			<div>
 				<div class="relative mr-4 inline-block">
-					<div class="text-gray-500 cursor-pointer w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-300 inline-flex items-center justify-center" @mouseenter="showTooltip = true" @mouseleave="showTooltip = false" @click="printInvoice()">
+					<a class="text-gray-500 cursor-pointer w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-300 inline-flex items-center justify-center" href="{{url('/cetak/pengembalianshow/'.$datas->kodetrans)}}">
 						<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 							<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
 							<path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
 							<path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
 							<rect x="7" y="13" width="10" height="8" rx="2" />
 						</svg>				  
-					</div>
+					</a>
 				</div>
 				
 				<div class="relative inline-block">
@@ -79,7 +79,7 @@
 				</div>
                 <div class="mb-2 md:mb-1 md:flex items-center">
 					<label class="w-40 text-gray-800 block font-bold text-xs uppercase tracking-wide">Tanggal dikembalikan</label>
-					<input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-xs" id="inline-full-name" type="text" placeholder="eg. #INV-100001" value="{{Fungsi::tanggalgaring($datas->created_at)}}" disabled>
+					<input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-48 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-xs" id="inline-full-name" type="text" placeholder="eg. #INV-100001" value="{{Fungsi::tanggalgaringcreated($datas->created_at)}}" disabled>
 				</div>
             </div>
         </div>

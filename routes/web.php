@@ -219,6 +219,7 @@ Route::get('invoice/{id}', 'App\Http\Controllers\pagesController@invoice')->name
 
 
 Route::get('cetak/peminjamanshow/{id}', 'App\Http\Controllers\cetakController@peminjamanshow')->name('cetak.peminjaman.show');
+Route::get('cetak/pengembalianshow/{id}', 'App\Http\Controllers\cetakController@pengembalianshow')->name('cetak.pengembalian.show');
 // Route::get('/', function () {
 //     return view('auth.login');
 // });

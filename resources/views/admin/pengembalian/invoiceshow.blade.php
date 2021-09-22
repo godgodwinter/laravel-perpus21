@@ -229,11 +229,11 @@ $message=session('status');
                 <div class="row no-print">
                   <div class="col-12">
                     {{-- <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a> --}}
-                    <button type="button" class="btn btn-default float-right"><i class="fas fa-print"></i> Print
-                    </button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <a type="button" class="btn btn-default float-right" href="{{url('/invoice/'.$datapinjam->kodetrans)}}"><i class="fas fa-print"></i> Show
+                    </a>
+                    <a type="button" class="btn btn-primary float-right" style="margin-right: 5px;" href="{{url('/cetak/pengembalianshow/'.$datapinjam->kodetrans)}}">
                       <i class="fas fa-download"></i> Generate PDF
-                    </button>
+                    </a>
                     <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/invoice/'.$datapinjam->kodetrans), 'QRCODE')}}" alt="barcode" class="float-left"/>
                 </div>
               </div>

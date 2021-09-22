@@ -21,4 +21,18 @@ class cetakController extends Controller
         $pdf = PDF::loadview('admin.cetak.peminjamanshow',compact('datas','detaildatas'))->setPaper('a4', 'potrait');
         return $pdf->download('laporansekolah_'.$tgl.'-pdf');
     }
+     
+    public function pengembalianshow($id)
+    {
+        $tgl=date("YmdHis");
+        // dd($tgl);
+        $datas=DB::table('pengembalian')->where('kodetrans',$id)->first();
+        // dd($datas);
+            $datapinjamdetail=DB::table('pengembaliandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
+       
+            $detaildatas = $datapinjamdetail->unique('buku_kode');
+// dd($detaildatas);
+        $pdf = PDF::loadview('admin.cetak.pengembalianshow',compact('datas','detaildatas'))->setPaper('a4', 'potrait');
+        return $pdf->download('laporansekolah_'.$tgl.'-pdf');
+    }
 }

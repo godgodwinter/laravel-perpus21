@@ -242,7 +242,7 @@ $message=session('status');
                 <div class="row no-print">
                   <div class="col-12">
                     {{-- <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a> --}}
-                    <a type="button" class="btn btn-default float-right" href="{{url('/cetak/peminjamanshow/'.$datapinjam->kodetrans)}}"><i class="fas fa-print"></i> Print
+                    <a type="button" class="btn btn-default float-right" href="{{url('/invoice/'.$datapinjam->kodetrans)}}"><i class="fas fa-print"></i> Show
                     </a>
                     <a type="button" class="btn btn-primary float-right" style="margin-right: 5px;" href="{{url('/cetak/peminjamanshow/'.$datapinjam->kodetrans)}}">
                       <i class="fas fa-download"></i> Generate PDF
