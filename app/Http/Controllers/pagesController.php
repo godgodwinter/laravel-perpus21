@@ -88,26 +88,36 @@ class pagesController extends Controller
                     if($row->gambar==null){
                         $gambar='https://ui-avatars.com/api/?name='.$row->nama.'&color=7F9CF5&background=EBF4FF';
                     }else{
-                        $gambar=$row->gambar;
+                        $gambar=asset("storage/").'/'.$row->gambar;
                     }
 
                 $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white">
                 <div class="max-w-lg rounded overflow-hidden shadow-lg">
-                    <img class="w-full" src="'.$gambar.'" alt="Sunset in the mountains">
-                    <div class="px-6 py-4">
-                      <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                      <p class="text-gray-700 text-base">
-                       '.$row->nama.'.
+                    <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
+                    <div class="px-6 py-4"> 
+                      <div class="font-bold text-xl mb-2"> '.$row->nama.'.</div>
+                      <table>
+                      <tr>
+                      <td style="padding-right:10px;">
+                                           <p class="text-gray-700 text-base">Pengarang </td><td style="padding-right:10px;"> :</td><td> 
+                       '.$row->pengarang.' </td>
                       </p>
+                      </tr>
+                      <tr>
+                      <td>
+                                           <p class="text-gray-700 text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td> 
+                       '.$row->penerbit.' </td>
+                      </p>
+                      </tr>
+                      </table>
+
                     </div>
                     <div class="px-6 pt-4 pb-2">
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">'.$row->isbn.'</span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">'.$row->penerbit.'</span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">'.$row->pengarang.'</span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">ISBN : '.$row->isbn.'</span>
                     </div>
                   </div>
             </div>
-               
+
                 ';
                 }
          }else{
