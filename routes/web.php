@@ -217,6 +217,8 @@ Route::get('anggota/anggotacektanggungan', 'App\Http\Controllers\pagesController
 Route::get('anggotashow/{id}', 'App\Http\Controllers\pagesController@anggotashow')->name('anggotashow');
 Route::get('invoice/{id}', 'App\Http\Controllers\pagesController@invoice')->name('invoice');
 
+
+Route::get('cetak/peminjamanshow/{id}', 'App\Http\Controllers\cetakController@peminjamanshow')->name('cetak.peminjaman.show');
 // Route::get('/', function () {
 //     return view('auth.login');
 // });
