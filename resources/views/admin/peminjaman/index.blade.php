@@ -209,6 +209,58 @@ $message=session('status');
                                 </form>
                                 
                             <script type="text/javascript">
+                             let  cari = $("#tags").val();
+                             let jmltanggungan=0;
+                             function fetch_customer_data(query = '')
+                                            {
+                                            $.ajax({
+                                            url:"{{ route('anggota.anggotacektanggungan') }}",
+                                            method:'GET',
+                                            data:{
+                                                        "_token": "{{ csrf_token() }}",
+                                                        cari: cari,
+                                                    },
+                                            dataType:'json',
+                                            success:function(data)
+                                            {
+                                                // alert('');
+                                                jmltanggungan=data.datas;
+                                                if(jmltanggungan>0){
+                                                    $("button#kirimdata").prop('disabled', true);
+                                                     
+                                                    var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 3000
+                                                                });
+
+                                                                Toast.fire({
+                                                                    icon: 'error',
+                                                                    title: 
+                                                                        'Tidak bisa meminjam karena masih memiliki tanggungan! '
+                                                                });
+                                                }else{
+                                                    $("button#kirimdata").prop('disabled', false);
+
+                                                }
+                                                // alert(jmltanggungan);
+                                                // $('#tampil').html(data.show);
+                                                    // console.log($('#tampil').html(data.datas);
+                                                    // console.log(data.datas);
+                                                // $('tbody').html(data.table_data);
+                                                // $('#total_records').text(data.total_data);
+                                            }
+                                            })
+                                            }
+                            $( "#tags" ).change(function() {
+                               cari = $("#tags").val();
+                                // alert(cari);
+                            var query = $(this).val();
+                              fetch_customer_data(query);
+                                        // alert(jmltanggungan);    
+                        
+                            });
                                 var values = $('#tags option[selected="true"]').map(function() { return $(this).val(); }).get();
     
                                   // you have no need of .trigger("change") if you dont want to trigger an event

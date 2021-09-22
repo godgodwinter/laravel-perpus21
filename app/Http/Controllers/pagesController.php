@@ -257,6 +257,8 @@ class pagesController extends Controller
     ,'bukukategori','datas','request'));
     }
 
+    
+   
     public function katalog()
     {
         $pages='beranda';
@@ -265,6 +267,36 @@ class pagesController extends Controller
     ));
     }
     
+
+    public function anggotacektanggungan(Request $request)
+    {
+        
+        $jmlpinjam=DB::table('peminjaman')
+        ->where('nomeridentitas',$request->cari)
+        ->count();
+        $jmlkembali=DB::table('pengembalian')
+        ->where('nomeridentitas',$request->cari)
+        ->count();
+
+        if($jmlpinjam>0){
+            $tersedia=$jmlpinjam." Kali";
+        }else{
+            $tersedia="Belum pernah pinjam";
+        }
+
+        if($jmlpinjam>$jmlkembali){
+            $belumkembali=$jmlpinjam-$jmlkembali;
+        }else{
+            $belumkembali=0;
+        }
+        return response()->json([
+            'success' => true,
+            'message' => $belumkembali,
+            'datas' => $belumkembali
+        ], 200);
+
+        dd($datas);
+    }
     public function anggotaproses(Request $request)
     {
 

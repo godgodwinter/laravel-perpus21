@@ -213,6 +213,7 @@ Route::get('katalog/proses', 'App\Http\Controllers\pagesController@katalogproses
 Route::get('buku/{id}', 'App\Http\Controllers\pagesController@buku')->name('buku');
 Route::get('anggota', 'App\Http\Controllers\pagesController@anggota')->name('anggota');
 Route::get('anggota/proses', 'App\Http\Controllers\pagesController@anggotaproses')->name('anggota.proses');
+Route::get('anggota/anggotacektanggungan', 'App\Http\Controllers\pagesController@anggotacektanggungan')->name('anggota.anggotacektanggungan');
 Route::get('anggotashow/{id}', 'App\Http\Controllers\pagesController@anggotashow')->name('anggotashow');
 Route::get('invoice/{id}', 'App\Http\Controllers\pagesController@invoice')->name('invoice');
 
