@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/assets/landing/favicon.c4b2bf5a.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{Fungsi::aplikasijudul()}}</title>
+    <title>G App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- <link
@@ -214,76 +214,73 @@
 
                                     {{-- <form action="cari/proses" class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
                                         method="GET" autocomplete="on" novalidate> --}}
-                                        <form action="{{ route('login') }}" method="POST">
-                                            @csrf
+
                                     <div  class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
                                         <div class="mb-4">
                                             <label class="block mb-2 font-bold text-gray-700 text-md" for="pair">
-                                                Username / Email :
+                                                Pencarian:
                                             </label>
 
                                             <input
                                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 search"
-                                                id="inline-full-name" type="text" placeholder="Username / Email " name="identity"  required>
+                                                id="inline-full-name" type="text" placeholder="Cari Anggota. . . " name="cari" >
 
-                                                @error('identity')
-                                                <label class="block mb-2 font-bold text-red-400 text-sm" for="pair">
-                                                    {{ $message}}
-                                                </label>
-                                                @enderror
                                         </div>
-                                        <div class="mb-4">
-                                            <label class="block mb-2 font-bold text-gray-700 text-md" for="pair">
-                                                Password :
-                                            </label>
-
-                                            <input
-                                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 search"
-                                                id="inline-full-name"  placeholder="Password" name="password" type="password" required>
-
-                                                @error('password')
-                                                <label class="block mb-2 font-bold text-red-400 text-sm" for="pair">
-                                                    {{ $message}}
-                                                </label>
-                                                @enderror
-                                        </div>
-                                         
                                         <div class="flex items-center justify-between">
 
-                                            <button class="px-4 py-2 font-semibold text-white bg-transparent border border-white rounded hover:bg-white active:bg-white hover:text-white hover:border-transparent focus:outline-none focus:shadow-outline"
-                                                id="clear"> 
+                                            <button class="px-4 py-2 font-semibold text-yellow-700 bg-transparent border border-yellow-500 rounded hover:bg-yellow-600 active:bg-yellow-700 hover:text-white hover:border-transparent focus:outline-none focus:shadow-outline"
+                                                href="#" id="clear"> Clear
                                             </button>
 
-                                            <button type="submit"
+                                            <button
                                                 class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline transform hover:scale-150 transition duration-500 ease-in-out "
-                                                href="#"> Masuk
+                                                href="#"> Submit
                                             </button>
 
                                         </div>
-                                        
-                                        @if($errors->any())
-                                        @foreach ($errors->all() as $error)
-                                        <div class="mb-4 mt-2">
-                                            <label class="block mb-2 font-bold text-red-400 text-sm" for="pair">
-                                                {{ $error }}
-                                            </label>
-                                        </div>    
-                                        @endforeach
-                                        @endif
                                     </div>
-                                        </form>
                                 </div>
 
                                 <script>
                                     $(document).ready(function(){
 
+                                    //  fetch_customer_data();
+                                    cari = $("input[name=cari]").val();
+
+                                     function fetch_customer_data(query = '')
+                                     {
+                                      $.ajax({
+                                       url:"{{ route('anggota.proses') }}",
+                                       method:'GET',
+                                       data:{
+                                                "_token": "{{ csrf_token() }}",
+                                                cari: cari,
+                                            },
+                                       dataType:'json',
+                                       success:function(data)
+                                       {
+                                           $('#tampil').html(data.show);
+                                            // console.log($('#tampil').html(data.datas);
+                                            // console.log(data.datas);
+                                        // $('tbody').html(data.table_data);
+                                        // $('#total_records').text(data.total_data);
+                                       }
+                                      })
+                                     }
+
+                                     $(document).on('keyup', '.search', function(){
+                                    cari = $("input[name=cari]").val();
+                                            // console.log(cari);
+                                      var query = $(this).val();
+                                      fetch_customer_data(query);
+                                     });
+
                                      
-                                    //  $("button#clear").click(function(){
+                                     $("button#clear").click(function(){
                                          
-                                    //     //  alert('');
-                                    //      $("input[name=identity]").val('');
-                                    //      $("input[name=password]").val('');
-                                    //  });
+                                        //  alert('');
+                                         $("input[name=cari]").val('');
+                                     });
                                     });
                                     </script>
 

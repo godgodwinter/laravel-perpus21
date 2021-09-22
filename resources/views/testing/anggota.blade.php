@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/assets/landing/favicon.c4b2bf5a.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>G App</title>
+    <title>{{Fungsi::aplikasijudul()}}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- <link
@@ -223,7 +223,7 @@
 
                                             <input
                                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 search"
-                                                id="inline-full-name" type="text" placeholder="Cari . . . " name="cari" >
+                                                id="inline-full-name" type="text" placeholder="Cari Anggota. . . " name="cari" >
 
                                         </div>
                                         <div class="flex items-center justify-between">
