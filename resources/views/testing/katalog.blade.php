@@ -250,7 +250,7 @@
                                      function fetch_customer_data(query = '')
                                      {
                                       $.ajax({
-                                       url:"{{ route('cari.proses') }}",
+                                       url:"{{ route('katalog.proses') }}",
                                        method:'GET',
                                        data:{
                                                 "_token": "{{ csrf_token() }}",

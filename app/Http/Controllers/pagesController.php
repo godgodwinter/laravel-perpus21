@@ -56,35 +56,47 @@ class pagesController extends Controller
     ));
     }
 
-    public function cari()
+    public function anggota()
     {
         $pages='beranda';
         $datas=[];
-        return view('testing.cari',compact('pages','datas'
+        return view('testing.anggota',compact('pages','datas'
     ));
     }
-    public function cariproses(Request $request)
+    
+    public function katalogproses(Request $request)
     {
 
         $output = '';
         $cari=$request->cari;
 
         $jml=DB::table('buku')
-        // ->where('nis','like',"%".$cari."%")
-        ->where('nama','like',"%".$cari."%")
-        ->orWhere('kode','like',"%".$cari."%")
-        ->orWhere('isbn','like',"%".$cari."%")
+        ->where('nama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('kode','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('isbn','like',"%".$cari."%")->skip(0)->take(10)
         ->count();
+        
 
         $datas=DB::table('buku')
         // ->where('nis','like',"%".$cari."%")
-        ->where('nama','like',"%".$cari."%")
-        ->orWhere('kode','like',"%".$cari."%")
-        ->orWhere('isbn','like',"%".$cari."%")
+        ->where('nama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('kode','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('isbn','like',"%".$cari."%")->skip(0)->take(10)
         ->get();
         if($jml>0){
 
                 foreach($datas as $row){
+                    
+        $jmltersedia=DB::table('bukudetail')
+        ->where('status','ada')
+        ->where('buku_kode',$row->kode)
+        ->count();
+        if($jmltersedia>0){
+            $tersedia=$jmltersedia." Buku";
+        }else{
+            $tersedia="Buku kosong";
+        }
+
                     if($row->gambar==null){
                         $gambar='https://ui-avatars.com/api/?name='.$row->nama.'&color=7F9CF5&background=EBF4FF';
                     }else{
@@ -107,6 +119,226 @@ class pagesController extends Controller
                       <td>
                                            <p class="text-gray-700 text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td> 
                        '.$row->penerbit.' </td>
+                      </p>
+                      </tr>
+                      <tr>
+                      <td>
+                                           <p class="text-gray-700 text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td> 
+                       '.$tersedia.' </td>
+                      </p>
+                      </tr>
+                      </table>
+
+                    </div>
+                    <div class="px-6 pt-4 pb-2">
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">ISBN : '.$row->isbn.'</span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Kode Panggil : '.$row->kode.'</span>
+                    </div>
+                  </div>
+            </div>
+
+                ';
+                }
+         }else{
+            $output = '
+            <tr>
+             <td align="center" colspan="5">No Data Found</td>
+            </tr>
+            ';
+
+         }
+        // echo json_encode($datas);
+
+        return response()->json([
+            'success' => true,
+            'message' => $jml,
+            'show' => $output,
+            // 'status' => $data->status,
+            'datas' => $datas
+        ], 200);
+
+        dd($datas);
+
+
+
+        #WAJIB
+
+
+
+
+
+    // $bukurak = DB::table('bukurak')->get();
+    $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+    return view('admin.buku.index',compact('pages'
+    // ,'bukurak'
+    ,'bukukategori','datas','request'));
+    }
+
+    public function katalog()
+    {
+        $pages='beranda';
+        $datas=[];
+        return view('testing.katalog',compact('pages','datas'
+    ));
+    }
+    
+    public function anggotaproses(Request $request)
+    {
+
+        $output = '';
+        $cari=$request->cari;
+
+        $jml=DB::table('anggota')
+        ->where('nama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('nomeridentitas','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('agama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('alamat','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('jk','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('sekolahasal','like',"%".$cari."%")->skip(0)->take(10)
+        ->count();
+        
+
+        $datas=DB::table('anggota')
+        ->where('nama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('nomeridentitas','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('agama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('alamat','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('jk','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('sekolahasal','like',"%".$cari."%")->skip(0)->take(10)
+        ->get();
+
+        if($jml>0){
+
+                foreach($datas as $row){
+              
+
+                    if($row->gambar==null){
+                        $gambar='https://ui-avatars.com/api/?name='.$row->nama.'&color=7F9CF5&background=EBF4FF';
+                    }else{
+                        $gambar=asset("storage/").'/'.$row->gambar;
+                    }
+
+                $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white">
+                <div class="max-w-lg rounded overflow-hidden shadow-lg">
+                    <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
+                    <div class="px-6 py-4"> 
+                      <div class="font-bold text-xl mb-2"> '.$row->nama.'.</div>
+                      <table>
+                      <tr>
+                      <td style="padding-right:10px;">
+                                           <p class="text-gray-700 text-base">Pinjam </td><td style="padding-right:10px;"> : </td><td> 
+                       '.$row->telp.' Kali</td>
+                      </p>
+                      </tr>
+                      <tr>
+                      <td style="padding-right:10px;">
+                                           <p class="text-gray-700 text-base">Belum dikembalikan </td><td style="padding-right:10px;"> : </td><td> 
+                       '.$row->telp.' Buku</td>
+                      </p>
+                      </tr>
+                      </table>
+
+                    </div>
+                    <div class="px-6 pt-4 pb-2">
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Kode Panggil : '.$row->nomeridentitas.'</span>
+                    </div>
+                  </div>
+            </div>
+
+                ';
+                }
+         }else{
+            $output = '
+            <tr>
+             <td align="center" colspan="5">No Data Found</td>
+            </tr>
+            ';
+
+         }
+        // echo json_encode($datas);
+
+        return response()->json([
+            'success' => true,
+            'message' => $jml,
+            'show' => $output,
+            // 'status' => $data->status,
+            'datas' => $datas
+        ], 200);
+
+        dd($datas);
+
+    }
+
+
+    public function cari()
+    {
+        $pages='beranda';
+        $datas=[];
+        return view('testing.cari',compact('pages','datas'
+    ));
+    }
+    public function cariproses(Request $request)
+    {
+
+        $output = '';
+        $cari=$request->cari;
+
+        $jml=DB::table('buku')
+        ->where('nama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('kode','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('isbn','like',"%".$cari."%")->skip(0)->take(10)
+        ->count();
+        
+
+        $datas=DB::table('buku')
+        // ->where('nis','like',"%".$cari."%")
+        ->where('nama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('kode','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('isbn','like',"%".$cari."%")->skip(0)->take(10)
+        ->get();
+        if($jml>0){
+
+                foreach($datas as $row){
+                    
+        $jmltersedia=DB::table('bukudetail')
+        ->where('status','ada')
+        ->where('buku_kode',$row->kode)
+        ->count();
+        if($jmltersedia>0){
+            $tersedia=$jmltersedia." Buku";
+        }else{
+            $tersedia="Buku kosong";
+        }
+
+                    if($row->gambar==null){
+                        $gambar='https://ui-avatars.com/api/?name='.$row->nama.'&color=7F9CF5&background=EBF4FF';
+                    }else{
+                        $gambar=asset("storage/").'/'.$row->gambar;
+                    }
+
+                $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white">
+                <div class="max-w-lg rounded overflow-hidden shadow-lg">
+                    <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
+                    <div class="px-6 py-4"> 
+                      <div class="font-bold text-xl mb-2"> '.$row->nama.'.</div>
+                      <table>
+                      <tr>
+                      <td style="padding-right:10px;">
+                                           <p class="text-gray-700 text-base">Pengarang </td><td style="padding-right:10px;"> :</td><td> 
+                       '.$row->pengarang.' </td>
+                      </p>
+                      </tr>
+                      <tr>
+                      <td>
+                                           <p class="text-gray-700 text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td> 
+                       '.$row->penerbit.' </td>
+                      </p>
+                      </tr>
+                      <tr>
+                      <td>
+                                           <p class="text-gray-700 text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td> 
+                       '.$tersedia.' </td>
                       </p>
                       </tr>
                       </table>

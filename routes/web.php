@@ -207,6 +207,10 @@ Route::get('/landing', 'App\Http\Controllers\pagesController@landing');
 // HALAMANLUAR-raport
 Route::get('cari', 'App\Http\Controllers\pagesController@cari')->name('cari');
 Route::get('cari/proses', 'App\Http\Controllers\pagesController@cariproses')->name('cari.proses');
+Route::get('katalog', 'App\Http\Controllers\pagesController@katalog')->name('katalog');
+Route::get('katalog/proses', 'App\Http\Controllers\pagesController@katalogproses')->name('katalog.proses');
+Route::get('anggota', 'App\Http\Controllers\pagesController@anggota')->name('anggota');
+Route::get('anggota/proses', 'App\Http\Controllers\pagesController@anggotaproses')->name('anggota.proses');
 
 Route::get('/', function () {
     return view('auth.login');
