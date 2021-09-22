@@ -234,7 +234,7 @@ $message=session('status');
                     <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
                       <i class="fas fa-download"></i> Generate PDF
                     </button>
-                    <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/admin/peminjaman/pengembalian/'.$datapinjam->kodetrans), 'QRCODE')}}" alt="barcode" class="float-left"/>
+                    <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/invoice/'.$datapinjam->kodetrans), 'QRCODE')}}" alt="barcode" class="float-left"/>
                 </div>
               </div>
               <!-- /.invoice -->
