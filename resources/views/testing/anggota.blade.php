@@ -10,10 +10,10 @@
                 class="text-4xl font-extrabold leading-snug text-center text-transparent tex md:text-6xl lg:text-4xl bg-gradient-to-tr from-pink-500 to-indigo-600 via-blue-600-300 bg-clip-text ">
                
        
- <div class="typing-container">
-    <span id="sentence" class="sentence">SISTEM </span>
-    <span id="feature-text"></span>
-    <span class="input-cursor"></span>
+ <div class="typing-container"> 
+    <span id="sentence" class="sentence">SISTEM PERPUSTAKAAN </span>
+    {{-- <span id="feature-text"></span>
+    <span class="input-cursor"></span> --}}
   </div> 
 
             </h2>
@@ -39,8 +39,8 @@
         <div class="flex justify-center p-4 px-3 py-10">
             <div class="w-full max-w-lg">
                 <div class="bg-white rounded shadow shadow-drop-center">
-                    <div class="py-4 text-xl tracking-wider text-center text-gray-700 border-b">
-                        {{ Fungsi::sekolahalamat() }}
+                    <div class="py-4 text-xl tracking-wider text-center text-gray-700 border-b uppercase">
+                        Mts Shirothul Fuqoha
                     </div>
 
                     {{-- <form action="cari/proses" class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
