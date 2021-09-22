@@ -21,6 +21,7 @@
       <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
       <link rel="stylesheet" href="{{url('assets/tailwind/')}}/css/styles.css">
+      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
       .loading {
         position: fixed;
@@ -270,6 +271,32 @@
                         <div class="py-4 text-xl tracking-wider text-center text-gray-700 border-b">
                             Tailwind CSS and Select2 single example
                         </div>
+
+                        
+                        <button
+                        class="transform hover:rotate-180 transition duration-500 ease-in-out bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">
+                        Rotate Me 180°
+                       </button>
+                      
+                       <button
+                        class="transform hover:scale-150 transition duration-500 ease-in-out bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
+                        Scale Me 1.5×
+                       </button>
+
+                       <button
+                        class="animate-bounce ease-in-out bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
+                        Scale Me 1.5×
+                       </button>
+                      
+                       <button
+                        class="transform hover:translate-x-20 hover:translate-y-20 transition duration-500 ease-in-out bg-red-400 text-white font-bold py-2 px-4 rounded-lg">
+                        Translate Me 5rem
+                       </button>
+                      
+                       <button
+                        class="transform hover:skew-x-12 hover:skew-y-12 transition duration-500 ease-in-out bg-red-400 text-white font-bold py-2 px-4 rounded-lg">
+                        Skew Me 12°
+                       </button>
                         <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
                             method="POST"
                             autocomplete="on"
@@ -295,7 +322,9 @@
                                 </select>
                             </div>
                             <div class="flex items-center justify-between">
-                                <a class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline transform rotate-45 md:rotate-2" href="#"> Submit
+ 
+
+                                <a class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline transform rotate-45 md:rotate-15 animate-spin " href="#"> Submit
                                 </a>
                                 
                                 <a class="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-600 active:bg-blue-700 hover:text-white hover:border-transparent focus:outline-none focus:shadow-outline" href="#"> Cancel
@@ -341,6 +370,7 @@
     
                 </div>  
             </div>
+            
 
               <div
                 x-ref="showCase"
