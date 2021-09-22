@@ -38,9 +38,13 @@ class pagesController extends Controller
             ->orderBy('created_at','desc')
             ->first();
 
-            $pages='pengembalian';
-            return view('testing.invoicepengembalian',compact('pages','datas'
-        ));
+            $datapinjamdetail=DB::table('pengembaliandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
+       
+            $detaildatas = $datapinjamdetail->unique('buku_kode');
+            
+                        $pages='pengembalian';
+                        return view('testing.invoicepengembalian',compact('pages','datas','detaildatas'
+                     ));
         }else{
 
             $cekpeminjaman=DB::table('peminjaman')
