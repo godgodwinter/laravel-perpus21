@@ -103,7 +103,7 @@ class pagesController extends Controller
                         $gambar=asset("storage/").'/'.$row->gambar;
                     }
 
-                $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white">
+                $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white dark:bg-gray-800">
                 <div class="max-w-lg rounded overflow-hidden shadow-lg">
                     <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
                     <div class="px-6 py-4"> 
@@ -111,19 +111,19 @@ class pagesController extends Controller
                       <table>
                       <tr>
                       <td style="padding-right:10px;">
-                                           <p class="text-gray-700 text-base">Pengarang </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 dark:text-white text-base">Pengarang </td><td style="padding-right:10px;"> :</td><td> 
                        '.$row->pengarang.' </td>
                       </p>
                       </tr>
                       <tr>
                       <td>
-                                           <p class="text-gray-700 text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 dark:text-white text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td> 
                        '.$row->penerbit.' </td>
                       </p>
                       </tr>
                       <tr>
                       <td>
-                                           <p class="text-gray-700 text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 dark:text-white text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td> 
                        '.$tersedia.' </td>
                       </p>
                       </tr>
@@ -131,8 +131,8 @@ class pagesController extends Controller
 
                     </div>
                     <div class="px-6 pt-4 pb-2">
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">ISBN : '.$row->isbn.'</span>
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Kode Panggil : '.$row->kode.'</span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700  dark:bg-gray-700  mr-2 mb-2 dark:text-white">ISBN : '.$row->isbn.'</span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:bg-gray-700 mr-2 mb-2 dark:text-white">Kode Panggil : '.$row->kode.'</span>
                     </div>
                   </div>
             </div>
@@ -209,9 +209,29 @@ class pagesController extends Controller
         ->get();
 
         if($jml>0){
-
+      
+        
                 foreach($datas as $row){
               
+                    $jmlpinjam=DB::table('peminjaman')
+                    ->where('nomeridentitas',$row->nomeridentitas)
+                    ->count();
+                    $jmlkembali=DB::table('pengembalian')
+                    ->where('nomeridentitas',$row->nomeridentitas)
+                    ->count();
+
+                    if($jmlpinjam>0){
+                        $tersedia=$jmlpinjam." Kali";
+                    }else{
+                        $tersedia="Belum pernah pinjam";
+                    }
+
+                    if($jmlpinjam>$jmlkembali){
+                        $belumkembali=$jmlpinjam-$jmlkembali;
+                    }else{
+                        $belumkembali=0;
+                    }
+                    
 
                     if($row->gambar==null){
                         $gambar='https://ui-avatars.com/api/?name='.$row->nama.'&color=7F9CF5&background=EBF4FF';
@@ -219,29 +239,29 @@ class pagesController extends Controller
                         $gambar=asset("storage/").'/'.$row->gambar;
                     }
 
-                $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white">
+                $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white dark:bg-gray-800">
                 <div class="max-w-lg rounded overflow-hidden shadow-lg">
                     <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
                     <div class="px-6 py-4"> 
-                      <div class="font-bold text-xl mb-2"> '.$row->nama.'.</div>
+                      <div class="font-bold text-xl mb-2 text-gray-700 dark:text-white"> '.$row->nama.'.</div>
                       <table>
                       <tr>
                       <td style="padding-right:10px;">
-                                           <p class="text-gray-700 text-base">Pinjam </td><td style="padding-right:10px;"> : </td><td> 
-                       '.$row->telp.' Kali</td>
+                                           <p class="text-gray-700 dark:text-white text-base">Pinjam </td><td style="padding-right:10px;"> : </td><td> 
+                       '.$tersedia.' </td>
                       </p>
                       </tr>
                       <tr>
                       <td style="padding-right:10px;">
-                                           <p class="text-gray-700 text-base">Belum dikembalikan </td><td style="padding-right:10px;"> : </td><td> 
-                       '.$row->telp.' Buku</td>
+                                           <p class="text-gray-700 dark:text-white text-base">Belum dikembalikan </td><td style="padding-right:10px;"> : </td><td> 
+                                           <p class="text-red-400 text-base">'.$belumkembali.' Buku</p></td>
                       </p>
                       </tr>
                       </table>
 
                     </div>
                     <div class="px-6 pt-4 pb-2">
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Kode Panggil : '.$row->nomeridentitas.'</span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 dark:bg-gray-700  dark:text-white" >Kode Panggil : '.$row->nomeridentitas.'</span>
                     </div>
                   </div>
             </div>

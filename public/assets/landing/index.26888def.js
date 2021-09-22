@@ -55,15 +55,15 @@ i.data("mainState", (() => ({
         }
     }
 })), i.data("navbarLinksState", (() => ({
-    navigationLinks: [{
-        label: "ADMIN",
-        link: "/dashboard"
-    }, {
+    navigationLinks: [ {
         label: "KATALOG",
         link: "/katalog"
     }, {
         label: "ANGGOTA",
         link: "/anggota"
+    },{
+        label: "LOGIN",
+        link: "/dashboard"
     }],
     handelMouseEnter: e => {
         n.to(e.querySelector(".underline-link"), {
