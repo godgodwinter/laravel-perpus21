@@ -203,6 +203,11 @@ Route::get('/landing', 'App\Http\Controllers\pagesController@landing');
 //     return view('dashboard');
 // })->name('dashboard');
 
+
+// HALAMANLUAR-raport
+Route::get('cari', 'App\Http\Controllers\pagesController@cari')->name('cari');
+Route::get('cari/proses', 'App\Http\Controllers\pagesController@cariproses')->name('cari.proses');
+
 Route::get('/', function () {
     return view('auth.login');
 });
