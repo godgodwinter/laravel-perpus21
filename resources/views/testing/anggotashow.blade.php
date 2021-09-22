@@ -11,19 +11,25 @@
     
     <!-- ./ Breadcrumbs -->
   @php
-           $jmlbuku=DB::table('bukudetail')
-        ->where('buku_kode',$datas->kode)
-        ->count();  
 
-    $jmltersedia=DB::table('bukudetail')
-        ->where('status','ada')
-        ->where('buku_kode',$datas->kode)
-        ->count();
-        if($jmltersedia>0){
-            $tersedia=$jmltersedia." Buku";
-        }else{
-            $tersedia="Buku kosong";
-        }
+  $jmlpinjam=DB::table('peminjaman')
+  ->where('nomeridentitas',$datas->nomeridentitas)
+  ->count();
+  $jmlkembali=DB::table('pengembalian')
+  ->where('nomeridentitas',$datas->nomeridentitas)
+  ->count();
+
+  if($jmlpinjam>0){
+      $tersedia=$jmlpinjam." Kali";
+  }else{
+      $tersedia="Belum pernah pinjam";
+  }
+
+  if($jmlpinjam>$jmlkembali){
+      $belumkembali=$jmlpinjam-$jmlkembali;
+  }else{
+      $belumkembali=0;
+  }
 
       if($datas->gambar==null){
                         $gambar='https://ui-avatars.com/api/?name='.$datas->nama.'&color=7F9CF5&background=EBF4FF';
@@ -53,48 +59,30 @@
         </div>
         <div class="md:flex-1 px-4">
           <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">{{$datas->nama}}.</h2>
-          <p class="text-gray-500 text-sm">Pengarang : <button  class="text-indigo-600 hover:underline transform hover:translate-x-2 hover:translate-y-2 transition duration-500 ease-in-out">{{$datas->pengarang}}</button></p>
-          
+          {{-- <p class="text-gray-500 text-sm">Pengarang : <button  class="text-indigo-600 hover:underline transform hover:translate-x-2 hover:translate-y-2 transition duration-500 ease-in-out">{{$datas->pengarang}}</button></p> --}}
   
           <div class="flex items-center space-x-4 my-4">
             <div class="flex-1">
-              <p class="text-green-500 text-xl font-semibold">Penerbit : {{$datas->penerbit}}</p>
-              <p class="text-gray-400 text-sm">{{$datas->tahunterbit}}, {{$datas->tempatterbit}} , {{$datas->bahasa}}</p>
+              <p class="text-green-500 text-xl font-semibold">Alamat : {{$datas->alamat}}</p>
+              <p class="text-gray-400 text-sm">{{$datas->tempatlahir}}, {{$datas->tgllahir}} , {{$datas->jk}}</p>
             </div>
           </div>
           <table>
             <tr>
             <td style="padding-right:10px;">
-                                 <p class="text-gray-700 dark:text-white text-base">ISBN </td><td style="padding-right:10px;"> :</td><td> 
-                                    {{$datas->isbn}} </td>
+                                 <p class="text-gray-700 dark:text-white text-base">Pinjam </td><td style="padding-right:10px;"> :</td><td> 
+                                    {{$jmlpinjam}} Buku </td>
             </p>
             </tr>
-            <tr>
-                <td style="padding-right:10px;">
-                                     <p class="text-gray-700 dark:text-white text-base">Kode Panggil </td><td style="padding-right:10px;"> :</td><td> 
-                                        {{$datas->kode}} </td>
-                </p>
-                </tr>
-                <tr>
-                    <td style="padding-right:10px;">
-                                         <p class="text-gray-700 dark:text-white text-base">Jumlah Buku </td><td style="padding-right:10px;"> :</td><td> 
-                                            {{$jmlbuku}} Buku </td>
-                    </p>
-                    </tr>
             <tr>
             </tr>
             <tr>
             <td style="padding-right:10px;">
-                                 <p class="text-gray-700 dark:text-white text-base">Dipinjam </td><td style="padding-right:10px;"> :</td><td> 
-                                    {{$jmlbuku-$jmltersedia}} Buku </td>
+                                 <p class="text-gray-700 dark:text-white text-base">Belum dikembalikan </td><td style="padding-right:10px;"> :</td><td> 
+                                    {{$belumkembali}} Buku </td>
             </p>
             </tr>
-            <tr>
-            <td>
-                                 <p class="text-gray-700 dark:text-white text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td> 
-                                    {{$jmltersedia}}  Buku </td>
-            </p>
-            </tr>
+           
             </table>
   
 
@@ -102,7 +90,7 @@
             <div class="relative">
              
 
-            <img w src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/buku/'.$datas->kode), 'QRCODE')}}" alt="barcode" class="transform hover:skew-x-12 hover:skew-y-12 transition duration-500 ease-in-out h-44"/>
+            <img w src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/anggotashow/'.$datas->nomeridentitas), 'QRCODE')}}" alt="barcode" class="transform hover:skew-x-12 hover:skew-y-12 transition duration-500 ease-in-out h-44"/>
               
             </div></div>
 

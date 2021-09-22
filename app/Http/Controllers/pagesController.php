@@ -34,6 +34,17 @@ class pagesController extends Controller
         return view('testing.buku',compact('pages','datas'
     ));
     }
+    public function anggotashow(Request $request,$id)
+    {
+        $datas=DB::table('anggota')
+        ->where('nomeridentitas',$id)
+        ->orderBy('created_at','desc')
+        ->first();
+        // dd($datas);
+        $pages='beranda';
+        return view('testing.anggotashow',compact('pages','datas'
+    ));
+    }
     public function formatimport()
     {
         $pages='beranda';
@@ -280,8 +291,18 @@ class pagesController extends Controller
 
                     </div>
                     <div class="px-6 pt-4 pb-2">
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 dark:bg-gray-700  dark:text-white" >Kode Panggil : '.$row->nomeridentitas.'</span>
+                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 dark:bg-gray-700  dark:text-white" >Nomer Identitas : '.$row->nomeridentitas.'</span>
                     </div>
+
+
+                    <div class="px-6 pt-4 pb-2 flex float-right">
+                    <a href="'.url('/anggotashow/').'/'.$row->nomeridentitas.'"
+                    class="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:shadow-outline transform hover:rotate-2 transition duration-500 ease-in-out "
+                    href="#"> Lihat Selengkapnya
+                </a>
+                </div>
+
+
                   </div>
             </div>
 

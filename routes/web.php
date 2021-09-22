@@ -213,6 +213,7 @@ Route::get('katalog/proses', 'App\Http\Controllers\pagesController@katalogproses
 Route::get('buku/{id}', 'App\Http\Controllers\pagesController@buku')->name('buku');
 Route::get('anggota', 'App\Http\Controllers\pagesController@anggota')->name('anggota');
 Route::get('anggota/proses', 'App\Http\Controllers\pagesController@anggotaproses')->name('anggota.proses');
+Route::get('anggotashow/{id}', 'App\Http\Controllers\pagesController@anggotashow')->name('anggotashow');
 
 // Route::get('/', function () {
 //     return view('auth.login');
