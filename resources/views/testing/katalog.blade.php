@@ -51,14 +51,14 @@
                         </div>
                         <div class="flex items-center justify-between">
 
-                            <button class="px-4 py-2 font-semibold text-yellow-700 bg-transparent border border-yellow-500 rounded hover:bg-yellow-600 active:bg-yellow-700 hover:text-white hover:border-transparent focus:outline-none focus:shadow-outline"
+                            <button class="px-4 py-2 font-semibold text-yellow-700 bg-transparent border border-yellow-500 rounded hover:bg-yellow-600 active:bg-yellow-700 hover:text-white hover:border-transparent focus:outline-none focus:shadow-outline transform hover:scale-150 transition duration-500 ease-in-out"
                                 href="#" id="clear"> Clear
                             </button>
 
-                            <button
+                            {{-- <button
                                 class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:shadow-outline transform hover:scale-150 transition duration-500 ease-in-out "
                                 href="#"> Submit
-                            </button>
+                            </button> --}}
 
                         </div>
                     </div>
