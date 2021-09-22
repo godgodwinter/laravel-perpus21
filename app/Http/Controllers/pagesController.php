@@ -23,6 +23,54 @@ use Illuminate\Support\Facades\URL;
 class pagesController extends Controller
 {
     
+    public function invoice(Request $request,$id)
+    {
+        // 1. periksa jika di pengembalian ada maka tampilkan 
+        // 2. jika tidak a maka peminjaman
+        // 3. jika tidak ada maka tampilkan pesan error
+        $cekpemgembalian=DB::table('pengembalian')
+        ->where('kodetrans',$id)
+        ->orderBy('created_at','desc')
+        ->count();
+        if($cekpemgembalian>0){
+            $datas=DB::table('pengembalian')
+            ->where('kodetrans',$id)
+            ->orderBy('created_at','desc')
+            ->first();
+
+            $pages='pengembalian';
+            return view('testing.invoicepengembalian',compact('pages','datas'
+        ));
+        }else{
+
+            $cekpeminjaman=DB::table('peminjaman')
+            ->where('kodetrans',$id)
+            ->orderBy('created_at','desc')
+            ->count();
+                if($cekpeminjaman>0){
+                    $datas=DB::table('peminjaman')
+                    ->where('kodetrans',$id)
+                    ->orderBy('created_at','desc')
+                    ->first();
+                    
+                 
+        $datapinjamdetail=DB::table('peminjamandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
+       
+        $detaildatas = $datapinjamdetail->unique('buku_kode');
+        
+                    $pages='peminjaman';
+                    return view('testing.invoicepeminjaman',compact('pages','datas','detaildatas'
+                ));
+
+                }else{
+                    //data tidak ditemukan 
+                     return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
+      
+
+                }
+        }
+
+    }
     public function buku(Request $request,$id)
     {
         $datas=DB::table('buku')

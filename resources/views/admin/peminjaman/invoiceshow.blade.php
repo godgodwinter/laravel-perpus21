@@ -132,7 +132,7 @@ $message=session('status');
                     <table class="table table-striped">
                       <thead>
                       <tr>
-                        <th>Qty</th>
+                        <th>Jumlah</th>
                         <th>Judul Buku</th>
                         <th>ISBN #</th>
                         <th>Penerbit</th>
@@ -247,7 +247,7 @@ $message=session('status');
                     <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
                       <i class="fas fa-download"></i> Generate PDF
                     </button>
-                    <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/admin/peminjaman/peminjaman/'.$datapinjam->kodetrans), 'QRCODE')}}" alt="barcode" class="float-left"/>
+                    <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/invoice/'.$datapinjam->kodetrans), 'QRCODE')}}" alt="barcode" class="float-left"/>
                 </div>
               </div>
               <!-- /.invoice -->
