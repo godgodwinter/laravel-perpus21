@@ -15,10 +15,11 @@
   <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset("assets/") }}/dist/css/adminlte.min.css">
-  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
 integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xgit Zd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
-crossorigin="anonymous"></script>
+crossorigin="anonymous"></script> --}}
   @yield('csshere')
 </head>
 <body class="hold-transition sidebar-mini">

@@ -156,7 +156,7 @@ $message=session('status');
     </td>
 </tr>
 <script>
-    // alert(jmlpinjamlocal);
+    // alert({{$cekjmlada}});
     // va
      if($("input#tersedia{{$data->kode}}").val()>0){
         $("#isikan{{$data->kode}}").prop('disabled', false);
@@ -164,7 +164,7 @@ $message=session('status');
         $("#isikan{{$data->kode}}").prop('title', 'Pinjam!');
 
         $("input#tersedia{{$data->kode}}").prop('min','1');
-        $("input#tersedia{{$data->kode}}").prop('max','{{$cekjmldipinjam}}');
+        $("input#tersedia{{$data->kode}}").prop('max','{{$cekjmlada}}');
      }else{
          $("input#tersedia{{$data->kode}}").prop('readonly',true);
         $("#isikan{{$data->kode}}").prop('disabled', false);
@@ -190,7 +190,7 @@ $message=session('status');
                                                                                 buku_.pengarang ='{{$data->pengarang}}';   
                                                                                 buku_.penerbit = '{{$data->penerbit}}';  
                                                                                 buku_.bukukategori_nama = '{{$data->bukukategori_nama}}';   
-                                                                                buku_.jml = parseInt('{{$cekjmlada}}');   
+                                                                                buku_.jml = parseInt($("input#tersedia{{$data->kode}}").val());   
                                                                                 // var ItemId = "data-" + buku_.id;  
                                                                                 var ItemId = buku_.kode;  
                                                                                 localStorage.setItem(ItemId, JSON.stringify(buku_)); 
