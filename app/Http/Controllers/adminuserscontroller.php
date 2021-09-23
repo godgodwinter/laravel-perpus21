@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Fungsi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 
 class adminuserscontroller extends Controller
@@ -56,5 +58,149 @@ class adminuserscontroller extends Controller
     // $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
     return view('admin.users.index',compact('pages','datas','request'));
+    }
+    public function store(Request $request)
+    {
+        // dd($request);
+        // dd($request);
+        $request->validate([
+            'name'=>'required|unique:users,name',
+            'username' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^\S*$/u'],
+            'email' => 'required|email|unique:users',
+            'tipeuser'=>'required',
+            'password' => 'min:8|required_with:password2|same:password2',
+            'password2' => 'min:8',
+
+
+        ],
+        [
+            'name.required'=>'Nama Harus diisi2',
+
+        ]);
+        
+       DB::table('users')->insert(
+        array(
+               'name'     =>   $request->name,
+               'tipeuser'     =>   $request->tipeuser,
+               'username'     =>   $request->username,
+               'email'     =>   $request->email,
+               'password' => Hash::make($request->password),
+               'nomerinduk'     =>   date('YmdHis'),
+               'created_at'=>date("Y-m-d H:i:s"),
+               'updated_at'=>date("Y-m-d H:i:s")
+        ));
+
+        return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
+    
+    }
+    public function show(Request $request,User $id)
+    {
+        // dd($id);
+        #WAJIB
+        $pages='users';
+        $datas=$id;
+        
+
+        return view('admin.users.edit',compact('pages','datas','request'));
+    }
+    public function proses_update($request,$datas)
+    {
+        if($request->email!==$datas->email){
+            $request->validate([
+                'email'=>'unique:users,email'
+            ],
+            [
+                'email.unique'=>'Email sudah digunakan'
+
+
+            ]);
+        }
+
+            if($request->username!==$datas->username){
+                $request->validate([
+                    'username'=>'unique:users,username'
+                ],
+                [
+                    'username.unique'=>'Username sudah digunakan'
+    
+    
+                ]);
+        }
+    
+
+        if ($request->password==null){
+
+            User::where('email',$datas->email)
+            ->update([
+                'name'     =>   $request->name,
+                'tipeuser'     =>   $request->tipeuser,
+                'username'     =>   $request->username,
+                'email'     =>   $request->email,
+                'nomerinduk'     =>   date('YmdHis'),
+               'updated_at'=>date("Y-m-d H:i:s")
+            ]);
+        }else{
+            User::where('email',$datas->email)
+            ->update([
+                'name'     =>   $request->name,
+                'tipeuser'     =>   $request->tipeuser,
+                'username'     =>   $request->username,
+                'email'     =>   $request->email,
+                'password' => Hash::make($request->password),
+                'nomerinduk'     =>   date('YmdHis'),
+               'updated_at'=>date("Y-m-d H:i:s")
+            ]);
+
+        }
+
+        
+    }
+
+    public function update(Request $request, User $id)
+    {
+        $this->proses_update($request,$id);
+
+            return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
+    }
+    
+    public function destroy($id)
+    {
+        User::destroy($id);
+        return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
+    
+    }
+
+    public function multidel(Request $request)
+    {
+        
+        $ids=$request->ids;
+
+        // $datasiswa = DB::table('siswa')->where('id',$ids)->get();
+        // foreach($datasiswa as $ds){
+        //     $nis=$ds->nis;
+        // }
+
+        // dd($request);
+
+        // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
+        User::whereIn('id',$ids)->delete();
+
+        
+        // load ulang
+     
+        #WAJIB
+        $pages='users';
+        $jmldata='0';
+        $datas='0';
+
+
+        $datas=DB::table('anggota')
+        ->orderBy('nama','asc')
+        ->paginate(Fungsi::paginationjml());
+
+        // $anggotakategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+        return view('admin.anggota.index',compact('pages','datas','request'));
+
     }
 }

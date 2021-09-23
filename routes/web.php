@@ -192,6 +192,8 @@ Route::post('admin/databuku/upload/{buku}', 'App\Http\Controllers\prosesControll
 Route::delete('admin/databuku/upload/{buku}', 'App\Http\Controllers\prosesController@uploadbukudelete')->name('admin.buku.upload.delete');
 Route::post('admin/dataanggota/upload/{anggota}', 'App\Http\Controllers\prosesController@uploadanggota')->name('admin.anggota.upload');
 Route::delete('admin/dataanggota/upload/{anggota}', 'App\Http\Controllers\prosesController@uploadanggotadelete')->name('admin.anggota.upload.delete');
+Route::post('admin/datausers/upload/{users}', 'App\Http\Controllers\prosesController@uploadusers')->name('admin.users.upload');
+Route::delete('admin/datausers/upload/{users}', 'App\Http\Controllers\prosesController@uploadusersdelete')->name('admin.users.upload.delete');
 
 // Route::post('/checkemail',['uses'=>'PagesController@checkEmail']);
 // Route::post('/checkemail', 'App\Http\Controllers\PagesController@checkEmail')->name('checkEmail');

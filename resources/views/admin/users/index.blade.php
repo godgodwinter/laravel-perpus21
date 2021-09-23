@@ -2,11 +2,11 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Anggota')
+@section('title','users')
 @section('linkpages')
 data{{ $pages }}
 @endsection
-@section('halaman','kelas')
+@section('halaman','users')
 
 @section('csshere')
 @endsection
@@ -254,24 +254,52 @@ $message=session('status');
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="name">name @yield('title')</label>
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="name">Nama <code>*)</code></label>
                                             <input type="text" name="name" id="name"
                                                 class="form-control @error('name') is-invalid @enderror" placeholder=""
                                                 value="{{old('name')}}" required>
                                             @error('name')<div class="invalid-feedback"> {{$message}}</div>
                                             @enderror
                                         </div>
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="username">Username <code>*)</code></label>
+                                            <input type="text" name="username" id="username"
+                                                class="form-control @error('username') is-invalid @enderror" placeholder=""
+                                                value="{{old('username')}}" required>
+                                            @error('username')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="email">Email <code>*)</code></label>
+                                            <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" onblur="duplicateEmail(this)"  required>
+                                            @error('email')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
 
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Tipe Anggota<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="tipe">
-                                                @if (old('tipe'))
-                                                <option>{{old('tipe')}}</option>
+                                        <div class="form-group col-md-6 col-6">
+                                            <label>Tipe User<code>*)</code></label>
+                                            <select class="form-control form-control-lg" required name="tipeuser">
+                                                @if (old('tipeuser'))
+                                                <option>{{old('tipeuser')}}</option>
                                                 @endif
                                                 <option value="admin">Admin</option>
                                                 <option value="pustakawan">Pustakawan</option>
                                             </select>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="password">Password <code>*)</code></label>
+                                            <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
+                                            @error('password')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="password2">Konfirmasi Password <code>*)</code></label>
+                                            <input type="password" name="password2" id="password2" class="form-control @error('password2') is-invalid @enderror"  required>
+                                            @error('password2')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
                                         </div>
 
                                     </div>
