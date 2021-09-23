@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Fungsi;
 use App\Models\kelas;
+use App\Models\pengunjung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\URL;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class laporanController extends Controller
@@ -25,6 +28,30 @@ class laporanController extends Controller
         $jmldata = DB::table('kelas')->count();
 
         return view('admin.laporan.index',compact('pages','jmldata','datas'));
+    }
+    public function pengunjung(Request $request, pengunjung $id)
+    {
+        if($this->checkauth('admin')==='404'){
+            return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
+        }
+        // dd($id);
+
+        #WAJIB
+        $pages='pengunjung';
+        $jmldata='0';
+        $datas='0';
+        $buku=$id;
+
+
+        $datas=DB::table('pengunjung')->where('nama',$id->nama)->orderBy('created_at','desc')
+        // ->orderBy('isbn','asc')
+        ->paginate(Fungsi::paginationjml());
+
+        // $bukurak = DB::table('bukurak')->get();
+        // $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+        return view('admin.laporan.pengunjung',compact('pages','datas','request'));
+        // return view('admin.beranda');
     }
 
     public function cetak()

@@ -71,6 +71,8 @@ Route::put('/admin/anggota/{id}', 'App\Http\Controllers\adminanggotacontroller@u
 Route::delete('/admin/anggota/{id}', 'App\Http\Controllers\adminanggotacontroller@destroy')->name('admin.anggota.destroy');
 Route::delete('/admin/dataanggota/multidel', 'App\Http\Controllers\adminanggotacontroller@multidel')->name('admin.anggota.multidel');
 
+//pengunjung-MENU
+Route::get('/admin/pengunjung', 'App\Http\Controllers\laporanController@pengunjung')->name('admin.laporan.pengunjung');
 
 //users-MENU
 Route::get('/admin/users', 'App\Http\Controllers\adminuserscontroller@index')->name('admin.users');

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset("assets/") }}/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/select2/css/select2.min.css">
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
@@ -221,7 +222,7 @@ crossorigin="anonymous"></script> --}}
           </a>
         </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('admin.laporan.pengunjung')}}" class="nav-link">
               <i class="far fa-user"></i>
               <p>Pengunjung</p>
             </a>
@@ -379,6 +380,7 @@ crossorigin="anonymous"></script> --}}
 <!-- jQuery -->
 <script src="{{ asset("assets/") }}/plugins/jquery/jquery.min.js"></script>
 <!-- SweetAlert2 -->
+<script src="{{ asset("assets/") }}/plugins/select2/js/select2.full.min.js"></script>
 <script src="{{ asset("assets/") }}/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="{{ asset("assets/") }}/plugins/toastr/toastr.min.js"></script>
