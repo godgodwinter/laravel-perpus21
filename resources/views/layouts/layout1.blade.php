@@ -144,7 +144,12 @@ crossorigin="anonymous"></script> --}}
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+            @if((Auth::user()->profile_photo_path!='')AND(Auth::user()->profile_photo_path!=null))
           <img src="{{ asset("storage/") }}/{{ Auth::user()->profile_photo_path }}" class="img-circle elevation-2  img-fluid imgprofile" id="imgprofile" alt="User Image" >
+            @else
+            <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" class="img-circle elevation-2  img-fluid imgprofile" id="imgprofile" alt="User Image" >
+
+            @endif
         </div>
         <div class="info">
             <a href="{{route('admin.users.myprofile')}}"  class="d-block">{{ Auth::user()->name }}</a>
