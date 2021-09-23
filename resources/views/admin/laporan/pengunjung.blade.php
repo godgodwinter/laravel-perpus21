@@ -148,7 +148,7 @@ $message=session('status');
               <!-- Default box -->
       <div class="card col-md-10 offset-md-1">
         <div class="card-header" id="jmldata">
-            <label>Jumlah : 0 Pengunjung</label>
+            {{-- <label>Jumlah : 0 Pengunjung</label> --}}
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
