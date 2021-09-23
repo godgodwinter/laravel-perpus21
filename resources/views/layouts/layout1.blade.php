@@ -54,7 +54,7 @@ crossorigin="anonymous"></script> --}}
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
-      
+
       <script>
         $(function () {
           var jmlpinjamlocal=localStorage.length;
@@ -66,11 +66,11 @@ crossorigin="anonymous"></script> --}}
             //     daftarbuku = JSON.parse(localStorage.getItem('daftarbuku'));
             // }
         // alert(daftarbuku.length);
-        
+
         // $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
         $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+jmlpinjamlocal+'</span>');
 
-        
+
         // let daftarkembali=0;
         //     if (localStorage.getItem('daftarkembali') === null) {
         //         daftarkembali = [];
@@ -78,7 +78,7 @@ crossorigin="anonymous"></script> --}}
         //         daftarkembali = JSON.parse(localStorage.getItem('daftarkembali'));
         //     }
         // alert(daftarbuku.length);
-        
+
         // $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
         // $("#jmldatabukukembali").append('<span class="badge badge-success navbar-badge">'+daftarkembali.length+'</span>');
         // $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
@@ -89,7 +89,7 @@ crossorigin="anonymous"></script> --}}
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" >
           <i class="fas fa-cog"></i>
-          
+
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
@@ -105,11 +105,11 @@ crossorigin="anonymous"></script> --}}
           <form method="POST" action="{{ route('logout') }}">
             @csrf
 
-        
+
                 <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger"
                 onclick="event.preventDefault();
                             this.closest('form').submit();">
-                    <i class="fas fa-sign-out-alt">    
+                    <i class="fas fa-sign-out-alt">
                     </i> Logout
                   </a>
         </form>
@@ -225,6 +225,12 @@ crossorigin="anonymous"></script> --}}
           <p>Peralatan</p>
         </a>
       </li>
+        <li class="nav-item">
+        <a href="{{route('admin.users')}}" class="nav-link">
+            <i class="fas fa-user-lock"></i>
+          <p>User</p>
+        </a>
+      </li>
           <li class="nav-header">PROSES</li>
           <li class="nav-item">
             <a href="{{route('admin.peminjaman')}}" class="nav-link">
@@ -238,7 +244,7 @@ crossorigin="anonymous"></script> --}}
               <p>Kembalikan</p>
             </a>
           </li>
-          
+
           <li class="nav-header">KEUANGAN</li>
           <li class="nav-item">
             <a href="{{route('admin.pemasukan')}}" class="nav-link">
@@ -274,9 +280,9 @@ crossorigin="anonymous"></script> --}}
                   <p>Pengembalian</p>
                 </a>
               </li>
-            
+
             </ul>
-            
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-money-check-alt"></i>
@@ -304,9 +310,9 @@ crossorigin="anonymous"></script> --}}
                   <p>Laporan Keuangan</p>
                 </a>
               </li>
-            
+
             </ul>
-{{--             
+{{--
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-users"></i>

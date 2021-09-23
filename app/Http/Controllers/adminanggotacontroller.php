@@ -76,7 +76,7 @@ class adminanggotacontroller extends Controller
 
         ],
         [
-            'nama.required'=>'Nama Harus diisi',
+            'nama.required'=>'Nama Harus diisi2',
 
         ]);
         

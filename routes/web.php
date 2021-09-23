@@ -72,6 +72,14 @@ Route::delete('/admin/anggota/{id}', 'App\Http\Controllers\adminanggotacontrolle
 Route::delete('/admin/dataanggota/multidel', 'App\Http\Controllers\adminanggotacontroller@multidel')->name('admin.anggota.multidel');
 
 
+//users-MENU
+Route::get('/admin/users', 'App\Http\Controllers\adminuserscontroller@index')->name('admin.users');
+Route::get('/admin/users/cari', 'App\Http\Controllers\adminuserscontroller@cari')->name('admin.users.cari');
+Route::post('/admin/users', 'App\Http\Controllers\adminuserscontroller@store')->name('admin.users.store');
+Route::get('/admin/users/{id}', 'App\Http\Controllers\adminuserscontroller@show')->name('admin.users.show');
+Route::put('/admin/users/{id}', 'App\Http\Controllers\adminuserscontroller@update')->name('admin.users.update');
+Route::delete('/admin/users/{id}', 'App\Http\Controllers\adminuserscontroller@destroy')->name('admin.users.destroy');
+Route::delete('/admin/datausers/multidel', 'App\Http\Controllers\adminuserscontroller@multidel')->name('admin.users.multidel');
 
 
 //peralatan-MENU
@@ -171,6 +179,8 @@ Route::get('admin/datapemasukan/export', 'App\Http\Controllers\prosesController@
 Route::post('admin/datapemasukan/import', 'App\Http\Controllers\prosesController@importpemasukan')->name('pemasukan.import');
 Route::get('admin/datapengeluaran/export', 'App\Http\Controllers\prosesController@exportpengeluaran')->name('pengeluaran.export');
 Route::post('admin/datapengeluaran/import', 'App\Http\Controllers\prosesController@importpengeluaran')->name('pengeluaran.import');
+Route::get('admin/datausers/export', 'App\Http\Controllers\prosesController@exportusers')->name('users.export');
+Route::post('admin/datausers/import', 'App\Http\Controllers\prosesController@importusers')->name('users.import');
 
 Route::get('admin/testing/qr', 'App\Http\Controllers\laporanController@qr')->name('testing.qr');
 

@@ -138,6 +138,9 @@ $message=session('status');
                                             <input type="number" name="jml" id="jml" class="form-control" placeholder="" value="" disabled
                                                 required>
                                         </div>
+                                        <div class="form-group col-md-12 col-12">
+                                            <code>Clear data Jika ada data Undefine.</code>
+                                        </div>
 
                                     </div>
 
