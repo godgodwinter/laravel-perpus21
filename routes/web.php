@@ -73,6 +73,7 @@ Route::delete('/admin/dataanggota/multidel', 'App\Http\Controllers\adminanggotac
 
 //pengunjung-MENU
 Route::get('/admin/pengunjung', 'App\Http\Controllers\laporanController@pengunjung')->name('admin.laporan.pengunjung');
+Route::get('/admin/pengunjungapi', 'App\Http\Controllers\laporanController@pengunjungapi')->name('admin.laporan.pengunjungapi');
 
 //users-MENU
 Route::get('/admin/users', 'App\Http\Controllers\adminuserscontroller@index')->name('admin.users');

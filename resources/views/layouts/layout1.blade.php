@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset("assets/") }}/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/select2/css/select2.min.css">
+  {{-- <link rel="stylesheet" href="{{ asset("assets/") }}/plugins/select2/css/select2.min.css"> --}}
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
