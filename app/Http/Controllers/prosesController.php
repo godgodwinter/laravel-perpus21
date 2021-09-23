@@ -423,6 +423,64 @@ class prosesController extends Controller
 		]);
         return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
 	}
+	public function uploadusers(Request $request,User $users){
+        // dd($request);
+		$this->validate($request, [
+			'file' => 'required',
+		]);
+		$namafilebaru=$users->username;
+
+		// menyimpan data file yang diupload ke variabel $file
+		$file = $request->file('file');
+
+      	        // nama file
+		echo 'File Name: '.$file->getClientOriginalName();
+		echo '<br>';
+
+      	        // ekstensi file
+		echo 'File Extension: '.$file->getClientOriginalExtension();
+		// dd()
+		echo '<br>';
+
+      	        // real path
+		echo 'File Real Path: '.$file->getRealPath();
+		echo '<br>';
+
+      	        // ukuran file
+		echo 'File Size: '.$file->getSize();
+		echo '<br>';
+
+      	        // tipe mime
+		echo 'File Mime Type: '.$file->getMimeType();
+
+      	        // isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'storage/gambar';
+
+                // upload file
+		$file->move($tujuan_upload,"gambar/".$namafilebaru.".jpg");
+
+
+		User::where('username',$users->username)
+		->update([
+			'profile_photo_path' => "gambar/".$namafilebaru.".jpg",
+		'updated_at'=>date("Y-m-d H:i:s")
+		]);
+
+        return redirect()->back()->with('status','Photo berhasil Diupload!')->with('tipe','success')->with('icon','fas fa-edit');
+
+	}
+
+	public function uploadusersdelete(Request $request,User $users){
+
+        // dd($request);
+        Storage::disk('public')->delete($request->profile_photo_path);
+		User::where('id',$users->id)
+		->update([
+			'profile_photo_path' => "",
+			'updated_at'=>date("Y-m-d H:i:s")
+		]);
+        return redirect()->back()->with('status','Photo berhasil Dihapus!')->with('tipe','danger')->with('icon','fas fa-trash');
+	}
 
 	public function uploadlogo(Request $request,settings $settings){
         // dd($request);
