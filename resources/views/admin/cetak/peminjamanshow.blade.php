@@ -118,8 +118,8 @@ zxc
                     $totaldenda=0;
                     @endphp
                     @foreach ($detaildatas as $dd)
-                        <tr>
-                            <td>   
+                        <tr >
+                            <td align="center">   
                                 @php
                                 $jmldatapinjam=DB::table('peminjamandetail')->where('kodetrans',$datas->kodetrans)->where('buku_kode',$dd->buku_kode)->orderBy('created_at', 'desc')->count();
                                 @endphp
@@ -129,7 +129,7 @@ zxc
                                     {{$dd->buku_nama}}
                                 </td>
                                 <td>
-                                    Pengarang : {{$dd->buku_pengarang}}
+                                    {{$dd->buku_isbn}}
                                 </td>
                                 <td>
                                     {{$dd->buku_penerbit}}
