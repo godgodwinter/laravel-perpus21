@@ -32,7 +32,7 @@ class adminuserscontroller extends Controller
         return view('admin.users.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
-    
+
     public function cari(Request $request)
     {
         // dd($request);
@@ -47,9 +47,9 @@ class adminuserscontroller extends Controller
     $datas=DB::table('users')
     // ->where('nis','like',"%".$cari."%")
     ->where('name','like',"%".$cari."%")
-    ->orWhere('nomeridentitas','like',"%".$cari."%")
-    ->orWhere('agama','like',"%".$cari."%")
-    ->orWhere('tipe','like',"%".$cari."%")
+    ->orWhere('username','like',"%".$cari."%")
+    ->orWhere('email','like',"%".$cari."%")
+    ->orWhere('tipeuser','like',"%".$cari."%")
     ->paginate(Fungsi::paginationjml());
 
 
@@ -77,7 +77,7 @@ class adminuserscontroller extends Controller
             'name.required'=>'Nama Harus diisi2',
 
         ]);
-        
+
        DB::table('users')->insert(
         array(
                'name'     =>   $request->name,
@@ -91,7 +91,7 @@ class adminuserscontroller extends Controller
         ));
 
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
-    
+
     }
     public function show(Request $request,User $id)
     {
@@ -99,7 +99,7 @@ class adminuserscontroller extends Controller
         #WAJIB
         $pages='users';
         $datas=$id;
-        
+
 
         return view('admin.users.edit',compact('pages','datas','request'));
     }
@@ -122,11 +122,11 @@ class adminuserscontroller extends Controller
                 ],
                 [
                     'username.unique'=>'Username sudah digunakan'
-    
-    
+
+
                 ]);
         }
-    
+
 
         if ($request->password==null){
 
@@ -153,7 +153,7 @@ class adminuserscontroller extends Controller
 
         }
 
-        
+
     }
 
     public function update(Request $request, User $id)
@@ -162,17 +162,17 @@ class adminuserscontroller extends Controller
 
             return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
-    
+
     public function destroy($id)
     {
         User::destroy($id);
         return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
-    
+
     }
 
     public function multidel(Request $request)
     {
-        
+
         $ids=$request->ids;
 
         // $datasiswa = DB::table('siswa')->where('id',$ids)->get();
@@ -185,9 +185,9 @@ class adminuserscontroller extends Controller
         // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
         User::whereIn('id',$ids)->delete();
 
-        
+
         // load ulang
-     
+
         #WAJIB
         $pages='users';
         $jmldata='0';

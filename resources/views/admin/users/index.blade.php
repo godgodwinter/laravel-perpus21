@@ -48,6 +48,7 @@ $message=session('status');
     <th width="10%" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
     <th> Nama  </th>
+    <th> Username</th>
     <th> Hakakses</th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
@@ -94,7 +95,8 @@ $message=session('status');
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
     <td>{{ $data->name }}</td>
-    <td>{{ $data->tipeuser }}</td>
+    <td>{{ $data->username }}</td>
+    <td>{{ Str::ucfirst($data->tipeuser) }}</td>
 
     <td class="text-center">
         {{-- <a class="btn btn-icon btn-secondary btn-sm " href="{{ url('/admin/inputnilai/kelas') }}/{{ $data->id }}"
@@ -287,14 +289,14 @@ $message=session('status');
                                                 <option value="pustakawan">Pustakawan</option>
                                             </select>
                                         </div>
-                                        
+
                                         <div class="form-group col-md-6 col-6">
                                             <label for="password">Password <code>*)</code></label>
                                             <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
                                             @error('password')<div class="invalid-feedback"> {{$message}}</div>
                                             @enderror
                                         </div>
-                                        
+
                                         <div class="form-group col-md-6 col-6">
                                             <label for="password2">Konfirmasi Password <code>*)</code></label>
                                             <input type="password" name="password2" id="password2" class="form-control @error('password2') is-invalid @enderror"  required>
