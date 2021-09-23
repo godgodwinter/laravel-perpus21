@@ -22,10 +22,10 @@ use Illuminate\Support\Facades\URL;
 
 class pagesController extends Controller
 {
-    
+
     public function invoice(Request $request,$id)
     {
-        // 1. periksa jika di pengembalian ada maka tampilkan 
+        // 1. periksa jika di pengembalian ada maka tampilkan
         // 2. jika tidak a maka peminjaman
         // 3. jika tidak ada maka tampilkan pesan error
         $cekpemgembalian=DB::table('pengembalian')
@@ -39,9 +39,9 @@ class pagesController extends Controller
             ->first();
 
             $datapinjamdetail=DB::table('pengembaliandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
-       
+
             $detaildatas = $datapinjamdetail->unique('buku_kode');
-            
+
                         $pages='pengembalian';
                         return view('testing.invoicepengembalian',compact('pages','datas','detaildatas'
                      ));
@@ -56,20 +56,20 @@ class pagesController extends Controller
                     ->where('kodetrans',$id)
                     ->orderBy('created_at','desc')
                     ->first();
-                    
-                 
+
+
         $datapinjamdetail=DB::table('peminjamandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
-       
+
         $detaildatas = $datapinjamdetail->unique('buku_kode');
-        
+
                     $pages='peminjaman';
                     return view('testing.invoicepeminjaman',compact('pages','datas','detaildatas'
                 ));
 
                 }else{
-                    //data tidak ditemukan 
+                    //data tidak ditemukan
                      return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
-      
+
 
                 }
         }
@@ -138,7 +138,14 @@ class pagesController extends Controller
         return view('testing.anggota',compact('pages','datas'
     ));
     }
-    
+    public function pengunjung()
+    {
+        $pages='beranda';
+        $datas=[];
+        return view('testing.pengunjung',compact('pages','datas'
+    ));
+    }
+
     public function katalogproses(Request $request)
     {
 
@@ -150,7 +157,7 @@ class pagesController extends Controller
         ->orWhere('kode','like',"%".$cari."%")->skip(0)->take(10)
         ->orWhere('isbn','like',"%".$cari."%")->skip(0)->take(10)
         ->count();
-        
+
 
         $datas=DB::table('buku')
         // ->where('nis','like',"%".$cari."%")
@@ -161,7 +168,7 @@ class pagesController extends Controller
         if($jml>0){
 
                 foreach($datas as $row){
-                    
+
         $jmltersedia=DB::table('bukudetail')
         ->where('status','ada')
         ->where('buku_kode',$row->kode)
@@ -181,24 +188,24 @@ class pagesController extends Controller
                 $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white dark:bg-gray-800">
                 <div class="max-w-lg rounded overflow-hidden shadow-lg">
                     <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
-                    <div class="px-6 py-4"> 
+                    <div class="px-6 py-4">
                       <div class="font-bold text-xl mb-2"> '.$row->nama.'.</div>
                       <table>
                       <tr>
                       <td style="padding-right:10px;">
-                                           <p class="text-gray-700 dark:text-white text-base">Pengarang </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 dark:text-white text-base">Pengarang </td><td style="padding-right:10px;"> :</td><td>
                        '.$row->pengarang.' </td>
                       </p>
                       </tr>
                       <tr>
                       <td>
-                                           <p class="text-gray-700 dark:text-white text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 dark:text-white text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td>
                        '.$row->penerbit.' </td>
                       </p>
                       </tr>
                       <tr>
                       <td>
-                                           <p class="text-gray-700 dark:text-white text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 dark:text-white text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td>
                        '.$tersedia.' </td>
                       </p>
                       </tr>
@@ -209,7 +216,7 @@ class pagesController extends Controller
                       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700  dark:bg-gray-700  mr-2 mb-2 dark:text-white">ISBN : '.$row->isbn.'</span>
                       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:bg-gray-700 mr-2 mb-2 dark:text-white">Kode Panggil : '.$row->kode.'</span>
                     </div>
-                    
+
                     <div class="px-6 pt-4 pb-2 flex float-right">
                     <a href="'.url('/buku/').'/'.$row->kode.'"
                     class="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:shadow-outline transform hover:rotate-2 transition duration-500 ease-in-out "
@@ -257,8 +264,8 @@ class pagesController extends Controller
     ,'bukukategori','datas','request'));
     }
 
-    
-   
+
+
     public function katalog()
     {
         $pages='beranda';
@@ -266,11 +273,11 @@ class pagesController extends Controller
         return view('testing.katalog',compact('pages','datas'
     ));
     }
-    
+
 
     public function anggotacektanggungan(Request $request)
     {
-        
+
         $jmlpinjam=DB::table('peminjaman')
         ->where('nomeridentitas',$request->cari)
         ->count();
@@ -311,7 +318,7 @@ class pagesController extends Controller
         ->orWhere('jk','like',"%".$cari."%")->skip(0)->take(10)
         ->orWhere('sekolahasal','like',"%".$cari."%")->skip(0)->take(10)
         ->count();
-        
+
 
         $datas=DB::table('anggota')
         ->where('nama','like',"%".$cari."%")->skip(0)->take(10)
@@ -322,11 +329,20 @@ class pagesController extends Controller
         ->orWhere('sekolahasal','like',"%".$cari."%")->skip(0)->take(10)
         ->get();
 
+        $first=DB::table('anggota')
+        ->where('nama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('nomeridentitas','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('agama','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('alamat','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('jk','like',"%".$cari."%")->skip(0)->take(10)
+        ->orWhere('sekolahasal','like',"%".$cari."%")->skip(0)->take(10)
+        ->first();
+
         if($jml>0){
-      
-        
+
+
                 foreach($datas as $row){
-              
+
                     $jmlpinjam=DB::table('peminjaman')
                     ->where('nomeridentitas',$row->nomeridentitas)
                     ->count();
@@ -345,7 +361,7 @@ class pagesController extends Controller
                     }else{
                         $belumkembali=0;
                     }
-                    
+
 
                     if($row->gambar==null){
                         $gambar='https://ui-avatars.com/api/?name='.$row->nama.'&color=7F9CF5&background=EBF4FF';
@@ -356,18 +372,18 @@ class pagesController extends Controller
                 $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white dark:bg-gray-800">
                 <div class="max-w-lg rounded overflow-hidden shadow-lg">
                     <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
-                    <div class="px-6 py-4"> 
+                    <div class="px-6 py-4">
                       <div class="font-bold text-xl mb-2 text-gray-700 dark:text-white"> '.$row->nama.'.</div>
                       <table>
                       <tr>
                       <td style="padding-right:10px;">
-                                           <p class="text-gray-700 dark:text-white text-base">Pinjam </td><td style="padding-right:10px;"> : </td><td> 
+                                           <p class="text-gray-700 dark:text-white text-base">Pinjam </td><td style="padding-right:10px;"> : </td><td>
                        '.$tersedia.' </td>
                       </p>
                       </tr>
                       <tr>
                       <td style="padding-right:10px;">
-                                           <p class="text-gray-700 dark:text-white text-base">Belum dikembalikan </td><td style="padding-right:10px;"> : </td><td> 
+                                           <p class="text-gray-700 dark:text-white text-base">Belum dikembalikan </td><td style="padding-right:10px;"> : </td><td>
                                            <p class="text-red-400 text-base">'.$belumkembali.' Buku</p></td>
                       </p>
                       </tr>
@@ -407,7 +423,8 @@ class pagesController extends Controller
             'message' => $jml,
             'show' => $output,
             // 'status' => $data->status,
-            'datas' => $datas
+            'datas' => $datas,
+            'first' => $first
         ], 200);
 
         dd($datas);
@@ -433,7 +450,7 @@ class pagesController extends Controller
         ->orWhere('kode','like',"%".$cari."%")->skip(0)->take(10)
         ->orWhere('isbn','like',"%".$cari."%")->skip(0)->take(10)
         ->count();
-        
+
 
         $datas=DB::table('buku')
         // ->where('nis','like',"%".$cari."%")
@@ -444,7 +461,7 @@ class pagesController extends Controller
         if($jml>0){
 
                 foreach($datas as $row){
-                    
+
         $jmltersedia=DB::table('bukudetail')
         ->where('status','ada')
         ->where('buku_kode',$row->kode)
@@ -464,24 +481,24 @@ class pagesController extends Controller
                 $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white">
                 <div class="max-w-lg rounded overflow-hidden shadow-lg">
                     <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
-                    <div class="px-6 py-4"> 
+                    <div class="px-6 py-4">
                       <div class="font-bold text-xl mb-2"> '.$row->nama.'.</div>
                       <table>
                       <tr>
                       <td style="padding-right:10px;">
-                                           <p class="text-gray-700 text-base">Pengarang </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 text-base">Pengarang </td><td style="padding-right:10px;"> :</td><td>
                        '.$row->pengarang.' </td>
                       </p>
                       </tr>
                       <tr>
                       <td>
-                                           <p class="text-gray-700 text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 text-base">Penerbit </td><td style="padding-right:10px;"> :</td><td>
                        '.$row->penerbit.' </td>
                       </p>
                       </tr>
                       <tr>
                       <td>
-                                           <p class="text-gray-700 text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td> 
+                                           <p class="text-gray-700 text-base">Tersedia </td><td style="padding-right:10px;"> :</td><td>
                        '.$tersedia.' </td>
                       </p>
                       </tr>

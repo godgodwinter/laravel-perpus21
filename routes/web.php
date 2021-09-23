@@ -230,6 +230,7 @@ Route::get('anggota/anggotacektanggungan', 'App\Http\Controllers\pagesController
 Route::get('anggotashow/{id}', 'App\Http\Controllers\pagesController@anggotashow')->name('anggotashow');
 Route::get('invoice/{id}', 'App\Http\Controllers\pagesController@invoice')->name('invoice');
 
+Route::get('pengunjung', 'App\Http\Controllers\pagesController@pengunjung')->name('pengunjung');
 
 Route::get('cetak/peminjamanshow/{id}', 'App\Http\Controllers\cetakController@peminjamanshow')->name('cetak.peminjaman.show');
 Route::get('cetak/pengembalianshow/{id}', 'App\Http\Controllers\cetakController@pengembalianshow')->name('cetak.pengembalian.show');
