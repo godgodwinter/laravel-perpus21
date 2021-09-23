@@ -80,6 +80,7 @@ Route::get('/admin/users/{id}', 'App\Http\Controllers\adminuserscontroller@show'
 Route::put('/admin/users/{id}', 'App\Http\Controllers\adminuserscontroller@update')->name('admin.users.update');
 Route::delete('/admin/users/{id}', 'App\Http\Controllers\adminuserscontroller@destroy')->name('admin.users.destroy');
 Route::delete('/admin/datausers/multidel', 'App\Http\Controllers\adminuserscontroller@multidel')->name('admin.users.multidel');
+Route::get('/admin/myprofile', 'App\Http\Controllers\adminuserscontroller@myprofile')->name('admin.users.myprofile');
 
 
 //peralatan-MENU

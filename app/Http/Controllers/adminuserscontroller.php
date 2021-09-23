@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Fungsi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
@@ -92,6 +93,18 @@ class adminuserscontroller extends Controller
 
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
 
+    }
+    public function myprofile(Request $request)
+    {
+        $id=Auth::user()->username;
+        $datas=DB::table('users')->where('username',$id)->first();
+        // dd($datas);
+        #WAJIB
+        $pages='users';
+        // $datas=$id;
+
+
+        return view('admin.users.edit',compact('pages','datas','request'));
     }
     public function show(Request $request,User $id)
     {

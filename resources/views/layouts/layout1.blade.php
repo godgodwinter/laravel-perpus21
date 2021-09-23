@@ -20,7 +20,15 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
 integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xgit Zd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
 crossorigin="anonymous"></script> --}}
+<style>
+    .imgprofile {
+  width: 10px;
+  height: 10px;
+  object-fit: cover;
+}
+</style>
   @yield('csshere')
+
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -136,10 +144,10 @@ crossorigin="anonymous"></script> --}}
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ Auth::user()->profile_photo_url }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset("storage/") }}/{{ Auth::user()->profile_photo_path }}" class="img-circle elevation-2  img-fluid imgprofile" id="imgprofile" alt="User Image" >
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            <a href="{{route('admin.users.myprofile')}}"  class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 

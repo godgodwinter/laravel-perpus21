@@ -128,7 +128,7 @@ $message=session('status');
                     <form action="/admin/datausers/upload/{{ $datas->id }}" method="post" class="d-inline">
                       @method('delete')
                       @csrf
-                      <input type="hidden" name="namaphoto" value="{{ $datas->gambar }}" required>
+                      <input type="hidden" name="namaphoto" value="{{ $datas->profile_photo_path }}" required>
                       <button class="btn btn-icon btn-danger btn-md"
                           onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"><span
                               class="pcoded-micon"> <i class="fas fa-trash"></i> Hapus</span></button>
