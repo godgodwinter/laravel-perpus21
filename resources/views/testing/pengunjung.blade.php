@@ -4,12 +4,40 @@
 
 
 <section x-data="introSectionState" class="relative min-h-screen intro">
+
+    
     <div class="relative px-6 pb-24 mx-auto md:pt-24 max-w-7xl">
         <div class="flex flex-col items-center justify-end pt-20 space-y-10 pb-18">
+
+            @php
+            $tipe=session('tipe');
+            $message=session('status');
+            @endphp
+                    @if (session('status'))
+
+                    <div class="bg-white rounded-lg border-blue-600 border p-3 shadow-lg" id="notif">
+                        <div class="flex flex-row">
+                          <div class="px-2">
+                            <svg width="24" height="24" viewBox="0 0 1792 1792" fill="#44C997" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1299 813l-422 422q-19 19-45 19t-45-19l-294-294q-19-19-19-45t19-45l102-102q19-19 45-19t45 19l147 147 275-275q19-19 45-19t45 19l102 102q19 19 19 45t-19 45zm141 83q0-148-73-273t-198-198-273-73-273 73-198 198-73 273 73 273 198 198 273 73 273-73 198-198 73-273zm224 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/>
+                              </svg>
+                          </div>
+                          <div class="ml-2 mr-6">
+                            <span class="font-semibold">{{$message}}!</span>
+                            {{-- <span class="block text-gray-500">Anyone with a link can now view this file</span> --}}
+                          </div>
+                        </div>
+                      </div>
+                   
+                    @endif
+          
+
+              
             <h2
                 class="text-4xl font-extrabold leading-snug text-center text-transparent tex md:text-6xl lg:text-4xl bg-gradient-to-tr from-pink-500 to-indigo-600 via-blue-600-300 bg-clip-text ">
 
 
+        
  <div class="typing-container">
     <span id="sentence" class="sentence">SISTEM PERPUSTAKAAN </span>
     {{-- <span id="feature-text"></span>
@@ -27,7 +55,7 @@
                 $('.selectpicker').select2();
             });
 
-        </script>
+        </s>
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -43,18 +71,19 @@
                         ISI DATA PENGUNJUNG
                     </div>
 
-                    <form action="anggota/proses" class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
+                    <form action="pengunjung/proses" class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
                         method="GET" autocomplete="on" novalidate>
 
                     {{-- <div  class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"> --}}
                         <div class="mb-4">
                             <label class="block mb-2 font-bold text-red-300 text-sm" for="pair">
-                                Cari jika sudah menjadi anggota perpus
+                                Cari jika sudah menjadi anggota perpus<br>
+                                Jika belum menjadi anggota langsung isi data saja.
                             </label>
 
                             <input
                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 search"
-                                id="inline-full-name" type="text" placeholder="" name="nomeridentitas" >
+                                id="inline-full-name" type="text" placeholder="Cari . . . " name="cari" >
 
                         </div>
                         <div class="mb-4">
@@ -64,8 +93,12 @@
 
                             <input
                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 nomeridentitas"
-                                id="inline-full-name" type="text" placeholder="" name="nomeridentitas" required>
-
+                                id="inline-full-name" type="text" placeholder="" name="nomeridentitas" required value="{{old('nomeridentitas')}}">
+                                @error('nomeridentitas')
+                                <label class="block mb-2 font-bold text-red-300 text-sm" for="pair">
+                                    {{$message}}
+                                </label>
+                                @enderror 
                         </div>
                         <div class="mb-4">
                             <label class="block mb-2 font-bold text-gray-700 text-md" for="pair">
@@ -74,8 +107,34 @@
 
                             <input
                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 nama"
-                                id="inline-full-name" type="text" placeholder="" name="nama" required>
-
+                                id="inline-full-name" type="text" placeholder="" name="nama" required  value="{{old('nama')}}">
+                                @error('nama')
+                                <label class="block mb-2 font-bold text-red-300 text-sm" for="pair">
+                                    {{$message}}
+                                </label>
+                                @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label class="block mb-2 font-bold text-red-200 text-md" for="pair">
+                                Tanggal (untuk testing)
+                            </label>
+                                @if(old('tgl')!=null)
+                                    @php
+                                        $tgl=old('tgl');
+                                    @endphp
+                                @else
+                                    @php
+                                        $tgl=date('Y-m-d');
+                                    @endphp
+                                @endif
+                            <input
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 nama"
+                                id="inline-full-name" type="date" placeholder="" name="tgl" required  value="{{$tgl}}">
+                                @error('nama')
+                                <label class="block mb-2 font-bold text-red-300 text-sm" for="pair">
+                                    {{$message}}
+                                </label>
+                                @enderror
                         </div>
                         <div class="flex items-center justify-between">
 
@@ -112,8 +171,14 @@
                        success:function(data)
                        {
                            $('#tampil').html(data.show);
-                         $("input[name=nomeridentitas]").val(data.first.nomeridentitas);
-                         $("input[name=nama]").val(data.first.nama);
+
+                           if(data.first!==null){
+                                $("input[name=nomeridentitas]").val(data.first.nomeridentitas);
+                                $("input[name=nama]").val(data.first.nama);
+                           }else{
+                                $("input[name=nomeridentitas]").val('');
+                                $("input[name=nama]").val('');
+                           }
                         //  $("input[name=cari]").val('');
                             // console.log($('#tampil').html(data.datas);
                             // console.log(data.datas);
@@ -135,6 +200,11 @@
 
                         //  alert('');
                          $("input[name=cari]").val('');
+                         $("input[name=nomeridentitas]").val('');
+                         $("input[name=nama]").val('');
+                         $("input[name=tgl]").val('{{date('Y-m-d')}}')
+
+                         return false;
                      });
                     });
                     </script>

@@ -231,6 +231,7 @@ Route::get('anggotashow/{id}', 'App\Http\Controllers\pagesController@anggotashow
 Route::get('invoice/{id}', 'App\Http\Controllers\pagesController@invoice')->name('invoice');
 
 Route::get('pengunjung', 'App\Http\Controllers\pagesController@pengunjung')->name('pengunjung');
+Route::get('pengunjung/proses', 'App\Http\Controllers\pagesController@pengunjungproses')->name('pengunjung.proses');
 
 Route::get('cetak/peminjamanshow/{id}', 'App\Http\Controllers\cetakController@peminjamanshow')->name('cetak.peminjaman.show');
 Route::get('cetak/pengembalianshow/{id}', 'App\Http\Controllers\cetakController@pengembalianshow')->name('cetak.pengembalian.show');

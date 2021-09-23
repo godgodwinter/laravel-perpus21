@@ -61,6 +61,9 @@ i.data("mainState", (() => ({
     }, {
         label: "ANGGOTA",
         link: "/anggota"
+    }, {
+        label: "PENGUNJUNG",
+        link: "/pengunjung"
     },{
         label: "LOGIN",
         link: "/dashboard"

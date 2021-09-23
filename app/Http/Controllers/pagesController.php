@@ -16,6 +16,7 @@ use App\Models\tagihansiswa;
 use App\Models\tagihansiswadetail;
 use App\Models\tapel;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -302,7 +303,37 @@ class pagesController extends Controller
             'datas' => $belumkembali
         ], 200);
 
-        dd($datas);
+        // dd($datas);
+    }
+    
+    public function pengunjungproses(Request $request)
+    {
+        $request->validate([
+            'nama'=>'required',
+            'nomeridentitas'=>'required',
+            'tgl'=>'required',
+        ],
+        [
+            'nama.required'=>'Nama Harus diisi',
+
+        ]);
+            $tipe='Belum Daftar';
+        $d=DB::table('anggota')->where('nomeridentitas',$request->nomeridentitas)->count();
+        if($d>0){
+            $dd=DB::table('anggota')->where('nomeridentitas',$request->nomeridentitas)->first();
+            $tipe=$dd->tipe;
+        }
+
+        DB::table('pengunjung')->insert([
+            'nama' => $request->nama,
+            'nomeridentitas' =>$request->nomeridentitas,
+            'tipe' => $tipe,
+            'tgl' =>$request->tgl,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        
+        return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
     }
     public function anggotaproses(Request $request)
     {
