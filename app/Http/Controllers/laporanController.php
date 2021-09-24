@@ -50,7 +50,39 @@ class laporanController extends Controller
         // $bukurak = DB::table('bukurak')->get();
         // $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-        return view('admin.laporan.pengunjung',compact('pages','datas','request','jml'));
+
+        $labelawal = Carbon::now()->startOfMonth()->subMonth(6);
+        $month = date("Y-m",strtotime($labelawal));
+        $label=[];
+        array_push($label,Fungsi::tanggalindobln($month));
+        // $label='"'.Fungsi::tanggalindobln($month).'"';
+        $bln = date("m",strtotime($labelawal));
+        $year = date("Y",strtotime($labelawal));
+
+        $count=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)
+        ->count();
+        $data=$count;
+
+        for($i=0;$i<6;$i++){
+            $labelawal = $labelawal->startOfMonth()->addMonth(1);
+            $month = date("Y-m",strtotime($labelawal));
+            // $label.=',"'.Fungsi::tanggalindobln($month).'"';
+        array_push($label,Fungsi::tanggalindobln($month));
+
+
+
+            $bln = date("m",strtotime($labelawal));
+            $year = date("Y",strtotime($labelawal));
+            $count=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)
+                     ->count();
+                     $data.=','.$count;
+        }
+
+        $datasminus = Carbon::now()->startOfMonth()->subMonth(3);
+        $datasadd = Carbon::now()->startOfMonth()->addMonth(3);
+        $month = date("m",strtotime($datasminus));
+
+        return view('admin.laporan.pengunjung',compact('pages','datas','request','jml','label','data'));
         // return view('admin.beranda');
     }
 

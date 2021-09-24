@@ -17,6 +17,86 @@ data{{ $pages }}
       $('.select2').select2()
     });
 </script>
+<script src="{{ asset("assets/") }}/plugins/Chart.bundle.js"></script>
+<script>
+
+//     let labelku='';
+//     let dataku='';
+//     $(document).ready(function(){
+
+//         fetch_customer_data();
+// //  fetch_customer_data();
+// cari = $("input[name=cari]").val();
+// bln = $("input[name=bln]").val();
+
+//  function fetch_customer_data(query = '')
+//  {
+//   $.ajax({
+//    url:"{{ route('admin.api.chart1') }}",
+//    method:'GET',
+//    data:{
+//             "_token": "{{ csrf_token() }}",
+//         },
+//    dataType:'json',
+//    success:function(data)
+//    {
+// //  alert(data.label);
+//  labelku=data.label;
+//  dataku=data.data;
+
+//     //    $('#jmldata').html(data.jml);
+//         // console.log($('#tampil').html(data.datas);
+//         // console.log(data.datas);
+//     // $('tbody').html(data.table_data);
+//     // $('#total_records').text(data.total_data);
+//    }
+//   })
+//  }
+
+
+// });
+
+
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [@foreach ($label as $l)
+            " {{$l}} ",
+            @endforeach],
+            datasets: [{
+                    label: '# Jumlah Pengunjung per bulan',
+                    data: [{{$data}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+            }
+        }
+    });
+</script>
 @endsection
 
 
@@ -232,6 +312,32 @@ $message=session('status');
 
         </div>
 
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Grafik Pengunjung</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+      <div class="card-body col-sm-6 offset-3">
+        <div class="chart">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+      </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
 
     </section>
     @endsection

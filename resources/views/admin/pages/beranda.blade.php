@@ -15,41 +15,41 @@ data{{ $pages }}
 <script src="{{ asset("assets/") }}/plugins/Chart.bundle.js"></script>
 <script>
 
-    let labelku='';
-    let dataku='';
-    $(document).ready(function(){
+//     let labelku='';
+//     let dataku='';
+//     $(document).ready(function(){
 
-        fetch_customer_data();
-//  fetch_customer_data();
-cari = $("input[name=cari]").val();
-bln = $("input[name=bln]").val();
+//         fetch_customer_data();
+// //  fetch_customer_data();
+// cari = $("input[name=cari]").val();
+// bln = $("input[name=bln]").val();
 
- function fetch_customer_data(query = '')
- {
-  $.ajax({
-   url:"{{ route('admin.api.chart1') }}",
-   method:'GET',
-   data:{
-            "_token": "{{ csrf_token() }}",
-        },
-   dataType:'json',
-   success:function(data)
-   {
-//  alert(data.label);
- labelku=data.label;
- dataku=data.data;
+//  function fetch_customer_data(query = '')
+//  {
+//   $.ajax({
+//    url:"{{ route('admin.api.chart1') }}",
+//    method:'GET',
+//    data:{
+//             "_token": "{{ csrf_token() }}",
+//         },
+//    dataType:'json',
+//    success:function(data)
+//    {
+// //  alert(data.label);
+//  labelku=data.label;
+//  dataku=data.data;
 
-    //    $('#jmldata').html(data.jml);
-        // console.log($('#tampil').html(data.datas);
-        // console.log(data.datas);
-    // $('tbody').html(data.table_data);
-    // $('#total_records').text(data.total_data);
-   }
-  })
- }
+//     //    $('#jmldata').html(data.jml);
+//         // console.log($('#tampil').html(data.datas);
+//         // console.log(data.datas);
+//     // $('tbody').html(data.table_data);
+//     // $('#total_records').text(data.total_data);
+//    }
+//   })
+//  }
 
 
-});
+// });
 
 
     var ctx = document.getElementById("myChart");
