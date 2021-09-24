@@ -86,19 +86,31 @@ class laporanController extends Controller
         // dd($id);
 
         #WAJIB
-        $pages='pengunjung';
+        $pages='keuangan';
         $jmldata='0';
         $datas='0';
+        $bln=date('Y-m');
+        $month = date("m",strtotime($bln));
+        $year = date("Y",strtotime($bln));
 
-        $datas=DB::table('pengunjung')->orderBy('tgl','desc')->get();
-        $jml=DB::table('pengunjung')->orderBy('tgl','desc')->count();
+        $datas=DB::table('pengeluaran')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->orderBy('tglbayar','desc')->get();
+        $jml=DB::table('pengeluaran')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->orderBy('tglbayar','desc')->count();
+        $totalnominal=DB::table('pengeluaran')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->orderBy('tglbayar','desc')->sum('nominal');
+
+        $datas2=DB::table('pemasukan')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->orderBy('tglbayar','desc')->get();
+        $jml2=DB::table('pemasukan')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->orderBy('tglbayar','desc')->count();
+        $totalnominal2=DB::table('pemasukan')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->orderBy('tglbayar','desc')->sum('nominal');
+
+        $datasdenda=DB::table('pengembaliandetail')->whereMonth('tgl_dikembalikan',$month)->whereYear('tgl_dikembalikan',$year)->orderBy('tgl_dikembalikan','desc')->get();
+        $jmldenda=DB::table('pengembaliandetail')->whereMonth('tgl_dikembalikan',$month)->whereYear('tgl_dikembalikan',$year)->orderBy('tgl_dikembalikan','desc')->count();
+        $totalnominaldenda=DB::table('pengembaliandetail')->whereMonth('tgl_dikembalikan',$month)->whereYear('tgl_dikembalikan',$year)->orderBy('tgl_dikembalikan','desc')->sum('totaldenda');
         // ->orderBy('isbn','asc')
         // ->paginate(Fungsi::paginationjml());
 
         // $bukurak = DB::table('bukurak')->get();
         // $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-        return view('admin.laporan.pengunjung',compact('pages','datas','request','jml'));
+        return view('admin.laporan.keuangan',compact('pages','datas','datas2','request','jml','jml2','totalnominal','totalnominal2','datasdenda','jmldenda','totalnominaldenda'));
         // return view('admin.beranda');
     }
 
@@ -244,8 +256,302 @@ if($request->status=='sudah'){
 
 
     }
-    public function keuanganapi(Request $request)
+    public function apikeuangan(Request $request)
     {
+
+
+        $output = '';
+        $outputpemasukan = '';
+        $outputpengeluaran = '';
+        $outputdenda = '';
+        $cari=$request->cari;
+        $month = date("m",strtotime($request->bln));
+        $year = date("Y",strtotime($request->bln));
+
+    $jmlpemasukan=DB::table('pemasukan')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->skip(0)->take(10)
+    ->count();
+
+
+    $dataspemasukan=DB::table('pemasukan')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->skip(0)->take(10)
+    ->get();
+
+    $sumpemasukan=DB::table('pemasukan')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->skip(0)->take(10)
+    ->sum('nominal');
+
+    $firstpemasukan=DB::table('pemasukan')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->skip(0)->take(10)
+    ->first();
+
+    $jmlpengeluaran=DB::table('pengeluaran')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->skip(0)->take(10)
+    ->count();
+
+
+    $dataspengeluaran=DB::table('pengeluaran')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->skip(0)->take(10)
+    ->get();
+    $sumpengeluaran=DB::table('pengeluaran')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->skip(0)->take(10)
+    ->sum('nominal');
+
+    $firstpengeluaran=DB::table('pengeluaran')->whereMonth('tglbayar',$month)->whereYear('tglbayar',$year)->skip(0)->take(10)
+    ->first();
+
+
+    $jmldenda=DB::table('pengembaliandetail')->whereMonth('tgl_dikembalikan',$month)->whereYear('tgl_dikembalikan',$year)->skip(0)->take(10)
+    ->count();
+
+
+    $datasdenda=DB::table('pengembaliandetail')->whereMonth('tgl_dikembalikan',$month)->whereYear('tgl_dikembalikan',$year)->skip(0)->take(10)
+    ->get();
+
+    $sumdenda=DB::table('pengembaliandetail')->whereMonth('tgl_dikembalikan',$month)->whereYear('tgl_dikembalikan',$year)->skip(0)->take(10)
+    ->sum('totaldenda');
+
+    $firstdenda=DB::table('pengembaliandetail')->whereMonth('tgl_dikembalikan',$month)->whereYear('tgl_dikembalikan',$year)->skip(0)->take(10)
+    ->first();
+
+    $sumsaldo=($sumpemasukan+$sumdenda)-$sumpengeluaran;
+    $outputsaldo='';
+        if($jmlpemasukan>0){
+
+            $no=0;
+                    $outputpemasukan .= '
+                    <tr  class="thead-dark">
+                        <th colspan="2">
+                        Data  Pemasukan
+                        </th>
+
+                        <th style="width: 18%" class="text-center">
+                            '.$jmlpemasukan.' Transaksi
+                        </th>
+                        <th style="width: 18%" class="text-center">
+                        <small>   Total Nominal :</small><br>
+                            <strong>'.Fungsi::rupiah($sumpemasukan).'</strong>
+                        </th>
+
+                    </tr>
+                    ';
+                foreach($dataspemasukan as $data){
+
+                    $no++;
+                $outputpemasukan .= '
+
+                <tr>
+                <td>
+                    '.$no.'
+                </td>
+                <td >
+                       '.$data->nama.'
+
+                </td>
+                <td class="text-center">
+                '.Fungsi::tanggalindo($data->tglbayar).'
+                </td>
+
+                <td class="project-state">
+                    '.Fungsi::rupiah($data->nominal).'
+                </td>
+
+            </tr>
+
+                ';
+                }
+         }else{
+            $outputpemasukan = '
+            <tr>
+             <td align="center" colspan="5">No Data Found</td>
+            </tr>
+            ';
+
+         }
+
+
+
+        if($jmlpengeluaran>0){
+
+            $no=0;
+                    $outputpengeluaran .= '
+                    <tr  class="thead-dark">
+                        <th colspan="2">
+                        Data  Pengeluaran
+                        </th>
+
+                        <th style="width: 18%" class="text-center">
+                            '.$jmlpengeluaran.' Transaksi
+                        </th>
+                        <th style="width: 18%" class="text-center">
+                        <small>   Total Nominal :</small><br>
+                            <strong>'.Fungsi::rupiah($sumpengeluaran).'</strong>
+                        </th>
+
+                    </tr>
+                    ';
+                foreach($dataspengeluaran as $data){
+
+                    $no++;
+                $outputpengeluaran .= '
+
+                <tr>
+                <td>
+                    '.$no.'
+                </td>
+                <td >
+                       '.$data->nama.'
+
+                </td>
+                <td class="text-center">
+                '.Fungsi::tanggalindo($data->tglbayar).'
+                </td>
+
+                <td class="project-state">
+                    '.Fungsi::rupiah($data->nominal).'
+                </td>
+
+            </tr>
+
+                ';
+                }
+         }else{
+            $outputpengeluaran = '
+            <tr>
+             <td align="center" colspan="5">No Data Found</td>
+            </tr>
+            ';
+
+         }
+
+
+
+        if($jmldenda>0){
+
+            $no=0;
+                    $outputdenda .= '
+                    <tr  class="thead-dark">
+                        <th colspan="2">
+                        Data  Denda
+                        </th>
+
+                        <th style="width: 18%" class="text-center">
+                            '.$jmldenda.' Transaksi
+                        </th>
+                        <th style="width: 18%" class="text-center">
+                        <small>   Total Nominal :</small><br>
+                            <strong>'.Fungsi::rupiah($sumdenda).'</strong>
+                        </th>
+
+                    </tr>
+                    ';
+                foreach($datasdenda as $data){
+
+                    $no++;
+                $outputdenda .= '
+
+                <tr>
+                <td>
+                    '.$no.'
+                </td>
+                <td >
+                       '.$data->buku_nama.'
+
+                </td>
+                <td class="text-center">
+                '.Fungsi::tanggalindo($data->tgl_dikembalikan).'
+                </td>
+
+                <td class="project-state">
+                    '.Fungsi::rupiah($data->totaldenda).'
+                </td>
+
+            </tr>
+
+                ';
+                }
+         }else{
+            $outputdenda = '
+            <tr>
+             <td align="center" colspan="5">No Data Found</td>
+            </tr>
+            ';
+
+         }
+
+         $outputsaldo .= '
+
+         <tr>
+         <td colspan="4"> </td>
+       </tr>
+       <tr>
+           <th colspan="2">
+             Data  Pemasukan
+           </th>
+
+           <th style="width: 18%" class="text-center">
+               '.$jmlpemasukan.' Transaksi
+           </th>
+           <th style="width: 18%" class="text-center">
+            <small>   Total Nominal :</small><br>
+               <strong>'.Fungsi::rupiah($sumpemasukan).'</strong>
+           </th>
+
+       </tr>
+       <tr >
+           <th colspan="2">
+             Data  Pemasukan Denda
+           </th>
+
+           <th style="width: 18%" class="text-center">
+           '.$jmldenda.' Transaksi
+           </th>
+           <th style="width: 18%" class="text-center">
+            <small>   Total Nominal :</small><br>
+               <strong>'.Fungsi::rupiah($sumdenda).'</strong>
+           </th>
+
+       </tr>
+       <tr>
+           <th colspan="2">
+             Data  Pengeluaran
+           </th>
+
+           <th style="width: 18%" class="text-center">
+           '.$jmlpengeluaran.' Transaksi
+           </th>
+           <th style="width: 18%" class="text-center">
+            <small>   Total Nominal :</small><br>
+               <strong>'.Fungsi::rupiah($sumpengeluaran).'</strong>
+           </th>
+
+       </tr>
+       <tr>
+           <th colspan="3">
+            Total Saldo = Total Pemasukan + Denda - Pengeluaran
+           </th>
+
+           <th style="width: 18%" class="text-center">
+            <small>   Total Saldo :</small><br>
+               <strong>'.Fungsi::rupiah($sumsaldo).'</strong>
+           </th>
+
+       </tr>
+       ';
+
+        return response()->json([
+            'success' => true,
+            'jmlpemasukan' => $jmlpemasukan,
+            'dataspemasukan' => $dataspemasukan,
+            'firstpemasukan' => $firstpemasukan,
+            'outputpemasukan' => $outputpemasukan,
+
+            'jmlpengeluaran' => $jmlpengeluaran,
+            'dataspengeluaran' => $dataspengeluaran,
+            'firstpengeluaran' => $firstpengeluaran,
+            'outputpengeluaran' => $outputpengeluaran,
+
+            'jmldenda' => $jmldenda,
+            'datasdenda' => $datasdenda,
+            'firstdenda' => $firstdenda,
+            'outputdenda' => $outputdenda,
+            'outputsaldo' => $outputsaldo,
+        ], 200);
+
+        // dd($datas);
 
     }
     public function pengunjungapi(Request $request)
