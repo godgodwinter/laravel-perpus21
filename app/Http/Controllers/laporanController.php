@@ -43,16 +43,17 @@ class laporanController extends Controller
         $datas='0';
 
         $datas=DB::table('pengunjung')->orderBy('tgl','desc')->get();
+        $jml=DB::table('pengunjung')->orderBy('tgl','desc')->count();
         // ->orderBy('isbn','asc')
         // ->paginate(Fungsi::paginationjml());
 
         // $bukurak = DB::table('bukurak')->get();
         // $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
-        return view('admin.laporan.pengunjung',compact('pages','datas','request'));
+        return view('admin.laporan.pengunjung',compact('pages','datas','request','jml'));
         // return view('admin.beranda');
     }
-    
+
     public function pengunjungapi(Request $request)
     {
 
@@ -96,19 +97,19 @@ class laporanController extends Controller
                           <a>
                              '.$data->nama.'
                           </a>
-                         
+
                       </td>
                       <td>
                       '.$data->nomeridentitas.'
                       </td>
                       <td class="project_progress">
-                          
+
                         '.Fungsi::tanggalindo($data->tgl).'</td>
                       <td class="project-state">
-                                 
+
                           <span class="badge badge-success">'.$data->tipe.'</span>
                       </td>
-                     
+
                   </tr>
 
                 ';
@@ -146,7 +147,7 @@ class laporanController extends Controller
         // dd($datapengeluaran);
 
         $pdf = PDF::loadview('admin.laporan.cetak',compact('databos','datapemasukan','datapengeluaran'))->setPaper('a4', 'potrait');
-        
+
         // \QrCode::size(500)
         //     ->format('png')
         //     ->generate('www.google.com', public_path('assets/img/qrcode.png'));

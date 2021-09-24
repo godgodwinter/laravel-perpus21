@@ -36,7 +36,7 @@ $message=session('status');
                 showConfirmButton: false,
                 timer: 3000
             });
-            
+
             Toast.fire({
                 icon: '{{$tipe}}',
                 title: '{{$message}}'
@@ -62,7 +62,7 @@ $message=session('status');
                         <div class="row">
                             <div class="col-6">
                                 <div class="input-group ">
-                                    <input type="text" class="form-control form-control search" placeholder="Type your keywords here" name="cari"  id="cari" autocomplete="off">
+                                    <input type="text" class="form-control form-control search" placeholder="Cari . . ." name="cari"  id="cari" autocomplete="off">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn btn-default search">
                                             <i class="fa fa-search"></i>
@@ -80,11 +80,11 @@ $message=session('status');
                                             $bln=date('Y-m');
                                         }
 
-                                    @endphp 
+                                    @endphp
                                     <input type="month" name="bln" id="bln"
                                         class="form-control  search" placeholder=""
                                         value="{{$bln}}" required>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@ $message=session('status');
                         </div>
                     </div>
                 </div>
-            
+
             <script>
                 $(document).ready(function(){
 
@@ -114,6 +114,9 @@ $message=session('status');
                    success:function(data)
                    {
                        $('#tampil').html(data.show);
+                       $('#jmldata').clear;
+                       $('#jmldata').html('<label>Jumlah : '+data.message+' Pengunjung</label>');
+                    //    $('#jmldata').html(data.jml);
                         // console.log($('#tampil').html(data.datas);
                         // console.log(data.datas);
                     // $('tbody').html(data.table_data);
@@ -130,7 +133,7 @@ $message=session('status');
                   fetch_customer_data(query);
                  });
 
-                 
+
                  $(document).on('change', '#bln', function(){
                 cari = $("input[name=cari]").val();
                 bln = $("input[name=bln]").val();
@@ -139,7 +142,7 @@ $message=session('status');
                   fetch_customer_data(query);
                  });
                 //  $("button#clear").click(function(){
-                     
+
                 //     //  alert('');
                 //      $("input[name=cari]").val('');
                 //  });
@@ -148,7 +151,7 @@ $message=session('status');
               <!-- Default box -->
       <div class="card col-md-10 offset-md-1">
         <div class="card-header" id="jmldata">
-            {{-- <label>Jumlah : 0 Pengunjung</label> --}}
+            <label>Jumlah : {{$jml}} Pengunjung</label>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -178,13 +181,13 @@ $message=session('status');
                       <th style="width: 8%" class="text-center">
                           Tipe
                       </th>
-                     
+
                   </tr>
               </thead>
               <tbody id="tampil">
                   {{-- {{dd($datas)}} --}}
                   @foreach ($datas as $data)
-                      
+
                   <tr>
                       <td>
                          {{$loop->index+1}}
@@ -212,14 +215,14 @@ $message=session('status');
                       </td>
                       <td class="project-state">
                           @php
-                           
-                          @endphp           
+
+                          @endphp
                           <span class="badge badge-success">{{$data->tipe}}</span>
                       </td>
-                     
+
                   </tr>
                   @endforeach
-                 
+
               </tbody>
           </table>
         </div>
@@ -229,6 +232,6 @@ $message=session('status');
 
         </div>
 
-        
+
     </section>
     @endsection
