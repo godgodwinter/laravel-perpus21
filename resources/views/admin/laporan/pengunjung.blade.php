@@ -173,6 +173,34 @@ $message=session('status');
                     </div>
                 </div>
 
+
+      <!-- Default box -->
+      <div class="card  col-sm-10 offset-1">
+        <div class="card-header">
+          <h3 class="card-title">Grafik Pengunjung</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+      <div class="card-body  col-sm-7 offset-2">
+        <div class="chart">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+      </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
             <script>
                 $(document).ready(function(){
 
@@ -312,32 +340,6 @@ $message=session('status');
 
         </div>
 
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Grafik Pengunjung</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-
-      <div class="card-body col-sm-6 offset-3">
-        <div class="chart">
-            <canvas id="myChart" width="400" height="400"></canvas>
-        </div>
-      </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-        </div>
-        <!-- /.card-footer-->
-      </div>
-      <!-- /.card -->
 
     </section>
     @endsection

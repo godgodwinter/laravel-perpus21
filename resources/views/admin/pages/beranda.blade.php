@@ -161,7 +161,7 @@ data{{ $pages }}
     <section class="content">
 
       <!-- Default box -->
-      <div class="card">
+      <div class="card  col-sm-10 offset-1">
         <div class="card-header">
           <h3 class="card-title">Grafik Peminjaman</h3>
 
@@ -175,14 +175,13 @@ data{{ $pages }}
           </div>
         </div>
 
-      <div class="card-body col-sm-6 offset-3">
+      <div class="card-body col-sm-7 offset-3">
         <div class="chart">
             <canvas id="myChart" width="400" height="400"></canvas>
         </div>
       </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          Footer
         </div>
         <!-- /.card-footer-->
       </div>
