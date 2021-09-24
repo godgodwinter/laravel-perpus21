@@ -31,7 +31,7 @@ $message=session('status');
                 showConfirmButton: false,
                 timer: 3000
             });
-            
+
             Toast.fire({
                 icon: '{{$tipe}}',
                 title: '{{$message}}'
@@ -119,7 +119,7 @@ $message=session('status');
 
 @endsection
 
-@section('foottable')  
+@section('foottable')
 
 @php
   $cari=$request->cari;
@@ -179,11 +179,11 @@ $message=session('status');
                 <div class="card-body">
 
 
-                        
+
                         <form action="{{ route('admin.'.$pages.'.cari') }}" method="GET">
-                           
+
                     <div class="row">
-                               
+
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
                                     <input type="text" name="cari" id="cari"
                                         class="form-control form-control-sm @error('cari') is-invalid @enderror"
@@ -191,18 +191,18 @@ $message=session('status');
                                     @error('cari')<div class="invalid-feedback"> {{$message}}</div>
                                     @enderror
                     </div>
-                               
 
-                                       
+
+
                     <div class="form-group col-md-4 col-4 mt-1 text-left">
-                         
+
 
                         <button type="submit" value="CARI" class="btn btn-icon btn-info btn-sm mt-0"><span
                             class="pcoded-micon"> <i class="fas fa-search"></i> Pecarian</span></button>
 
-                    </div>                     
+                    </div>
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
-                            
+
                         <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                             data-target="#importExcel"><i class="fas fa-upload"></i>
                             Import
@@ -211,12 +211,12 @@ $message=session('status');
                         <a href="/admin/@yield('linkpages')/export" type="submit" value="Import"
                             class="btn btn-icon btn-primary btn-sm"><span class="pcoded-micon"> <i
                                     class="fas fa-download"></i> Export </span></a>
-                    </div> 
+                    </div>
 
-                                  
-                              
 
-                            
+
+
+
 
                                         </div>
 
@@ -266,30 +266,61 @@ $message=session('status');
                                             @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                                             @enderror
                                         </div>
-                                        
+
                                         <div class="form-group col-md-12 col-12">
                                             <label>Kategori<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="kategori_nama">  
+                                            <select class="form-control form-control-lg" required name="kategori_nama">
                                                 @if (old('kategori_nama'))
-                                                <option>{{old('kategori_nama')}}</option>                        
+                                                <option>{{old('kategori_nama')}}</option>
                                                 @endif
                                                 <option>Umum</option>
                                                 <option>Perbaikan</option>
                                                 <option>Kegiatan Sekolah</option>
                                             </select>
-                                        </div> 
+                                        </div>
 
-                                        
+
                                         <div class="form-group col-md-6 col-6">
                                             <label for="nominal">Nominal <code>*)</code></label>
                                             <input type="number" name="nominal" id="nominal" class="form-control @error('nominal') is-invalid @enderror" value="{{old('nominal')}}" required>
+                                            <input type="text" name="labelrupiah" min="0" id="labelrupiah" class="form-control-plaintext" readonly="" value="Rp 0,00" >
                                             @error('nominal')<div class="invalid-feedback"> {{$message}}</div>
                                             @enderror
                                         </div>
+
+                                        <script type="text/javascript">
+
+                                            var rupiah = document.getElementById('nominal');
+                                            var labelrupiah = document.getElementById('labelrupiah');
+                                            rupiah.addEventListener('keyup', function(e){
+                                              // tambahkan 'Rp.' pada saat form di ketik
+                                              // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+                                              // rupiah.value = formatRupiah(this.value, 'Rp. ');
+                                              labelrupiah.value = formatRupiah(this.value, 'Rp. ');
+                                            });
+
+                                            /* Fungsi formatRupiah */
+                                            function formatRupiah(angka, prefix){
+                                              var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                                              split   		= number_string.split(','),
+                                              sisa     		= split[0].length % 3,
+                                              rupiah     		= split[0].substr(0, sisa),
+                                              ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+                                              // tambahkan titik jika yang di input sudah menjadi angka ribuan
+                                              if(ribuan){
+                                                separator = sisa ? '.' : '';
+                                                rupiah += separator + ribuan.join('.');
+                                              }
+
+                                              rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                                              return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+                                            }
+                                          </script>
                                         @if(old('tglbayar'))
                                             @php
                                                 $tgl=old('tglbayar');
-                                            @endphp    
+                                            @endphp
                                         @else
                                         @php
                                             $tgl=date('Y-m-d');
@@ -301,8 +332,8 @@ $message=session('status');
                                             @error('tglbayar')<div class="invalid-feedback"> {{$message}}</div>
                                             @enderror
                                         </div>
-                                        
-                                        
+
+
                                         <div class="form-group col-md-6 col-6">
                                             <label for="telp">Catatan <code>*)</code></label>
                                             <input type="text" name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" value="{{old('catatan')}}" required>
@@ -343,14 +374,14 @@ $message=session('status');
                         <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
                       </div>
                       <div class="modal-body">
-           
+
                         {{ csrf_field() }}
-           
+
                         <label>Pilih file excel(.xlsx)</label>
                         <div class="form-group">
                           <input type="file" name="file" required="required">
                         </div>
-           
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -360,7 +391,7 @@ $message=session('status');
                   </form>
                 </div>
               </div>
-          
+
 
 @endsection
 
