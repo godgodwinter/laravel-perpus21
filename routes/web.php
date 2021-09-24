@@ -218,19 +218,13 @@ Route::get('admin/dataperalatan/cetak', 'App\Http\Controllers\adminperalatancont
 
 
 //pustakawan
-Route::get('/pustakawan/buku', 'App\Http\Controllers\pustakawanbukudetailcontroller@buku')->name('pustakawan.buku');
-Route::get('/pustakawan/buku/cari', 'App\Http\Controllers\pustakawanbukudetailcontroller@bukucari')->name('pustakawan.buku.cari');
-Route::get('/pustakawan/buku/{id}/bukudetail', 'App\Http\Controllers\pustakawanbukudetailcontroller@bukudetail')->name('pustakawan.buku.bukudetail');
-Route::get('/pustakawan/buku/{id}/databukudetail/cari', 'App\Http\Controllers\pustakawanbukudetailcontroller@bukudetailcari')->name('pustakawan.bukudetail.cari');
-Route::get('/pustakawan/peminjaman', 'App\Http\Controllers\pustakawanbukudetailcontroller@peminjaman')->name('pustakawan.peminjaman');
-Route::get('/pustakawan/pengembalian', 'App\Http\Controllers\pustakawanbukudetailcontroller@pengembalian')->name('pustakawan.pengembalian');
+Route::get('/pustakawan/buku', 'App\Http\Controllers\pustakawancontroller@buku')->name('pustakawan.buku');
+Route::get('/pustakawan/buku/cari', 'App\Http\Controllers\pustakawancontroller@bukucari')->name('pustakawan.buku.cari');
+Route::get('/pustakawan/buku/{id}/bukudetail', 'App\Http\Controllers\pustakawancontroller@bukudetail')->name('pustakawan.buku.bukudetail');
+Route::get('/pustakawan/buku/{id}/databukudetail/cari', 'App\Http\Controllers\pustakawancontroller@bukudetailcari')->name('pustakawan.bukudetail.cari');
+Route::get('/pustakawan/peminjaman', 'App\Http\Controllers\pustakawancontroller@peminjaman')->name('pustakawan.peminjaman');
+Route::get('/pustakawan/pengembalian', 'App\Http\Controllers\pustakawancontroller@pengembalian')->name('pustakawan.pengembalian');
 
-Route::get('/pustakawan/invoice/peminjaman', 'App\Http\Controllers\pustakawanbukudetailcontroller@invoicepeminjaman')->name('pustakawan.peminjaman.invoicepeminjaman');
-Route::post('/pustakawan/invoice/peminjaman', 'App\Http\Controllers\pustakawanbukudetailcontroller@invoicepeminjamanperiksa')->name('pustakawan.peminjaman.invoicepeminjamanperiksa');
-Route::get('/pustakawan/invoice/pengembalian', 'App\Http\Controllers\pustakawanbukudetailcontroller@invoicepengembalian')->name('pustakawan.pengembalian.invoicepengembalian');
-Route::post('/pustakawan/invoice/pengembalian', 'App\Http\Controllers\pustakawanbukudetailcontroller@invoicepengembalianperiksa')->name('pustakawan.pengembalian.invoicepengembalianperiksa');
-Route::get('/pustakawan/peminjaman/{id}', 'App\Http\Controllers\pustakawanbukudetailcontroller@invoice')->name('pustakawan.peminjaman.invoice');
-Route::get('/pustakawan/pengembalian/{id}', 'App\Http\Controllers\pustakawanbukudetailcontroller@invoice')->name('pustakawan.pengembalian.invoice');
 
 });
 

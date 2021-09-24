@@ -14,9 +14,9 @@ class adminpeminjamancontroller extends Controller
 {
     public function index(Request $request)
     {
-        if($this->checkauth('admin')==='404'){
-            return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
-        }
+        // if($this->checkauth('admin')==='404'){
+        //     return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
+        // }
 
         #WAJIB
         $pages='peminjaman';
@@ -43,9 +43,6 @@ class adminpeminjamancontroller extends Controller
     }
     public function invoicepeminjaman(Request $request)
     {
-        if($this->checkauth('admin')==='404'){
-            return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
-        }
 
         #WAJIB
         $pages='peminjaman';
@@ -70,28 +67,28 @@ class adminpeminjamancontroller extends Controller
         ->where('kodetrans',$id)
         ->orderBy('created_at','desc')
         ->first();
-        
+
         $jmlbelumkembali=0;
             //ambil data
         $datapinjamdetail=DB::table('peminjamandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
-       
+
         $datas = $datapinjamdetail->unique('buku_kode');
         $dataanggota=DB::table('anggota')->where('nomeridentitas',$datapinjam->nomeridentitas)->first();
-       
+
             // dd($datas);
             #WAJIB
             $pages='pengembalian';
             // $jmldata='0';
             // $datas='0';
-    
-    
+
+
             // $datas=DB::table('pengembalian')
             // ->orderBy('nama','asc')
             // ->paginate(Fungsi::paginationjml());
-    
+
             // $pengembaliankategori = DB::table('kategori')->where('prefix','tipepengembalian')->get();
             // $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
-    
+
         // dd($dataanggota);
         return view('admin.peminjaman.invoiceshow',compact('pages','datas','datapinjam','request','dataanggota'));
     }
@@ -100,10 +97,10 @@ class adminpeminjamancontroller extends Controller
         // dd($request);
         $kodetrans=base64_encode(date('YmdHis'));
         $decodekodetrans=base64_decode($kodetrans);
-        
+
         $dataanggota=DB::table('anggota')->where('nomeridentitas',$request->nomeridentitas)->first();
 
-        
+
         $jaminan_nama=$request->nomeridentitas;
         if($request->jaminan_nama!=null){
             $jaminan_nama=$request->jaminan_nama;
@@ -120,10 +117,10 @@ class adminpeminjamancontroller extends Controller
         foreach($request->daftarbuku as $db){
             $kode=$db['kode'];
             $jml=$db['jml'];
-        
+
             // 1.ambil data buku
                 $databuku=DB::table('buku')->where('kode',$kode)->first();
-                
+
             // 2. insert peminjaman berdasarkan dataanggota
                 DB::table('peminjaman')->insert([
                     'kodetrans' => $kodetrans,
@@ -145,7 +142,7 @@ class adminpeminjamancontroller extends Controller
                 $datas=DB::table('bukudetail')->where('status','ada')->where('buku_kode',$databuku->kode)->skip(0)->take(1)->first();
                 // dd($kodetrans,$databukudetail,$request->daftarbuku,$db,$db['kode'],$kode,$jml,$databuku);
                 // foreach($databukudetail as $datas){
-             if($cek>0){       
+             if($cek>0){
             DB::table('peminjamandetail')->insert([
                 'kodetrans' => $kodetrans,
                 'buku_isbn' => $datas->buku_isbn,
@@ -179,7 +176,7 @@ class adminpeminjamancontroller extends Controller
             // }
 
         }
-        
+
         // dd($request->daftarbuku,$db);
         return  redirect(URL::to('/').'/admin/peminjaman/'.$kodetrans)->with('status','Proses Peminjaman Berhasil!')->with('tipe','success')->with('clearlocal','yes');
 
@@ -194,10 +191,10 @@ class adminpeminjamancontroller extends Controller
         // if()
         $str=explode(",",$bukubuku);
         for($i=0;$i<$jml;$i++){
-            
-            
+
+
         }
-        
+
         $datas=DB::table('bukudetail')->where('kodepanggil',$str[0])->first();
         $dataanggota=DB::table('anggota')->where('nomeridentitas',$request->nomeridentitas)->first();
 
@@ -231,9 +228,9 @@ class adminpeminjamancontroller extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
-        
+
         //2/insert buku ke peminjaman detail where kodetransaksi
-        
+
         for($i=0;$i<$jml;$i++){
 
             $datas=DB::table('bukudetail')->where('kodepanggil',$str[$i])->first();
@@ -259,23 +256,23 @@ class adminpeminjamancontroller extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-            
+
         //3.ubah status buku per exemplar bahwa dipinjam
-        
+
         bukudetail::where('kodepanggil',$str[$i])
         ->update([
             'status'     =>  'dipinjam',
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 
-            
+
         }
-        
+
         return redirect()->back()->with('status','Proses Peminjaman Berhasil!')->with('tipe','success')->with('clearlocal','yes');
 
 
     }
-    
+
     public function periksabuku($id)
     {
         $jmltersedia=DB::table('bukudetail')->where('buku_kode',$id)->where('status','ada')->count();
@@ -291,13 +288,13 @@ class adminpeminjamancontroller extends Controller
             'penerbit' => $data->penerbit,
             'isbn' => $data->isbn,
             'bukukategori_nama' => $data->bukukategori_nama,
-            'data'    => $id  
+            'data'    => $id
         ], 200);
 
     }
     public function periksa($id)
     {
-        
+
         $datas=DB::table('bukudetail')->where('kodepanggil',$id)->count();
         $data=DB::table('bukudetail')->where('kodepanggil',$id)->first();
         // //make response JSON
@@ -313,7 +310,7 @@ class adminpeminjamancontroller extends Controller
                 'status' => $data->status,
                 'buku_nama' => $data->buku_nama,
                 'bukukategori_nama' => $data->bukukategori_nama,
-                'data'    => $id  
+                'data'    => $id
             ], 200);
 
         }else{
@@ -327,7 +324,7 @@ class adminpeminjamancontroller extends Controller
                 'status' => $data->status,
                 'buku_nama' => $data->buku_nama,
                 'bukukategori_nama' => $data->bukukategori_nama,
-                'data'    => $id  
+                'data'    => $id
             ], 200);
 
         }

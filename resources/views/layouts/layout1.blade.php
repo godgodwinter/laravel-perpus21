@@ -334,6 +334,15 @@ crossorigin="anonymous"></script> --}}
 
               @else
 
+              <li class="nav-item">
+                <a href="{{route('dashboard')}}" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Beranda
+                    {{-- <span class="right badge badge-danger">New</span> --}}
+                  </p>
+                </a>
+              </li>
 
             <li class="nav-item">
               <a href="{{ route('pustakawan.buku') }}" class="nav-link">
@@ -343,13 +352,13 @@ crossorigin="anonymous"></script> --}}
             </li>
             <li class="nav-header">PROSES</li>
             <li class="nav-item">
-              <a href="{{route('pustakawan.peminjaman')}}" class="nav-link">
+              <a href="{{route('admin.peminjaman')}}" class="nav-link">
                 <i class="fas fa-calendar-plus"></i>
                 <p>Pinjam</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('pustakawan.pengembalian')}}" class="nav-link">
+              <a href="{{route('admin.pengembalian')}}" class="nav-link">
                 <i class="far fa-calendar-check"></i>
                 <p>Kembalikan</p>
               </a>
@@ -365,13 +374,13 @@ crossorigin="anonymous"></script> --}}
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('pustakawan.peminjaman.invoicepeminjaman')}}" class="nav-link">
+                  <a href="{{route('admin.peminjaman.invoicepeminjaman')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Peminjaman</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('pustakawan.pengembalian.invoicepengembalian')}}" class="nav-link">
+                  <a href="{{route('admin.pengembalian.invoicepengembalian')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Pengembalian</p>
                   </a>
