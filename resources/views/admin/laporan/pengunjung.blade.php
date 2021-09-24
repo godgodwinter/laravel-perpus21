@@ -139,18 +139,21 @@ $message=session('status');
         <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
+                        <form action="{{ route('pengunjung.cetak')}}" method="get">
+                            @csrf
                         <div class="row">
                             <div class="col-6">
                                 <div class="input-group ">
                                     <input type="text" class="form-control form-control search" placeholder="Cari . . ." name="cari"  id="cari" autocomplete="off">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn btn-default search">
+                                        <button  class="btn btn btn-default search"  id="tombolcari">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </div>
                                 </div>
 
                             </div>
+
                             <div class="col-3">
                                 <div class="form-group">
                                     @php
@@ -167,7 +170,16 @@ $message=session('status');
 
                                 </div>
                             </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default float-right" type="submit" ><i class="fas fa-print"></i> Cetak PDF
+                                    </button>
+
+                                </div>
+                            </div>
+
                         </div>
+                    </form>
                         <div class="form-group">
                         </div>
                     </div>
@@ -202,6 +214,9 @@ $message=session('status');
       <!-- /.card -->
 
             <script>
+                $("button#tombolcari").click(function(){
+                    return false
+                });
                 $(document).ready(function(){
 
                 //  fetch_customer_data();

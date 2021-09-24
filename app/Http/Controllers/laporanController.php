@@ -732,6 +732,29 @@ if($request->status=='sudah'){
 
         return $pdf->download('laporansekolah_'.$tgl.'-pdf');
     }
+
+
+    public function pengunjungcetak(Request $request)
+    {
+        // dd($request->bln);
+        $tgl=date("YmdHis");
+        // dd($tgl);
+        $bln = date("m",strtotime($request->bln));
+        $year = date("Y",strtotime($request->bln));
+        $blnthn=$request->bln;
+
+        $datas=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+        $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+// dd($datas,$jml);/
+
+        $pdf = PDF::loadview('admin.laporan.pengunjungcetak',compact('datas','jml','blnthn'))->setPaper('a4', 'potrait');
+
+        // \QrCode::size(500)
+        //     ->format('png')
+        //     ->generate('www.google.com', public_path('assets/img/qrcode.png'));
+
+        return $pdf->download('laporanpengunjung'.$tgl.'-pdf');
+    }
     public function qr(){
 
         // \QrCode::size(500)

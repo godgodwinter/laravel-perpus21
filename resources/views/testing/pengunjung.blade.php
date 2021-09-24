@@ -5,7 +5,7 @@
 
 <section x-data="introSectionState" class="relative min-h-screen intro">
 
-    
+
     <div class="relative px-6 pb-24 mx-auto md:pt-24 max-w-7xl">
         <div class="flex flex-col items-center justify-end pt-20 space-y-10 pb-18">
 
@@ -28,16 +28,16 @@
                           </div>
                         </div>
                       </div>
-                   
-                    @endif
-          
 
-              
+                    @endif
+
+
+
             <h2
                 class="text-4xl font-extrabold leading-snug text-center text-transparent tex md:text-6xl lg:text-4xl bg-gradient-to-tr from-pink-500 to-indigo-600 via-blue-600-300 bg-clip-text ">
 
 
-        
+
  <div class="typing-container">
     <span id="sentence" class="sentence">SISTEM PERPUSTAKAAN </span>
     {{-- <span id="feature-text"></span>
@@ -74,6 +74,7 @@
                     <form action="pengunjung/proses" class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"
                         method="GET" autocomplete="on" novalidate>
 
+
                     {{-- <div  class="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md"> --}}
                         <div class="mb-4">
                             <label class="block mb-2 font-bold text-red-300 text-sm" for="pair">
@@ -98,7 +99,7 @@
                                 <label class="block mb-2 font-bold text-red-300 text-sm" for="pair">
                                     {{$message}}
                                 </label>
-                                @enderror 
+                                @enderror
                         </div>
                         <div class="mb-4">
                             <label class="block mb-2 font-bold text-gray-700 text-md" for="pair">
