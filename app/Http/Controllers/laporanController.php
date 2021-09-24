@@ -43,8 +43,13 @@ class laporanController extends Controller
         $datas='0';
         $bln=date('m');
         $year=date('Y');
-        $datas=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
-        $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+
+        $datatanpauniq=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+        $datas=$datatanpauniq->unique('nama');
+        // $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+        $jml=$datatanpauniq->unique('nama')->count();
+        // $datas=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+        // $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
         // ->orderBy('isbn','asc')
         // ->paginate(Fungsi::paginationjml());
 
@@ -60,8 +65,10 @@ class laporanController extends Controller
         $bln = date("m",strtotime($labelawal));
         $year = date("Y",strtotime($labelawal));
 
-        $count=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)
-        ->count();
+        $datatanpauniq=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+        $datas=$datatanpauniq->unique('nama');
+        // $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+        $count=$datatanpauniq->unique('nama')->count();
         $data=$count;
 
         for($i=0;$i<6;$i++){
@@ -74,8 +81,11 @@ class laporanController extends Controller
 
             $bln = date("m",strtotime($labelawal));
             $year = date("Y",strtotime($labelawal));
-            $count=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)
-                     ->count();
+            $datatanpauniq=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+            $datas=$datatanpauniq->unique('nama');
+            // $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+            $count=$datatanpauniq->unique('nama')->count();
+            // $data=$count;
                      $data.=','.$count;
         }
 
@@ -642,24 +652,31 @@ if($request->status=='sudah'){
         // $month = $request->bln;
         // dd($month);
 
-        $jml=DB::table('pengunjung')
-        ->where('nama','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
-        ->orWhere('nomeridentitas','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
-        ->orWhere('tipe','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
-        ->count();
+
+        // $datatanpauniq=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+        // $datas=$datatanpauniq->unique('nama');
+        // $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+
+        // $jml=DB::table('pengunjung')
+        // ->where('nama','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
+        // ->orWhere('nomeridentitas','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
+        // ->orWhere('tipe','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
+        // ->count();
 
 
-        $datas=DB::table('pengunjung')
+        $datatanpauniq=DB::table('pengunjung')
         ->where('nama','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
         ->orWhere('nomeridentitas','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
         ->orWhere('tipe','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
         ->get();
+        $datas=$datatanpauniq->unique('nama');
 
-        $first=DB::table('pengunjung')
-        ->where('nama','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
-        ->orWhere('nomeridentitas','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
-        ->orWhere('tipe','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
-        ->first();
+        $jml=$datatanpauniq->unique('nama')->count();
+        // $first=DB::table('pengunjung')
+        // ->where('nama','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
+        // ->orWhere('nomeridentitas','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
+        // ->orWhere('tipe','like',"%".$cari."%")->whereMonth('tgl',$month)->whereYear('tgl',$year)->skip(0)->take(10)
+        // ->first();
 
         if($jml>0){
 
@@ -708,7 +725,7 @@ if($request->status=='sudah'){
             'show' => $output,
             // 'status' => $data->status,
             'datas' => $datas,
-            'first' => $first
+            // 'first' => $first
         ], 200);
 
         dd($datas);
@@ -736,6 +753,7 @@ if($request->status=='sudah'){
 
     public function pengunjungcetak(Request $request)
     {
+
         // dd($request->bln);
         $tgl=date("YmdHis");
         // dd($tgl);
@@ -743,9 +761,11 @@ if($request->status=='sudah'){
         $year = date("Y",strtotime($request->bln));
         $blnthn=$request->bln;
 
-        $datas=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
-        $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
-// dd($datas,$jml);/
+        $datatanpauniq=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+        $datas=$datatanpauniq->unique('nama');
+        // $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+        $jml=$datatanpauniq->unique('nama')->count();
+// dd($datas,$jml);
 
         $pdf = PDF::loadview('admin.laporan.pengunjungcetak',compact('datas','jml','blnthn'))->setPaper('a4', 'potrait');
 
