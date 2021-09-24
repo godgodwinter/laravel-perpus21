@@ -50,9 +50,9 @@ crossorigin="anonymous"></script> --}}
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route("admin.pengembalian") }}" class="nav-link"  id="jmldatabukukembali">Kembalikan</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Anggota</a>
-      </li>
+      </li> --}}
     </ul>
 
     <!-- Right navbar links -->
@@ -91,7 +91,7 @@ crossorigin="anonymous"></script> --}}
         // $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
         // $("#jmldatabukukembali").append('<span class="badge badge-success navbar-badge">'+daftarkembali.length+'</span>');
         // $("#jmldatabuku").append('<span class="badge badge-info navbar-badge">'+daftarbuku.length+'</span>');
-        $("#jmldatabukukembali").append('<span class="badge badge-success navbar-badge">0</span>');
+        // $("#jmldatabukukembali").append('<span class="badge badge-success navbar-badge">0</span>');
         });
       </script>
       <!-- Notifications Dropdown Menu -->
