@@ -307,19 +307,13 @@ crossorigin="anonymous"></script> --}}
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-users"></i>
-                  <p>Laporan Pengunjung</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.laporan.peminjaman')}}" class="nav-link">
                   <i class="fas fa-user-clock"></i>
                   <p>Laporan Peminjaman</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.laporan.keuangan')}}" class="nav-link">
                   <i class="fas fa-money-check-alt"></i>
                   <p>Laporan Keuangan</p>
                 </a>

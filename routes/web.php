@@ -75,6 +75,12 @@ Route::delete('/admin/dataanggota/multidel', 'App\Http\Controllers\adminanggotac
 Route::get('/admin/pengunjung', 'App\Http\Controllers\laporanController@pengunjung')->name('admin.laporan.pengunjung');
 Route::get('/admin/pengunjungapi', 'App\Http\Controllers\laporanController@pengunjungapi')->name('admin.laporan.pengunjungapi');
 
+//laporan-MENU
+Route::get('/admin/laporan/peminjaman', 'App\Http\Controllers\laporanController@laporanpeminjaman')->name('admin.laporan.peminjaman');
+Route::get('/admin/laporan/api/peminjaman', 'App\Http\Controllers\laporanController@apipeminjaman')->name('admin.laporan.api.peminjaman');
+Route::get('/admin/laporan/keuangan', 'App\Http\Controllers\laporanController@laporankeuangan')->name('admin.laporan.keuangan');
+Route::get('/admin/laporan/api/keuangan', 'App\Http\Controllers\laporanController@apikeuangan')->name('admin.laporan.api.keuangan');
+
 //users-MENU
 Route::get('/admin/users', 'App\Http\Controllers\adminuserscontroller@index')->name('admin.users');
 Route::get('/admin/users/cari', 'App\Http\Controllers\adminuserscontroller@cari')->name('admin.users.cari');
