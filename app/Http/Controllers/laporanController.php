@@ -44,7 +44,7 @@ class laporanController extends Controller
         $bln=date('m');
         $year=date('Y');
         $datas=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
-        $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)git ->orderBy('tgl','desc')->count();
+        $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
         // ->orderBy('isbn','asc')
         // ->paginate(Fungsi::paginationjml());
 
