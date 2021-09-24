@@ -114,6 +114,51 @@ class laporanController extends Controller
         // return view('admin.beranda');
     }
 
+    public function apichart1(Request $request)
+    {
+        // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        // data: [12, 19, 3, 5, 2, 3],
+
+
+        $labelawal = Carbon::now()->startOfMonth()->subMonth(6);
+        $bln = date("m",strtotime($labelawal));
+        $year = date("Y",strtotime($labelawal));
+        $month = date("Y-m",strtotime($labelawal));
+        $label='"'.Fungsi::tanggalindobln($month).'"';
+
+        $count=DB::table('peminjamandetail')->whereMonth('tgl_pinjam',$bln)->whereYear('tgl_pinjam',$year)
+        ->count();
+        $data=$count;
+
+        for($i=0;$i<6;$i++){
+            $labelawal = $labelawal->startOfMonth()->addMonth($i+1);
+            $month = date("Y-m",strtotime($labelawal));
+            $label.=',"'.Fungsi::tanggalindobln($month).'"';
+
+
+
+            $bln = date("m",strtotime($labelawal));
+            $year = date("Y",strtotime($labelawal));
+            $count=DB::table('peminjamandetail')->whereMonth('tgl_pinjam',$bln)->whereYear('tgl_pinjam',$year)
+                     ->count();
+                     $data.=','.$count;
+        }
+
+        $datasminus = Carbon::now()->startOfMonth()->subMonth(3);
+        $datasadd = Carbon::now()->startOfMonth()->addMonth(3);
+        $month = date("m",strtotime($datasminus));
+        return response()->json([
+            'success' => true,
+            'datasminus' => $datasminus,
+            'datasadd' => $datasadd,
+            'aa' => $month,
+            'label' => $label,
+            'data' => $data,
+        ], 200);
+
+
+    }
+
     public function apipeminjaman(Request $request)
     {
 

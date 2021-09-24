@@ -4,15 +4,15 @@ namespace App\Helpers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
- 
+
 class Fungsi {
     // public static function get_username($user_id) {
     //     $user = DB::table('users')->where('userid', $user_id)->first();
     //     return (isset($user->username) ? $user->username : '');
     // }
-    
+
     public static function periksaterlambat($inputan){
-        
+
         $hitungketerlambatan = strtotime($inputan)-strtotime(Carbon::now());
         $selisih = $hitungketerlambatan / 86400;
         // jika selisih negatif maka terlambat
@@ -26,7 +26,7 @@ class Fungsi {
         return $telat;
     }
     public static function periksadenda($inputan){
-        
+
         $hitungketerlambatan = strtotime($inputan)-strtotime(Carbon::now());
         $selisih = $hitungketerlambatan / 86400;
         // jika selisih negatif maka terlambat
@@ -39,7 +39,7 @@ class Fungsi {
 
         return $denda;
     }
-    
+
     public static function tanggalgaringcreated($data){
         $data2=explode(" ",$data);
 
@@ -53,7 +53,7 @@ class Fungsi {
         $str=explode("-",$inputan);
         return $str[2]."/".$str[1]."/".$str[0];
     }
-    
+
     public static function tanggalindocreated($data){
         $data2=explode(" ",$data);
 
@@ -87,7 +87,38 @@ class Fungsi {
                     $bulanindo='Desember';
                 }
 
-        return $str[2]." ".$bulanindo." " .$str[0]; 
+        return $str[2]." ".$bulanindo." " .$str[0];
+    }
+    public static function tanggalindobln($inputan){
+        $bulanindo='Januari';
+        $str=explode("-",$inputan);
+                if($str[1]=='01'){
+                    $bulanindo='Januari';
+                }elseif($str[1]=='02'){
+                    $bulanindo='Februari';
+                }elseif($str[1]=='03'){
+                    $bulanindo='Maret';
+                }elseif($str[1]=='04'){
+                    $bulanindo='April';
+                }elseif($str[1]=='05'){
+                    $bulanindo='Mei';
+                }elseif($str[1]=='06'){
+                    $bulanindo='Juni';
+                }elseif($str[1]=='07'){
+                    $bulanindo='Juli';
+                }elseif($str[1]=='08'){
+                    $bulanindo='Agustus';
+                }elseif($str[1]=='09'){
+                    $bulanindo='September';
+                }elseif($str[1]=='10'){
+                    $bulanindo='Oktober';
+                }elseif($str[1]=='11'){
+                    $bulanindo='November';
+                }else{
+                    $bulanindo='Desember';
+                }
+
+        return $bulanindo." " .$str[0];
     }
     public static function tanggalindo($inputan){
         $bulanindo='Januari';
@@ -118,7 +149,7 @@ class Fungsi {
                     $bulanindo='Desember';
                 }
 
-        return $str[2]." ".$bulanindo." " .$str[0]; 
+        return $str[2]." ".$bulanindo." " .$str[0];
     }
     public static function manipulasiTanggal($tgl,$jumlah=1,$format='days'){
         $currentDate = $tgl;
@@ -129,7 +160,7 @@ class Fungsi {
         // $data=$inputan;
         $str=explode(",",$inputan);
         $jmlstr=count($str);
-       
+
         return $jmlstr;
     }
     public static function autokodebuku($inputan){
@@ -159,7 +190,7 @@ class Fungsi {
         return $kodebukubaru;
     }
     public static function cekkodebuku($inputan){
-     
+
         $cekkodebuku = DB::table('buku')->where('kode',$inputan)->count();
         if($cekkodebuku>0){
             $hasil='sudahdipakai';
@@ -168,7 +199,7 @@ class Fungsi {
         }
 
         return $hasil;
-     
+
     }
     public static function predikat($angka){
         if($angka>=90){
@@ -201,130 +232,130 @@ class Fungsi {
         }
         return $hasil;
     }
-    
+
     return (isset($hasil) ? $hasil : '');
 }
 
     public static function rupiah($angka){
-	
+
         $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
         return $hasil_rupiah;
-     
+
     }
 
     public static function paginationjml(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->paginationjml;
         return $data;
-     
+
     }
 
     public static function sekolahnama(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->sekolahnama;
         return $data;
-     
+
     }
 
     public static function sekolahalamat(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->sekolahalamat;
         return $data;
-     
+
     }
 
     public static function sekolahtelp(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->sekolahtelp;
         return $data;
-     
+
     }
 
     public static function aplikasijudul(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->aplikasijudul;
         return $data;
-     
+
     }
 
 
     public static function aplikasijudulsingkat(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->aplikasijudulsingkat;
         return $data;
-     
+
     }
 
     public static function passdefaultadmin(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->passdefaultadmin;
         return $data;
-     
+
     }
     public static function passdefaultpegawai(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->passdefaultpegawai;
         return $data;
-     
+
     }
     public static function sekolahlogo(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->sekolahlogo;
-        
+
         return $data;
-     
+
     }
     public static function sekolahttd(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->sekolahttd;
         return $data;
-     
+
     }
     public static function sekolahttd2(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->sekolahttd2;
         return $data;
-     
+
     }
     public static function defaultdenda(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->defaultdenda;
         return $data;
-     
+
     }
     public static function defaultminbayar(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->defaultminbayar;
         return $data;
-     
+
     }
     public static function defaultmaxbukupinjam(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->defaultmaxbukupinjam;
         return $data;
-     
+
     }
 
     public static function defaultmaxharipinjam(){
-	
+
         $settings = DB::table('settings')->first();
         $data=$settings->defaultmaxharipinjam;
         return $data;
-     
+
     }
     //naik tapel
     public static function naik_t($str)
@@ -334,7 +365,7 @@ class Fungsi {
             $strex[1]=$strex[1]+1;
 
             $str=implode("/",$strex);
-            
+
             return $str;
         }
 

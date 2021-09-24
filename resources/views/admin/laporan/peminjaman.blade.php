@@ -9,14 +9,17 @@ data{{ $pages }}
 @section('halaman','kelas')
 
 @section('csshere')
+<style type="text/css">
+    .container {
+        width: 50%;
+        margin: 15px auto;
+    }
+</style>
+
 @endsection
 
 @section('jshere')
-<script>
-    $(function () {
-      $('.select2').select2()
-    });
-</script>
+
 @endsection
 
 
@@ -268,6 +271,7 @@ $message=session('status');
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+
 
         </div>
 

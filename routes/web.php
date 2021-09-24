@@ -81,6 +81,9 @@ Route::get('/admin/laporan/api/peminjaman', 'App\Http\Controllers\laporanControl
 Route::get('/admin/laporan/keuangan', 'App\Http\Controllers\laporanController@laporankeuangan')->name('admin.laporan.keuangan');
 Route::get('/admin/laporan/api/keuangan', 'App\Http\Controllers\laporanController@apikeuangan')->name('admin.laporan.api.keuangan');
 
+//chart-MENU
+Route::get('/admin/api/chart1', 'App\Http\Controllers\laporanController@apichart1')->name('admin.api.chart1');
+
 //users-MENU
 Route::get('/admin/users', 'App\Http\Controllers\adminuserscontroller@index')->name('admin.users');
 Route::get('/admin/users/cari', 'App\Http\Controllers\adminuserscontroller@cari')->name('admin.users.cari');

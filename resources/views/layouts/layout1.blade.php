@@ -194,6 +194,15 @@ crossorigin="anonymous"></script> --}}
             </ul> --}}
           </li>
           <li class="nav-item">
+            <a href="{{route('dashboard')}}" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Beranda
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('admin.settings')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -384,5 +393,7 @@ crossorigin="anonymous"></script> --}}
 <script src="{{ asset("assets/") }}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset("assets/") }}/dist/js/demo.js"></script>
+
+
 </body>
 </html>
