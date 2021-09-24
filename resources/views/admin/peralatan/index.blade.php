@@ -31,7 +31,7 @@ $message=session('status');
                 showConfirmButton: false,
                 timer: 3000
             });
-            
+
             Toast.fire({
                 icon: '{{$tipe}}',
                 title: '{{$message}}'
@@ -117,7 +117,7 @@ $message=session('status');
 
 @endsection
 
-@section('foottable')  
+@section('foottable')
 
 @php
   $cari=$request->cari;
@@ -177,11 +177,11 @@ $message=session('status');
                 <div class="card-body">
 
 
-                        
+
                         <form action="{{ route('admin.'.$pages.'.cari') }}" method="GET">
-                           
+
                     <div class="row">
-                               
+
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
                                     <input type="text" name="cari" id="cari"
                                         class="form-control form-control-sm @error('cari') is-invalid @enderror"
@@ -189,18 +189,28 @@ $message=session('status');
                                     @error('cari')<div class="invalid-feedback"> {{$message}}</div>
                                     @enderror
                     </div>
-                               
 
-                                       
+
+
                     <div class="form-group col-md-4 col-4 mt-1 text-left">
-                         
+
 
                         <button type="submit" value="CARI" class="btn btn-icon btn-info btn-sm mt-0"><span
                             class="pcoded-micon"> <i class="fas fa-search"></i> Pecarian</span></button>
 
-                    </div>                     
+                    </div>
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
-                            
+
+                        {{-- <div class="col-3">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default float-right" type="submit" ><i class="fas fa-print"></i> Cetak PDF
+                                </button>
+
+                            </div>
+                        </div> --}}
+
+                        <a href="{{route('peralatan.cetak')}}" type="submit" value="Import"
+                            class="btn btn-icon btn-default btn-sm"><span class="pcoded-micon"> <i class="fas fa-print"></i>   Cetak PDF </span></a>
                         <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                             data-target="#importExcel"><i class="fas fa-upload"></i>
                             Import
@@ -209,12 +219,12 @@ $message=session('status');
                         <a href="/admin/@yield('linkpages')/export" type="submit" value="Import"
                             class="btn btn-icon btn-primary btn-sm"><span class="pcoded-micon"> <i
                                     class="fas fa-download"></i> Export </span></a>
-                    </div> 
+                    </div>
 
-                                  
-                              
 
-                            
+
+
+
 
                                         </div>
 
@@ -264,30 +274,30 @@ $message=session('status');
                                             @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                                             @enderror
                                         </div>
-                                        
+
                                         <div class="form-group col-md-12 col-12">
                                             <label>Kategori<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="kategori_nama">  
+                                            <select class="form-control form-control-lg" required name="kategori_nama">
                                                 @if (old('kategori_nama'))
-                                                <option>{{old('kategori_nama')}}</option>                        
+                                                <option>{{old('kategori_nama')}}</option>
                                                 @endif
                                                 @foreach ($peralatankategori as $t)
                                                     <option>{{ $t->nama }}</option>
                                                 @endforeach
                                             </select>
-                                        </div> 
+                                        </div>
 
                                         <div class="form-group col-md-12 col-12">
                                             <label>Kondisi<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="kondisi">  
+                                            <select class="form-control form-control-lg" required name="kondisi">
                                                 @if (old('kondisi'))
-                                                <option>{{old('kondisi')}}</option>                        
+                                                <option>{{old('kondisi')}}</option>
                                                 @endif
                                                 @foreach ($kondisi as $t)
                                                     <option>{{ $t->nama }}</option>
                                                 @endforeach
                                             </select>
-                                        </div> 
+                                        </div>
                                         <div class="form-group col-md-6 col-6">
                                             <label>Tanggal Lahir</label>
                                             <input type="date" class="form-control" name="tgl_masuk" @error('tgl_masuk') is-invalid @enderror" value="{{old('tgl_masuk')}}" >
@@ -295,7 +305,7 @@ $message=session('status');
                                             @enderror
                                         </div>
 
-                                        
+
 
                                     </div>
 
@@ -330,14 +340,14 @@ $message=session('status');
                         <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
                       </div>
                       <div class="modal-body">
-           
+
                         {{ csrf_field() }}
-           
+
                         <label>Pilih file excel(.xlsx)</label>
                         <div class="form-group">
                           <input type="file" name="file" required="required">
                         </div>
-           
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -347,7 +357,7 @@ $message=session('status');
                   </form>
                 </div>
               </div>
-          
+
 
 @endsection
 

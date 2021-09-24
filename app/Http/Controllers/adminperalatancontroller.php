@@ -7,6 +7,7 @@ use App\Models\peralatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use PDF;
 
 class adminperalatancontroller extends Controller
 {
@@ -73,7 +74,7 @@ class adminperalatancontroller extends Controller
             'nama.required'=>'Nama Harus diisi',
 
         ]);
-        
+
        DB::table('peralatan')->insert(
         array(
                'nama'     =>   $request->nama,
@@ -85,7 +86,7 @@ class adminperalatancontroller extends Controller
         ));
 
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
-    
+
     }
     public function show(Request $request,peralatan $id)
     {
@@ -93,7 +94,7 @@ class adminperalatancontroller extends Controller
         #WAJIB
         $pages='peralatan';
         $datas=$id;
-        
+
 
         $peralatankategori = DB::table('kategori')->where('prefix','tipeperalatan')->get();
         $kondisi = DB::table('kategori')->where('prefix','kondisi')->get();
@@ -111,9 +112,9 @@ class adminperalatancontroller extends Controller
 
             ]);
         }
-    
 
-       
+
+
         peralatan::where('id',$datas->id)
         ->update([
             'nama'     =>   $request->nama,
@@ -123,7 +124,7 @@ class adminperalatancontroller extends Controller
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 
-        
+
     }
 
     public function update(Request $request, peralatan $id)
@@ -132,17 +133,17 @@ class adminperalatancontroller extends Controller
 
             return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
-    
+
     public function destroy($id)
     {
         peralatan::destroy($id);
         return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
-    
+
     }
 
     public function multidel(Request $request)
     {
-        
+
         $ids=$request->ids;
 
         // $datasiswa = DB::table('siswa')->where('id',$ids)->get();
@@ -155,9 +156,9 @@ class adminperalatancontroller extends Controller
         // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
         peralatan::whereIn('id',$ids)->delete();
 
-        
+
         // load ulang
-     
+
         #WAJIB
         $pages='peralatan';
         $jmldata='0';
@@ -173,5 +174,28 @@ class adminperalatancontroller extends Controller
 
         return view('admin.peralatan.index',compact('pages','datas','peralatankategori','kondisi','request'));
 
+    }
+
+
+    public function cetak(Request $request)
+    {
+
+        // dd($request->bln);
+        $tgl=date("YmdHis");
+        // dd($tgl);
+        $bln = date("m",strtotime($request->bln));
+        $year = date("Y",strtotime($request->bln));
+        $blnthn=$request->bln;
+
+        $datas=DB::table('peralatan')->orderBy('created_at','desc')->get();
+// dd($datas,$jml);
+
+        $pdf = PDF::loadview('admin.peralatan.cetak',compact('datas'))->setPaper('a4', 'potrait');
+
+        // \QrCode::size(500)
+        //     ->format('png')
+        //     ->generate('www.google.com', public_path('assets/img/qrcode.png'));
+
+        return $pdf->download('laporanperalatan'.$tgl.'-pdf');
     }
 }

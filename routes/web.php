@@ -213,6 +213,8 @@ Route::delete('admin/datausers/upload/{users}', 'App\Http\Controllers\prosesCont
 // Route::get('/home', function () {
 //     return view('guess/home');
 // });
+Route::get('pengunjung/cetak', 'App\Http\Controllers\laporanController@pengunjungcetak')->name('pengunjung.cetak');
+Route::get('admin/dataperalatan/cetak', 'App\Http\Controllers\adminperalatancontroller@cetak')->name('peralatan.cetak');
 
 });
 
@@ -220,8 +222,6 @@ Route::delete('admin/datausers/upload/{users}', 'App\Http\Controllers\prosesCont
 Route::get('raport', 'App\Http\Controllers\raportcontroller@index')->name('raport');
 Route::get('raport/{nis}', 'App\Http\Controllers\raportcontroller@show')->name('raport.show');
 Route::get('raport/{nis}/cetak', 'App\Http\Controllers\raportcontroller@cetak')->name('raport.cetak');
-Route::get('pengunjung/cetak', 'App\Http\Controllers\laporanController@pengunjungcetak')->name('pengunjung.cetak');
-Route::get('peralatan/cetak', 'App\Http\Controllers\peralatancontroller@cetak')->name('peralatan.cetak');
 
 Route::get('/404', 'App\Http\Controllers\adminberandaController@notfound');
 Route::get('/tail', 'App\Http\Controllers\pagesController@tail');
