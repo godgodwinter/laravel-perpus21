@@ -669,7 +669,7 @@ if($request->status=='sudah'){
                 $output .= '
                 <tr>
                       <td>
-                         '.($no+1).'
+                         '.($no).'
                       </td>
                       <td>
                           <a>
