@@ -395,7 +395,8 @@ if($request->status=='sudah'){
     $firstdenda=DB::table('pengembaliandetail')->whereMonth('tgl_dikembalikan',$month)->whereYear('tgl_dikembalikan',$year)->skip(0)->take(10)
     ->first();
 
-    $sumsaldo=($sumpemasukan+$sumdenda)-$sumpengeluaran;
+    // $sumsaldo=($sumpemasukan+$sumdenda)-$sumpengeluaran;
+    $sumsaldo=($sumpemasukan-$sumpengeluaran);
     $outputsaldo='';
         if($jmlpemasukan>0){
 
@@ -507,58 +508,58 @@ if($request->status=='sudah'){
 
 
 
-        if($jmldenda>0){
+        // if($jmldenda>0){
 
-            $no=0;
-                    $outputdenda .= '
-                    <tr  class="thead-dark">
-                        <th colspan="2">
-                        Data  Denda
-                        </th>
+        //     $no=0;
+        //             $outputdenda .= '
+        //             <tr  class="thead-dark">
+        //                 <th colspan="2">
+        //                 Data  Denda
+        //                 </th>
 
-                        <th style="width: 18%" class="text-center">
-                            '.$jmldenda.' Transaksi
-                        </th>
-                        <th style="width: 18%" class="text-center">
-                        <small>   Total Nominal :</small><br>
-                            <strong>'.Fungsi::rupiah($sumdenda).'</strong>
-                        </th>
+        //                 <th style="width: 18%" class="text-center">
+        //                     '.$jmldenda.' Transaksi
+        //                 </th>
+        //                 <th style="width: 18%" class="text-center">
+        //                 <small>   Total Nominal :</small><br>
+        //                     <strong>'.Fungsi::rupiah($sumdenda).'</strong>
+        //                 </th>
 
-                    </tr>
-                    ';
-                foreach($datasdenda as $data){
+        //             </tr>
+        //             ';
+        //         foreach($datasdenda as $data){
 
-                    $no++;
-                $outputdenda .= '
+        //             $no++;
+        //         $outputdenda .= '
 
-                <tr>
-                <td>
-                    '.$no.'
-                </td>
-                <td >
-                       '.$data->buku_nama.'
+        //         <tr>
+        //         <td>
+        //             '.$no.'
+        //         </td>
+        //         <td >
+        //                '.$data->buku_nama.'
 
-                </td>
-                <td class="text-center">
-                '.Fungsi::tanggalindo($data->tgl_dikembalikan).'
-                </td>
+        //         </td>
+        //         <td class="text-center">
+        //         '.Fungsi::tanggalindo($data->tgl_dikembalikan).'
+        //         </td>
 
-                <td class="project-state">
-                    '.Fungsi::rupiah($data->totaldenda).'
-                </td>
+        //         <td class="project-state">
+        //             '.Fungsi::rupiah($data->totaldenda).'
+        //         </td>
 
-            </tr>
+        //     </tr>
 
-                ';
-                }
-         }else{
-            $outputdenda = '
-            <tr>
-             <td align="center" colspan="5">No Data Found</td>
-            </tr>
-            ';
+        //         ';
+        //         }
+        //  }else{
+        //     $outputdenda = '
+        //     <tr>
+        //      <td align="center" colspan="5">No Data Found</td>
+        //     </tr>
+        //     ';
 
-         }
+        //  }
 
          $outputsaldo .= '
 
@@ -579,20 +580,7 @@ if($request->status=='sudah'){
            </th>
 
        </tr>
-       <tr >
-           <th colspan="2">
-             Data  Pemasukan Denda
-           </th>
-
-           <th style="width: 18%" class="text-center">
-           '.$jmldenda.' Transaksi
-           </th>
-           <th style="width: 18%" class="text-center">
-            <small>   Total Nominal :</small><br>
-               <strong>'.Fungsi::rupiah($sumdenda).'</strong>
-           </th>
-
-       </tr>
+     
        <tr>
            <th colspan="2">
              Data  Pengeluaran
@@ -609,7 +597,7 @@ if($request->status=='sudah'){
        </tr>
        <tr>
            <th colspan="3">
-            Total Saldo = Total Pemasukan + Denda - Pengeluaran
+            Total Saldo = Total Pemasukan - Pengeluaran
            </th>
 
            <th style="width: 18%" class="text-center">
@@ -633,7 +621,7 @@ if($request->status=='sudah'){
             'outputpengeluaran' => $outputpengeluaran,
 
             'jmldenda' => $jmldenda,
-            'datasdenda' => $datasdenda,
+            // 'datasdenda' => $datasdenda,
             'firstdenda' => $firstdenda,
             'outputdenda' => $outputdenda,
             'outputsaldo' => $outputsaldo,

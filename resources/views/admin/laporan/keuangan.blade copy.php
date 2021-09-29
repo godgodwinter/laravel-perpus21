@@ -175,6 +175,53 @@ $message=session('status');
 
             </tbody>
     </table>
+    <hr>
+    <table class="table projects">
+            <tbody id="tampildenda">
+
+                <tr class="thead-dark">
+                    <th colspan="2">
+                      Data  Pemasukan Denda
+                    </th>
+
+                    <th style="width: 18%" class="text-center">
+                        {{$jmldenda}} Transaksi
+                    </th>
+                    <th style="width: 18%" class="text-center">
+                     <small>   Total Nominal :</small><br>
+                        <strong>{{Fungsi::rupiah($totalnominaldenda)}}</strong>
+                    </th>
+
+                </tr>
+              {{-- {{dd($datas)}} --}}
+              @foreach ($datasdenda as $data)
+
+              <tr>
+                  <td>
+                     {{$loop->index+1}}
+                  </td>
+                  <td>
+                      <a>
+                          {{$data->buku_nama}}
+                      </a>
+                      {{-- <br/> --}}
+                      {{-- <small>
+                          Created 01.01.2019
+                      </small> --}}
+                  </td>
+                  <td class="text-center">
+                    {{Fungsi::tanggalindo($data->tgl_dikembalikan)}}
+                  </td>
+
+                  <td class="project-state">
+                    {{Fungsi::rupiah($data->totaldenda)}}
+                  </td>
+
+              </tr>
+              @endforeach
+
+          </tbody>
+        </table>
         <table class="table  projects">
             <tbody id="tampilpengeluaran">
               <tr class="thead-dark">
@@ -241,7 +288,7 @@ $message=session('status');
                   </th>
 
               </tr>
-              {{-- <tr>
+              <tr>
                   <th colspan="2">
                     Data  Pemasukan Denda
                   </th>
@@ -254,7 +301,7 @@ $message=session('status');
                       <strong>{{Fungsi::rupiah($totalnominaldenda)}}</strong>
                   </th>
 
-              </tr> --}}
+              </tr>
               <tr>
                   <th colspan="2">
                     Data  Pengeluaran
@@ -271,12 +318,12 @@ $message=session('status');
               </tr>
               <tr>
                   <th colspan="3">
-                   Total Saldo = Total Pemasukan- Pengeluaran
+                   Total Saldo = Total Pemasukan + Denda - Pengeluaran
                   </th>
 
                   <th style="width: 18%" class="text-center">
                    <small>   Total Saldo :</small><br>
-                      <strong>{{Fungsi::rupiah(($totalnominal2)-($totalnominal))}}</strong>
+                      <strong>{{Fungsi::rupiah(($totalnominal2+$totalnominaldenda)-($totalnominal))}}</strong>
                   </th>
 
               </tr>

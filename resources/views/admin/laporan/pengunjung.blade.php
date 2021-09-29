@@ -191,14 +191,6 @@ $message=session('status');
         <div class="card-header">
           <h3 class="card-title">Grafik Pengunjung</h3>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
         </div>
 
       <div class="card-body  col-sm-7 offset-2">
@@ -276,14 +268,6 @@ $message=session('status');
         <div class="card-header" id="jmldata">
             <label>Jumlah : {{$jml}} Pengunjung</label>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
         </div>
         <div class="card-body p-0">
           <table class="table table-striped projects">
