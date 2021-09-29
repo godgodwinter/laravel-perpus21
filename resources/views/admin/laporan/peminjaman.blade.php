@@ -63,7 +63,7 @@ $message=session('status');
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="input-group ">
                                     <input type="text" class="form-control form-control search" placeholder="Cari . . ." name="cari"  id="cari" autocomplete="off">
                                     <div class="input-group-append">
@@ -97,6 +97,14 @@ $message=session('status');
                                         value="{{$bln}}" required>
 
                                 </div>
+                            </div>    
+                            <div class="col-2">       
+                                    @php
+                                        $status='semua';
+                                        $cari='null';
+                                    @endphp
+                                <a href="{{url('/admin/datapeminjaman/cetak/'.$bln.'/'.$status.'/'.$cari)}}" type="submit" value="cetak" id="blncetak"
+                                 class="btn btn-icon btn-default btn-md"><span class="pcoded-micon"> <i class="fas fa-print"></i>   Cetak PDF </span></a>
                             </div>
                         </div>
                         <div class="form-group">
@@ -151,6 +159,7 @@ $message=session('status');
                 cari = $("input[name=cari]").val();
                 bln = $("input[name=bln]").val();
                 status = $("select[name=status]").val();
+                $("#blncetak").prop('href','{{url('/admin/datapeminjaman/cetak/')}}/'+bln+'/semua/null');
                         // console.log(cari);
                   var query = $(this).val();
                   fetch_customer_data(query);

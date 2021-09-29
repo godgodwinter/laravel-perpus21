@@ -215,6 +215,8 @@ Route::delete('admin/datausers/upload/{users}', 'App\Http\Controllers\prosesCont
 // });
 Route::get('pengunjung/cetak', 'App\Http\Controllers\laporanController@pengunjungcetak')->name('pengunjung.cetak');
 Route::get('admin/dataperalatan/cetak', 'App\Http\Controllers\adminperalatancontroller@cetak')->name('peralatan.cetak');
+Route::get('admin/datakeuangan/cetak/{bln}', 'App\Http\Controllers\laporancontroller@cetakkeuangan')->name('keuangan.cetak');
+Route::get('admin/datapeminjaman/cetak/{bln}/{status}/{cari}', 'App\Http\Controllers\laporancontroller@cetakpeminjaman')->name('peminjaman.cetak');
 
 
 //pustakawan

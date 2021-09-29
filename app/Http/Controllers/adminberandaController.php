@@ -54,8 +54,52 @@ class adminberandaController extends Controller
         $month = date("m",strtotime($datasminus));
 // dd($label);
 
+
+// data pengunjung
+$datatanpauniq=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+$datas=$datatanpauniq->unique('nama');
+$jml=$datatanpauniq->unique('nama')->count();
+
+
+$labelawal = Carbon::now()->startOfMonth()->subMonth(6);
+$month = date("Y-m",strtotime($labelawal));
+$labelpengunjung=[];
+array_push($labelpengunjung,Fungsi::tanggalindobln($month));
+// $label='"'.Fungsi::tanggalindobln($month).'"';
+$bln = date("m",strtotime($labelawal));
+$year = date("Y",strtotime($labelawal));
+
+$datatanpauniq=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+$datas=$datatanpauniq->unique('nama');
+// $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+$count=$datatanpauniq->unique('nama')->count();
+$datapengunjung=$count;
+
+for($i=0;$i<6;$i++){
+    $labelawal = $labelawal->startOfMonth()->addMonth(1);
+    $month = date("Y-m",strtotime($labelawal));
+    // $label.=',"'.Fungsi::tanggalindobln($month).'"';
+array_push($labelpengunjung,Fungsi::tanggalindobln($month));
+
+
+
+    $bln = date("m",strtotime($labelawal));
+    $year = date("Y",strtotime($labelawal));
+    $datatanpauniq=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->get();
+    $datas=$datatanpauniq->unique('nama');
+    // $jml=DB::table('pengunjung')->whereMonth('tgl',$bln)->whereYear('tgl',$year)->orderBy('tgl','desc')->count();
+    $count=$datatanpauniq->unique('nama')->count();
+    // $data=$count;
+             $datapengunjung.=','.$count;
+}
+
+$datasminus = Carbon::now()->startOfMonth()->subMonth(3);
+$datasadd = Carbon::now()->startOfMonth()->addMonth(3);
+$month = date("m",strtotime($datasminus));
+// dd($label,$data,$labelpengunjung,$datapengunjung);
         return view('admin.pages.beranda',compact('pages'
             ,'label','data'
+            ,'labelpengunjung','datapengunjung'
         ));
         }
 

@@ -75,6 +75,12 @@ $message=session('status');
                                         value="{{$bln}}" required>
 
                                 </div>
+                                
+                            </div>
+                                   
+                            <div class="col-3">       
+                                <a href="{{url('/admin/datakeuangan/cetak/'.$bln)}}" type="submit" value="cetak" id="blncetak"
+                                 class="btn btn-icon btn-default btn-md"><span class="pcoded-micon"> <i class="fas fa-print"></i>   Cetak PDF </span></a>
                             </div>
                         </div>
                         <div class="form-group">
@@ -112,6 +118,7 @@ $message=session('status');
 
                  $(document).on('change', '#bln', function(){
                 bln = $("input[name=bln]").val();
+                $("#blncetak").prop('href','{{url('/admin/datakeuangan/cetak/')}}/'+bln);
                   var query = $(this).val();
                   fetch_customer_data(query);
                  });

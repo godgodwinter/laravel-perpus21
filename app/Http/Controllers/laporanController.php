@@ -121,6 +121,28 @@ class laporanController extends Controller
         // return view('admin.beranda');
     }
 
+    
+
+    public function cetakpeminjaman($bln,$status,$cari)
+    {
+        // dd($bln,$status,$cari);
+        // dd($bln);
+        $tgl=date("YmdHis");
+        // dd($tgl);
+        $bulan = date("m",strtotime($bln));
+        $year = date("Y",strtotime($bln));
+        $blnthn=$bln;
+
+
+        $pdf = PDF::loadview('admin.laporan.cetakpeminjaman',compact('bulan','year','blnthn','status','cari'))->setPaper('a4', 'potrait');
+
+        // \QrCode::size(500)
+        //     ->format('png')
+        //     ->generate('www.google.com', public_path('assets/img/qrcode.png'));
+
+        return $pdf->download('laporanperalatan'.$tgl.'-pdf');
+    }
+
     public function laporankeuangan(Request $request)
     {
         if($this->checkauth('admin')==='404'){
@@ -155,6 +177,28 @@ class laporanController extends Controller
 
         return view('admin.laporan.keuangan',compact('pages','datas','datas2','request','jml','jml2','totalnominal','totalnominal2','datasdenda','jmldenda','totalnominaldenda'));
         // return view('admin.beranda');
+    }
+    
+    public function cetakkeuangan($bln)
+    {
+
+        // dd($bln);
+        $tgl=date("YmdHis");
+        // dd($tgl);
+        $bulan = date("m",strtotime($bln));
+        $year = date("Y",strtotime($bln));
+        $blnthn=$bln;
+
+        // $datas=DB::table('peralatan')->orderBy('created_at','desc')->get();
+// dd($datas,$jml);
+
+        $pdf = PDF::loadview('admin.laporan.cetakkeuangan',compact('bulan','year','blnthn'))->setPaper('a4', 'potrait');
+
+        // \QrCode::size(500)
+        //     ->format('png')
+        //     ->generate('www.google.com', public_path('assets/img/qrcode.png'));
+
+        return $pdf->download('laporanperalatan'.$tgl.'-pdf');
     }
 
     public function apichart1(Request $request)
