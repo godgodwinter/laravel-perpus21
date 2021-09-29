@@ -113,6 +113,20 @@ class adminpeminjamancontroller extends Controller
         return redirect()->back()->with('status','Gagal! Buku tidak ditemukan!')->with('tipe','error')->with('icon','fas fa-trash');
         }
 
+            // 2. insert peminjaman berdasarkan dataanggota
+            DB::table('peminjaman')->insert([
+                'kodetrans' => $kodetrans,
+                'nama' => $dataanggota->nama,
+                'nomeridentitas' =>$request->nomeridentitas,
+                'jaminan_tipe' => $request->jaminan_tipe,
+                'jaminan_nama' => $jaminan_nama,
+                'tgl_pinjam' => $tgl_pinjam,
+                'tgl_harus_kembali' =>$tgl_harus_kembali,
+                'denda' =>Fungsi::defaultdenda(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+            
         // dd($request->daftarbuku);
         foreach($request->daftarbuku as $db){
             $kode=$db['kode'];
@@ -121,19 +135,6 @@ class adminpeminjamancontroller extends Controller
             // 1.ambil data buku
                 $databuku=DB::table('buku')->where('kode',$kode)->first();
 
-            // 2. insert peminjaman berdasarkan dataanggota
-                DB::table('peminjaman')->insert([
-                    'kodetrans' => $kodetrans,
-                    'nama' => $dataanggota->nama,
-                    'nomeridentitas' =>$request->nomeridentitas,
-                    'jaminan_tipe' => $request->jaminan_tipe,
-                    'jaminan_nama' => $jaminan_nama,
-                    'tgl_pinjam' => $tgl_pinjam,
-                    'tgl_harus_kembali' =>$tgl_harus_kembali,
-                    'denda' =>Fungsi::defaultdenda(),
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
             // 3. ulangi sesuai jml buku
             // 4. insert peminjamandetail
             for($i=0;$i<$jml;$i++){

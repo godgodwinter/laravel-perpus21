@@ -336,7 +336,7 @@ crossorigin="anonymous"></script> --}}
 
               <li class="nav-item">
                 <a href="{{route('dashboard')}}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <i class="fas fa-home"></i>
                   <p>
                     Beranda
                     {{-- <span class="right badge badge-danger">New</span> --}}
