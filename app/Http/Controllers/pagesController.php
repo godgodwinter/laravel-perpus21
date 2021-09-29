@@ -186,10 +186,11 @@ class pagesController extends Controller
                         $gambar=asset("storage/").'/'.$row->gambar;
                     }
 
-                $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white dark:bg-gray-800">
+                $output .= '
+                
                 <div class="max-w-lg rounded overflow-hidden shadow-lg">
-                    <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
-                    <div class="px-6 py-4">
+                    <img class="w-full object-cover h-48" src="'.$gambar.'" alt="Sunset in the mountains">
+                    <div class="px-3 py-4">
                       <div class="font-bold text-xl mb-2"> '.$row->nama.'.</div>
                       <table>
                       <tr>
@@ -225,7 +226,6 @@ class pagesController extends Controller
                 </a>
                 </div>
                   </div>
-            </div>
 
                 ';
                 }

@@ -6,13 +6,13 @@
         <div class="flex flex-col items-center justify-end pt-20 space-y-10 pb-18">
             <h2
                 class="text-4xl font-extrabold leading-snug text-center text-transparent tex md:text-6xl lg:text-4xl bg-gradient-to-tr from-pink-500 to-indigo-600 via-blue-600-300 bg-clip-text ">
-                
-       
- <div class="typing-container"> 
+
+
+ <div class="typing-container">
     <span id="sentence" class="sentence">SISTEM PERPUSTAKAAN </span>
     {{-- <span id="feature-text"></span>
     <span class="input-cursor"></span> --}}
-  </div> 
+  </div>
             </h2>
 
         </div>
@@ -103,9 +103,9 @@
                       fetch_customer_data(query);
                      });
 
-                     
+
                      $("button#clear").click(function(){
-                         
+
                         //  alert('');
                          $("input[name=cari]").val('');
                      });
@@ -117,14 +117,14 @@
             </div>
         </div>
 
-        <div class="flex flex-wrap" id="tampil">
+        <div class="flex flex-wrap" >
             {{-- <div id="tampil">
 
             </div> --}}
 
-{{--
-            @for ($i=0;$i<5;$i++)
-            <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white">
+            <div class="p-10 grid  md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-6" id="tampil">
+
+            {{-- @for ($i=0;$i<10;$i++)
                 <div class="max-w-lg rounded overflow-hidden shadow-lg">
                     <img class="w-full" src="https://ui-avatars.com/api/?name=casd&color=7F9CF5&background=EBF4FF" alt="Sunset in the mountains">
                     <div class="px-6 py-4">
@@ -138,16 +138,15 @@
                       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
                       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
                     </div>
-                  </div>
-            </div>
+                </div>
 
             @endfor --}}
+        </div>
 
 
             {{-- <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/2 xl:w-1/6 mb-4 bg-gray-400"></div> --}}
           </div>
 
-      
 
 
         <div x-ref="showCase"

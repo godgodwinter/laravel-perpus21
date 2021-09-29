@@ -59,9 +59,6 @@ i.data("mainState", (() => ({
         label: "KATALOG",
         link: "/katalog"
     }, {
-        label: "ANGGOTA",
-        link: "/anggota"
-    }, {
         label: "PENGUNJUNG",
         link: "/pengunjung"
     },{

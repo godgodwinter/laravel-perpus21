@@ -69,8 +69,9 @@
 </head>
 
 <body style="overflow-x: hidden">
+    
     <!-- Loading -->
-    <div class="loading">
+    {{-- <div class="loading">
         <div class="left"></div>
         <div class="right"></div>
         <div class="logo">
@@ -80,7 +81,7 @@
                     fill="#8B5CF6" />
             </svg>
         </div>
-    </div>
+    </div> --}}
 
     <div x-data="mainState" class="overflow-x-hidden" :class="{ dark: isDark }">
         <div class="font-sans antialiased text-gray-900 bg-gray-50 dark:bg-gray-800 dark:text-gray-200">
@@ -215,7 +216,7 @@
                     while(true) {
                       updateFontColor(eleRef, carouselList[i].color)
                       await typeSentence(carouselList[i].text, eleRef);
-                      await waitForMs(1500);
+                      await waitForMs(500);
                       await deleteSentence(eleRef);
                       await waitForMs(500);
                       i++
