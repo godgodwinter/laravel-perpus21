@@ -400,51 +400,51 @@ class pagesController extends Controller
                         $gambar=asset("storage/").'/'.$row->gambar;
                     }
 
-                $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white dark:bg-gray-800">
-                <div class="max-w-lg rounded overflow-hidden shadow-lg">
-                    <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
-                    <div class="px-6 py-4">
-                      <div class="font-bold text-xl mb-2 text-gray-700 dark:text-white"> '.$row->nama.'.</div>
-                      <table>
-                      <tr>
-                      <td style="padding-right:10px;">
-                                           <p class="text-gray-700 dark:text-white text-base">Pinjam </td><td style="padding-right:10px;"> : </td><td>
-                       '.$tersedia.' </td>
-                      </p>
-                      </tr>
-                      <tr>
-                      <td style="padding-right:10px;">
-                                           <p class="text-gray-700 dark:text-white text-base">Belum dikembalikan </td><td style="padding-right:10px;"> : </td><td>
-                                           <p class="text-red-400 text-base">'.$belumkembali.' Buku</p></td>
-                      </p>
-                      </tr>
-                      </table>
+            //     $output .= '<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-4 bg-white dark:bg-gray-800">
+            //     <div class="max-w-lg rounded overflow-hidden shadow-lg">
+            //         <img class="w-full object-cover h-96" src="'.$gambar.'" alt="Sunset in the mountains">
+            //         <div class="px-6 py-4">
+            //           <div class="font-bold text-xl mb-2 text-gray-700 dark:text-white"> '.$row->nama.'.</div>
+            //           <table>
+            //           <tr>
+            //           <td style="padding-right:10px;">
+            //                                <p class="text-gray-700 dark:text-white text-base">Pinjam </td><td style="padding-right:10px;"> : </td><td>
+            //            '.$tersedia.' </td>
+            //           </p>
+            //           </tr>
+            //           <tr>
+            //           <td style="padding-right:10px;">
+            //                                <p class="text-gray-700 dark:text-white text-base">Belum dikembalikan </td><td style="padding-right:10px;"> : </td><td>
+            //                                <p class="text-red-400 text-base">'.$belumkembali.' Buku</p></td>
+            //           </p>
+            //           </tr>
+            //           </table>
 
-                    </div>
-                    <div class="px-6 pt-4 pb-2">
-                      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 dark:bg-gray-700  dark:text-white" >Nomer Identitas : '.$row->nomeridentitas.'</span>
-                    </div>
-
-
-                    <div class="px-6 pt-4 pb-2 flex float-right">
-                    <a href="'.url('/anggotashow/').'/'.$row->nomeridentitas.'"
-                    class="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:shadow-outline transform hover:rotate-2 transition duration-500 ease-in-out "
-                    href="#"> Lihat Selengkapnya
-                </a>
-                </div>
+            //         </div>
+            //         <div class="px-6 pt-4 pb-2">
+            //           <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 dark:bg-gray-700  dark:text-white" >Nomer Identitas : '.$row->nomeridentitas.'</span>
+            //         </div>
 
 
-                  </div>
-            </div>
+            //         <div class="px-6 pt-4 pb-2 flex float-right">
+            //         <a href="'.url('/anggotashow/').'/'.$row->nomeridentitas.'"
+            //         class="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-600 active:bg-gray-700 focus:outline-none focus:shadow-outline transform hover:rotate-2 transition duration-500 ease-in-out "
+            //         href="#"> Lihat Selengkapnya
+            //     </a>
+            //     </div>
 
-                ';
+
+            //       </div>
+            // </div>
+
+            //     ';
                 }
          }else{
-            $output = '
-            <tr>
-             <td align="center" colspan="5">No Data Found</td>
-            </tr>
-            ';
+            // $output = '
+            // <tr>
+            //  <td align="center" colspan="5">No Data Found</td>
+            // </tr>
+            // ';
 
          }
         // echo json_encode($datas);

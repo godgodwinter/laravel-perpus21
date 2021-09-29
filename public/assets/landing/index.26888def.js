@@ -62,7 +62,7 @@ i.data("mainState", (() => ({
         label: "PENGUNJUNG",
         link: "/pengunjung"
     },{
-        label: "LOGIN",
+        label: "MASUK",
         link: "/dashboard"
     }],
     handelMouseEnter: e => {
