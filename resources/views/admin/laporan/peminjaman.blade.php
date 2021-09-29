@@ -246,9 +246,15 @@ $message=session('status');
                       </td>
                       <td>
                           @php
+                              $jmlambilpeminjam=DB::table('peminjaman')->where('kodetrans',$data->kodetrans)->count();
                               $ambilpeminjam=DB::table('peminjaman')->where('kodetrans',$data->kodetrans)->first();
                           @endphp
+                          @if($jmlambilpeminjam>0)
+
                         {{$data->nomeridentitas}} - {{$ambilpeminjam->nama}}
+                          @else
+                            Data Tidak ditemukan
+                          @endif
                       </td>
                       <td class="project-state">
                           @php

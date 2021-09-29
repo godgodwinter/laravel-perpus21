@@ -229,7 +229,7 @@ $message=session('status');
                     
                     <div class="form-group col-md-6 col-6">
                         <label for="telp">Telp <code>*)</code></label>
-                        <input type="text" name="telp" id="telp" class="form-control @error('telp') is-invalid @enderror" value="{{$datas->telp}}" required>
+                        <input type="text" name="telp" id="telp" class="form-control @error('telp') is-invalid @enderror" value="{{$datas->telp}}" >
                         @error('telp')<div class="invalid-feedback"> {{$message}}</div>
                         @enderror
                     </div>
