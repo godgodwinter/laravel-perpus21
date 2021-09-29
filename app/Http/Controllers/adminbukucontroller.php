@@ -8,6 +8,7 @@ use App\Models\bukudetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use PDF;
 use PHPUnit\Framework\MockObject\Rule\Parameters;
 
 class adminbukucontroller extends Controller
@@ -307,5 +308,18 @@ class adminbukucontroller extends Controller
         // ,'bukurak'
         ,'bukukategori','datas','request','kodepanggil'));
 
+    }
+    public function cetakchecked(Request $request){
+        // dd($request->databukuchecked);
+        
+        $tgl=date("YmdHis");
+        $str=explode(",",$request->databukuchecked);
+        $jmldata=count($str);
+
+        // dd($str,$jmldata);
+        
+        $pdf = PDF::loadview('admin.buku.cetakchecked',compact('jmldata','str'))->setPaper('a4', 'potrait');
+
+        return $pdf->download('buku'.$tgl.'.pdf');
     }
 }

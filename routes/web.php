@@ -217,6 +217,7 @@ Route::get('pengunjung/cetak', 'App\Http\Controllers\laporanController@pengunjun
 Route::get('admin/dataperalatan/cetak', 'App\Http\Controllers\adminperalatancontroller@cetak')->name('peralatan.cetak');
 Route::get('admin/datakeuangan/cetak/{bln}', 'App\Http\Controllers\laporancontroller@cetakkeuangan')->name('keuangan.cetak');
 Route::get('admin/datapeminjaman/cetak/{bln}/{status}/{cari}', 'App\Http\Controllers\laporancontroller@cetakpeminjaman')->name('peminjaman.cetak');
+Route::get('admin/databuku/cetak/checked', 'App\Http\Controllers\adminbukucontroller@cetakchecked')->name('buku.checked.cetak');
 
 
 //pustakawan

@@ -66,6 +66,40 @@ $message=session('status');
         $("#chkCheckAll").click(function () {
             $(".checkBoxClass").prop('checked', $(this).prop('checked'));
         })
+        
+        $("#cetakbukuchecked").click(function (e) {
+            e.preventDefault();
+            var allids = [];
+            $("input:checkbox[name=ids]:checked").each(function () {
+                allids.push($(this).val());
+            });
+            $("#databukuchecked").val(allids);
+
+            if($("#databukuchecked").val()==''){
+                // alert('datakosong');
+                $('#tombolcetak').prop('disabled',true);
+            }else{
+                // alert('dataterisi');
+                $('#tombolcetak').prop('disabled',false);
+            }
+                // alert(allids);
+                
+            // $.ajax({
+            //     url: "{{ route('admin.buku.multidel') }}",
+            //     type: "DELETE",
+            //     data: {
+            //         _token: $("input[name=_token]").val(),
+            //         ids: allids
+            //     },
+            //     success: function (response) {
+            //         $.each(allids, function ($key, val) {
+            //             $("#sid" + val).remove();
+            //         })
+            //     }
+            // });
+            // alert('asd');
+            
+        });
 
         $("#deleteAllSelectedRecord").click(function (e) {
             e.preventDefault();
@@ -270,9 +304,22 @@ $message=session('status');
 
 <tr>
     <td class="text-left" colspan="8">
+        <form action="{{route('buku.checked.cetak')}}" method="get">
+            @csrf
+
         <a href="#" class="btn btn-sm  btn-danger" id="deleteAllSelectedRecord"
             onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"><i class="fas fa-trash"></i> Hapus
-            Terpilih</a></td>
+            Terpilih</a>
+                
+            <a href="#" type="submit" value="cetak" id="cetakbukuchecked"
+            class="btn btn-icon btn-warning btn-sm ml-2"  data-toggle="tooltip" data-placement="top" title="Pilih satu atau beberapa buku dahulu!"><span class="pcoded-micon"> <i class="fas fa-print"></i>   Buat Link Cetak </span></a>
+
+            
+            <input type="hidden" name="databukuchecked" class="databukuchecked " id="databukuchecked" value="">
+            <button href="#" type="submit" value="cetak" id="tombolcetak"
+            class="btn btn-icon btn-default btn-sm ml-2" disabled  data-toggle="tooltip" data-placement="top" title="Tekan tombol Buat link cetak dahulu"><span class="pcoded-micon" > <i class="fas fa-print"></i>   Cetak PDF </span></button>
+        </form>
+        </td>
 </tr>
 
 @endsection
