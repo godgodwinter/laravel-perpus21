@@ -84,17 +84,6 @@ $message=session('status');
         <div class="col-12 col-md-12 col-lg-12">
 
             <div class="card">
-                <div class="card-header">
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
                 <div class="card-body">
 
 
@@ -187,107 +176,6 @@ $message=session('status');
         
         {{-- asd --}}
 
-
-        <div class="col-12 col-md-12 col-lg-12">
-
-            <div class="card">
-                <div class="card-header">
-
-                    {{-- <div class="card-body"> --}}
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-
-
-                        <div class="col-12 col-md-12 col-lg-4">
-                            <div class="card">
-                                {{-- <form action="#" method="post">
-                                @csrf --}}
-                              
-
-                                <form action="/admin/pengembalian/periksaanggota" method="post" id="formanggota">
-                                    @csrf
-                                    <div class="card-body">
-                                        
-                                        <div class="form-group">
-                                            <label>Pilih Anggota :</label>
-                                            <select class="form-control form-control-md" id="tags" select2 select2-hidden-accessible  name="nomeridentitas" required>
-                                                <option value="" disabled selected>Pilih Anggota</option>
-                                            @php
-                                            // $cekdataselect = DB::table('anggota')
-                                            //     ->count();
-                                            $dataselect=DB::table('anggota')
-                                                ->get();
-                                                @endphp 
-                                               
-                                            @foreach ($dataselect as $t)
-                                                <option value="{{ $t->nomeridentitas }}" >{{ $t->nomeridentitas }} - {{ $t->nama }}</option>
-                                            @endforeach
-                                            </select>
-                                        </div>
-                                        
-                                       
-                                        
-                                        <div class="row" id="forminputan">
-                                            {{-- <div class="form-group col-md-12 col-12">
-                                            <label for="nama">Kode Panggil</label>
-                                            <input type="text" name="nama" id="nama"
-                                                class="form-control" placeholder="" required>
-                                        </div> --}}
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="card-footer text-right">
-                                        <button class="btn btn-success" id="kirimdata">Periksa</button>
-                                    </div>
-                                </form>
-                                
-                                  
-                                <script type="text/javascript">
-                                    var values = $('#tags option[selected="true"]').map(function() { return $(this).val(); }).get();
-        
-                                      // you have no need of .trigger("change") if you dont want to trigger an event
-                                      $('#tags').select2({ 
-                                    placeholder: "Pilih Anggota"
-                                   });
-
-                                   $("#tags").select2({
-                                    theme: "classic"
-                                    });
-
-                                    
-                                // $("select#tags").change(function(e){
-                                //     var selectedText = $(this).find("option:selected").val();
-                                //      kode = $(this).find("option:selected").val();
-                                //     //  alert(kode);
-                                //     $("form#formanggota").prop('action', '/admin/pengembalian/periksaanggota/'+kode);
-                                // });
-                                   </script>
-
-
-                            </div>
-
-                        </div>
-                        <!-- /.card-body -->
-
-                      
-
-                    </div>
-                </div>
-                <!-- /.card -->
-
-            </div>
-        </div>
 
         
 

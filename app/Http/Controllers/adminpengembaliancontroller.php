@@ -242,11 +242,36 @@ class adminpengembaliancontroller extends Controller
         // if($this->checkauth('admin')==='404'){
         //     return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
         // }
-
+        // dd('asd');
+            //periksa apakah pernah pinjam
         $jmlpinjam=DB::table('peminjaman')->where('nomeridentitas',$request->nomeridentitas)->orderBy('created_at', 'desc')->count();
         if($jmlpinjam<1){
+            // periksa apakah sudah dikembalikan
+            // $ambildatapeminjaman=DB::table('peminjaman')->where('nomeridentitas',$request->nomeridentitas)->orderBy('created_at', 'desc')->first();
+            // $jmlkembali=DB::table('pengembalian')->where('nomeridentitas',$request->nomeridentitas)->where('tgl_pinjam',$ambildatapeminjaman->tgl_pinjam)
+            //                                     ->where('tgl_harus_kembali',$ambildatapeminjaman
+            //                                     ->tgl_harus_kembali)->orderBy('created_at', 'desc')
+            //                                     ->count();
+            //                                         if($jmlkembali>1){
+                                                            // sudah dikembalikan
             return redirect(URL::to('/').'/admin/pengembalian')->with('status','Belum pernah pinjam!')->with('tipe','error');
+                                                    // }
+
         }else{
+            $ambildatapeminjaman=DB::table('peminjaman')->where('nomeridentitas',$request->nomeridentitas)->orderBy('created_at', 'desc')->first();
+           
+            $jmlkembali=DB::table('pengembalian')->where('nomeridentitas',$request->nomeridentitas)
+            // ->where('tgl_pinjam',$ambildatapeminjaman->tgl_pinjam)
+                                                // ->where('tgl_harus_kembali',$ambildatapeminjaman
+                                                // ->tgl_harus_kembali)
+                                                ->orderBy('created_at', 'desc')
+                                                ->count();
+                                                // dd($ambildatapeminjaman,$jmlpinjam,$jmlkembali);
+                                                    if($jmlpinjam<=$jmlkembali){
+                                                            // sudah dikembalikan
+            return redirect(URL::to('/').'/admin/pengembalian')->with('status','Belum pernah pinjam! Atau buku sudah dikembalikan')->with('tipe','error');
+                                                    }
+                                                    
             return redirect(URL::to('/').'/admin/pengembalian/periksaanggota/'.$request->nomeridentitas)->with('status','Data ditemukan!')->with('tipe','success');
 
         $jmlbelumkembali=0;
