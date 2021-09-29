@@ -356,7 +356,11 @@ class prosesController extends Controller
 	public function uploadbukudelete(Request $request,buku $buku){
 
         // dd($request);
-        Storage::disk('public')->delete($request->namaphoto);
+        // Storage::disk('public')->delete($request->namaphoto);
+        // Storage::delete($request->namaphoto);
+        $image_path = 'storage/'.$request->namaphoto;
+        // $image_path = public_path().'/'.$request->namaphoto;
+        unlink($image_path);
 		buku::where('id',$buku->id)
 		->update([
 			'gambar' => "",
