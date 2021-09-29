@@ -163,17 +163,6 @@ $message=session('status');
         <div class="col-12 col-md-12 col-lg-12">
 
             <div class="card">
-                <div class="card-header">
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
                 <div class="card-body">
 
 
@@ -208,9 +197,11 @@ $message=session('status');
 
                             </div>
                         </div> --}}
-
-                        <a href="{{route('peralatan.cetak')}}" type="submit" value="Import"
-                            class="btn btn-icon btn-default btn-sm"><span class="pcoded-micon"> <i class="fas fa-print"></i>   Cetak PDF </span></a>
+         
+                        <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
+                        data-target="#add"><i class="fas fa-plus"></i>
+                        Tambah
+                    </button>
                         <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                             data-target="#importExcel"><i class="fas fa-upload"></i>
                             Import
@@ -219,6 +210,9 @@ $message=session('status');
                         <a href="/admin/@yield('linkpages')/export" type="submit" value="Import"
                             class="btn btn-icon btn-primary btn-sm"><span class="pcoded-micon"> <i
                                     class="fas fa-download"></i> Export </span></a>
+                                    
+                        <a href="{{route('peralatan.cetak')}}" type="submit" value="Import"
+                        class="btn btn-icon btn-default btn-sm"><span class="pcoded-micon"> <i class="fas fa-print"></i>   Cetak PDF </span></a>
                     </div>
 
 
@@ -237,99 +231,85 @@ $message=session('status');
         </div>
     </div>
 
-    <div class="col-12 col-md-12 col-lg-12">
-
-        <div class="card">
-            <div class="card-header">
-
-                {{-- <div class="card-body"> --}}
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-
-
-                    <div class="col-12 col-md-12 col-lg-12">
-                        <div class="card">
-                            <form action="/admin/{{ $pages }}" method="post">
-                                @csrf
-                                <div class="card-header">
-                                    <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Tambah
-                                        @yield('title')</span>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="nama">Nama @yield('title')</label>
-                                            <input type="text" name="nama" id="nama"
-                                                class="form-control @error('nama') is-invalid @enderror" placeholder=""
-                                                value="{{old('nama')}}" required>
-                                            @error('nama')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Kategori<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="kategori_nama">
-                                                @if (old('kategori_nama'))
-                                                <option>{{old('kategori_nama')}}</option>
-                                                @endif
-                                                @foreach ($peralatankategori as $t)
-                                                    <option>{{ $t->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Kondisi<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="kondisi">
-                                                @if (old('kondisi'))
-                                                <option>{{old('kondisi')}}</option>
-                                                @endif
-                                                @foreach ($kondisi as $t)
-                                                    <option>{{ $t->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6 col-6">
-                                            <label>Tanggal Lahir</label>
-                                            <input type="date" class="form-control" name="tgl_masuk" @error('tgl_masuk') is-invalid @enderror" value="{{old('tgl_masuk')}}" >
-                                            @error('tgl_masuk')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
-
-
-                                    </div>
-
-                                </div>
-                                <div class="card-footer text-right">
-                                    <button class="btn btn-primary">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                    <!-- /.card-body -->
-
-                </div>
-            </div>
-            <!-- /.card -->
-
-        </div>
+    
 
 </section>
 <!-- /.content -->
 @endsection
 
 @section('container-modals')
+
+
+              <!--Tambah -->
+              <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  {{-- <form method="post" action="{{ route($pages.'.import') }}" enctype="multipart/form-data"> --}}
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
+                      </div>
+                      <div class="modal-body">
+           
+                        <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card-body">
+                        <div class="row">
+                            <form action="/admin/{{ $pages }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                            
+                                
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="nama">Nama @yield('title')</label>
+                                    <input type="text" name="nama" id="nama"
+                                        class="form-control @error('nama') is-invalid @enderror" placeholder=""
+                                        value="{{old('nama')}}" required>
+                                    @error('nama')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Kategori<code>*)</code></label>
+                                    <select class="form-control form-control-lg" required name="kategori_nama">
+                                        @if (old('kategori_nama'))
+                                        <option>{{old('kategori_nama')}}</option>
+                                        @endif
+                                        @foreach ($peralatankategori as $t)
+                                            <option>{{ $t->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Kondisi<code>*)</code></label>
+                                    <select class="form-control form-control-lg" required name="kondisi">
+                                        @if (old('kondisi'))
+                                        <option>{{old('kondisi')}}</option>
+                                        @endif
+                                        @foreach ($kondisi as $t)
+                                            <option>{{ $t->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Tanggal Masuk</label>
+                                    <input type="date" class="form-control" name="tgl_masuk" @error('tgl_masuk') is-invalid @enderror" value="{{old('tgl_masuk')}}" >
+                                    @error('tgl_masuk')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+                              
+
+                        </div>
+                        </div>
+                        </div>
+           
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
 
               <!-- Import Excel -->
               <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

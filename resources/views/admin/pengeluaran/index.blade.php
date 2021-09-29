@@ -49,7 +49,7 @@ $message=session('status');
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
     <th> Nama  </th>
     <th> Kategori</th>
-    <th> Tanggal Masuk</th>
+    <th> Tanggal Pengeluaran</th>
     <th> Nominal</th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
@@ -165,17 +165,6 @@ $message=session('status');
         <div class="col-12 col-md-12 col-lg-12">
 
             <div class="card">
-                <div class="card-header">
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
                 <div class="card-body">
 
 
@@ -204,6 +193,11 @@ $message=session('status');
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
 
                         <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
+                        data-target="#add"><i class="fas fa-plus"></i>
+                        Tambah
+                        </button>
+
+                        <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                             data-target="#importExcel"><i class="fas fa-upload"></i>
                             Import
                         </button>
@@ -229,141 +223,128 @@ $message=session('status');
         </div>
     </div>
 
-    <div class="col-12 col-md-12 col-lg-12">
-
-        <div class="card">
-            <div class="card-header">
-
-                {{-- <div class="card-body"> --}}
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-
-
-                    <div class="col-12 col-md-12 col-lg-12">
-                        <div class="card">
-                            <form action="/admin/{{ $pages }}" method="post">
-                                @csrf
-                                <div class="card-header">
-                                    <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Tambah
-                                        @yield('title')</span>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="nama">Nama </label>
-                                            <input type="text" name="nama" id="nama"
-                                                class="form-control @error('nama') is-invalid @enderror" placeholder=""
-                                                value="{{old('nama')}}" required>
-                                            @error('nama')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Kategori<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="kategori_nama">
-                                                @if (old('kategori_nama'))
-                                                <option>{{old('kategori_nama')}}</option>
-                                                @endif
-                                                <option>Umum</option>
-                                                <option>Perbaikan</option>
-                                                <option>Kegiatan Sekolah</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="form-group col-md-6 col-6">
-                                            <label for="nominal">Nominal <code>*)</code></label>
-                                            <input type="number" name="nominal" id="nominal" class="form-control @error('nominal') is-invalid @enderror" value="{{old('nominal')}}" required>
-                                            <input type="text" name="labelrupiah" min="0" id="labelrupiah" class="form-control-plaintext" readonly="" value="Rp 0,00" >
-                                            @error('nominal')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                        <script type="text/javascript">
-
-                                            var rupiah = document.getElementById('nominal');
-                                            var labelrupiah = document.getElementById('labelrupiah');
-                                            rupiah.addEventListener('keyup', function(e){
-                                              // tambahkan 'Rp.' pada saat form di ketik
-                                              // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-                                              // rupiah.value = formatRupiah(this.value, 'Rp. ');
-                                              labelrupiah.value = formatRupiah(this.value, 'Rp. ');
-                                            });
-
-                                            /* Fungsi formatRupiah */
-                                            function formatRupiah(angka, prefix){
-                                              var number_string = angka.replace(/[^,\d]/g, '').toString(),
-                                              split   		= number_string.split(','),
-                                              sisa     		= split[0].length % 3,
-                                              rupiah     		= split[0].substr(0, sisa),
-                                              ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
-
-                                              // tambahkan titik jika yang di input sudah menjadi angka ribuan
-                                              if(ribuan){
-                                                separator = sisa ? '.' : '';
-                                                rupiah += separator + ribuan.join('.');
-                                              }
-
-                                              rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-                                              return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-                                            }
-                                          </script>
-                                        @if(old('tglbayar'))
-                                            @php
-                                                $tgl=old('tglbayar');
-                                            @endphp
-                                        @else
-                                        @php
-                                            $tgl=date('Y-m-d');
-                                        @endphp
-                                        @endif
-                                        <div class="form-group col-md-6 col-6">
-                                            <label>Tanggal</label>
-                                            <input type="date" class="form-control" name="tglbayar" @error('tglbayar') is-invalid @enderror" value="{{ $tgl }}" >
-                                            @error('tglbayar')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
-
-                                        <div class="form-group col-md-6 col-6">
-                                            <label for="telp">Catatan <code>*)</code></label>
-                                            <input type="text" name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" value="{{old('catatan')}}" required>
-                                            @error('catatan')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div class="card-footer text-right">
-                                    <button class="btn btn-primary">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                    <!-- /.card-body -->
-
-                </div>
-            </div>
-            <!-- /.card -->
-
-        </div>
-
 </section>
 <!-- /.content -->
 @endsection
 
 @section('container-modals')
+
+              <!--Tambah -->
+              <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  {{-- <form method="post" action="{{ route($pages.'.import') }}" enctype="multipart/form-data"> --}}
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
+                      </div>
+                      <div class="modal-body">
+           
+                        <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card-body">
+                        <div class="row">
+                            <form action="/admin/{{ $pages }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                            
+                                
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="nama">Nama </label>
+                                    <input type="text" name="nama" id="nama"
+                                        class="form-control @error('nama') is-invalid @enderror" placeholder=""
+                                        value="{{old('nama')}}" required>
+                                    @error('nama')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Kategori<code>*)</code></label>
+                                    <select class="form-control form-control-lg" required name="kategori_nama">
+                                        @if (old('kategori_nama'))
+                                        <option>{{old('kategori_nama')}}</option>
+                                        @endif
+                                        <option>Umum</option>
+                                        <option>Pengadaan buku</option>
+                                        <option>Perbaikan</option>
+                                        <option>Kegiatan Sekolah</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="nominal">Nominal <code>*)</code></label>
+                                    <input type="number" name="nominal" id="nominal" class="form-control @error('nominal') is-invalid @enderror" value="{{old('nominal')}}" required>
+                                    <input type="text" name="labelrupiah" min="0" id="labelrupiah" class="form-control-plaintext" readonly="" value="Rp 0,00" >
+                                    @error('nominal')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <script type="text/javascript">
+
+                                    var rupiah = document.getElementById('nominal');
+                                    var labelrupiah = document.getElementById('labelrupiah');
+                                    rupiah.addEventListener('keyup', function(e){
+                                      // tambahkan 'Rp.' pada saat form di ketik
+                                      // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+                                      // rupiah.value = formatRupiah(this.value, 'Rp. ');
+                                      labelrupiah.value = formatRupiah(this.value, 'Rp. ');
+                                    });
+
+                                    /* Fungsi formatRupiah */
+                                    function formatRupiah(angka, prefix){
+                                      var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                                      split   		= number_string.split(','),
+                                      sisa     		= split[0].length % 3,
+                                      rupiah     		= split[0].substr(0, sisa),
+                                      ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+                                      // tambahkan titik jika yang di input sudah menjadi angka ribuan
+                                      if(ribuan){
+                                        separator = sisa ? '.' : '';
+                                        rupiah += separator + ribuan.join('.');
+                                      }
+
+                                      rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                                      return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+                                    }
+                                  </script>
+                                @if(old('tglbayar'))
+                                    @php
+                                        $tgl=old('tglbayar');
+                                    @endphp
+                                @else
+                                @php
+                                    $tgl=date('Y-m-d');
+                                @endphp
+                                @endif
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Tanggal Pengeluaran</label>
+                                    <input type="date" class="form-control" name="tglbayar" @error('tglbayar') is-invalid @enderror" value="{{ $tgl }}" >
+                                    @error('tglbayar')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+
+
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="telp">Catatan <code>*)</code></label>
+                                    <input type="text" name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" value="{{old('catatan')}}" required>
+                                    @error('catatan')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+                              
+
+                        </div>
+                        </div>
+                        </div>
+           
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
 
               <!-- Import Excel -->
               <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -166,7 +166,7 @@ $message=session('status');
                     @endphp
                     @endif
                     <div class="form-group col-md-6 col-6">
-                        <label>Tanggal</label>
+                        <label>Tanggal Pengeluaran</label>
                         <input type="date" class="form-control" name="tglbayar" @error('tglbayar') is-invalid @enderror" value="{{ $tgl }}" >
                         @error('tglbayar')<div class="invalid-feedback"> {{$message}}</div>
                         @enderror

@@ -256,14 +256,14 @@ $message=session('status');
                         @enderror
                     </div>
                     
-                    <div class="form-group col-md-12 col-12">
+                    {{-- <div class="form-group col-md-12 col-12">
                         <label for="sekolahasal">Sekolah Asal</label>
                         <input type="text" name="sekolahasal" id="sekolahasal"
                             class="form-control @error('sekolahasal') is-invalid @enderror" placeholder=""
                             value="{{$datas->sekolahasal}}" required>
                         @error('sekolahasal')<div class="invalid-feedback"> {{$message}}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                 </div>
              

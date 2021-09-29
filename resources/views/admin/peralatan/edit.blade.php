@@ -84,7 +84,7 @@ $message=session('status');
 
     <!-- Default box -->
 
-    <div class="col-12 col-md-12 col-lg-4">
+    <div class="col-12 col-md-12 col-lg-6">
         <div class="card">
            
             <div class="card-body">
@@ -130,7 +130,7 @@ $message=session('status');
                             @endforeach
                         </select>
                     </div> 
-                    <div class="form-group col-md-6 col-6">
+                    <div class="form-group col-md-12 col-12">
                         <label>Tanggal Lahir</label>
                         <input type="date" class="form-control" name="tgl_masuk" @error('tgl_masuk') is-invalid @enderror" value="{{$datas->tgl_masuk}}" >
                         @error('tgl_masuk')<div class="invalid-feedback"> {{$message}}</div>
