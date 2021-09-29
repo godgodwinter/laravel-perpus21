@@ -2,7 +2,7 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Rak Buku')
+@section('title','Buku')
 @section('linkpages')
 data{{ $pages }}
 @endsection
@@ -161,7 +161,7 @@ $message=session('status');
             </div>
             </div>
             <div class="col-4 col-md-4 col-lg-4">
-                <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/admin/peminjaman/pengembalian/'.$datas->kode), 'QRCODE')}}" alt="barcode" width="50%"/>
+                <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/admin/buku/'.$datas->kode), 'QRCODE')}}" alt="barcode" width="50%"/>
                
        
         
