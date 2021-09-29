@@ -296,17 +296,6 @@ $.ajax({
         <div class="col-12 col-md-12 col-lg-8">
 
             <div class="card">
-                <div class="card-header">
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
                 <div class="card-body">
 
 
@@ -329,7 +318,7 @@ $.ajax({
                          
 
                         <button type="submit" value="CARI" class="btn btn-icon btn-info btn-sm mt-0"><span
-                            class="pcoded-micon"> <i class="fas fa-search"></i> Pecarian</span></button>
+                            class="pcoded-micon"> <i class="fas fa-search"></i> Cari</span></button>
 
                     </div>                     
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
@@ -363,24 +352,11 @@ $.ajax({
     <div class="col-12 col-md-12 col-lg-4">
 
         <div class="card">
-            <div class="card-header">
-
-                {{-- <div class="card-body"> --}}
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
             <div class="card-body">
                 <div class="row">
 
 
                     <div class="col-12 col-md-12 col-lg-12">
-                        <div class="card">
                             <form action="/admin/buku/{{$buku->id}}/{{ $pages }}" method="post">
                                 @csrf
                                 <div class="card-header">
@@ -404,19 +380,20 @@ $.ajax({
                                         </div> 
 
                                         
+                                     
                                         
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                              <span class="input-group-text">Kode Panggil</span>
-                                            </div>
-                                            <input type="number" name="kode" id="kode"
-                                            class="form-control @error('kode') is-invalid @enderror" placeholder="Otomatis dari Kode buku dan Iterasi detail buku"
-                                            value="{{old('kode')}}" required min="1" readonly>
-                                        @error('kode')<div class="invalid-feedback"> {{$message}}</div>
-                                        @enderror
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">Jumlah</span>
+                                        </div>
+                                        <input type="number" name="jumlah" id="jumlah"
+                                        class="form-control @error('jumlah') is-invalid @enderror" placeholder=""
+                                        value="1" required min="1" >
+                                    @error('jumlah')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
 
 
-                                    </div>
+                                </div>
 
 
                                     <div class="row">
@@ -430,7 +407,6 @@ $.ajax({
                                 </div>
                             </form>
                             
-                        </div>
 
                     </div>
                     <!-- /.card-body -->

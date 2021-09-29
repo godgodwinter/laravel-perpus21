@@ -49,8 +49,8 @@ $message=session('status');
     <th width="80px" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
     <th> KD Buku - Judul Buku </th>
-    <th> Pengarang </th>
-    <th> Jumlah </th>
+    <th class="text-center"> Pengarang </th>
+    <th class="text-center"> Jumlah </th>
     <th class="text-center"> Tersedia </th>
     <th class="text-center"> Dipinjam </th>
     <th width="100px" class="text-center">Aksi</th>
@@ -412,6 +412,16 @@ $message=session('status');
                                 @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                                 @enderror
                             </div>
+                            
+                            <div class="form-group col-md-12 col-12">
+                                <img alt="image" src="https://ui-avatars.com/api/?name=img&color=7F9CF5&background=EBF4FF" class="img-thumbnail" width="200px">
+
+                                <label for="file">Pilih Photo <code></code></label>
+                                <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" >
+                                @error('file')<div class="invalid-feedback"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            
                             <div class="form-group col-md-12 col-12">
                                 <label for="pengarang">Pengarang</label>
                                 <input type="text" name="pengarang" id="pengarang"
@@ -457,7 +467,7 @@ $message=session('status');
                             
                                         
                             <div class="form-group col-md-12 col-12">
-                                <label>DDC  <code>*)</code></label>
+                                <label>DDC  <code></code></label>
                                 <input type="text" name="bukukategori_ddc" id="bukukategori_ddc"
                                     class="form-control @error('bukukategori_ddc') is-invalid @enderror" placeholder=""
                                     value="{{old('bukukategori_ddc')}}" required>

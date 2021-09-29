@@ -248,17 +248,15 @@ $message=session('status');
                   </div>  --}}
 
                   
+                              
                   <div class="form-group col-md-12 col-12">
-                      <label>DDC / Kategori Buku <code>*)</code></label>
-                      <select class="form-control form-control-lg" required name="bukukategori_nama">  
-                          @if ($datas->bukukategori_nama)
-                          <option value="{{$datas->bukukategori_nama}}">{{$datas->bukukategori_ddc}} / {{$datas->bukukategori_nama}}</option>                        
-                          @endif
-                      @foreach ($bukukategori as $t)
-                          <option value="{{ $t->nama }}">{{ $t->kode }} / {{ $t->nama }}</option>
-                      @endforeach
-                      </select>
-                  </div> 
+                    <label>DDC  <code></code></label>
+                    <input type="text" name="bukukategori_ddc" id="bukukategori_ddc"
+                        class="form-control @error('bukukategori_ddc') is-invalid @enderror" placeholder=""
+                        value="{{$datas->bukukategori_ddc}}" required>
+                    @error('bukukategori_ddc')<div class="invalid-feedback"> {{$message}}</div>
+                    @enderror
+                </div> 
                   
                   <div class="input-group mb-3">
                       <div class="input-group-prepend">

@@ -8,6 +8,7 @@ use App\Models\bukudetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use PHPUnit\Framework\MockObject\Rule\Parameters;
 
 class adminbukucontroller extends Controller
 {
@@ -74,6 +75,8 @@ class adminbukucontroller extends Controller
     }
     public function store(Request $request)
     {
+
+       
         // dd($request);
         // dd($request);
         $request->validate([
@@ -87,7 +90,7 @@ class adminbukucontroller extends Controller
             'nama.required'=>'Nama Harus diisi',
 
         ]);
-        
+        // dd($files);
         
         // dd($kodebuku);
        DB::table('buku')->insert(
@@ -106,6 +109,53 @@ class adminbukucontroller extends Controller
                'created_at'=>date("Y-m-d H:i:s"),
                'updated_at'=>date("Y-m-d H:i:s")
         ));
+
+        
+        $files = $request->file('file');
+        
+        // dd($request);
+        if($files!=null){
+            // dd(!Input::hasFile('files'));
+            // dd($files,'aaa');
+            $namafilebaru=$request->kode;
+    
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('file');
+    
+                      // nama file
+            echo 'File Name: '.$file->getClientOriginalName();
+            echo '<br>';
+    
+                      // ekstensi file
+            echo 'File Extension: '.$file->getClientOriginalExtension();
+            // dd()
+            echo '<br>';
+    
+                      // real path
+            echo 'File Real Path: '.$file->getRealPath();
+            echo '<br>';
+    
+                      // ukuran file
+            echo 'File Size: '.$file->getSize();
+            echo '<br>';
+    
+                      // tipe mime
+            echo 'File Mime Type: '.$file->getMimeType();
+    
+                      // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'storage/gambar';
+    
+                    // upload file
+            $file->move($tujuan_upload,"gambar/".$namafilebaru.".jpg");
+    
+    
+            buku::where('kode',$request->kode)
+            ->update([
+                'gambar' => "gambar/".$namafilebaru.".jpg",
+            'updated_at'=>date("Y-m-d H:i:s")
+            ]);
+            
+        }
 
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
     
@@ -151,28 +201,29 @@ class adminbukucontroller extends Controller
        
        
         // $ambilbukurak_kode = DB::table('bukurak')->where('nama',$request->bukurak_nama)->first();
-        $ambilbukukategori_ddc = DB::table('kategori')->where('nama',$request->bukukategori_nama)->first();
+        // $ambilbukukategori_ddc = DB::table('kategori')->where('nama',$request->bukukategori_nama)->first();
 
      
-        if($request->bukukategori_nama==$datas->bukukategori_nama){
-            $kodebuku=$datas->kode;
-        }else{
-            $kodebuku=Fungsi::autokodebuku($ambilbukukategori_ddc->kode);
-                    if($kodebuku==='penuh'){
-                        return redirect()->back()->with('status','Data Gagal di tambahkan karena kode buku penuh!')->with('tipe','error')->with('icon','fas fa-feather');
+        // if($request->bukukategori_nama==$datas->bukukategori_nama){
+        //     $kodebuku=$datas->kode;
+        // }else{
+        //     $kodebuku=Fungsi::autokodebuku($ambilbukukategori_ddc->kode);
+        //             if($kodebuku==='penuh'){
+        //                 return redirect()->back()->with('status','Data Gagal di tambahkan karena kode buku penuh!')->with('tipe','error')->with('icon','fas fa-feather');
 
-                    }
-        }
+        //             }
+        // }
         // dd($request->bukukategori_nama,$datas->bukukategori_nama,$kodebuku);
         
         bukudetail::where('buku_kode',$datas->kode)
         ->update([
             'buku_nama'     =>   $request->nama,
-            'buku_kode'     =>   $kodebuku,
+            'buku_kode'     =>   $request->kode,
             'buku_pengarang'     =>   $request->pengarang,
             'buku_isbn'     =>   $request->isbn,
-            'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
-            'bukukategori_nama'     =>   $request->bukukategori_nama,
+            // 'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
+            'bukukategori_ddc'     =>   $request->bukukategori_ddc,
+            // 'bukukategori_nama'     =>   $request->bukukategori_nama,
             // 'bukurak_kode'     =>   $ambilbukurak_kode->kode,
             // 'bukurak_nama'     =>   $request->bukurak_nama,
             'buku_penerbit'     =>   $request->penerbit,
@@ -184,11 +235,10 @@ class adminbukucontroller extends Controller
         buku::where('id',$datas->id)
         ->update([
             'nama'     =>   $request->nama,
-            'kode'     =>   $kodebuku,
+            'kode'     =>   $request->kode,
             'pengarang'     =>   $request->pengarang,
             'isbn'     =>   $request->isbn,
-            'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
-            'bukukategori_nama'     =>   $request->bukukategori_nama,
+            'bukukategori_ddc'     =>   $request->bukukategori_ddc,
             // 'bukurak_kode'     =>   $ambilbukurak_kode->kode,
             // 'bukurak_nama'     =>   $request->bukurak_nama,
             'penerbit'     =>   $request->penerbit,

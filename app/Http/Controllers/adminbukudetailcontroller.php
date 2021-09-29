@@ -73,7 +73,7 @@ class adminbukudetailcontroller extends Controller
         // dd($request);
         // dd($request);
         $request->validate([
-            // 'nama'=>'required|unique:bukurak,nama',
+            'jumlah'=>'required|numeric|min:1',
             // 'bukurak_nama'=>'required',
             // 'bukukategori_nama'=>'required',
 
@@ -83,9 +83,8 @@ class adminbukudetailcontroller extends Controller
             // 'nama.required'=>'Nama Harus diisi',
 
         ]);
-        
-
-        // dd($kodebuku);
+        for($i=0;$i<$request->jumlah;$i++){
+             // dd($kodebuku);
         DB::table('bukudetail')->insert(
             array(
                    'kondisi'     =>   $request->kondisi,
@@ -101,10 +100,14 @@ class adminbukudetailcontroller extends Controller
                    'updated_at'=>date("Y-m-d H:i:s")
             ));
     
-            $notification = array(
-                'message' => 'Post created successfully!',
-                'alert-type' => 'success'
-            );
+
+        }
+
+       
+            // $notification = array(
+            //     'message' => 'Post created successfully!',
+            //     'alert-type' => 'success'
+            // );
             return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
         
      }

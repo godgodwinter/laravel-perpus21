@@ -310,6 +310,7 @@ class prosesController extends Controller
 		$this->validate($request, [
 			'file' => 'required',
 		]);
+        
 		$namafilebaru=$buku->kode;
 
 		// menyimpan data file yang diupload ke variabel $file

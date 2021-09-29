@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Fungsi;
 use App\Models\anggota;
 use App\Models\buku;
 use App\Models\bukudetail;
@@ -146,9 +147,14 @@ class settingsController extends Controller
 
     buku::truncate();
 
+        // $jmlbuku = buku::count();
+        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
+
                     DB::table('buku')->insert([
                         'nama' => 'Sejarah Wali Songo [sumber elektronis]',
-                        'kode' => date('YmdHis').'1',
+                        'id' => $kodepanggil,
+                        'kode' => $kodepanggil,
                         'isbn' => '978-623-244-922-0',
                         'pengarang' => 'Zulham Farobi',
                         'penerbit' =>'Anak Hebat Indonesia',
@@ -163,10 +169,13 @@ class settingsController extends Controller
                         'updated_at' => Carbon::now()
                     ]);
 
-                    
+                   
+        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
                     DB::table('buku')->insert([
                         'nama' => 'Sejarah pemikiran ekonomi Islam',
-                        'kode' => date('YmdHis').'2',
+                        'id' => $kodepanggil,
+                        'kode' => $kodepanggil,
                         'isbn' => '978-623-312-462-1',
                         'pengarang' => 'Jajang W Mahri',
                         'penerbit' =>'Penerbit Universitas Terbuka',
@@ -183,9 +192,12 @@ class settingsController extends Controller
     
                     
                     
+        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
                     DB::table('buku')->insert([
                         'nama' => 'Tegar dalam doa',
-                        'kode' => date('YmdHis').'3',
+                        'id' => $kodepanggil,
+                        'kode' => $kodepanggil,
                         'isbn' => '978-623-383-034-8',
                         'pengarang' => 'Fauzah ',
                         'penerbit' => 'CV Pustaka Mediaguru',
@@ -200,9 +212,12 @@ class settingsController extends Controller
                         'updated_at' => Carbon::now()
                     ]);
                     
+        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
                     DB::table('buku')->insert([
                         'nama' => 'Hikmah melangitkan doa',
-                        'kode' => date('YmdHis').'4',
+                        'id' => $kodepanggil,
+                        'kode' => $kodepanggil,
                         'isbn' => '978-623-6860-68-7',
                         'pengarang' => 'Neny Andriani ; editor, Diyah KN',
                         'penerbit' => 'CV. Bumi Pena',
@@ -217,10 +232,13 @@ class settingsController extends Controller
                         'updated_at' => Carbon::now()
                     ]);
 
+                    $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+                    $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
                         
                     DB::table('buku')->insert([
                         'nama' => 'Pengantar jaringan komputer',
-                        'kode' => date('YmdHis').'5',
+                        'id' => $kodepanggil,
+                        'kode' => $kodepanggil,
                         'isbn' => '978-623-95937-6-6',
                         'pengarang' => 'Adi Wibowo',
                         'penerbit' => 'UMKO Publishing',
@@ -236,9 +254,12 @@ class settingsController extends Controller
                     ]);
                     
 
+                    $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+                    $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
                     DB::table('buku')->insert([
                         'nama' => 'Metode penelitian pendidikan ilmu komputer',
-                        'kode' => date('YmdHis').'6',
+                        'id' => $kodepanggil,
+                        'kode' => $kodepanggil,
                         'isbn' => '978-623-6478-35-6',
                         'pengarang' => 'Wahyudin',
                         'penerbit' => 'Perkumpulan Rumah Cemerlang Indonesia',
