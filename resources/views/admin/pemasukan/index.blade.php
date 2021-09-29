@@ -327,8 +327,8 @@ $message=session('status');
 
 
                                 <div class="form-group col-md-12 col-12">
-                                    <label for="telp">Catatan <code>*)</code></label>
-                                    <input type="text" name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" value="{{old('catatan')}}" required>
+                                    <label for="telp">Catatan <code></code></label>
+                                    <input type="text" name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" value="{{old('catatan')}}" >
                                     @error('catatan')<div class="invalid-feedback"> {{$message}}</div>
                                     @enderror
                                 </div>

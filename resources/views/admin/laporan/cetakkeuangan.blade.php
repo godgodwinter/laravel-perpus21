@@ -69,10 +69,10 @@
                     @endphp
                     @foreach ($datas2 as $data)
                         <tr>
-                            <td align="center">{{$loop->index+1}}</td>
+                            <td align="center" width="10%">{{$loop->index+1}}</td>
                             <td>{{$data->nama}}</td>
-                            <td>{{Fungsi::tanggalindo($data->tglbayar)}}</td>
-                            <td>{{Fungsi::rupiah($data->nominal)}}</td>
+                            <td width="20%">{{Fungsi::tanggalindo($data->tglbayar)}}</td>
+                            <td width="20%">{{Fungsi::rupiah($data->nominal)}}</td>
                         </tr>
                     @endforeach
                     <tr>
@@ -94,10 +94,10 @@
                     @endphp
                     @foreach ($datas as $data)
                         <tr>
-                            <td align="center">{{$loop->index+1}}</td>
+                            <td align="center" width="10%">{{$loop->index+1}}</td>
                             <td>{{$data->nama}}</td>
-                            <td>{{Fungsi::tanggalindo($data->tglbayar)}}</td>
-                            <td>{{Fungsi::rupiah($data->nominal)}}</td>
+                            <td width="20%">{{Fungsi::tanggalindo($data->tglbayar)}}</td>
+                            <td width="20%">{{Fungsi::rupiah($data->nominal)}}</td>
                         </tr>
                     @endforeach
                     <tr>
@@ -112,7 +112,7 @@
                    
                  
                     <tr>
-                        <td >Total Pemasukan</td>
+                        <td  width="80%">Total Pemasukan</td>
                         <td>{{Fungsi::rupiah($datas2sum)}}</td>
                     </tr>
                     <tr>
@@ -120,7 +120,7 @@
                         <td>{{Fungsi::rupiah($datassum)}}</td>
                     </tr>
                     <tr>
-                        <td >Total Saldo</td>
+                        <td >Total Saldo = Total Pemasukan - Total Pengeluaran</td>
                         @php
                                 $saldo=$datas2sum-$datassum;
                         @endphp

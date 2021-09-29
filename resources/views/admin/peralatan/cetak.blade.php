@@ -64,7 +64,7 @@
                     <tr>
                       <td align="center">No</td>
                       <td align="left"><b>Nama</b></td>
-                      <td align="center"><b> Tanggal Berkunjung</b></td>
+                      <td align="center"><b> Tanggal Barang Masuk</b></td>
                     </tr>
                     @foreach ($datas as $data)
                         <tr>

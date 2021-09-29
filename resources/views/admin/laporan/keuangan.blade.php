@@ -278,7 +278,7 @@ $message=session('status');
               </tr>
               <tr>
                   <th colspan="3">
-                   Total Saldo = Total Pemasukan- Pengeluaran
+                   Total Saldo = Total Pemasukan - Total Pengeluaran
                   </th>
 
                   <th style="width: 18%" class="text-center">
