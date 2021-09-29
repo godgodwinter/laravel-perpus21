@@ -11,6 +11,45 @@ class Fungsi {
     //     return (isset($user->username) ? $user->username : '');
     // }
 
+    public static function autokodepanggilbuku($inputan){
+        // $data=$inputan;
+        $mulai=$inputan;
+        $kodebukubaru=$mulai;
+        // $cekkodebuku = DB::table('buku')->where('kode',$mulai)->count();
+        $hasilcek=Fungsi::cekkodepanggilbuku($mulai);
+        //max integer value
+        $akhir=2147483647;
+        for($i=$mulai;$i<=$akhir+1;$i++){
+             $hasilcek=Fungsi::cekkodepanggilbuku($i);
+                if($hasilcek==='ready'){
+                    $kodebukubaru=$i;
+                    break;
+                }else{
+                    $hasilcek=Fungsi::cekkodepanggilbuku($i);
+                }
+
+                $kodebukubaru=$i;
+        }
+        
+        if($kodebukubaru>$akhir){
+            $kodebukubaru='kode enuh';
+        }
+
+      
+        return $kodebukubaru;
+    }
+    public static function cekkodepanggilbuku($inputan){
+
+        $cekkodebuku = DB::table('buku')->where('kode',$inputan)->count();
+        if($cekkodebuku>0){
+            $hasil='sudahdipakai';
+        }else{
+            $hasil='ready';
+        }
+
+        return $hasil;
+
+    }
     public static function periksaterlambat($inputan){
 
         $hitungketerlambatan = strtotime($inputan)-strtotime(Carbon::now());

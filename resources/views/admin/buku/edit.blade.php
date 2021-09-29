@@ -193,6 +193,14 @@ $message=session('status');
                   </div>
                   
                   <div class="form-group col-md-12 col-12">
+                    <label for="pengarang">Pengarang</label>
+                    <input type="text" name="pengarang" id="pengarang"
+                        class="form-control @error('pengarang') is-invalid @enderror" placeholder=""
+                        value="{{$datas->pengarang}}" required>
+                    @error('pengarang')<div class="invalid-feedback"> {{$message}}</div>
+                    @enderror
+                </div>
+                  <div class="form-group col-md-12 col-12">
                     <label for="penerbit">Penerbit</label>
                     <input type="text" name="penerbit" id="penerbit"
                         class="form-control @error('penerbit') is-invalid @enderror" placeholder=""

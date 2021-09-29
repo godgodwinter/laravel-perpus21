@@ -196,7 +196,7 @@ $message=session('status');
                          
 
                         <button type="submit" value="CARI" class="btn btn-icon btn-info btn-sm mt-0"><span
-                            class="pcoded-micon"> <i class="fas fa-search"></i> Pecarian</span></button>
+                            class="pcoded-micon"> <i class="fas fa-search"></i> Cari</span></button>
 
                     </div>                     
                     <div class="form-group col-md-4 col-4 mt-1 text-right">

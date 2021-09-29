@@ -101,10 +101,10 @@ crossorigin="anonymous"></script> --}}
 
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <div class="dropdown-divider"></div>
+          {{-- <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <i class="fas fa-user-cog"></i> Profil
-          </a>
+          </a> --}}
           <div class="dropdown-divider"></div>
           <a href="{{route('admin.settings')}}" class="dropdown-item">
             <i class="fas fa-cogs"></i> Pengaturan

@@ -49,12 +49,12 @@ $message=session('status');
     <th width="10%" class="text-center">
        <label for="chkCheckAll"> All</label></th>
     <th> KD Buku - Judul Buku </th>
-    <th> ISBN </th>
+    <th> Pengarang </th>
     <th> Kategori </th>
     <th> Jumlah </th>
     <th class="text-center"> Tersedia </th>
     <th class="text-center"> Dipinjam </th>
-    <th width="200px" class="text-center">Aksi</th>
+    <th width="100px" class="text-center">Aksi</th>
 </tr>
 @endsection
 
@@ -99,15 +99,16 @@ $message=session('status');
     <td class="text-center">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
     <td> {{ $data->kode }} - {{ $data->nama }}</td>
+    <td> {{ $data->pengarang }}</td>
     @php
        $isbn='-';
     @endphp
     @if ($data->isbn)
-       @php
+       {{-- @php
        $isbn=$data->isbn;
        @endphp
     @endif
-    <td>{{ $isbn }}</td>
+    <td>{{ $isbn }}</td> --}}
     <td class="text-center">{{ $data->bukukategori_nama }}</td>
     @php
         $jml=0;
@@ -313,7 +314,7 @@ $message=session('status');
 
 
                         <button type="submit" value="CARI" class="btn btn-icon btn-info btn-sm mt-0"><span
-                            class="pcoded-micon"> <i class="fas fa-search"></i> Pecarian</span></button>
+                            class="pcoded-micon"> <i class="fas fa-search"></i> Cari</span></button>
 
                     </div>
                     <div class="form-group col-md-4 col-4 mt-1 text-right">

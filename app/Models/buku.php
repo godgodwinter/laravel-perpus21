@@ -25,4 +25,12 @@ class buku extends Model
         'bukukategori_nama',
         'bukukategori_ddc',
     ];
+
+    protected $appends = ['code'];
+
+    public function getCodeAttribute()
+{
+    // use $this->attributes['id'] or try with $this->id
+    return str_pad($this->attributes['id'], 6, "0", STR_PAD_LEFT);
+}
 }

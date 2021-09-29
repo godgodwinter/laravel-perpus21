@@ -17,6 +17,15 @@ class adminbukucontroller extends Controller
             return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
         }
 
+
+
+        // $jmlbuku = buku::count();
+        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        // dd($generatekodepanggil);
+        // $jmlbuku++;
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
+
+        // dd($kodepanggil);
         #WAJIB
         $pages='buku';
         $jmldata='0';
@@ -24,7 +33,7 @@ class adminbukucontroller extends Controller
 
 
         $datas=DB::table('buku')
-        ->orderBy('nama','asc')
+        ->orderBy('kode','asc')
         ->paginate(Fungsi::paginationjml());
 
         // $bukurak = DB::table('bukurak')->get();
@@ -32,7 +41,7 @@ class adminbukucontroller extends Controller
 
         return view('admin.buku.index',compact('pages'
         // ,'bukurak'
-        ,'bukukategori','datas','request'));
+        ,'bukukategori','datas','request','kodepanggil'));
         // return view('admin.beranda');
     }
     
@@ -70,7 +79,7 @@ class adminbukucontroller extends Controller
         $request->validate([
             'nama'=>'required|unique:buku,nama',
             // 'bukurak_nama'=>'required',
-            'bukukategori_nama'=>'required',
+            'bukukategori_ddc'=>'required',
 
 
         ],
@@ -79,24 +88,18 @@ class adminbukucontroller extends Controller
 
         ]);
         
-        // $ambilbukurak_kode = DB::table('bukurak')->where('nama',$request->bukurak_nama)->first();
-        $ambilbukukategori_ddc = DB::table('kategori')->where('nama',$request->bukukategori_nama)->first();
-
-        $kodebuku=Fungsi::autokodebuku($ambilbukukategori_ddc->kode);
-        if($kodebuku==='penuh'){
-            return redirect()->back()->with('status','Data Gagal di tambahkan karena kode buku penuh!')->with('tipe','error')->with('icon','fas fa-feather');
-
-        }
+        
         // dd($kodebuku);
        DB::table('buku')->insert(
         array(
+               'id'     =>   $request->kode,
                'nama'     =>   $request->nama,
                'isbn'     =>   $request->isbn,
-               'kode'     =>   $kodebuku,
+               'pengarang'     =>   $request->pengarang,
+               'kode'     =>   $request->kode,
             //    'bukurak_nama'     =>   $request->bukurak_nama,
             //    'bukurak_kode'     =>   $ambilbukurak_kode->kode,
-               'bukukategori_nama'     =>   $request->bukukategori_nama,
-               'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
+               'bukukategori_ddc'     =>   $request->bukukategori_ddc,
                'penerbit'     =>   $request->penerbit,
                'tahunterbit'     =>   $request->tahunterbit,
                'bahasa'     =>   $request->bahasa,
@@ -166,6 +169,7 @@ class adminbukucontroller extends Controller
         ->update([
             'buku_nama'     =>   $request->nama,
             'buku_kode'     =>   $kodebuku,
+            'buku_pengarang'     =>   $request->pengarang,
             'buku_isbn'     =>   $request->isbn,
             'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
             'bukukategori_nama'     =>   $request->bukukategori_nama,
@@ -181,6 +185,7 @@ class adminbukucontroller extends Controller
         ->update([
             'nama'     =>   $request->nama,
             'kode'     =>   $kodebuku,
+            'pengarang'     =>   $request->pengarang,
             'isbn'     =>   $request->isbn,
             'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
             'bukukategori_nama'     =>   $request->bukukategori_nama,
@@ -227,22 +232,30 @@ class adminbukucontroller extends Controller
         
         // load ulang
      
-             #WAJIB
-             $pages='buku';
-             $jmldata='0';
-             $datas='0';
-     
-     
-             $datas=DB::table('buku')
-             ->orderBy('nama','asc')
-             ->paginate(Fungsi::paginationjml());
-     
-             // $bukurak = DB::table('bukurak')->get();
-             $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
-     
-             return view('admin.buku.index',compact('pages'
-             // ,'bukurak'
-             ,'bukukategori','datas','request'));
+          
+        // $jmlbuku = buku::count();
+        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        // dd($generatekodepanggil);
+        // $jmlbuku++;
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
+
+        // dd($kodepanggil);
+        #WAJIB
+        $pages='buku';
+        $jmldata='0';
+        $datas='0';
+
+
+        $datas=DB::table('buku')
+        ->orderBy('kode','asc')
+        ->paginate(Fungsi::paginationjml());
+
+        // $bukurak = DB::table('bukurak')->get();
+        $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+
+        return view('admin.buku.index',compact('pages'
+        // ,'bukurak'
+        ,'bukukategori','datas','request','kodepanggil'));
 
     }
 }
