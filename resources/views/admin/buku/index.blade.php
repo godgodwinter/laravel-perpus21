@@ -391,16 +391,18 @@ $message=session('status');
 @section('container-modals')
 
 
-              <!-- Import Excel -->
+              <!--Tambah -->
               <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   {{-- <form method="post" action="{{ route($pages.'.import') }}" enctype="multipart/form-data"> --}}
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
                       </div>
                       <div class="modal-body">
            
+                        <div class="col-12 col-md-12 col-lg-12">
+                            <div class="card-body">
                         <div class="row">
                             <form action="/admin/{{ $pages }}" method="post" enctype="multipart/form-data">
                                 @csrf
@@ -440,7 +442,7 @@ $message=session('status');
                             </div>
                             <div class="form-group col-md-12 col-12">
                                 <label for="tahunterbit">Tanggal Terbit</label>
-                                <input type="text" name="tahunterbit" id="tahunterbit"
+                                <input type="date" name="tahunterbit" id="tahunterbit"
                                     class="form-control @error('tahunterbit') is-invalid @enderror" placeholder=""
                                     value="{{old('tahunterbit')}}" required>
                                 @error('tahunterbit')<div class="invalid-feedback"> {{$message}}</div>
@@ -487,13 +489,15 @@ $message=session('status');
 
 
                         </div>
+                        </div>
+                        </div>
 
                         </div>
            
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Import</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                       </div>
                     </div>
                   </form>

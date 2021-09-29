@@ -49,7 +49,7 @@ $message=session('status');
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
     <th> Nama  </th>
     <th> Tipe</th>
-    <th> Telp</th>
+    <th> Alamat</th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
 @endsection
@@ -96,7 +96,7 @@ $message=session('status');
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
     <td>{{ $data->nama }}</td>
     <td>{{ $data->tipe }}</td>
-    <td>{{ $data->telp }}</td>
+    <td><p data-toggle="tooltip" data-placement="top" title="{{ $data->alamat }}">{{ substr($data->alamat,0,20) }}</p></td>
 
     <td class="text-center">
         {{-- <a class="btn btn-icon btn-secondary btn-sm " href="{{ url('/admin/inputnilai/kelas') }}/{{ $data->id }}"
@@ -163,17 +163,6 @@ $message=session('status');
         <div class="col-12 col-md-12 col-lg-12">
 
             <div class="card">
-                <div class="card-header">
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
                 <div class="card-body">
 
 
@@ -200,7 +189,11 @@ $message=session('status');
 
                     </div>                     
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
-                            
+                               
+                        <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
+                        data-target="#add"><i class="fas fa-plus"></i>
+                        Tambah
+                    </button>
                         <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                             data-target="#importExcel"><i class="fas fa-upload"></i>
                             Import
@@ -227,147 +220,7 @@ $message=session('status');
         </div>
     </div>
 
-    <div class="col-12 col-md-12 col-lg-12">
 
-        <div class="card">
-            <div class="card-header">
-
-                {{-- <div class="card-body"> --}}
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-
-
-                    <div class="col-12 col-md-12 col-lg-12">
-                        <div class="card">
-                            <form action="/admin/{{ $pages }}" method="post">
-                                @csrf
-                                <div class="card-header">
-                                    <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Tambah
-                                        @yield('title')</span>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="nama">Nama @yield('title')</label>
-                                            <input type="text" name="nama" id="nama"
-                                                class="form-control @error('nama') is-invalid @enderror" placeholder=""
-                                                value="{{old('nama')}}" required>
-                                            @error('nama')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Tipe Anggota<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="tipe">  
-                                                @if (old('tipe'))
-                                                <option>{{old('tipe')}}</option>                        
-                                                @endif
-                                                <option >Umum</option>
-                                                <option >Siswa</option>
-                                            </select>
-                                        </div> 
-
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="nomeridentitas">Nomer Identitas / NIS / KTP / SIM</label>
-                                            <input type="text" name="nomeridentitas" id="nomeridentitas"
-                                                class="form-control @error('nomeridentitas') is-invalid @enderror" placeholder=""
-                                                value="{{old('nomeridentitas')}}" required>
-                                            @error('nomeridentitas')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        
-                                        <div class="form-group col-md-6 col-6">
-                                            <label for="tempatlahir">Tempat Lahir <code>*)</code></label>
-                                            <input type="text" name="tempatlahir" id="tempatlahir" class="form-control @error('tempatlahir') is-invalid @enderror" value="{{old('tempatlahir')}}" required>
-                                            @error('tempatlahir')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group col-md-6 col-6">
-                                            <label>Tanggal Lahir</label>
-                                            <input type="date" class="form-control" name="tgllahir" @error('tgllahir') is-invalid @enderror" value="{{old('tgllahir')}}" >
-                                            @error('tgllahir')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        
-                                        <div class="form-group col-md-6 col-6">
-                                            <label>Jenis Kelamin <code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="jk">
-                                            @if (old('jk'))
-                                            <option>{{old('jk')}}</option>                        
-                                            @endif
-                                            
-                                            
-                                                <option>Laki-laki</option>
-                                                <option>Perempuan</option>
-                                            </select>
-                                        </div>
-
-                                        
-                                        <div class="form-group col-md-6 col-6">
-                                            <label for="telp">Telp <code>*)</code></label>
-                                            <input type="text" name="telp" id="telp" class="form-control @error('telp') is-invalid @enderror" value="{{old('telp')}}" required>
-                                            @error('telp')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-md-6 col-6">
-                                            <label>Agama <code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="agama"> 
-                                            @if (old('agama'))
-                                            <option>{{old('agama')}}</option>                        
-                                            @endif
-                                            <option>Islam</option>
-                                            <option>Kristen</option>
-                                            <option>Katholik</option>
-                                            <option>Hindu</option>
-                                            <option>Budha</option>
-                                            <option>Konghucu</option>
-                                            <option>Lain-lain</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="form-group col-md-6 col-6">
-                                            <label for="alamat">Alamat <code>*)</code></label>
-                                            <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{old('alamat')}}" required>
-                                            @error('alamat')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        
-                                        <div class="form-group col-md-12 col-12">
-                                            <label for="sekolahasal">Sekolah Asal</label>
-                                            <input type="text" name="sekolahasal" id="sekolahasal"
-                                                class="form-control @error('sekolahasal') is-invalid @enderror" placeholder=""
-                                                value="{{old('sekolahasal')}}" required>
-                                            @error('sekolahasal')<div class="invalid-feedback"> {{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div class="card-footer text-right">
-                                    <button class="btn btn-primary">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                    <!-- /.card-body -->
-
-                </div>
-            </div>
-            <!-- /.card -->
-
-        </div>
 
 </section>
 <!-- /.content -->
@@ -375,6 +228,132 @@ $message=session('status');
 
 @section('container-modals')
 
+
+              <!--Tambah -->
+              <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  {{-- <form method="post" action="{{ route($pages.'.import') }}" enctype="multipart/form-data"> --}}
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
+                      </div>
+                      <div class="modal-body">
+           
+                        <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card-body">
+                        <div class="row">
+                            <form action="/admin/{{ $pages }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                            
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="nama">Nama @yield('title')</label>
+                                    <input type="text" name="nama" id="nama"
+                                        class="form-control @error('nama') is-invalid @enderror" placeholder=""
+                                        value="{{old('nama')}}" required>
+                                    @error('nama')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+                                 
+                            <div class="form-group col-md-12 col-12">
+                                <img alt="image" src="https://ui-avatars.com/api/?name=img&color=7F9CF5&background=EBF4FF" class="img-thumbnail" width="200px">
+
+                                <label for="file">Pilih Photo <code></code></label>
+                                <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" >
+                                @error('file')<div class="invalid-feedback"> {{$message}}</div>
+                                @enderror
+                            </div>
+                                
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Tipe Anggota<code>*)</code></label>
+                                    <select class="form-control form-control-lg" required name="tipe">  
+                                        @if (old('tipe'))
+                                        <option>{{old('tipe')}}</option>                        
+                                        @endif
+                                        <option >Umum</option>
+                                        <option >Siswa</option>
+                                    </select>
+                                </div> 
+
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="nomeridentitas">Nomer Identitas / NIS / KTP / SIM</label>
+                                    <input type="number" name="nomeridentitas" id="nomeridentitas"
+                                        class="form-control @error('nomeridentitas') is-invalid @enderror" placeholder=""
+                                        value="{{old('nomeridentitas')}}" required>
+                                    @error('nomeridentitas')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+                                
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="tempatlahir">Tempat Lahir <code>*)</code></label>
+                                    <input type="text" name="tempatlahir" id="tempatlahir" class="form-control @error('tempatlahir') is-invalid @enderror" value="{{old('tempatlahir')}}" required>
+                                    @error('tempatlahir')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Tanggal Lahir</label>
+                                    <input type="date" class="form-control" name="tgllahir" @error('tgllahir') is-invalid @enderror" value="{{old('tgllahir')}}" >
+                                    @error('tgllahir')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+                                
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Jenis Kelamin <code>*)</code></label>
+                                    <select class="form-control form-control-lg" required name="jk">
+                                    @if (old('jk'))
+                                    <option>{{old('jk')}}</option>                        
+                                    @endif
+                                    
+                                    
+                                        <option>Laki-laki</option>
+                                        <option>Perempuan</option>
+                                    </select>
+                                </div>
+
+                                
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="telp">Telp <code></code></label>
+                                    <input type="text" name="telp" id="telp" class="form-control @error('telp') is-invalid @enderror" value="{{old('telp')}}" required>
+                                    @error('telp')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Agama <code>*)</code></label>
+                                    <select class="form-control form-control-lg" required name="agama"> 
+                                    @if (old('agama'))
+                                    <option>{{old('agama')}}</option>                        
+                                    @endif
+                                    <option>Islam</option>
+                                    <option>Kristen</option>
+                                    <option>Katholik</option>
+                                    <option>Hindu</option>
+                                    <option>Budha</option>
+                                    <option>Konghucu</option>
+                                    <option>Lain-lain</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group col-md-12 col-12">
+                                    <label for="alamat">Alamat <code>*)</code></label>
+                                    <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{old('alamat')}}" required>
+                                    @error('alamat')<div class="invalid-feedback"> {{$message}}</div>
+                                    @enderror
+                                </div>
+                              
+
+                        </div>
+                        </div>
+                        </div>
+           
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
               <!-- Import Excel -->
               <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

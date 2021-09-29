@@ -420,7 +420,10 @@ class prosesController extends Controller
 	public function uploadanggotadelete(Request $request,anggota $anggota){
 
         // dd($request);
-        Storage::disk('public')->delete($request->namaphoto);
+        // Storage::disk('public')->delete($request->namaphoto);
+        $image_path = 'storage/'.$request->namaphoto;
+        // $image_path = public_path().'/'.$request->namaphoto;
+        unlink($image_path);
 		anggota::where('id',$anggota->id)
 		->update([
 			'gambar' => "",

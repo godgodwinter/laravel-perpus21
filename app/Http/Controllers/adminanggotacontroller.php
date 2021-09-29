@@ -65,13 +65,12 @@ class adminanggotacontroller extends Controller
         $request->validate([
             'nama'=>'required|unique:anggota,nama',
             'tipe'=>'required',
-            'nomeridentitas'=>'unique:anggota,nomeridentitas',
+            'nomeridentitas'=>'unique:anggota,nomeridentitas|numeric',
             'tempatlahir'=>'required',
             'tgllahir'=>'required',
             'jk'=>'required',
             'agama'=>'required',
             'alamat'=>'required',
-            'sekolahasal'=>'required',
 
 
         ],
@@ -95,6 +94,53 @@ class adminanggotacontroller extends Controller
                'created_at'=>date("Y-m-d H:i:s"),
                'updated_at'=>date("Y-m-d H:i:s")
         ));
+
+        
+        $files = $request->file('file');
+        
+        // dd($request);
+        if($files!=null){
+            // dd(!Input::hasFile('files'));
+            // dd($files,'aaa');
+            $namafilebaru=$request->nomeridentitas;
+    
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('file');
+    
+                      // nama file
+            echo 'File Name: '.$file->getClientOriginalName();
+            echo '<br>';
+    
+                      // ekstensi file
+            echo 'File Extension: '.$file->getClientOriginalExtension();
+            // dd()
+            echo '<br>';
+    
+                      // real path
+            echo 'File Real Path: '.$file->getRealPath();
+            echo '<br>';
+    
+                      // ukuran file
+            echo 'File Size: '.$file->getSize();
+            echo '<br>';
+    
+                      // tipe mime
+            echo 'File Mime Type: '.$file->getMimeType();
+    
+                      // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'storage/gambar';
+    
+                    // upload file
+            $file->move($tujuan_upload,"gambar/".$namafilebaru.".jpg");
+    
+    
+            anggota::where('nomeridentitas',$request->nomeridentitas)
+            ->update([
+                'gambar' => "gambar/".$namafilebaru.".jpg",
+            'updated_at'=>date("Y-m-d H:i:s")
+            ]);
+            
+        }
 
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
     

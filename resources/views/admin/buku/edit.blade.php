@@ -210,7 +210,7 @@ $message=session('status');
                 </div>
                 <div class="form-group col-md-12 col-12">
                     <label for="tahunterbit">Tanggal Terbit</label>
-                    <input type="text" name="tahunterbit" id="tahunterbit"
+                    <input type="date" name="tahunterbit" id="tahunterbit"
                         class="form-control @error('tahunterbit') is-invalid @enderror" placeholder=""
                         value="{{$datas->tahunterbit}}" required>
                     @error('tahunterbit')<div class="invalid-feedback"> {{$message}}</div>
