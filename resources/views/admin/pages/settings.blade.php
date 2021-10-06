@@ -196,7 +196,7 @@ $message=session('status');
                       <div class="card-body">
                           <div class="row">
                               <div class="form-group col-md-6 col-6">
-                                  <label for="sekolahnama">Nama Sekolah @yield('title')</label>
+                                  <label for="sekolahnama">Nama Sekolah </label>
                                   <input type="text" name="sekolahnama" id="sekolahnama"
                                       class="form-control @error('sekolahnama') is-invalid @enderror" placeholder=""
                                       value="{{ Fungsi::sekolahnama() }}" required>
@@ -206,7 +206,7 @@ $message=session('status');
 
 
                               <div class="form-group col-md-6 col-6">
-                                <label for="kop1">Nama Yayasan @yield('title')</label>
+                                <label for="kop1">Nama Yayasan</label>
                                 <input type="text" name="kop1" id="kop1"
                                     class="form-control @error('kop1') is-invalid @enderror" placeholder=""
                                     value="{{ Fungsi::kop1() }}" required>
@@ -224,7 +224,7 @@ $message=session('status');
                             </div>
 
                             <div class="form-group col-md-6 col-6">
-                                <label for="kop3">Nama Daerah @yield('title')</label>
+                                <label for="kop3">Nama Daerah</label>
                                 <input type="text" name="kop3" id="kop3"
                                     class="form-control @error('kop3') is-invalid @enderror" placeholder=""
                                     value="{{ Fungsi::kop3() }}" required>
