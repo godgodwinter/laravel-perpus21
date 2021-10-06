@@ -30,12 +30,12 @@ class Fungsi {
 
                 $kodebukubaru=$i;
         }
-        
+
         if($kodebukubaru>$akhir){
             $kodebukubaru='kode enuh';
         }
 
-      
+
         return $kodebukubaru;
     }
     public static function cekkodepanggilbuku($inputan){
@@ -302,6 +302,42 @@ class Fungsi {
 
         $settings = DB::table('settings')->first();
         $data=$settings->sekolahalamat;
+        return $data;
+
+    }
+
+
+    public static function kop1(){
+
+        $settings = DB::table('settings')->first();
+        $data=$settings->kop1;
+        return $data;
+
+    }
+
+
+    public static function kop2(){
+
+        $settings = DB::table('settings')->first();
+        $data=$settings->kop2;
+        return $data;
+
+    }
+
+
+    public static function kop3(){
+
+        $settings = DB::table('settings')->first();
+        $data=$settings->kop3;
+        return $data;
+
+    }
+
+
+    public static function kop4(){
+
+        $settings = DB::table('settings')->first();
+        $data=$settings->kop4;
         return $data;
 
     }

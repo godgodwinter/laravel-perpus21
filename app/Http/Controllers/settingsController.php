@@ -31,13 +31,13 @@ class settingsController extends Controller
         // ,'settings'
     ));
     }
-    
+
     public function proses_update($request,$datas)
     {
 
-       
-       
-        
+
+
+
 
         settings::where('id',$datas->id)
         ->update([
@@ -54,10 +54,14 @@ class settingsController extends Controller
             'sekolahnama'     =>   $request->sekolahnama,
             'sekolahalamat'     =>   $request->sekolahalamat,
             'sekolahtelp'     =>   $request->sekolahtelp,
+            'kop1'     =>   $request->kop1,
+            'kop2'     =>   $request->kop2,
+            'kop3'     =>   $request->kop3,
+            'kop4'     =>   $request->kop4,
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 
-        
+
     }
 
     public function update(Request $request, settings $id)
@@ -66,9 +70,9 @@ class settingsController extends Controller
 
             return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
-    
+
     public function hard(){
-        
+
         buku::truncate();
         bukudetail::truncate();
         // bukurak::truncate();
@@ -81,7 +85,7 @@ class settingsController extends Controller
 
         return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
-    
+
     public function bukurak(){
         $jmldata=10;
         $limitdata=200;
@@ -90,9 +94,9 @@ class settingsController extends Controller
         if($cekdata>$limitdata){
             return redirect()->back()->with('status','Gagal! Data  lebih dari '.$limitdata)->with('tipe','error')->with('icon','fas fa-trash');
         }
-        
+
         bukurak::truncate();
-        
+
         $faker = Faker::create('id_ID');
         for($i=0;$i<$jmldata;$i++){
             // 3. insert data siswa
@@ -111,14 +115,14 @@ class settingsController extends Controller
         $jmldata=20;
         $limitdata=200;
 
-        
-        
+
+
         $cekdata=DB::table('buku')
         ->count();
         if($cekdata>$limitdata){
             return redirect()->back()->with('status','Gagal! Data  lebih dari '.$limitdata)->with('tipe','error')->with('icon','fas fa-trash');
         }
-        
+
         $faker = Faker::create('id_ID');
     //     for($i=0;$i<$jmldata;$i++){
     //         $nama=$faker->sentence($nbWords = 6, $variableNbWords = true);
@@ -169,9 +173,9 @@ class settingsController extends Controller
                         'updated_at' => Carbon::now()
                     ]);
 
-                   
+
         $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
-        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
                     DB::table('buku')->insert([
                         'nama' => 'Sejarah pemikiran ekonomi Islam',
                         'id' => $kodepanggil,
@@ -189,11 +193,11 @@ class settingsController extends Controller
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-    
-                    
-                    
+
+
+
         $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
-        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
                     DB::table('buku')->insert([
                         'nama' => 'Tegar dalam doa',
                         'id' => $kodepanggil,
@@ -211,9 +215,9 @@ class settingsController extends Controller
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    
+
         $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
-        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
                     DB::table('buku')->insert([
                         'nama' => 'Hikmah melangitkan doa',
                         'id' => $kodepanggil,
@@ -233,8 +237,8 @@ class settingsController extends Controller
                     ]);
 
                     $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
-                    $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
-                        
+                    $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
+
                     DB::table('buku')->insert([
                         'nama' => 'Pengantar jaringan komputer',
                         'id' => $kodepanggil,
@@ -252,10 +256,10 @@ class settingsController extends Controller
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    
+
 
                     $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
-                    $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ; 
+                    $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
                     DB::table('buku')->insert([
                         'nama' => 'Metode penelitian pendidikan ilmu komputer',
                         'id' => $kodepanggil,
@@ -276,19 +280,19 @@ class settingsController extends Controller
 
      return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
-    
+
 
     public function bukudetail(){
         $jmldata=5;
         $limitdata=200;
-        
+
         $faker = Faker::create('id_ID');
         $databos=DB::table('buku')->get();
         foreach($databos as $db){
-            
+
         for($i=0;$i<$jmldata;$i++){
             $nomeridentitas=date('YmdHis').$i;
-            
+
             DB::table('bukudetail')->insert([
                 'buku_nama' => $db->nama,
                 'buku_kode' => $db->kode,
@@ -322,7 +326,7 @@ class settingsController extends Controller
         if($cekdata>$limitdata){
             return redirect()->back()->with('status','Gagal! Data  lebih dari '.$limitdata)->with('tipe','error')->with('icon','fas fa-trash');
         }
-        
+
         $faker = Faker::create('id_ID');
         for($i=0;$i<$jmldata;$i++){
             $nama=$faker->name;

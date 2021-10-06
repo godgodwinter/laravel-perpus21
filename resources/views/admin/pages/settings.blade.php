@@ -31,7 +31,7 @@ $message=session('status');
                 showConfirmButton: false,
                 timer: 3000
             });
-            
+
             Toast.fire({
                 icon: '{{$tipe}}',
                 title: '{{$message}}'
@@ -121,7 +121,7 @@ $message=session('status');
                                   @error('paginationjml')<div class="invalid-feedback"> {{$message}}</div>
                                   @enderror
                               </div>
-                              
+
                               <div class="form-group col-md-6 col-6">
                                 <label for="passdefaultadmin">Password Admin Default</label>
                                 <input type="text" name="passdefaultadmin" id="passdefaultadmin"
@@ -131,7 +131,7 @@ $message=session('status');
                                 @enderror
                             </div>
 
-                            
+
                             <div class="form-group col-md-6 col-6">
                               <label for="passdefaultpegawai">Password Pustakawan Default</label>
                               <input type="text" name="passdefaultpegawai" id="passdefaultpegawai"
@@ -141,17 +141,9 @@ $message=session('status');
                               @enderror
                           </div>
 
-                          
-                            
-                          <div class="form-group col-md-6 col-6">
-                            <label for="sekolahttd"> Nama Tanda tangan 1</label>
-                            <input type="text" name="sekolahttd" id="sekolahttd"
-                                class="form-control @error('sekolahttd') is-invalid @enderror"
-                                placeholder="" value="{{ Fungsi::sekolahttd() }}" required>
-                            @error('sekolahttd')<div class="invalid-feedback"> {{$message}}</div>
-                            @enderror
-                        </div>
-                         
+
+
+
                         <div class="form-group col-md-6 col-6">
                           <label for="defaultdenda"> Denda Terlambat /perhari</label>
                           <input type="text" name="defaultdenda" id="defaultdenda"
@@ -161,7 +153,7 @@ $message=session('status');
                           @enderror
                       </div>
 
-                       
+
                       <div class="form-group col-md-6 col-6">
                         <label for="defaultminbayar">Minimal Nominal Pembayaran</label>
                         <input type="text" name="defaultminbayar" id="defaultminbayar"
@@ -171,7 +163,7 @@ $message=session('status');
                         @enderror
                     </div>
 
-                    
+
                     <div class="form-group col-md-6 col-6">
                       <label for="defaultmaxbukupinjam">Jumlah Maximal Buku dipinjam</label>
                       <input type="text" name="defaultmaxbukupinjam" id="defaultmaxbukupinjam"
@@ -180,7 +172,7 @@ $message=session('status');
                       @error('defaultmaxbukupinjam')<div class="invalid-feedback"> {{$message}}</div>
                       @enderror
                   </div>
-                    
+
                     <div class="form-group col-md-6 col-6">
                       <label for="defaultmaxharipinjam">Jumlah Maximal Hari Peminjaman</label>
                       <input type="text" name="defaultmaxharipinjam" id="defaultmaxharipinjam"
@@ -212,14 +204,33 @@ $message=session('status');
                                   @enderror
                               </div>
 
+
                               <div class="form-group col-md-6 col-6">
-                                  <label for="sekolahalamat">Alamat Sekolah</label>
-                                  <input type="text" name="sekolahalamat" id="sekolahalamat"
-                                      class="form-control @error('sekolahalamat') is-invalid @enderror" placeholder=""
-                                      value="{{ Fungsi::sekolahalamat() }}" required>
-                                  @error('sekolahalamat')<div class="invalid-feedback"> {{$message}}</div>
-                                  @enderror
-                              </div>
+                                <label for="kop1">Nama Yayasan @yield('title')</label>
+                                <input type="text" name="kop1" id="kop1"
+                                    class="form-control @error('kop1') is-invalid @enderror" placeholder=""
+                                    value="{{ Fungsi::kop1() }}" required>
+                                @error('kop1')<div class="invalid-feedback"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-6 col-6">
+                                <label for="sekolahalamat">Alamat Sekolah</label>
+                                <input type="text" name="sekolahalamat" id="sekolahalamat"
+                                    class="form-control @error('sekolahalamat') is-invalid @enderror" placeholder=""
+                                    value="{{ Fungsi::sekolahalamat() }}" required>
+                                @error('sekolahalamat')<div class="invalid-feedback"> {{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-6 col-6">
+                                <label for="kop3">Nama Daerah @yield('title')</label>
+                                <input type="text" name="kop3" id="kop3"
+                                    class="form-control @error('kop3') is-invalid @enderror" placeholder=""
+                                    value="{{ Fungsi::kop3() }}" required>
+                                @error('kop3')<div class="invalid-feedback"> {{$message}}</div>
+                                @enderror
+                            </div>
 
                               <div class="form-group col-md-6 col-6">
                                   <label for="sekolahtelp">No Telp Sekolah</label>
@@ -229,6 +240,16 @@ $message=session('status');
                                   @error('sekolahtelp')<div class="invalid-feedback"> {{$message}}</div>
                                   @enderror
                               </div>
+
+
+                          <div class="form-group col-md-6 col-6">
+                            <label for="sekolahttd"> Nama Tanda tangan 1</label>
+                            <input type="text" name="sekolahttd" id="sekolahttd"
+                                class="form-control @error('sekolahttd') is-invalid @enderror"
+                                placeholder="" value="{{ Fungsi::sekolahttd() }}" required>
+                            @error('sekolahttd')<div class="invalid-feedback"> {{$message}}</div>
+                            @enderror
+                        </div>
 
                           </div>
 
@@ -245,7 +266,7 @@ $message=session('status');
 
                       </div>
                     </div>
-                    
+
       <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
 
@@ -256,18 +277,18 @@ $message=session('status');
                                   <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Data Seeder
                                       dan Reset</span>
                               </div>
-          
+
                               <div class="card-body ml-3">
-                             
+
                                 <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-                    
+
                                   <form action="{{ route('reset.hard') }}" method="post" class="d-inline">
                                     @csrf
                                     <button class="btn btn-danger btn-lg"
                                         onclick="return  confirm('Anda yakin melakukan Hard Reset aplikasi? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
                                             class="pcoded-micon"> <i class="fas fa-power-off"></i> Hard reset aplikasi!</span></button>
                                   </form>
-                                  
+
                                   <form action="{{ route('reset.default') }}" method="post" class="d-inline ml-1">
                                     @csrf
                                     <button class="btn btn-danger btn-lg"
@@ -278,15 +299,15 @@ $message=session('status');
                                   <button type="button" class="btn btn-icon btn-warning btn-md ml-1" data-toggle="modal"  data-placement="top" title="File sampah sisa export dan import! Agar tidak membebani server."  data-target="#cleartemp"><i class="fas fa-trash"></i>
                                     Hapus File Sampah
                                   </button>
-                                  
+
                                 </div>
                             </div>
 
-                            
+
                             <div class="card-body ml-3">
-                             
+
                                 <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-                    
+
                                   <form action="{{ route('seeder.anggota') }}" method="post" class="d-inline">
                                     @csrf
                                     <button class="btn btn-info btn-lg"
@@ -300,21 +321,21 @@ $message=session('status');
                                         onclick="return  confirm('Anda yakin memasukan data palsu ? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
                                             class="pcoded-micon"> <i class="fas fa-power-off"></i> Seeder bukurak!</span></button>
                                   </form> --}}
-                                  
+
                                   <form action="{{ route('seeder.buku') }}" method="post" class="d-inline ml-1">
                                     @csrf
                                     <button class="btn btn-info btn-lg"
                                         onclick="return  confirm('Anda yakin memasukan data palsu ? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
                                             class="pcoded-micon"> <i class="fas fa-power-off"></i> Seeder Buku!</span></button>
                                   </form>
-                                  
+
                                   <form action="{{ route('seeder.bukudetail') }}" method="post" class="d-inline ml-1">
                                     @csrf
                                     <button class="btn btn-info btn-lg"
                                         onclick="return  confirm('Anda yakin memasukan data palsu ? Y/N')"  data-toggle="tooltip" data-placement="top" title="Untuk membersihkan semua data! Jadi aplikasi baru dengan data kosong!"><span
                                             class="pcoded-micon"> <i class="fas fa-power-off"></i> Seeder BukuDetail!</span></button>
                                   </form>
-                                  
+
                                 </div>
                             </div>
                       </div>
@@ -337,11 +358,11 @@ $message=session('status');
                         <h5 class="modal-title" id="exampleModalLabel">Hapus Temporari</h5>
                       </div>
                       <div class="modal-body">
-           
+
                         {{ csrf_field() }}
-           
+
                         <label></label>
-           
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -42,14 +42,22 @@
         <table width="100%" border="0">
             <tr>
             <td width="13%" align="right"><img src="assets/upload/logoyayasan.png" width="140" height="140"></td>
-            <td width="80%" align="center"><p><b><font size="28px">YAYASAN PENDIDIKAN ISLAM <br> " MTS SHIROTHUL FUQOHA "</font><br>
+            <td width="80%" align="center"><p><b><font size="28px"> {{strtoupper(Fungsi::kop1())}} <br> " {{strtoupper(Fungsi::sekolahnama())}} "</font><br>
+              <font size="18px"> {{strtoupper(Fungsi::kop3())}}</font>
+            </b>
+            <br>
+            <br> <font size="14px">{{Fungsi::sekolahalamat()}}. Telp.{{Fungsi::sekolahtelp()}}  </font>
+                                        </p>
+
+                                        </td>
+            {{-- <td width="80%" align="center"><p><b><font size="28px">YAYASAN PENDIDIKAN ISLAM <br> " MTS SHIROTHUL FUQOHA "</font><br>
               <font size="18px"> KENDAL PAYAK - KECAMATAN PAKISAJI - KABUPATEN MALANG</font>
             </b>
             <br>
             <br> <font size="14px">Sekretariat : Jl. Kendalpayak No.98 Pakisaji - Malang. TELP. 085746911467</font>
                                         </p>
 
-                                        </td>
+                                        </td> --}}
             <td widht="7%"></td>
             </tr>
             <tr>
@@ -94,9 +102,10 @@
 
             <th width="34%"></th>
 
-            <th width="30%" align="center">.........,..........................,  @php
+            <th width="30%" align="center">
+                {{-- .........,..........................,  @php
                echo  date('Y');
-            @endphp
+            @endphp --}}
 
                 <br>Mengetahui,<br>
                 <br><br>
