@@ -121,7 +121,7 @@ class laporanController extends Controller
         // return view('admin.beranda');
     }
 
-    
+
 
     public function cetakpeminjaman($bln,$status,$cari)
     {
@@ -178,7 +178,7 @@ class laporanController extends Controller
         return view('admin.laporan.keuangan',compact('pages','datas','datas2','request','jml','jml2','totalnominal','totalnominal2','datasdenda','jmldenda','totalnominaldenda'));
         // return view('admin.beranda');
     }
-    
+
     public function cetakkeuangan($bln)
     {
 
@@ -624,7 +624,7 @@ if($request->status=='sudah'){
            </th>
 
        </tr>
-     
+
        <tr>
            <th colspan="2">
              Data  Pengeluaran
