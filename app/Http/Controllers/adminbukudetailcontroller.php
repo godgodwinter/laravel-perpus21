@@ -7,7 +7,7 @@ use App\Models\buku;
 use App\Models\bukudetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\URL; 
+use Illuminate\Support\Facades\URL;
 
 class adminbukudetailcontroller extends Controller
 {
@@ -40,7 +40,7 @@ class adminbukudetailcontroller extends Controller
 
     public function cari(Request $request,buku $id)
     {
-        
+
         $buku=$id;
         // dd($request);
         $cari=$request->cari;
@@ -99,19 +99,19 @@ class adminbukudetailcontroller extends Controller
                    'created_at'=>date("Y-m-d H:i:s"),
                    'updated_at'=>date("Y-m-d H:i:s")
             ));
-    
+
 
         }
 
-       
+
             // $notification = array(
             //     'message' => 'Post created successfully!',
             //     'alert-type' => 'success'
             // );
             return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
-        
+
      }
-     
+
     public function show(Request $request,buku $buku,bukudetail $id)
     {
         // dd($id);
@@ -119,7 +119,7 @@ class adminbukudetailcontroller extends Controller
         $pages='bukudetail';
         $buku=$buku;
         $datas=$id;
-        
+
         // $bukurak = DB::table('bukurak')->get();
         $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
@@ -129,9 +129,9 @@ class adminbukudetailcontroller extends Controller
     }
     public function proses_update($request,$buku,$datas)
     {
-       
-       
-       
+
+
+
         // dd($request->bukukategori_nama,$datas->bukukategori_nama,$kodebuku);
 
         bukudetail::where('id',$datas->id)
@@ -140,7 +140,7 @@ class adminbukudetailcontroller extends Controller
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 
-        
+
     }
 
     public function update(Request $request, buku $buku,bukudetail $id)
@@ -153,12 +153,12 @@ class adminbukudetailcontroller extends Controller
     {
         bukudetail::destroy($id);
         return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
-    
+
     }
 
     public function multidel(Request $request,buku $id)
     {
-        
+
         $ids=$request->ids;
 
         // $datasiswa = DB::table('siswa')->where('id',$ids)->get();
@@ -171,10 +171,10 @@ class adminbukudetailcontroller extends Controller
         // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
         bukudetail::whereIn('id',$ids)->delete();
 
-        
+
         // load ulang
-     
-       
+
+
         #WAJIB
         $pages='bukudetail';
         $jmldata='0';

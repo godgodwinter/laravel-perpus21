@@ -144,6 +144,15 @@ Route::put('/admin/pemasukan/{id}', 'App\Http\Controllers\adminpemasukancontroll
 Route::delete('/admin/pemasukan/{id}', 'App\Http\Controllers\adminpemasukancontroller@destroy')->name('admin.pemasukan.destroy');
 Route::delete('/admin/datapemasukan/multidel', 'App\Http\Controllers\adminpemasukancontroller@multidel')->name('admin.pemasukan.multidel');
 
+//bukudigital-MENU
+Route::get('/admin/bukudigital', 'App\Http\Controllers\adminbukudigitalcontroller@index')->name('admin.bukudigital');
+Route::get('/admin/bukudigital/cari', 'App\Http\Controllers\adminbukudigitalcontroller@cari')->name('admin.bukudigital.cari');
+Route::post('/admin/bukudigital', 'App\Http\Controllers\adminbukudigitalcontroller@store')->name('admin.bukudigital.store');
+Route::get('/admin/bukudigital/{id}', 'App\Http\Controllers\adminbukudigitalcontroller@show')->name('admin.bukudigital.show');
+Route::put('/admin/bukudigital/{id}', 'App\Http\Controllers\adminbukudigitalcontroller@update')->name('admin.bukudigital.update');
+Route::delete('/admin/bukudigital/{id}', 'App\Http\Controllers\adminbukudigitalcontroller@destroy')->name('admin.bukudigital.destroy');
+Route::delete('/admin/databukudigital/multidel', 'App\Http\Controllers\adminbukudigitalcontroller@multidel')->name('admin.bukudigital.multidel');
+
 
 //pengeluaran-MENU
 Route::get('/admin/pengeluaran', 'App\Http\Controllers\adminpengeluarancontroller@index')->name('admin.pengeluaran');
@@ -174,6 +183,8 @@ Route::post('admin/seeder/buku', 'App\Http\Controllers\settingsController@buku')
 Route::post('admin/seeder/bukudetail', 'App\Http\Controllers\settingsController@bukudetail')->name('seeder.bukudetail');
 
 // ExportdanImport
+Route::get('admin/databukudigital/export', 'App\Http\Controllers\prosesController@exportbukudigital')->name('bukudigital.export');
+Route::post('admin/databukudigital/import', 'App\Http\Controllers\prosesController@importbukudigital')->name('bukudigital.import');
 Route::get('admin/databukurak/export', 'App\Http\Controllers\prosesController@exportbukurak')->name('bukurak.export');
 Route::post('admin/databukurak/import', 'App\Http\Controllers\prosesController@importbukurak')->name('bukurak.import');
 Route::get('admin/databuku/export', 'App\Http\Controllers\prosesController@exportbuku')->name('buku.export');
