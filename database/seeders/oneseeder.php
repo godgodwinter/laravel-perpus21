@@ -87,7 +87,7 @@ class oneseeder extends Seeder
               'updated_at' => Carbon::now()
            ]);
 
-           
+
           DB::table('kategori')->insert([
             'nama' => 'Teknologi',
             'prefix' => 'ddc',
@@ -132,14 +132,14 @@ class oneseeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);
-         
+
          DB::table('kategori')->insert([
              'nama' => 'Umum',
              'prefix' => 'tipeperalatan',
              'created_at' => Carbon::now(),
              'updated_at' => Carbon::now()
           ]);
-          
+
 
          //KELAS SEEDER
         DB::table('kelas')->insert([
@@ -173,7 +173,11 @@ class oneseeder extends Seeder
         DB::table('settings')->insert([
             'paginationjml' => '10',
             'sekolahnama' => 'SMP ABCD 01 Malang',
-            'sekolahalamat' => 'Jl. Abcd Desa Qwerty Kecamatan Zxcvb',
+            'kop1' => 'YAYASAN PENDIDIKAN ISLAM',
+            'kop2' => 'MTS SHIROTHUL FUQOHA',
+            'kop3' => 'KENDAL PAYAK - KECAMATAN PAKISAJI - KABUPATEN MALANG',
+            'kop4' => 'Alamat : Jl. Kendalpayak No.98 Pakisaji - Malang',
+            'sekolahalamat' => 'Alamat : Jl. Kendalpayak No.98 Pakisaji - Malang',
             'sekolahtelp' => '0341-123456',
             'aplikasijudul' => 'PERPUSTAKAAN',
             'aplikasijudulsingkat' => 'SP',
@@ -184,7 +188,7 @@ class oneseeder extends Seeder
             'passdefaultpegawai' => 'perpus123',
             'passdefaultadmin' => 'perpus123',
             'sekolahlogo' => '',
-            'sekolahttd' => 'Nama Kepala Sekolah M.Pd',
+            'sekolahttd' => 'Kepala Perpustakaan',
             'sekolahttd2' => 'Nama Kepala Sekolah M.Pd', //masih konsep
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

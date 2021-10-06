@@ -246,7 +246,7 @@ $message=session('status');
                             <label for="sekolahttd"> Nama Tanda tangan 1</label>
                             <input type="text" name="sekolahttd" id="sekolahttd"
                                 class="form-control @error('sekolahttd') is-invalid @enderror"
-                                placeholder="" value="{{ Fungsi::sekolahttd() }}" required>
+                                placeholder="" value="{{ Fungsi::sekolahttd() }}" >
                             @error('sekolahttd')<div class="invalid-feedback"> {{$message}}</div>
                             @enderror
                         </div>
