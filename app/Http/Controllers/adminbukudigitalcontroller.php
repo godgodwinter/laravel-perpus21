@@ -31,6 +31,28 @@ class adminbukudigitalcontroller extends Controller
         return view('admin.bukudigital.index',compact('pages','datas','request'));
         // return view('admin.beranda');
     }
+    public function cari(Request $request)
+    {
+        // dd($request);
+        $cari=$request->cari;
+
+        #WAJIB
+        $pages='bukudigital';
+        $jmldata='0';
+        $datas='0';
+
+
+    $datas=DB::table('bukudigital')
+    // ->where('nis','like',"%".$cari."%")
+    ->where('nama','like',"%".$cari."%")
+    ->orWhere('tipe','like',"%".$cari."%")
+    ->paginate(Fungsi::paginationjml());
+
+
+
+
+    return view('admin.bukudigital.index',compact('pages','datas','request'));
+    }
 
     public function store(Request $request)
     {
@@ -122,7 +144,7 @@ class adminbukudigitalcontroller extends Controller
 
         ]);
 
-
+// dd($request);
         $namafileku=null;
         $files = $request->file('file');
         if($files!=null){
@@ -177,6 +199,8 @@ class adminbukudigitalcontroller extends Controller
              'file' => $namafileku,
             'updated_at'=>date("Y-m-d H:i:s")
         ]);
+
+        // dd($namafileku);
             }else{
 
         bukudigital::where('id',$datas->id)
