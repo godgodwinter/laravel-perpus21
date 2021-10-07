@@ -356,6 +356,13 @@ crossorigin="anonymous"></script> --}}
                 <p>Buku</p>
               </a>
             </li>
+            
+            <li class="nav-item">
+                <a href="{{route('admin.bukudigital')}}" class="nav-link">
+                <i class="fas fa-atlas"></i>
+                <p>Buku Digital</p>
+                </a>
+            </li>
             <li class="nav-header">PROSES</li>
             <li class="nav-item">
               <a href="{{route('admin.peminjaman')}}" class="nav-link">
