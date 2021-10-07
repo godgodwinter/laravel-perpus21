@@ -48,6 +48,8 @@ $message=session('status');
     <th width="10%" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
     <th> Judul  </th>
+    <th width="200px" class="text-center"> Tipe  </th>
+    <th width="200px" class="text-center"> Data  </th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
 @endsection
@@ -70,7 +72,7 @@ $message=session('status');
             });
 
             $.ajax({
-                url: "{{ route('admin.pemasukan.multidel') }}",
+                url: "{{ route('admin.bukudigital.multidel') }}",
                 type: "DELETE",
                 data: {
                     _token: $("input[name=_token]").val(),
@@ -93,11 +95,25 @@ $message=session('status');
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
     <td>{{ $data->nama }}</td>
+    <td class="text-center">{{ $data->tipe }}</td>
+    <td class="text-center">
+
+        @if ($data->tipe=='Link')
+
+        <a class="btn btn-icon btn-info btn-sm " href="{{ $data->link }}"
+            data-toggle="tooltip" data-placement="top" title="Lihat data !" target="_blank"> <i
+                class="fas fa-angle-double-right"></i> Lihat Data</a>
+        @else
+
+        <a class="btn btn-icon btn-info btn-sm " href="{{ url($data->file) }}"
+            data-toggle="tooltip" data-placement="top" title="Lihat data !" target="_blank"> <i
+                class="fas fa-angle-double-right"></i> Lihat Data</a>
+
+
+        @endif
+    </td>
 
     <td class="text-center">
-        <a class="btn btn-icon btn-secondary btn-sm " href="{{ $data->link }}"
-        data-toggle="tooltip" data-placement="top" title="Lihat !" target="_blank"> <i
-            class="fas fa-angle-double-right"></i> </a>
         <x-button-edit link="/admin/{{ $pages }}/{{$data->id}}" />
         <x-button-delete link="/admin/{{ $pages }}/{{$data->id}}" />
     </td>
@@ -286,6 +302,7 @@ $message=session('status');
                                                 @enderror
                                             `;
 
+                                            inputan.html(inputanklink);
                                             tipeselect.change(function(e) {
                                             if (tipeselect.val()=='Link'){
                                                 inputan.html(inputanklink);
