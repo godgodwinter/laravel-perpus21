@@ -75,7 +75,7 @@
                             No
                         </th>
                         <th>
-                            Nama
+                            Nama Pemasukan
                         </th>
                         <th>
                             Tanggal
@@ -114,7 +114,7 @@
                             No
                         </th>
                         <th>
-                            Nama
+                            Nama Pengeluaran
                         </th>
                         <th>
                             Tanggal
@@ -148,7 +148,7 @@
                 <table width="100%" border="1">
                     <tr>
                         <th>
-                            Nama
+                            Nama Transaksi
                         </th>
                         <th>
                             Nominal

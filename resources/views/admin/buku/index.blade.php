@@ -442,6 +442,8 @@ $message=session('status');
               <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   {{-- <form method="post" action="{{ route($pages.'.import') }}" enctype="multipart/form-data"> --}}
+                            <form action="/admin/{{ $pages }}" method="post" enctype="multipart/form-data">
+                                @csrf
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
@@ -451,8 +453,6 @@ $message=session('status');
                         <div class="col-12 col-md-12 col-lg-12">
                             <div class="card-body">
                         <div class="row">
-                            <form action="/admin/{{ $pages }}" method="post" enctype="multipart/form-data">
-                                @csrf
                             <div class="form-group col-md-12 col-12">
                                 <label for="nama">Judul Buku</label>
                                 <input type="text" name="nama" id="nama"
