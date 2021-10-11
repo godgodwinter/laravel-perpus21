@@ -2,7 +2,7 @@
 {{-- @extends('admin.pages.beranda') --}}
 
 
-@section('title','Rak Buku')
+@section('title','Peralatan')
 @section('linkpages')
 data{{ $pages }}
 @endsection
@@ -86,10 +86,10 @@ $message=session('status');
 
     <div class="col-12 col-md-12 col-lg-6">
         <div class="card">
-           
+
             <div class="card-body">
 
-  
+
                 <form action="/admin/{{ $pages }}/{{$datas->id}}" method="post">
                     @method('put')
                     @csrf
@@ -106,30 +106,30 @@ $message=session('status');
                         @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                         @enderror
                     </div>
-                    
+
                     <div class="form-group col-md-12 col-12">
                         <label>Kategori<code>*)</code></label>
-                        <select class="form-control form-control-lg" required name="kategori_nama">  
+                        <select class="form-control form-control-lg" required name="kategori_nama">
                             @if ($datas->kategori_nama)
-                            <option>{{$datas->kategori_nama}}</option>                        
+                            <option>{{$datas->kategori_nama}}</option>
                             @endif
                             @foreach ($peralatankategori as $t)
                                 <option>{{ $t->nama }}</option>
                             @endforeach
                         </select>
-                    </div> 
+                    </div>
 
                     <div class="form-group col-md-12 col-12">
                         <label>Kondisi<code>*)</code></label>
-                        <select class="form-control form-control-lg" required name="kondisi">  
+                        <select class="form-control form-control-lg" required name="kondisi">
                             @if ($datas->kondisi)
-                            <option>{{$datas->kondisi}}</option>                        
+                            <option>{{$datas->kondisi}}</option>
                             @endif
                             @foreach ($kondisi as $t)
                                 <option>{{ $t->nama }}</option>
                             @endforeach
                         </select>
-                    </div> 
+                    </div>
                     <div class="form-group col-md-12 col-12">
                         <label>Tanggal Lahir</label>
                         <input type="date" class="form-control" name="tgl_masuk" @error('tgl_masuk') is-invalid @enderror" value="{{$datas->tgl_masuk}}" >
@@ -138,16 +138,16 @@ $message=session('status');
                     </div>
 
                 </div>
-             
+
             </div>
             <div class=" text-right">
-                
+
               <a href="{{ route('admin.'.$pages) }}" class="btn btn-icon btn-dark ml-3"> <i class="fas fa-backward"></i> Batal</a>
               <button class="btn btn-primary">Simpan</button>
             </div>
           </form>
         </div>
-                
+
             </div>
             <!-- /.card-body -->
 

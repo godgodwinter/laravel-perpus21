@@ -140,7 +140,7 @@ class laporanController extends Controller
         //     ->format('png')
         //     ->generate('www.google.com', public_path('assets/img/qrcode.png'));
 
-        return $pdf->download('laporanperalatan'.$tgl.'-pdf');
+        return $pdf->download('laporanpeminjamandanpengembalian'.$tgl.'-pdf');
     }
 
     public function laporankeuangan(Request $request)
@@ -198,7 +198,7 @@ class laporanController extends Controller
         //     ->format('png')
         //     ->generate('www.google.com', public_path('assets/img/qrcode.png'));
 
-        return $pdf->download('laporanperalatan'.$tgl.'-pdf');
+        return $pdf->download('laporankeuangan'.$tgl.'-pdf');
     }
 
     public function apichart1(Request $request)

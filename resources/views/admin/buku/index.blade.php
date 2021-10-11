@@ -32,7 +32,7 @@ $message=session('status');
                 showConfirmButton: false,
                 timer: 3000
             });
-            
+
             Toast.fire({
                 icon: '{{$tipe}}',
                 title: '{{$message}}'
@@ -66,7 +66,7 @@ $message=session('status');
         $("#chkCheckAll").click(function () {
             $(".checkBoxClass").prop('checked', $(this).prop('checked'));
         })
-        
+
         $("#cetakbukuchecked").click(function (e) {
             e.preventDefault();
             var allids = [];
@@ -83,7 +83,7 @@ $message=session('status');
                 $('#tombolcetak').prop('disabled',false);
             }
                 // alert(allids);
-                
+
             // $.ajax({
             //     url: "{{ route('admin.buku.multidel') }}",
             //     type: "DELETE",
@@ -98,7 +98,7 @@ $message=session('status');
             //     }
             // });
             // alert('asd');
-            
+
         });
 
         $("#deleteAllSelectedRecord").click(function (e) {
@@ -131,14 +131,14 @@ $message=session('status');
 <tr id="sid{{ $data->id }}">
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
-    <td> 
+    <td>
         <a class="btn btn-icon btn-light btn-sm " href="{{ url('/admin/buku/') }}/{{ $data->id }}/bukudetail"  data-toggle="tooltip" data-placement="top" title=" {{ $data->nama }}">
             {{-- {{ App\Models\buku::find($data->id)->code }} --}}
            {{$data->kode}}  - {{ substr($data->nama, 0 ,20) }}</a>
         </td>
     <td ><p data-toggle="tooltip" data-placement="top" title="{{ $data->pengarang }}">{{ substr($data->pengarang, 0 ,15) }}</p></td>
     {{-- @php
-       $isbn='-'; 
+       $isbn='-';
     @endphp
     @if ($data->isbn)
        @php
@@ -165,7 +165,7 @@ $message=session('status');
         <div class="row">
             <div class="col-sm-6">
                 <input type="hidden" name="{{$data->kode}}" id="{{$data->kode}}" value="{{$data->kode}}">
-                <input type="number" class="form-control-plaintext form-control2 no-border text-center btn btn-light" name="tersedia{{$data->kode}}" id="tersedia{{$data->kode}}" value="{{$cekjmlada}}" min="0" max="{{$cekjmlada}}"> 
+                <input type="number" class="form-control-plaintext form-control2 no-border text-center btn btn-light" name="tersedia{{$data->kode}}" id="tersedia{{$data->kode}}" value="{{$cekjmlada}}" min="0" max="{{$cekjmlada}}">
 
             </div>
             <div class="col-sm-6">
@@ -173,13 +173,13 @@ $message=session('status');
                 </button>
             </div>
         </div>
-       
+
     </td>
-    <td class="text-center"> 
+    <td class="text-center">
         {{-- <a href="{{ route("admin.pengembalian")}}" class="btn btn-icon btn-light btn-sm "  data-toggle="tooltip" data-placement="top" title="Kembalikan!" >  --}}
-        {{$cekjmldipinjam}}  
+        {{$cekjmldipinjam}}
       {{-- </a> --}}
-       
+
     </td>
 
     <td class="text-center">
@@ -227,7 +227,7 @@ $message=session('status');
 
                                                             Toast.fire({
                                                                 icon: 'error',
-                                                                title: 
+                                                                title:
                                                                     'Gagal, Buku tidak tersedial! '
                                                             });
                                                             $("#isikan{{$data->kode}}").prop('disabled', true);
@@ -240,11 +240,11 @@ $message=session('status');
                 // alert('buku tidak tersedia');
                 }
         });
-    
+
 
 });
-        
-     
+
+
     // $("input#tersedia{{$data->kode}}").prop('disabled'.true);
 
     document.querySelector('#isikan{{ $data->kode }}').addEventListener('click', function (
@@ -254,18 +254,18 @@ $message=session('status');
 
 
                                                 // masukkan data ke dalam local storage
-                                                        
-                                                                        var buku_ = {};  
-                                                                                buku_.kode = '{{$data->kode}}';  
+
+                                                                        var buku_ = {};
+                                                                                buku_.kode = '{{$data->kode}}';
                                                                                 buku_.nama = '{{$data->nama}}';
-                                                                                buku_.pengarang ='{{$data->pengarang}}';   
-                                                                                buku_.penerbit = '{{$data->penerbit}}';  
-                                                                                buku_.bukukategori_nama = '{{$data->bukukategori_nama}}';   
-                                                                                buku_.jml = parseInt($("input#tersedia{{$data->kode}}").val());   
-                                                                                // var ItemId = "data-" + buku_.id;  
-                                                                                var ItemId = buku_.kode;  
-                                                                                localStorage.setItem(ItemId, JSON.stringify(buku_)); 
-                                                                                 
+                                                                                buku_.pengarang ='{{$data->pengarang}}';
+                                                                                buku_.penerbit = '{{$data->penerbit}}';
+                                                                                buku_.bukukategori_nama = '{{$data->bukukategori_nama}}';
+                                                                                buku_.jml = parseInt($("input#tersedia{{$data->kode}}").val());
+                                                                                // var ItemId = "data-" + buku_.id;
+                                                                                var ItemId = buku_.kode;
+                                                                                localStorage.setItem(ItemId, JSON.stringify(buku_));
+
                                             var Toast = Swal.mixin({
                                                                 toast: true,
                                                                 position: 'top-end',
@@ -275,13 +275,13 @@ $message=session('status');
 
                                                             Toast.fire({
                                                                 icon: 'success',
-                                                                title: 
+                                                                title:
                                                                     'Buku berhasil ditambahkan, Periksa menu peminjaman! '
                                                             });
                                                             $("#isikan{{$data->kode}}").prop('disabled', false);
                                                     location.reload();
 
-                                            }else{    
+                                            }else{
                                             var Toast = Swal.mixin({
                                                                 toast: true,
                                                                 position: 'top-end',
@@ -291,7 +291,7 @@ $message=session('status');
 
                                                             Toast.fire({
                                                                 icon: 'error',
-                                                                title: 
+                                                                title:
                                                                     'Gagal, Buku tidak tersedial! '
                                                             });
                                                             $("#isikan{{$data->kode}}").prop('disabled', false);
@@ -310,11 +310,11 @@ $message=session('status');
         <a href="#" class="btn btn-sm  btn-danger" id="deleteAllSelectedRecord"
             onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"><i class="fas fa-trash"></i> Hapus
             Terpilih</a>
-                
+
             <a href="#" type="submit" value="cetak" id="cetakbukuchecked"
             class="btn btn-icon btn-warning btn-sm ml-2"  data-toggle="tooltip" data-placement="top" title="Pilih satu atau beberapa buku dahulu!"><span class="pcoded-micon"> <i class="fas fa-print"></i>   Buat Link Cetak </span></a>
 
-            
+
             <input type="hidden" name="databukuchecked" class="databukuchecked " id="databukuchecked" value="">
             <button href="#" type="submit" value="cetak" id="tombolcetak"
             class="btn btn-icon btn-default btn-sm ml-2" disabled  data-toggle="tooltip" data-placement="top" title="Tekan tombol Buat link cetak dahulu"><span class="pcoded-micon" > <i class="fas fa-print"></i>   Cetak PDF </span></button>
@@ -324,7 +324,7 @@ $message=session('status');
 
 @endsection
 
-@section('foottable')  
+@section('foottable')
 
 @php
   $cari=$request->cari;
@@ -370,15 +370,15 @@ $message=session('status');
         <div class="col-12 col-md-12 col-lg-12">
 
             <div class="card">
-              
+
                 <div class="card-body">
 
 
-                        
+
                         <form action="{{ route('admin.'.$pages.'.cari') }}" method="GET">
-                           
+
                     <div class="row">
-                               
+
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
                                     <input type="text" name="cari" id="cari"
                                         class="form-control form-control-sm @error('cari') is-invalid @enderror"
@@ -386,18 +386,18 @@ $message=session('status');
                                     @error('cari')<div class="invalid-feedback"> {{$message}}</div>
                                     @enderror
                     </div>
-                               
 
-                                       
+
+
                     <div class="form-group col-md-4 col-4 mt-1 text-left">
-                         
+
 
                         <button type="submit" value="CARI" class="btn btn-icon btn-info btn-sm mt-0"><span
                             class="pcoded-micon"> <i class="fas fa-search"></i> Cari</span></button>
 
-                    </div>                     
+                    </div>
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
-                            
+
                         <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                         data-target="#add"><i class="fas fa-plus"></i>
                         Tambah
@@ -411,12 +411,12 @@ $message=session('status');
                         <a href="/admin/@yield('linkpages')/export" type="submit" value="Import"
                             class="btn btn-icon btn-primary btn-sm"><span class="pcoded-micon"> <i
                                     class="fas fa-download"></i> Export </span></a>
-                    </div> 
+                    </div>
 
-                                  
-                              
 
-                            
+
+
+
 
                                         </div>
 
@@ -431,7 +431,7 @@ $message=session('status');
     </div>
 
 
-       
+
 <!-- /.content -->
 @endsection
 
@@ -447,7 +447,7 @@ $message=session('status');
                         <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
                       </div>
                       <div class="modal-body">
-           
+
                         <div class="col-12 col-md-12 col-lg-12">
                             <div class="card-body">
                         <div class="row">
@@ -461,7 +461,7 @@ $message=session('status');
                                 @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                                 @enderror
                             </div>
-                            
+
                             <div class="form-group col-md-12 col-12">
                                 <img alt="image" src="https://ui-avatars.com/api/?name=img&color=7F9CF5&background=EBF4FF" class="img-thumbnail" width="200px">
 
@@ -470,7 +470,7 @@ $message=session('status');
                                 @error('file')<div class="invalid-feedback"> {{$message}}</div>
                                 @enderror
                             </div>
-                            
+
                             <div class="form-group col-md-12 col-12">
                                 <label for="pengarang">Pengarang</label>
                                 <input type="text" name="pengarang" id="pengarang"
@@ -496,6 +496,14 @@ $message=session('status');
                                 @enderror
                             </div>
                             <div class="form-group col-md-12 col-12">
+                                <label for="tempatterbit">Tempat terbit</label>
+                                <input type="text" name="tempatterbit" id="tempatterbit"
+                                    class="form-control @error('tempatterbit') is-invalid @enderror" placeholder=""
+                                    value="{{old('tempatterbit')}}" required>
+                                @error('tempatterbit')<div class="invalid-feedback"> {{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-12 col-12">
                                 <label for="isbn">ISBN </label>
                                 <input type="text" name="isbn" id="isbn"
                                     class="form-control @error('isbn') is-invalid @enderror" placeholder=""
@@ -503,7 +511,7 @@ $message=session('status');
                                 @error('isbn')<div class="invalid-feedback"> {{$message}}</div>
                                 @enderror
                             </div>
-                            
+
                             <div class="form-group col-md-12 col-12">
                                 <label for="bahasa">Bahasa</label>
                                 <input type="text" name="bahasa" id="bahasa"
@@ -513,8 +521,8 @@ $message=session('status');
                                 @enderror
                             </div>
 
-                            
-                                        
+
+
                             <div class="form-group col-md-12 col-12">
                                 <label>DDC  <code></code></label>
                                 <input type="text" name="bukukategori_ddc" id="bukukategori_ddc"
@@ -522,8 +530,8 @@ $message=session('status');
                                     value="{{old('bukukategori_ddc')}}" required>
                                 @error('bukukategori_ddc')<div class="invalid-feedback"> {{$message}}</div>
                                 @enderror
-                            </div> 
-                            
+                            </div>
+
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">Kode Paggil</span>
@@ -540,7 +548,7 @@ $message=session('status');
                         </div>
 
                         </div>
-           
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -550,7 +558,7 @@ $message=session('status');
                   </form>
                 </div>
               </div>
-          
+
 
 
 
@@ -563,14 +571,14 @@ $message=session('status');
                         <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
                       </div>
                       <div class="modal-body">
-           
+
                         {{ csrf_field() }}
-           
+
                         <label>Pilih file excel(.xlsx)</label>
                         <div class="form-group">
                           <input type="file" name="file" required="required">
                         </div>
-           
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -580,7 +588,7 @@ $message=session('status');
                   </form>
                 </div>
               </div>
-          
+
 
 @endsection
 

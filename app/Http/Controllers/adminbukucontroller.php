@@ -46,8 +46,8 @@ class adminbukucontroller extends Controller
         ,'bukukategori','datas','request','kodepanggil'));
         // return view('admin.beranda');
     }
-    
-    
+
+
     public function cari(Request $request)
     {
         // dd($request);
@@ -77,7 +77,7 @@ class adminbukucontroller extends Controller
     public function store(Request $request)
     {
 
-       
+
         // dd($request);
         // dd($request);
         $request->validate([
@@ -92,7 +92,7 @@ class adminbukucontroller extends Controller
 
         ]);
         // dd($files);
-        
+
         // dd($kodebuku);
        DB::table('buku')->insert(
         array(
@@ -104,6 +104,7 @@ class adminbukucontroller extends Controller
             //    'bukurak_nama'     =>   $request->bukurak_nama,
             //    'bukurak_kode'     =>   $ambilbukurak_kode->kode,
                'bukukategori_ddc'     =>   $request->bukukategori_ddc,
+               'tempatterbit'     =>   $request->tempatterbit,
                'penerbit'     =>   $request->penerbit,
                'tahunterbit'     =>   $request->tahunterbit,
                'bahasa'     =>   $request->bahasa,
@@ -111,55 +112,55 @@ class adminbukucontroller extends Controller
                'updated_at'=>date("Y-m-d H:i:s")
         ));
 
-        
+
         $files = $request->file('file');
-        
+
         // dd($request);
         if($files!=null){
             // dd(!Input::hasFile('files'));
             // dd($files,'aaa');
             $namafilebaru=$request->kode;
-    
+
             // menyimpan data file yang diupload ke variabel $file
             $file = $request->file('file');
-    
+
                       // nama file
             echo 'File Name: '.$file->getClientOriginalName();
             echo '<br>';
-    
+
                       // ekstensi file
             echo 'File Extension: '.$file->getClientOriginalExtension();
             // dd()
             echo '<br>';
-    
+
                       // real path
             echo 'File Real Path: '.$file->getRealPath();
             echo '<br>';
-    
+
                       // ukuran file
             echo 'File Size: '.$file->getSize();
             echo '<br>';
-    
+
                       // tipe mime
             echo 'File Mime Type: '.$file->getMimeType();
-    
+
                       // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'storage/gambar';
-    
+
                     // upload file
             $file->move($tujuan_upload,"gambar/".$namafilebaru.".jpg");
-    
-    
+
+
             buku::where('kode',$request->kode)
             ->update([
                 'gambar' => "gambar/".$namafilebaru.".jpg",
             'updated_at'=>date("Y-m-d H:i:s")
             ]);
-            
+
         }
 
         return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
-    
+
     }
     public function show(Request $request,buku $id)
     {
@@ -167,7 +168,7 @@ class adminbukucontroller extends Controller
         #WAJIB
         $pages='buku';
         $datas=$id;
-        
+
         // $bukurak = DB::table('bukurak')->get();
         $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
 
@@ -187,7 +188,7 @@ class adminbukucontroller extends Controller
 
             ]);
         }
-        
+
         if($request->kode!==$datas->kode){
             $request->validate([
                 'kode'=>'unique:buku,kode'
@@ -199,12 +200,12 @@ class adminbukucontroller extends Controller
             ]);
         }
 
-       
-       
+
+
         // $ambilbukurak_kode = DB::table('bukurak')->where('nama',$request->bukurak_nama)->first();
         // $ambilbukukategori_ddc = DB::table('kategori')->where('nama',$request->bukukategori_nama)->first();
 
-     
+
         // if($request->bukukategori_nama==$datas->bukukategori_nama){
         //     $kodebuku=$datas->kode;
         // }else{
@@ -215,7 +216,7 @@ class adminbukucontroller extends Controller
         //             }
         // }
         // dd($request->bukukategori_nama,$datas->bukukategori_nama,$kodebuku);
-        
+
         bukudetail::where('buku_kode',$datas->kode)
         ->update([
             'buku_nama'     =>   $request->nama,
@@ -243,12 +244,13 @@ class adminbukucontroller extends Controller
             // 'bukurak_kode'     =>   $ambilbukurak_kode->kode,
             // 'bukurak_nama'     =>   $request->bukurak_nama,
             'penerbit'     =>   $request->penerbit,
+            'tempatterbit'     =>   $request->tempatterbit,
             'tahunterbit'     =>   $request->tahunterbit,
             'bahasa'     =>   $request->bahasa,
            'updated_at'=>date("Y-m-d H:i:s")
         ]);
 
-        
+
     }
 
     public function update(Request $request, buku $id)
@@ -257,17 +259,17 @@ class adminbukucontroller extends Controller
 
             return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
     }
-    
+
     public function destroy($id)
     {
         buku::destroy($id);
         return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
-    
+
     }
 
     public function multidel(Request $request)
     {
-        
+
         $ids=$request->ids;
 
         // $datasiswa = DB::table('siswa')->where('id',$ids)->get();
@@ -280,10 +282,10 @@ class adminbukucontroller extends Controller
         // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
         buku::whereIn('id',$ids)->delete();
 
-        
+
         // load ulang
-     
-          
+
+
         // $jmlbuku = buku::count();
         $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
         // dd($generatekodepanggil);
@@ -311,13 +313,13 @@ class adminbukucontroller extends Controller
     }
     public function cetakchecked(Request $request){
         // dd($request->databukuchecked);
-        
+
         $tgl=date("YmdHis");
         $str=explode(",",$request->databukuchecked);
         $jmldata=count($str);
 
         // dd($str,$jmldata);
-        
+
         $pdf = PDF::loadview('admin.buku.cetakchecked',compact('jmldata','str'))->setPaper('a4', 'potrait');
 
         return $pdf->download('buku'.$tgl.'.pdf');

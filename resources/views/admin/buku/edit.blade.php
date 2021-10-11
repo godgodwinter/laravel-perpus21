@@ -40,7 +40,7 @@ $message=session('status');
                 showConfirmButton: false,
                 timer: 3000
             });
-            
+
             Toast.fire({
                 icon: '{{$tipe}}',
                 title: '{{$message}}'
@@ -90,28 +90,28 @@ $message=session('status');
 
     <div class="card-body">
         <div class="row">
-            
 
-            
+
+
       <div class="col-8 col-md-8 col-lg-8">
-        <div class="card"> 
-          
+        <div class="card">
+
               <div class="row">
             <div class="card-body">
-              
+
                 {{-- <span class="btn btn-icon btn-light ml-4"><i class="fas fa-feather"></i> EDIT {{ Str::upper($pages) }}</span> --}}
 
-                <div class="form-group col-md-6 col-6 ml-6">  
+                <div class="form-group col-md-6 col-6 ml-6">
                 <form method="post" action="/admin/databuku/upload/{{ $datas->id }}" enctype="multipart/form-data">
                   {{ csrf_field() }}
-                  
-                
- 
+
+
+
                     <div class="col-lg-8 d-flex align-items-stretch mb-4">
 
                 @if($datas->gambar!='')
                 {{-- <img alt="image" src="{{ asset("storage/") }}/{{ $du->profile_photo_path }}" class="rounded-circle profile-widget-picture" width="100px"> --}}
-          
+
                 <img alt="image" src="{{ asset("storage/") }}/{{ $datas->gambar }}"class="img-thumbnail thumb-post" width="200px">
 
                 @else
@@ -120,11 +120,11 @@ $message=session('status');
 
                 @endif
 
-               
-                 </div>
-                 
 
-                 
+                 </div>
+
+
+
                 {{-- <img alt="image" src="{{ asset("assets/") }}/img/products/product-3-50.png" class="rounded-circle profile-widget-picture"> --}}
                     <label for="file">Pilih Photo <code>*)</code></label>
                     <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" required>
@@ -132,7 +132,7 @@ $message=session('status');
                     @enderror
 
                   <div class="card-footer text-right">
-                  
+
                     <button class="btn btn-success"><i class="fas fa-upload"></i> Simpan</button>
                   </form>
 
@@ -147,7 +147,7 @@ $message=session('status');
                   <a href="{{ route('admin.'.$pages) }}" class="btn btn-icon btn-dark ml-3"> <i class="fas fa-backward"></i> Batal</a>
                   </div>
 
-                  
+
                   <br>
                   <br>
                   <br>
@@ -156,25 +156,25 @@ $message=session('status');
 
                 </div>
                 </div>
-                
+
             </div>
             </div>
             </div>
             <div class="col-4 col-md-4 col-lg-4">
                 <img src="data:image/png;base64,{{DNS2D::getBarcodePNG(url('/buku/'.$datas->kode), 'QRCODE')}}" alt="barcode" width="50%"/>
-               
-       
-        
+
+
+
               </div>
 
 
 
     <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
-           
+
             <div class="card-body">
 
-  
+
                 <form action="/admin/{{ $pages }}/{{$datas->id}}" method="post">
                     @method('put')
                     @csrf
@@ -191,7 +191,7 @@ $message=session('status');
                       @error('nama')<div class="invalid-feedback"> {{$message}}</div>
                       @enderror
                   </div>
-                  
+
                   <div class="form-group col-md-12 col-12">
                     <label for="pengarang">Pengarang</label>
                     <input type="text" name="pengarang" id="pengarang"
@@ -209,6 +209,14 @@ $message=session('status');
                     @enderror
                 </div>
                 <div class="form-group col-md-12 col-12">
+                  <label for="tempatterbit">Tempat terbit</label>
+                  <input type="text" name="tempatterbit" id="tempatterbit"
+                      class="form-control @error('tempatterbit') is-invalid @enderror" placeholder=""
+                      value="{{$datas->tempatterbit}}" required>
+                  @error('tempatterbit')<div class="invalid-feedback"> {{$message}}</div>
+                  @enderror
+              </div>
+                <div class="form-group col-md-12 col-12">
                     <label for="tahunterbit">Tanggal Terbit</label>
                     <input type="date" name="tahunterbit" id="tahunterbit"
                         class="form-control @error('tahunterbit') is-invalid @enderror" placeholder=""
@@ -216,7 +224,7 @@ $message=session('status');
                     @error('tahunterbit')<div class="invalid-feedback"> {{$message}}</div>
                     @enderror
                 </div>
-                
+
                 <div class="form-group col-md-12 col-12">
                     <label for="isbn">ISBN </label>
                     <input type="text" name="isbn" id="isbn"
@@ -225,7 +233,7 @@ $message=session('status');
                     @error('isbn')<div class="invalid-feedback"> {{$message}}</div>
                     @enderror
                 </div>
-                
+
                 <div class="form-group col-md-12 col-12">
                     <label for="bahasa">Bahasa</label>
                     <input type="text" name="bahasa" id="bahasa"
@@ -234,12 +242,12 @@ $message=session('status');
                     @error('bahasa')<div class="invalid-feedback"> {{$message}}</div>
                     @enderror
                 </div>
-                 
+
                   {{-- <div class="form-group col-md-12 col-12">
                       <label>Tempat Rak Buku <code>*)</code></label>
-                      <select class="form-control form-control-lg" required name="bukurak_nama">  
+                      <select class="form-control form-control-lg" required name="bukurak_nama">
                           @if ($datas->bukurak_nama)
-                          <option>{{$datas->bukurak_nama}}</option>                        
+                          <option>{{$datas->bukurak_nama}}</option>
                           @endif
                       @foreach ($bukurak as $t)
                           <option>{{ $t->nama }}</option>
@@ -247,8 +255,8 @@ $message=session('status');
                       </select>
                   </div>  --}}
 
-                  
-                              
+
+
                   <div class="form-group col-md-12 col-12">
                     <label>DDC  <code></code></label>
                     <input type="text" name="bukukategori_ddc" id="bukukategori_ddc"
@@ -256,8 +264,8 @@ $message=session('status');
                         value="{{$datas->bukukategori_ddc}}" required>
                     @error('bukukategori_ddc')<div class="invalid-feedback"> {{$message}}</div>
                     @enderror
-                </div> 
-                  
+                </div>
+
                   <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text">Kode Buku</span>
@@ -272,11 +280,11 @@ $message=session('status');
               </div>
 
                 </div>
-             
-           
+
+
             </div>
             <div class=" text-right">
-                
+
               <a href="{{ route('admin.'.$pages) }}" class="btn btn-icon btn-dark ml-3"> <i class="fas fa-backward"></i> Batal</a>
               <button class="btn btn-primary">Simpan</button>
             </div>

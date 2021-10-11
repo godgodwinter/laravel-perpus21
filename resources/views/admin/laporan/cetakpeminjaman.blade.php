@@ -70,6 +70,12 @@
 
                 <h3>Data Peminjaman {{Fungsi::tanggalindobln($blnthn)}}</h3>
                 <table width="100%" border="1">
+                    <tr>
+                        <th class="text-center" width="10px"> No</th>
+                        <th> Judul Buku</th>
+                        <th> Tanggal Peminjaman</th>
+                        <th> Status Pengembalian</th>
+                    </tr>
 
                     @php
                      $datas=DB::table('peminjamandetail')->whereMonth('tgl_pinjam',$bulan)->whereYear('tgl_pinjam',$year)->orderBy('tgl_pinjam','desc')->get();
@@ -81,8 +87,8 @@
                         <tr>
                             <td align="center">{{$loop->index+1}}</td>
                             <td>{{$data->buku_nama}}</td>
-                            <td>{{Fungsi::tanggalindo($data->tgl_pinjam)}}</td>
-                            <td>
+                            <td align="center">{{Fungsi::tanggalindo($data->tgl_pinjam)}}</td>
+                            <td align="center">
                           @php
                           if($data->statuspengembalian==null){
                               $status="Belum dikembalikan";

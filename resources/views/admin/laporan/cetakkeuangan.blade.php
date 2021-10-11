@@ -70,6 +70,20 @@
 
                 <h3>Data Pemasukan Bulan {{Fungsi::tanggalindobln($blnthn)}}</h3>
                 <table width="100%" border="1">
+                    <tr>
+                        <th align="center" width="5%">
+                            No
+                        </th>
+                        <th>
+                            Nama
+                        </th>
+                        <th>
+                            Tanggal
+                        </th>
+                        <th>
+                            Nominal
+                        </th>
+                    </tr>
 
                     @php
                        $datas2=DB::table('pemasukan')->whereMonth('tglbayar',$bulan)->whereYear('tglbayar',$year)->orderBy('tglbayar','desc')->get();
@@ -95,6 +109,20 @@
 
             <h3>Data Pengeluaran Bulan {{Fungsi::tanggalindobln($blnthn)}} </h3>
                 <table width="100%" border="1">
+                    <tr>
+                        <th align="center" width="5%">
+                            No
+                        </th>
+                        <th>
+                            Nama
+                        </th>
+                        <th>
+                            Tanggal
+                        </th>
+                        <th>
+                            Nominal
+                        </th>
+                    </tr>
 
                     @php
                        $datas=DB::table('pengeluaran')->whereMonth('tglbayar',$bulan)->whereYear('tglbayar',$year)->orderBy('tglbayar','desc')->get();
@@ -118,6 +146,14 @@
 
                 <h3>Data Saldo Bulan {{Fungsi::tanggalindobln($blnthn)}} </h3>
                 <table width="100%" border="1">
+                    <tr>
+                        <th>
+                            Nama
+                        </th>
+                        <th>
+                            Nominal
+                        </th>
+                    </tr>
 
 
                     <tr>
