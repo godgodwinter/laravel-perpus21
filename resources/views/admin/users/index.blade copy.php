@@ -220,7 +220,100 @@ $message=session('status');
         </div>
     </div>
 
+    <div class="col-12 col-md-12 col-lg-12">
 
+        <div class="card">
+            <div class="card-header">
+
+                {{-- <div class="card-body"> --}}
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <form action="/admin/{{ $pages }}" method="post">
+                                @csrf
+                                <div class="card-header">
+                                    <span class="btn btn-icon btn-light"><i class="fas fa-feather"></i> Tambah
+                                        @yield('title')</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="name">Nama <code>*)</code></label>
+                                            <input type="text" name="name" id="name"
+                                                class="form-control @error('name') is-invalid @enderror" placeholder=""
+                                                value="{{old('name')}}" required>
+                                            @error('name')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="username">Username <code>*)</code></label>
+                                            <input type="text" name="username" id="username"
+                                                class="form-control @error('username') is-invalid @enderror" placeholder=""
+                                                value="{{old('username')}}" required>
+                                            @error('username')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="email">Email <code>*)</code></label>
+                                            <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" onblur="duplicateEmail(this)"  required>
+                                            @error('email')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group col-md-6 col-6">
+                                            <label>Tipe User<code>*)</code></label>
+                                            <select class="form-control form-control-lg" required name="tipeuser">
+                                                @if (old('tipeuser'))
+                                                <option>{{old('tipeuser')}}</option>
+                                                @endif
+                                                <option value="admin">Admin</option>
+                                                <option value="pustakawan">Pustakawan</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="password">Password <code>*)</code></label>
+                                            <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
+                                            @error('password')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group col-md-6 col-6">
+                                            <label for="password2">Konfirmasi Password <code>*)</code></label>
+                                            <input type="password" name="password2" id="password2" class="form-control @error('password2') is-invalid @enderror"  required>
+                                            @error('password2')<div class="invalid-feedback"> {{$message}}</div>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="card-footer text-right">
+                                    <button class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+
+                </div>
+            </div>
+            <!-- /.card -->
+
+        </div>
 
 </section>
 <!-- /.content -->
