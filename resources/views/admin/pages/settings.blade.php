@@ -122,26 +122,24 @@ $message=session('status');
                                   @enderror
                               </div>
 
-                              <div class="form-group col-md-6 col-6">
+                              {{-- <div class="form-group col-md-6 col-6">
                                 <label for="passdefaultadmin">Password Admin Default</label>
                                 <input type="text" name="passdefaultadmin" id="passdefaultadmin"
                                     class="form-control @error('passdefaultadmin') is-invalid @enderror"
                                     placeholder="" value="{{ Fungsi::passdefaultadmin() }}" required>
                                 @error('passdefaultadmin')<div class="invalid-feedback"> {{$message}}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
 
-                            <div class="form-group col-md-6 col-6">
+                            {{-- <div class="form-group col-md-6 col-6">
                               <label for="passdefaultpegawai">Password Pustakawan Default</label>
                               <input type="text" name="passdefaultpegawai" id="passdefaultpegawai"
                                   class="form-control @error('passdefaultpegawai') is-invalid @enderror"
                                   placeholder="" value="{{ Fungsi::passdefaultpegawai() }}" required>
                               @error('passdefaultpegawai')<div class="invalid-feedback"> {{$message}}</div>
                               @enderror
-                          </div>
-
-
+                          </div> --}}
 
 
                         <div class="form-group col-md-6 col-6">
