@@ -154,14 +154,14 @@ $message=session('status');
                       </div>
 
 
-                      <div class="form-group col-md-6 col-6">
+                      {{-- <div class="form-group col-md-6 col-6">
                         <label for="defaultminbayar">Minimal Nominal Pembayaran</label>
                         <input type="text" name="defaultminbayar" id="defaultminbayar"
                             class="form-control @error('defaultminbayar') is-invalid @enderror"
                             placeholder="" value="{{ Fungsi::defaultminbayar() }}" required min="1">
                         @error('defaultminbayar')<div class="invalid-feedback"> {{$message}}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
 
                     <div class="form-group col-md-6 col-6">
@@ -173,14 +173,14 @@ $message=session('status');
                       @enderror
                   </div>
 
-                    <div class="form-group col-md-6 col-6">
+                    {{-- <div class="form-group col-md-6 col-6">
                       <label for="defaultmaxharipinjam">Jumlah Maximal Hari Peminjaman</label>
                       <input type="text" name="defaultmaxharipinjam" id="defaultmaxharipinjam"
                           class="form-control @error('defaultmaxharipinjam') is-invalid @enderror"
                           placeholder="" value="{{ Fungsi::defaultmaxharipinjam() }}" required min="1">
                       @error('defaultmaxharipinjam')<div class="invalid-feedback"> {{$message}}</div>
                       @enderror
-                  </div>
+                  </div> --}}
 
                           </div>
 
