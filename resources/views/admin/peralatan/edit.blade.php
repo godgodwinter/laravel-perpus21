@@ -131,7 +131,7 @@ $message=session('status');
                         </select>
                     </div>
                     <div class="form-group col-md-12 col-12">
-                        <label>Tanggal Lahir</label>
+                        <label>Tanggal Masuk</label>
                         <input type="date" class="form-control" name="tgl_masuk" @error('tgl_masuk') is-invalid @enderror" value="{{$datas->tgl_masuk}}" >
                         @error('tgl_masuk')<div class="invalid-feedback"> {{$message}}</div>
                         @enderror

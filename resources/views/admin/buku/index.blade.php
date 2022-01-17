@@ -496,7 +496,7 @@ $message=session('status');
                                 @enderror
                             </div>
                             <div class="form-group col-md-12 col-12">
-                                <label for="tempatterbit">Tempat terbit</label>
+                                <label for="tempatterbit">Kota terbit</label>
                                 <input type="text" name="tempatterbit" id="tempatterbit"
                                     class="form-control @error('tempatterbit') is-invalid @enderror" placeholder=""
                                     value="{{old('tempatterbit')}}" required>
