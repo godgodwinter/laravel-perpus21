@@ -34,7 +34,7 @@ $message=session('status');
                 showConfirmButton: false,
                 timer: 3000
             });
-            
+
             Toast.fire({
                 icon: '{{$tipe}}',
                 title: '{{$message}}'
@@ -108,14 +108,14 @@ $message=session('status');
         <button class="btn btn-icon btn-info btn-sm "  data-toggle="tooltip" data-placement="top" title="Masukkan keranjang!" id="isikan{{ $data->buku_kode}}"><i class="fas fa-shopping-cart"></i> </button>
         @else
         <button class="btn btn-icon btn-secondary btn-sm "  data-toggle="tooltip" data-placement="top" title="Telah dipinjam!" ><i class="fas fa-shopping-cart" disabled></i> </button>
-            
+
         @endif --}}
 
         <x-button-edit link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
         <x-button-delete link="/admin/buku/{{$buku->id}}/{{ $pages }}/{{$data->id}}" />
     </td>
     <script>
-        
+
 
         $(document).ready(function () {
 
@@ -148,7 +148,7 @@ $.ajax({
                                                         if (response
                                                             .message != 0) {
                                                                 // alert(response.message);
-                                                                
+
                                                             let daftarbuku2;
                                                             if (localStorage.getItem(
                                                                     'daftarbuku') ===
@@ -161,15 +161,15 @@ $.ajax({
                                                                         'daftarbuku'));
                                                             }
 
-                                                            
+
                                                             var hasilperiksa=0;
                                                             for (let i = 0; i < daftarbuku2.length; i++) {
                                                                           if(daftarbuku2[i]==nama){
                                                                               hasilperiksa++;
                                                                           }else{
-                                                                              
+
                                                                             // alert('belum ada');
-                                                                          }  
+                                                                          }
                                                                     }
                                                                 // alert(hasilperiksa);
                                                                 if(hasilperiksa>0){
@@ -182,22 +182,22 @@ $.ajax({
 
                                                                             Toast.fire({
                                                                                 icon: 'error',
-                                                                                title: 
+                                                                                title:
                                                                                     'Data sudah ditambahkan! '
                                                                             });
 
 
                                                                 }else{
-                                                                    
 
-                                                                    var buku_ = {};  
-                                                                            buku_.id = response.data;  
-                                                                            buku_.buku_nama = response.buku_nama;   
-                                                                            buku_.bukukategori_nama = response.bukukategori_nama;   
-                                                                            // var ItemId = "data-" + buku_.id;  
-                                                                            var ItemId = buku_.id;  
-                                                                            localStorage.setItem(ItemId, JSON.stringify(buku_));  
-                                                                            
+
+                                                                    var buku_ = {};
+                                                                            buku_.id = response.data;
+                                                                            buku_.buku_nama = response.buku_nama;
+                                                                            buku_.bukukategori_nama = response.bukukategori_nama;
+                                                                            // var ItemId = "data-" + buku_.id;
+                                                                            var ItemId = buku_.id;
+                                                                            localStorage.setItem(ItemId, JSON.stringify(buku_));
+
 
                                                                 daftarbuku2.push(nama);
                                                                 localStorage.setItem(
@@ -217,13 +217,13 @@ $.ajax({
                                                                             title: nama +
                                                                                 'Data berhasil ditambahkan!'
                                                                         });
- 
+
                                                                         location.reload();
                                                                 }
                                                                     }
-                                                                    
-                                                             
-                                                           
+
+
+
                             }else{
                             alert("Error")
                             // alert(response.message) //Message come from controller
@@ -250,7 +250,7 @@ $.ajax({
 
 @endsection
 
-@section('foottable')  
+@section('foottable')
 
 @php
   $cari=$request->cari;
@@ -299,11 +299,11 @@ $.ajax({
                 <div class="card-body">
 
 
-                        
+
                         <form action="{{url("/admin/buku/".$buku->id."/databukudetail/cari")}}" method="GET">
-                           
+
                     <div class="row">
-                               
+
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
                                     <input type="text" name="cari" id="cari"
                                         class="form-control form-control-sm @error('cari') is-invalid @enderror"
@@ -311,32 +311,32 @@ $.ajax({
                                     @error('cari')<div class="invalid-feedback"> {{$message}}</div>
                                     @enderror
                     </div>
-                               
 
-                                       
+
+
                     <div class="form-group col-md-4 col-4 mt-1 text-left">
-                         
+
 
                         <button type="submit" value="CARI" class="btn btn-icon btn-info btn-sm mt-0"><span
                             class="pcoded-micon"> <i class="fas fa-search"></i> Cari</span></button>
 
-                    </div>                     
+                    </div>
                     <div class="form-group col-md-4 col-4 mt-1 text-right">
-                            
-                        <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
+
+                        {{-- <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                             data-target="#importExcel"><i class="fas fa-upload"></i>
                             Import
                         </button>
 
                         <a href="/admin/@yield('linkpages')/export" type="submit" value="Import"
                             class="btn btn-icon btn-primary btn-sm"><span class="pcoded-micon"> <i
-                                    class="fas fa-download"></i> Export </span></a>
-                    </div> 
+                                    class="fas fa-download"></i> Export </span></a> --}}
+                    </div>
 
-                                  
-                              
 
-                            
+
+
+
 
                                         </div>
 
@@ -366,22 +366,22 @@ $.ajax({
                                 <div class="card-body">
                                     <div class="row">
                                           </div>
-                                       
+
                                         <div class="form-group col-md-12 col-12">
                                             <label>Kondisi<code>*)</code></label>
-                                            <select class="form-control form-control-lg" required name="kondisi">  
+                                            <select class="form-control form-control-lg" required name="kondisi">
                                                 @if (old('kondisi'))
-                                                <option>{{old('kondisi')}}</option>                        
+                                                <option>{{old('kondisi')}}</option>
                                                 @endif
                                                 <option>Bagus</option>
                                                 <option>Layak</option>
                                                 <option>Tidak Layak</option>
                                             </select>
-                                        </div> 
+                                        </div>
 
-                                        
-                                     
-                                        
+
+
+
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text">Jumlah</span>
@@ -403,10 +403,10 @@ $.ajax({
                                 </div>
                                 <div class="card-footer text-right">
                                     <button class="btn btn-primary">Simpan</button>
-                                    
+
                                 </div>
                             </form>
-                            
+
 
                     </div>
                     <!-- /.card-body -->
@@ -420,7 +420,7 @@ $.ajax({
 </div>
 </div>
 
-       
+
 <!-- /.content -->
 @endsection
 
@@ -435,14 +435,14 @@ $.ajax({
                         <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
                       </div>
                       <div class="modal-body">
-           
+
                         {{ csrf_field() }}
-           
+
                         <label>Pilih file excel(.xlsx)</label>
                         <div class="form-group">
                           <input type="file" name="file" required="required">
                         </div>
-           
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -452,7 +452,7 @@ $.ajax({
                   </form>
                 </div>
               </div>
-          
+
 
 @endsection
 
