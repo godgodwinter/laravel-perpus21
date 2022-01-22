@@ -58,6 +58,10 @@ class adminbukucontroller extends Controller
         $jmldata='0';
         $datas='0';
 
+        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        // dd($generatekodepanggil);
+        // $jmlbuku++;
+        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
 
     $datas=DB::table('buku')
     // ->where('nis','like',"%".$cari."%")
@@ -72,7 +76,7 @@ class adminbukucontroller extends Controller
 
     return view('admin.buku.index',compact('pages'
     // ,'bukurak'
-    ,'bukukategori','datas','request'));
+    ,'bukukategori','datas','request','kodepanggil'));
     }
     public function store(Request $request)
     {
