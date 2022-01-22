@@ -69,8 +69,8 @@ class adminuserscontroller extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^\S*$/u'],
             'email' => 'required|email|unique:users',
             'tipeuser'=>'required',
-            'password' => 'min:8|required_with:password2|same:password2',
-            'password2' => 'min:8',
+            'password' => 'min:3|required_with:password2|same:password2',
+            'password2' => 'min:3',
 
 
         ],
