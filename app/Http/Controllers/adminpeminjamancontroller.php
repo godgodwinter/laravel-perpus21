@@ -126,7 +126,7 @@ class adminpeminjamancontroller extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-            
+
         // dd($request->daftarbuku);
         foreach($request->daftarbuku as $db){
             $kode=$db['kode'];
@@ -329,6 +329,17 @@ class adminpeminjamancontroller extends Controller
             ], 200);
 
         }
+    }
+
+    public function destroy($id){
+
+        DB::table('pengembalian')->where('kodetrans', $id)->delete();
+        DB::table('pengembaliandetail')->where('kodetrans', $id)->delete();
+        DB::table('peminjaman')->where('kodetrans', $id)->delete();
+        DB::table('peminjamandetail')->where('kodetrans', $id)->delete();
+        // peminjaman::destroy($id);
+        return redirect()->route('admin.peminjaman.invoicepeminjaman')->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
+
     }
 
 }

@@ -170,6 +170,8 @@ Route::get('/admin/invoice/pengembalian', 'App\Http\Controllers\adminpengembalia
 Route::post('/admin/invoice/pengembalian', 'App\Http\Controllers\adminpengembaliancontroller@invoicepengembalianperiksa')->name('admin.pengembalian.invoicepengembalianperiksa');
 Route::get('/admin/peminjaman/{id}', 'App\Http\Controllers\adminpeminjamancontroller@invoice')->name('admin.peminjaman.invoice');
 Route::get('/admin/pengembalian/{id}', 'App\Http\Controllers\adminpengembaliancontroller@invoice')->name('admin.pengembalian.invoice');
+Route::delete('/admin/peminjaman/{id}/destroy', 'App\Http\Controllers\adminpeminjamancontroller@destroy')->name('admin.peminjaman.invoice.destroy');
+Route::delete('/admin/pengembalian/{id}/destroy', 'App\Http\Controllers\adminpengembaliancontroller@destroy')->name('admin.pengembalian.invoice.destroy');
 
 
 //SETTINGS-MENU

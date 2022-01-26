@@ -41,15 +41,15 @@ $message=session('status');
             icon: '{{$tipe}}',
             title: '{{$message}}'
         });
-         
+
     @if((session('clearlocal')=='yes'))
-   
-        localStorage.clear(); 
+
+        localStorage.clear();
         $("#tbody").empty();
    @endif
-   
+
     });
-   
+
 
 </script>
 @endif
@@ -126,7 +126,7 @@ $message=session('status');
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
-  
+
                 <!-- Table row -->
                 <div class="row">
                   <div class="col-12 table-responsive">
@@ -158,14 +158,14 @@ $message=session('status');
                         @php
                         $statuspengembalian='Sudah Kembali';
                         @endphp
-                       
+
                         <td><code>{{$statuspengembalian}}</code></td>
                         <td >
                             @php
                                 $dendatotalbuku=$data->totaldenda*$jmldatapinjam;
                                 $totaldenda+=$dendatotalbuku;
                             @endphp
-                          <span data-toggle="tooltip" data-placement="top" title="Terlambat {{Fungsi::periksaterlambat($data->tgl_harus_kembali)}} Hari!"> {{Fungsi::rupiah($dendatotalbuku)}}  </span> 
+                          <span data-toggle="tooltip" data-placement="top" title="Terlambat {{Fungsi::periksaterlambat($data->tgl_harus_kembali)}} Hari!"> {{Fungsi::rupiah($dendatotalbuku)}}  </span>
                         </td>
                       </tr>
                       @endforeach
@@ -175,7 +175,7 @@ $message=session('status');
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
-  
+
                 <div class="row">
                   <!-- accepted payments column -->
                   <div class="col-6">
@@ -184,7 +184,7 @@ $message=session('status');
                     <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
                     <img src="../../dist/img/credit/american-express.png" alt="American Express">
                     <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-  
+
                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                       Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
                       plugg
@@ -195,7 +195,7 @@ $message=session('status');
                   <div class="col-6">
                     {{-- <p class="lead">Amount Due 2/22/2014</p> --}}
                     <br>
-  
+
                     <div class="table-responsive">
                       <table class="table">
                         {{-- <tr>
@@ -224,7 +224,7 @@ $message=session('status');
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
-  
+
                 <!-- this row will not appear when printing -->
                 <div class="row no-print">
                   <div class="col-12">
@@ -240,6 +240,12 @@ $message=session('status');
               <!-- /.invoice -->
 <!-- /.content -->
             </div>
+            <form action="{{route('admin.peminjaman.invoice.destroy',$datapinjam->kodetrans)}}" method="post" class="d-inline">
+@method('delete')
+@csrf
+            <button class="btn btn-danger mr-1 btn-sm" style="margin-left: 5px;" onclick="return  confirm('Anda yakin menghapus data ini? Y/N')" ><span
+                class="pcoded-micon"> <i class="fas fa-trash"></i></span></button>
+            </form>
 @endsection
 
 @section('container-modals')
