@@ -107,7 +107,7 @@ $message=session('status');
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-12 col-12">
+                    {{-- <div class="form-group col-md-12 col-12">
                         <label>Kategori<code>*)</code></label>
                         <select class="form-control form-control-lg" required name="kategori_nama">
                             @if ($datas->kategori_nama)
@@ -117,7 +117,7 @@ $message=session('status');
                                 <option>{{ $t->nama }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group col-md-12 col-12">
                         <label>Kondisi<code>*)</code></label>

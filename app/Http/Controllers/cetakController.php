@@ -10,29 +10,29 @@ class cetakController extends Controller
 {
     public function peminjamanshow($id)
     {
-        $tgl=date("YmdHis");
+        $tgl = date("YmdHis");
         // dd($tgl);
-        $datas=DB::table('peminjaman')->where('kodetrans',$id)->first();
+        $datas = DB::table('peminjaman')->where('kodetrans', $id)->first();
         // dd($datas);
-            $datapinjamdetail=DB::table('peminjamandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
+        $datapinjamdetail = DB::table('peminjamandetail')->where('kodetrans', $id)->orderBy('created_at', 'desc')->get();
 
-            $detaildatas = $datapinjamdetail->unique('buku_kode');
-// dd($detaildatas);
-        $pdf = PDF::loadview('admin.cetak.peminjamanshow',compact('datas','detaildatas'))->setPaper('a4', 'potrait');
-        return $pdf->download('laporansekolah_'.$tgl.'-pdf');
+        $detaildatas = $datapinjamdetail->unique('buku_kode');
+        // dd($detaildatas);
+        $pdf = PDF::loadview('admin.cetak.peminjamanshow', compact('datas', 'detaildatas'))->setPaper('a4', 'potrait');
+        return $pdf->stream('laporansekolah_' . $tgl . '-pdf');
     }
 
     public function pengembalianshow($id)
     {
-        $tgl=date("YmdHis");
+        $tgl = date("YmdHis");
         // dd($tgl);
-        $datas=DB::table('pengembalian')->where('kodetrans',$id)->first();
+        $datas = DB::table('pengembalian')->where('kodetrans', $id)->first();
         // dd($datas);
-            $datapinjamdetail=DB::table('pengembaliandetail')->where('kodetrans',$id)->orderBy('created_at', 'desc')->get();
+        $datapinjamdetail = DB::table('pengembaliandetail')->where('kodetrans', $id)->orderBy('created_at', 'desc')->get();
 
-            $detaildatas = $datapinjamdetail->unique('buku_kode');
-// dd($detaildatas);
-        $pdf = PDF::loadview('admin.cetak.pengembalianshow',compact('datas','detaildatas'))->setPaper('a4', 'potrait');
-        return $pdf->download('laporansekolah_'.$tgl.'-pdf');
+        $detaildatas = $datapinjamdetail->unique('buku_kode');
+        // dd($detaildatas);
+        $pdf = PDF::loadview('admin.cetak.pengembalianshow', compact('datas', 'detaildatas'))->setPaper('a4', 'potrait');
+        return $pdf->stream('laporansekolah_' . $tgl . '-pdf');
     }
 }

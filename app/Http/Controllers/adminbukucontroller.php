@@ -15,35 +15,41 @@ class adminbukucontroller extends Controller
 {
     public function index(Request $request)
     {
-        if($this->checkauth('admin')==='404'){
-            return redirect(URL::to('/').'/404')->with('status','Halaman tidak ditemukan!')->with('tipe','danger')->with('icon','fas fa-trash');
+        if ($this->checkauth('admin') === '404') {
+            return redirect(URL::to('/') . '/404')->with('status', 'Halaman tidak ditemukan!')->with('tipe', 'danger')->with('icon', 'fas fa-trash');
         }
 
 
 
         // $jmlbuku = buku::count();
-        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        $generatekodepanggil = Fungsi::autokodepanggilbuku(1);
         // dd($generatekodepanggil);
         // $jmlbuku++;
-        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
+        $kodepanggil = '' . str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT);
 
         // dd($kodepanggil);
         #WAJIB
-        $pages='buku';
-        $jmldata='0';
-        $datas='0';
+        $pages = 'buku';
+        $jmldata = '0';
+        $datas = '0';
 
 
-        $datas=DB::table('buku')
-        ->orderBy('kode','asc')
-        ->paginate(Fungsi::paginationjml());
+        $datas = DB::table('buku')
+            ->orderBy('kode', 'asc')
+            ->paginate(Fungsi::paginationjml());
 
         // $bukurak = DB::table('bukurak')->get();
-        $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+        $bukukategori = DB::table('kategori')->where('prefix', 'ddc')->get();
 
-        return view('admin.buku.index',compact('pages'
-        // ,'bukurak'
-        ,'bukukategori','datas','request','kodepanggil'));
+        return view('admin.buku.index', compact(
+            'pages'
+            // ,'bukurak'
+            ,
+            'bukukategori',
+            'datas',
+            'request',
+            'kodepanggil'
+        ));
         // return view('admin.beranda');
     }
 
@@ -51,32 +57,38 @@ class adminbukucontroller extends Controller
     public function cari(Request $request)
     {
         // dd($request);
-        $cari=$request->cari;
+        $cari = $request->cari;
 
         #WAJIB
-        $pages='buku';
-        $jmldata='0';
-        $datas='0';
+        $pages = 'buku';
+        $jmldata = '0';
+        $datas = '0';
 
-        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        $generatekodepanggil = Fungsi::autokodepanggilbuku(1);
         // dd($generatekodepanggil);
         // $jmlbuku++;
-        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
+        $kodepanggil = '' . str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT);
 
-    $datas=DB::table('buku')
-    // ->where('nis','like',"%".$cari."%")
-    ->where('nama','like',"%".$cari."%")
-    ->orWhere('kode','like',"%".$cari."%")
-    ->paginate(Fungsi::paginationjml());
+        $datas = DB::table('buku')
+            // ->where('nis','like',"%".$cari."%")
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->orWhere('kode', 'like', "%" . $cari . "%")
+            ->paginate(Fungsi::paginationjml());
 
 
 
-    // $bukurak = DB::table('bukurak')->get();
-    $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+        // $bukurak = DB::table('bukurak')->get();
+        $bukukategori = DB::table('kategori')->where('prefix', 'ddc')->get();
 
-    return view('admin.buku.index',compact('pages'
-    // ,'bukurak'
-    ,'bukukategori','datas','request','kodepanggil'));
+        return view('admin.buku.index', compact(
+            'pages'
+            // ,'bukurak'
+            ,
+            'bukukategori',
+            'datas',
+            'request',
+            'kodepanggil'
+        ));
     }
     public function store(Request $request)
     {
@@ -84,124 +96,134 @@ class adminbukucontroller extends Controller
 
         // dd($request);
         // dd($request);
-        $request->validate([
-            'nama'=>'required|unique:buku,nama',
-            // 'bukurak_nama'=>'required',
-            'bukukategori_ddc'=>'required',
+        $request->validate(
+            [
+                'nama' => 'required|unique:buku,nama',
+                // 'bukurak_nama'=>'required',
+                'bukukategori_ddc' => 'required',
 
 
-        ],
-        [
-            'nama.required'=>'Nama Harus diisi',
+            ],
+            [
+                'nama.required' => 'Nama Harus diisi',
 
-        ]);
+            ]
+        );
         // dd($files);
 
         // dd($kodebuku);
-       DB::table('buku')->insert(
-        array(
-               'id'     =>   $request->kode,
-               'nama'     =>   $request->nama,
-               'isbn'     =>   $request->isbn,
-               'pengarang'     =>   $request->pengarang,
-               'kode'     =>   $request->kode,
-            //    'bukurak_nama'     =>   $request->bukurak_nama,
-            //    'bukurak_kode'     =>   $ambilbukurak_kode->kode,
-               'bukukategori_ddc'     =>   $request->bukukategori_ddc,
-               'tempatterbit'     =>   $request->tempatterbit,
-               'penerbit'     =>   $request->penerbit,
-               'tahunterbit'     =>   $request->tahunterbit,
-               'bahasa'     =>   $request->bahasa,
-               'created_at'=>date("Y-m-d H:i:s"),
-               'updated_at'=>date("Y-m-d H:i:s")
-        ));
+        DB::table('buku')->insert(
+            array(
+                'id'     =>   $request->kode,
+                'nama'     =>   $request->nama,
+                'isbn'     =>   $request->isbn,
+                'pengarang'     =>   $request->pengarang,
+                'kode'     =>   $request->kode,
+                //    'bukurak_nama'     =>   $request->bukurak_nama,
+                //    'bukurak_kode'     =>   $ambilbukurak_kode->kode,
+                'bukukategori_ddc'     =>   $request->bukukategori_ddc,
+                'tempatterbit'     =>   $request->tempatterbit,
+                'penerbit'     =>   $request->penerbit,
+                'tahunterbit'     =>   $request->tahunterbit,
+                'bahasa'     =>   $request->bahasa,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            )
+        );
 
 
         $files = $request->file('file');
 
         // dd($request);
-        if($files!=null){
+        if ($files != null) {
             // dd(!Input::hasFile('files'));
             // dd($files,'aaa');
-            $namafilebaru=$request->kode;
+            $namafilebaru = $request->kode;
 
             // menyimpan data file yang diupload ke variabel $file
             $file = $request->file('file');
 
-                      // nama file
-            echo 'File Name: '.$file->getClientOriginalName();
+            // nama file
+            echo 'File Name: ' . $file->getClientOriginalName();
             echo '<br>';
 
-                      // ekstensi file
-            echo 'File Extension: '.$file->getClientOriginalExtension();
+            // ekstensi file
+            echo 'File Extension: ' . $file->getClientOriginalExtension();
             // dd()
             echo '<br>';
 
-                      // real path
-            echo 'File Real Path: '.$file->getRealPath();
+            // real path
+            echo 'File Real Path: ' . $file->getRealPath();
             echo '<br>';
 
-                      // ukuran file
-            echo 'File Size: '.$file->getSize();
+            // ukuran file
+            echo 'File Size: ' . $file->getSize();
             echo '<br>';
 
-                      // tipe mime
-            echo 'File Mime Type: '.$file->getMimeType();
+            // tipe mime
+            echo 'File Mime Type: ' . $file->getMimeType();
 
-                      // isi dengan nama folder tempat kemana file diupload
+            // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'storage/gambar';
 
-                    // upload file
-            $file->move($tujuan_upload,"gambar/".$namafilebaru.".jpg");
+            // upload file
+            $file->move($tujuan_upload, "gambar/" . $namafilebaru . ".jpg");
 
 
-            buku::where('kode',$request->kode)
-            ->update([
-                'gambar' => "gambar/".$namafilebaru.".jpg",
-            'updated_at'=>date("Y-m-d H:i:s")
-            ]);
-
+            buku::where('kode', $request->kode)
+                ->update([
+                    'gambar' => "gambar/" . $namafilebaru . ".jpg",
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
         }
 
-        return redirect()->back()->with('status','Data berhasil di tambahkan!')->with('tipe','success');
-
+        return redirect()->back()->with('status', 'Data berhasil di tambahkan!')->with('tipe', 'success');
     }
-    public function show(Request $request,buku $id)
+    public function show(Request $request, buku $id)
     {
         // dd($id);
         #WAJIB
-        $pages='buku';
-        $datas=$id;
+        $pages = 'buku';
+        $datas = $id;
 
         // $bukurak = DB::table('bukurak')->get();
-        $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+        $bukukategori = DB::table('kategori')->where('prefix', 'ddc')->get();
 
-        return view('admin.buku.edit',compact('pages','datas'
-        // ,'bukurak'
-        ,'bukukategori','request'));
+        return view('admin.buku.edit', compact(
+            'pages',
+            'datas'
+            // ,'bukurak'
+            ,
+            'bukukategori',
+            'request'
+        ));
     }
-    public function proses_update($request,$datas)
+    public function proses_update($request, $datas)
     {
-        if($request->nama!==$datas->nama){
-            $request->validate([
-                'nama'=>'unique:buku,nama'
-            ],
-            [
-                // 'nama.unique'=>'Nama harus diisi'
+        if ($request->nama !== $datas->nama) {
+            $request->validate(
+                [
+                    'nama' => 'unique:buku,nama'
+                ],
+                [
+                    // 'nama.unique'=>'Nama harus diisi'
 
 
-            ]);
+                ]
+            );
         }
 
-        if($request->kode!==$datas->kode){
-            $request->validate([
-                'kode'=>'unique:buku,kode'
-            ],
-            [
-                // 'nama.unique'=>'Nama harus diisi'
+        if ($request->kode !== $datas->kode) {
+            $request->validate(
+                [
+                    'kode' => 'unique:buku,kode'
+                ],
+                [
+                    // 'nama.unique'=>'Nama harus diisi'
 
 
-            ]);
+                ]
+            );
         }
 
 
@@ -221,60 +243,57 @@ class adminbukucontroller extends Controller
         // }
         // dd($request->bukukategori_nama,$datas->bukukategori_nama,$kodebuku);
 
-        bukudetail::where('buku_kode',$datas->kode)
-        ->update([
-            'buku_nama'     =>   $request->nama,
-            'buku_kode'     =>   $request->kode,
-            'buku_pengarang'     =>   $request->pengarang,
-            'buku_isbn'     =>   $request->isbn,
-            // 'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
-            'bukukategori_ddc'     =>   $request->bukukategori_ddc,
-            // 'bukukategori_nama'     =>   $request->bukukategori_nama,
-            // 'bukurak_kode'     =>   $ambilbukurak_kode->kode,
-            // 'bukurak_nama'     =>   $request->bukurak_nama,
-            'buku_penerbit'     =>   $request->penerbit,
-            'buku_tahunterbit'     =>   $request->tahunterbit,
-            'buku_bahasa'     =>   $request->bahasa,
-           'updated_at'=>date("Y-m-d H:i:s")
-        ]);
+        bukudetail::where('buku_kode', $datas->kode)
+            ->update([
+                'buku_nama'     =>   $request->nama,
+                'buku_kode'     =>   $request->kode,
+                'buku_pengarang'     =>   $request->pengarang,
+                'buku_isbn'     =>   $request->isbn,
+                // 'bukukategori_ddc'     =>   $ambilbukukategori_ddc->kode,
+                'bukukategori_ddc'     =>   $request->bukukategori_ddc,
+                // 'bukukategori_nama'     =>   $request->bukukategori_nama,
+                // 'bukurak_kode'     =>   $ambilbukurak_kode->kode,
+                // 'bukurak_nama'     =>   $request->bukurak_nama,
+                'buku_penerbit'     =>   $request->penerbit,
+                'buku_tahunterbit'     =>   $request->tahunterbit,
+                'buku_bahasa'     =>   $request->bahasa,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
 
-        buku::where('id',$datas->id)
-        ->update([
-            'nama'     =>   $request->nama,
-            'kode'     =>   $request->kode,
-            'pengarang'     =>   $request->pengarang,
-            'isbn'     =>   $request->isbn,
-            'bukukategori_ddc'     =>   $request->bukukategori_ddc,
-            // 'bukurak_kode'     =>   $ambilbukurak_kode->kode,
-            // 'bukurak_nama'     =>   $request->bukurak_nama,
-            'penerbit'     =>   $request->penerbit,
-            'tempatterbit'     =>   $request->tempatterbit,
-            'tahunterbit'     =>   $request->tahunterbit,
-            'bahasa'     =>   $request->bahasa,
-           'updated_at'=>date("Y-m-d H:i:s")
-        ]);
-
-
+        buku::where('id', $datas->id)
+            ->update([
+                'nama'     =>   $request->nama,
+                'kode'     =>   $request->kode,
+                'pengarang'     =>   $request->pengarang,
+                'isbn'     =>   $request->isbn,
+                'bukukategori_ddc'     =>   $request->bukukategori_ddc,
+                // 'bukurak_kode'     =>   $ambilbukurak_kode->kode,
+                // 'bukurak_nama'     =>   $request->bukurak_nama,
+                'penerbit'     =>   $request->penerbit,
+                'tempatterbit'     =>   $request->tempatterbit,
+                'tahunterbit'     =>   $request->tahunterbit,
+                'bahasa'     =>   $request->bahasa,
+                'updated_at' => date("Y-m-d H:i:s")
+            ]);
     }
 
     public function update(Request $request, buku $id)
     {
-        $this->proses_update($request,$id);
+        $this->proses_update($request, $id);
 
-            return redirect()->back()->with('status','Data berhasil diupdate!')->with('tipe','success')->with('icon','fas fa-edit');
+        return redirect()->back()->with('status', 'Data berhasil diupdate!')->with('tipe', 'success')->with('icon', 'fas fa-edit');
     }
 
     public function destroy($id)
     {
         buku::destroy($id);
-        return redirect()->back()->with('status','Data berhasil dihapus!')->with('tipe','info')->with('icon','fas fa-trash');
-
+        return redirect()->back()->with('status', 'Data berhasil dihapus!')->with('tipe', 'info')->with('icon', 'fas fa-trash');
     }
 
     public function multidel(Request $request)
     {
 
-        $ids=$request->ids;
+        $ids = $request->ids;
 
         // $datasiswa = DB::table('siswa')->where('id',$ids)->get();
         // foreach($datasiswa as $ds){
@@ -284,48 +303,54 @@ class adminbukucontroller extends Controller
         // dd($request);
 
         // DB::table('tagihansiswa')->where('siswa_nis', $ids)->where('tapel_nama',$this->tapelaktif())->delete();
-        buku::whereIn('id',$ids)->delete();
+        buku::whereIn('id', $ids)->delete();
 
 
         // load ulang
 
 
         // $jmlbuku = buku::count();
-        $generatekodepanggil=Fungsi::autokodepanggilbuku(1);
+        $generatekodepanggil = Fungsi::autokodepanggilbuku(1);
         // dd($generatekodepanggil);
         // $jmlbuku++;
-        $kodepanggil = ''. str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT) ;
+        $kodepanggil = '' . str_pad($generatekodepanggil, 6, '0', STR_PAD_LEFT);
 
         // dd($kodepanggil);
         #WAJIB
-        $pages='buku';
-        $jmldata='0';
-        $datas='0';
+        $pages = 'buku';
+        $jmldata = '0';
+        $datas = '0';
 
 
-        $datas=DB::table('buku')
-        ->orderBy('kode','asc')
-        ->paginate(Fungsi::paginationjml());
+        $datas = DB::table('buku')
+            ->orderBy('kode', 'asc')
+            ->paginate(Fungsi::paginationjml());
 
         // $bukurak = DB::table('bukurak')->get();
-        $bukukategori = DB::table('kategori')->where('prefix','ddc')->get();
+        $bukukategori = DB::table('kategori')->where('prefix', 'ddc')->get();
 
-        return view('admin.buku.index',compact('pages'
-        // ,'bukurak'
-        ,'bukukategori','datas','request','kodepanggil'));
-
+        return view('admin.buku.index', compact(
+            'pages'
+            // ,'bukurak'
+            ,
+            'bukukategori',
+            'datas',
+            'request',
+            'kodepanggil'
+        ));
     }
-    public function cetakchecked(Request $request){
+    public function cetakchecked(Request $request)
+    {
         // dd($request->databukuchecked);
 
-        $tgl=date("YmdHis");
-        $str=explode(",",$request->databukuchecked);
-        $jmldata=count($str);
+        $tgl = date("YmdHis");
+        $str = explode(",", $request->databukuchecked);
+        $jmldata = count($str);
 
         // dd($str,$jmldata);
 
-        $pdf = PDF::loadview('admin.buku.cetakchecked',compact('jmldata','str'))->setPaper('a4', 'potrait');
+        $pdf = PDF::loadview('admin.buku.cetakchecked', compact('jmldata', 'str'))->setPaper('a4', 'potrait');
 
-        return $pdf->download('buku'.$tgl.'.pdf');
+        return $pdf->stream('buku' . $tgl . '.pdf');
     }
 }

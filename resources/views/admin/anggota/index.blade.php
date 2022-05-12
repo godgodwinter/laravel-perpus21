@@ -49,6 +49,7 @@ $message=session('status');
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
     <th> Nama  </th>
     <th> Tipe</th>
+    <th> No Telp</th>
     <th> Alamat</th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
@@ -96,6 +97,7 @@ $message=session('status');
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
     <td>{{ $data->nama }}</td>
     <td>{{ $data->tipe }}</td>
+    <td>{{ $data->telp }}</td>
     <td><p data-toggle="tooltip" data-placement="top" title="{{ $data->alamat }}">{{ substr($data->alamat,0,20) }}</p></td>
 
     <td class="text-center">
@@ -109,7 +111,7 @@ $message=session('status');
 @endforeach
 
 <tr>
-    <td class="text-left" colspan="5">
+    <td class="text-left" colspan="6">
         <a href="#" class="btn btn-sm  btn-danger" id="deleteAllSelectedRecord"
             onclick="return  confirm('Anda yakin menghapus data ini? Y/N')"><i class="fas fa-trash"></i> Hapus
             Terpilih</a></td>

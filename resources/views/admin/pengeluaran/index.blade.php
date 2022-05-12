@@ -238,14 +238,14 @@ $message=session('status');
                         <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
                       </div>
                       <div class="modal-body">
-           
+
                         <div class="col-12 col-md-12 col-lg-12">
                         <div class="card-body">
                         <div class="row">
                             <form action="/admin/{{ $pages }}" method="post" enctype="multipart/form-data">
                                 @csrf
-                            
-                                
+
+
                                 <div class="form-group col-md-12 col-12">
                                     <label for="nama">Nama </label>
                                     <input type="text" name="nama" id="nama"
@@ -324,17 +324,17 @@ $message=session('status');
 
 
                                 <div class="form-group col-md-12 col-12">
-                                    <label for="telp">Catatan <code></code></label>
+                                    <label for="catatan">Catatan <code></code></label>
                                     <input type="text" name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" value="{{old('catatan')}}" >
                                     @error('catatan')<div class="invalid-feedback"> {{$message}}</div>
                                     @enderror
                                 </div>
-                              
+
 
                         </div>
                         </div>
                         </div>
-           
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

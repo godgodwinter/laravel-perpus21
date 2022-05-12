@@ -92,7 +92,7 @@ data{{ $pages }}
         }
     });
 
-    
+
     var ctx = document.getElementById("myChartpengunjung");
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -190,8 +190,9 @@ data{{ $pages }}
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Blank Page</li>
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                  <li class="breadcrumb-item active">Index</li>
             </ol>
           </div>
         </div>
@@ -206,7 +207,7 @@ data{{ $pages }}
         <div class="card-header">
           <h3 class="card-title">Grafik Pengunjung</h3>
 
-         
+
         </div>
 
       <div class="card-body col-sm-7 offset-3">
@@ -227,7 +228,7 @@ data{{ $pages }}
         <div class="card-header">
           <h3 class="card-title">Grafik Peminjaman</h3>
 
-         
+
         </div>
 
       <div class="card-body col-sm-7 offset-3">

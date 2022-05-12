@@ -48,7 +48,7 @@ $message=session('status');
     <th width="10%" class="text-center">
         <input type="checkbox" id="chkCheckAll"> <label for="chkCheckAll"> All</label></th>
     <th> Nama  </th>
-    <th> Kategori</th>
+    {{-- <th> Kategori</th> --}}
     <th> Kondisi</th>
     <th width="200px" class="text-center">Aksi</th>
 </tr>
@@ -95,7 +95,7 @@ $message=session('status');
     <td class="text-center"> <input type="checkbox" name="ids" class="checkBoxClass " value="{{ $data->id }}">
         {{ ((($loop->index)+1)+(($datas->currentPage()-1)*$datas->perPage())) }}</td>
     <td>{{ $data->nama }}</td>
-    <td>{{ $data->kategori_nama }}</td>
+    {{-- <td>{{ $data->kategori_nama }}</td> --}}
     <td>{{ $data->kondisi }}</td>
 
     <td class="text-center">
@@ -197,7 +197,7 @@ $message=session('status');
 
                             </div>
                         </div> --}}
-         
+
                         <button type="button" class="btn btn-icon btn-primary btn-sm" data-toggle="modal"
                         data-target="#add"><i class="fas fa-plus"></i>
                         Tambah
@@ -210,7 +210,7 @@ $message=session('status');
                         <a href="/admin/@yield('linkpages')/export" type="submit" value="Import"
                             class="btn btn-icon btn-primary btn-sm"><span class="pcoded-micon"> <i
                                     class="fas fa-download"></i> Export </span></a>
-                                    
+
                         <a href="{{route('peralatan.cetak')}}" type="submit" value="Import"
                         class="btn btn-icon btn-default btn-sm"><span class="pcoded-micon"> <i class="fas fa-print"></i>   Cetak PDF </span></a>
                     </div>
@@ -231,7 +231,7 @@ $message=session('status');
         </div>
     </div>
 
-    
+
 
 </section>
 <!-- /.content -->
@@ -249,14 +249,14 @@ $message=session('status');
                         <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
                       </div>
                       <div class="modal-body">
-           
+
                         <div class="col-12 col-md-12 col-lg-12">
                         <div class="card-body">
                         <div class="row">
                             <form action="/admin/{{ $pages }}" method="post" enctype="multipart/form-data">
                                 @csrf
-                            
-                                
+
+
                                 <div class="form-group col-md-12 col-12">
                                     <label for="nama">Nama @yield('title')</label>
                                     <input type="text" name="nama" id="nama"
@@ -266,7 +266,7 @@ $message=session('status');
                                     @enderror
                                 </div>
 
-                                <div class="form-group col-md-12 col-12">
+                                {{-- <div class="form-group col-md-12 col-12">
                                     <label>Kategori<code>*)</code></label>
                                     <select class="form-control form-control-lg" required name="kategori_nama">
                                         @if (old('kategori_nama'))
@@ -276,7 +276,7 @@ $message=session('status');
                                             <option>{{ $t->nama }}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group col-md-12 col-12">
                                     <label>Kondisi<code>*)</code></label>
@@ -295,12 +295,12 @@ $message=session('status');
                                     @error('tgl_masuk')<div class="invalid-feedback"> {{$message}}</div>
                                     @enderror
                                 </div>
-                              
+
 
                         </div>
                         </div>
                         </div>
-           
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
